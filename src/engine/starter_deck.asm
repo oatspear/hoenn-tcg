@@ -50,6 +50,32 @@ _AddStarterDeck:
 	inc [hl]
 	dec c
 	jr nz, .loop_extra_cards
+
+; by Oats
+IF DEBUG_FULL_COLLECTION_AT_START
+; add all cards to the initial collection
+	ld c, NUM_CARDS
+.loop_debug_collection
+	ld a, c
+	ld l, a
+	res CARD_NOT_OWNED_F, [hl]
+	ld a, [hl]
+	add 16
+	ld [hl], a
+	dec c
+	jr nz, .loop_debug_collection
+; add a few extra energies
+	ld c, DOUBLE_COLORLESS_ENERGY - 1
+.loop_debug_energies
+	ld a, c
+	ld l, a
+	ld a, [hl]
+	add 30
+	ld [hl], a
+	dec c
+	jr nz, .loop_debug_energies
+ENDC
+
 	jp DisableSRAM
 
 .StarterCardIDs

@@ -1,6 +1,6 @@
 # Instructions
 
-These instructions explain how to set up the tools required to build **poketcg_v2**, including [**rgbds**](https://github.com/gbdev/rgbds), which assembles the source files into a ROM.
+These instructions explain how to set up the tools required to build **poketcg_hoenn**, including [**rgbds**](https://github.com/gbdev/rgbds), which assembles the source files into a ROM.
 
 These instruction were copied from one of the pret disassemblies. If you run into trouble, you could try asking for help on the pret Discord server (see [README.md](README.md)).
 
@@ -15,9 +15,9 @@ Update WSL's software before continuing. If you chose Debian, Ubuntu, or another
 apt-get update && apt-get upgrade
 ```
 
-WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install poketcg_v2 within Windows. You'll have to change the **current working directory** every time you open WSL.
+WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install poketcg_hoenn within Windows. You'll have to change the **current working directory** every time you open WSL.
 
-For example, if you want to store poketcg_v2 in **C:\Users\\*\<user>*\Desktop**, enter this command:
+For example, if you want to store poketcg_hoenn in **C:\Users\\*\<user>*\Desktop**, enter this command:
 
 ```bash
 cd /mnt/c/Users/<user>/Desktop
@@ -48,9 +48,9 @@ Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#
 
 Now open the **Cygwin terminal** and enter the following commands.
 
-Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\*\<user>***. If you don't want to store poketcg_v2 there, you'll have to change the **current working directory** every time you open Cygwin.
+Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\*\<user>***. If you don't want to store poketcg_hoenn there, you'll have to change the **current working directory** every time you open Cygwin.
 
-For example, if you want to store poketcg_v2 in **C:\Users\\*\<user>*\Desktop**:
+For example, if you want to store poketcg_hoenn in **C:\Users\\*\<user>*\Desktop**:
 
 ```bash
 cd /cygdrive/c/Users/<user>/Desktop
@@ -58,7 +58,7 @@ cd /cygdrive/c/Users/<user>/Desktop
 
 (The Windows `C:\` drive is called `/cygdrive/c/` in Cygwin. Replace *\<user>* in the example path with your username.)
 
-Now you're ready to [build **poketcg_v2**](#build-poketcg_v2).
+Now you're ready to [build **poketcg_hoenn**](#build-poketcg_hoenn).
 
 
 ## macOS
@@ -69,7 +69,7 @@ Open **Terminal** and prepare to enter commands.
 
 Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds 0.7.0**.
 
-Now you're ready to [build **poketcg_v2**](#build-poketcg_v2).
+Now you're ready to [build **poketcg_hoenn**](#build-poketcg_hoenn).
 
 
 ## Linux
@@ -133,19 +133,19 @@ If your distro is not listed here, try to find the required software in its repo
 
 If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.7.0** from source.
 
-Now you're ready to [build **poketcg_v2**](#build-poketcg_v2).
+Now you're ready to [build **poketcg_hoenn**](#build-poketcg_hoenn).
 
 
-## Build poketcg_v2
+## Build poketcg_hoenn
 
-To download the **poketcg_v2** source files:
+To download the **poketcg_hoenn** source files:
 
 ```bash
-git clone https://github.com/Sha0den/poketcg_v2
-cd poketcg_v2
+git clone https://github.com/Sha0den/poketcg_hoenn
+cd poketcg_hoenn
 ```
 
-To build **poketcg_v2.gbc**:
+To build **poketcg_hoenn.gbc**:
 
 ```bash
 make
@@ -153,7 +153,7 @@ make
 
 ### Build with a local rgbds version
 
-If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 0.7.0 globally. Instead, you can put its files in a directory within poketcg_v2, such as `poketcg_v2/rgbds-0.7.0/`. Then specify it when you run `make`:
+If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 0.7.0 globally. Instead, you can put its files in a directory within poketcg_hoenn, such as `poketcg_hoenn/rgbds-0.7.0/`. Then specify it when you run `make`:
 
 ```bash
 make RGBDS=rgbds-0.7.0/

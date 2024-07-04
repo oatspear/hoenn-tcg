@@ -101,7 +101,7 @@ AIDoTurn_LegendaryDragonite:
 	ld a, AI_TRAINER_CARD_PHASE_11
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wAlreadyDidUniqueAction]
 	or a
 	jr nz, .skip_energy_attach_1
 
@@ -150,7 +150,7 @@ AIDoTurn_LegendaryDragonite:
 	call AIProcessHandTrainerCards
 	ld a, AI_TRAINER_CARD_PHASE_11
 	call AIProcessHandTrainerCards
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wAlreadyDidUniqueAction]
 	or a
 	jr nz, .skip_energy_attach_2
 	call AIProcessAndTryToPlayEnergy

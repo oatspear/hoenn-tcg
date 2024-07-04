@@ -5,7 +5,7 @@ This is a modified disassembly of Pokémon Trading Card Game for the Game Boy Co
 For an overview of the changes that were made to the original game, see [**CHANGELOG.md**](CHANGELOG.md)
 
 To assemble, first download RGBDS (https://github.com/gbdev/rgbds/releases) and extract it to /usr/local/bin.
-Run `make` in your shell. This will output a file named "poketcg_v2.gbc".
+Run `make` in your shell. This will output a file named "poketcg_hoenn.gbc".
 
 For more detailed instructions about how to set up the repository, see [**INSTALL.md**](INSTALL.md).
 

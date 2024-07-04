@@ -547,7 +547,7 @@ CheckIfCardCanBePlayed:
 
 ; energy card
 	ld a, [wAlreadyDidUniqueAction]
-	or a
+	and PLAYED_ENERGY_THIS_TURN
 	ret z
 	scf
 	ret

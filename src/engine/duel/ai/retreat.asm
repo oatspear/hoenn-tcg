@@ -798,7 +798,7 @@ AITryToRetreat:
 ; if it does, check if there are any energy cards in hand
 ; and if there are, play that energy card
 	ld a, [wAlreadyDidUniqueAction]
-	or a
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .check_id
 	ld e, PLAY_AREA_ARENA
 	call CountNumberOfEnergyCardsAttached

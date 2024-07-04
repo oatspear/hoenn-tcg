@@ -253,3 +253,6 @@ DEF SECOND_ATTACK              EQU $1
 ; has limit on attached energy cards boost.
 DEF MAX_ENERGY_BOOST_IS_LIMITED     EQU $2
 DEF MAX_ENERGY_BOOST_IS_NOT_LIMITED EQU $3
+
+; debug constants
+DEF DEBUG_FULL_COLLECTION_AT_START EQU $1

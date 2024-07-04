@@ -132,8 +132,8 @@ AIDoTurn_LegendaryMoltres:
 	ld a, AI_TRAINER_CARD_PHASE_11
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyPlayedEnergy]
-	or a
+	ld a, [wAlreadyDidUniqueAction]
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .skip_attach_energy
 
 ; if MagmarLv31 is the Arena card and has no energy attached,

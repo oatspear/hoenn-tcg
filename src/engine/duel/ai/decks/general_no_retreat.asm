@@ -69,8 +69,8 @@ AIDoTurn_GeneralNoRetreat:
 	ld a, AI_TRAINER_CARD_PHASE_12
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyPlayedEnergy]
-	or a
+	ld a, [wAlreadyDidUniqueAction]
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .skip_energy_attach_1
 	call AIProcessAndTryToPlayEnergy
 .skip_energy_attach_1
@@ -117,8 +117,8 @@ AIDoTurn_GeneralNoRetreat:
 	call AIProcessHandTrainerCards
 	ld a, AI_TRAINER_CARD_PHASE_12
 	call AIProcessHandTrainerCards
-	ld a, [wAlreadyPlayedEnergy]
-	or a
+	ld a, [wAlreadyDidUniqueAction]
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .skip_energy_attach_2
 	call AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2

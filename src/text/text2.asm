@@ -1729,4 +1729,6 @@ MysteriousPokemonDescriptionText:
 	line "very rare Pokémon cards!"
 	done
 
-;	ds $26
+AlreadyRetreatedThisTurnText:
+	text "Already retreated this turn."
+	done

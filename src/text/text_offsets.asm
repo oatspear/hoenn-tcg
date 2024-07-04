@@ -759,6 +759,7 @@ TextOffsets::
 	textpointer LegendaryArticunoDescriptionText                   ; 0x02f3
 	textpointer LegendaryDragoniteDescriptionText                  ; 0x02f4
 	textpointer MysteriousPokemonDescriptionText                   ; 0x02f5
+	textpointer AlreadyRetreatedThisTurnText
 	textpointer GlossaryFWText                                     ; 0x02f6
 	textpointer GlossaryMenuPage1LeftText                          ; 0x02f7
 	textpointer GlossaryMenuPage1RightText                         ; 0x02f8

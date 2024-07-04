@@ -101,8 +101,8 @@ AIDoTurn_LegendaryDragonite:
 	ld a, AI_TRAINER_CARD_PHASE_11
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyPlayedEnergy]
-	or a
+	ld a, [wAlreadyDidUniqueAction]
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .skip_energy_attach_1
 
 ; if Arena card is Kangaskhan and doesn't
@@ -150,8 +150,8 @@ AIDoTurn_LegendaryDragonite:
 	call AIProcessHandTrainerCards
 	ld a, AI_TRAINER_CARD_PHASE_11
 	call AIProcessHandTrainerCards
-	ld a, [wAlreadyPlayedEnergy]
-	or a
+	ld a, [wAlreadyDidUniqueAction]
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .skip_energy_attach_2
 	call AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2

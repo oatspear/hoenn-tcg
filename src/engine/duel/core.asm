@@ -574,15 +574,16 @@ PlayEnergyCard:
 	jr c, .rain_dance_active
 
 .not_water_energy
-	ld a, [wAlreadyPlayedEnergy]
-	or a
+	ld a, [wAlreadyDidUniqueAction]
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .already_played_energy
 	call HasAlivePokemonInPlayArea
 	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
 	jp c, DuelMainInterface ; exit if no card was chosen
 .play_energy_set_played
-	ld a, TRUE
-	ld [wAlreadyPlayedEnergy], a
+	ld a, [wAlreadyDidUniqueAction]
+	or PLAYED_ENERGY_THIS_TURN
+	ld [wAlreadyDidUniqueAction], a
 .play_energy
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hTempPlayAreaLocation_ffa1], a
@@ -602,8 +603,8 @@ PlayEnergyCard:
 	jp c, DuelMainInterface ; exit if no card was chosen
 	call CheckRainDanceScenario
 	jr c, .play_energy
-	ld a, [wAlreadyPlayedEnergy]
-	or a
+	ld a, [wAlreadyDidUniqueAction]
+	and PLAYED_ENERGY_THIS_TURN
 	jr z, .play_energy_set_played
 	ldtx hl, MayOnlyAttachOneEnergyCardText
 	call DrawWideTextBox_WaitForInput
@@ -789,6 +790,12 @@ CheckRainDanceScenario:
 ; some status condition or due the bench containing no alive Pokemon.
 ; return carry if unable, nc if able.
 CheckAbleToRetreat:
+; OATS retreat only once per turn
+	ld a, [wAlreadyDidUniqueAction]
+	and RETREATED_THIS_TURN
+	ldtx hl, AlreadyRetreatedThisTurnText
+	jr nz, .done
+
 	call CheckCantRetreatDueToAttackEffect
 	ret c
 	call CheckIfActiveCardParalyzedOrAsleep
@@ -816,6 +823,7 @@ CheckAbleToRetreat:
 	ret
 .unable_to_retreat
 	ldtx hl, UnableToRetreatText
+.done
 	scf
 	ret
 
@@ -5768,6 +5776,9 @@ AttemptRetreat:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call SwapArenaWithBenchPokemon
+	ld a, [wAlreadyDidUniqueAction]
+	or RETREATED_THIS_TURN
+	ld [wAlreadyDidUniqueAction], a
 	xor a
 	ld [wGotHeadsFromConfusionCheckDuringRetreat], a
 	ret
@@ -6606,8 +6617,9 @@ OppAction_PlayEnergyCard:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	call DrawLargePictureOfCard
 	call PrintAttachedEnergyToPokemon
-	ld a, TRUE
-	ld [wAlreadyPlayedEnergy], a
+	ld a, [wAlreadyDidUniqueAction]
+	or PLAYED_ENERGY_THIS_TURN
+	ld [wAlreadyDidUniqueAction], a
 	jp DrawDuelMainScene
 
 ; evolve a Pokemon card in the arena or in the bench
@@ -7749,7 +7761,7 @@ InitVariablesToBeginDuel:
 ; init variables that last a single player's turn
 InitVariablesToBeginTurn:
 	xor a
-	ld [wAlreadyPlayedEnergy], a
+	ld [wAlreadyDidUniqueAction], a
 	ld [wGotHeadsFromConfusionCheckDuringRetreat], a
 	ld [wGotHeadsFromSmokescreenCheck], a
 	ldh a, [hWhoseTurn]

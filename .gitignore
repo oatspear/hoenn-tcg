@@ -30,3 +30,5 @@
 
 # *disasm.py output file
 *disasm_output.asm
+
+move-rom.sh

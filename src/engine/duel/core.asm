@@ -790,6 +790,12 @@ CheckRainDanceScenario:
 ; some status condition or due the bench containing no alive Pokemon.
 ; return carry if unable, nc if able.
 CheckAbleToRetreat:
+; OATS retreat only once per turn
+	ld a, [wAlreadyDidUniqueAction]
+	and RETREATED_THIS_TURN
+	ldtx hl, AlreadyRetreatedThisTurnText
+	jr nz, .done
+
 	call CheckCantRetreatDueToAttackEffect
 	ret c
 	call CheckIfActiveCardParalyzedOrAsleep
@@ -817,6 +823,7 @@ CheckAbleToRetreat:
 	ret
 .unable_to_retreat
 	ldtx hl, UnableToRetreatText
+.done
 	scf
 	ret
 
@@ -5769,6 +5776,9 @@ AttemptRetreat:
 	ldh a, [hTempPlayAreaLocation_ffa1]
 	ld e, a
 	call SwapArenaWithBenchPokemon
+	ld a, [wAlreadyDidUniqueAction]
+	or RETREATED_THIS_TURN
+	ld [wAlreadyDidUniqueAction], a
 	xor a
 	ld [wGotHeadsFromConfusionCheckDuringRetreat], a
 	ret

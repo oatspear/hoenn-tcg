@@ -297,7 +297,6 @@ DuelMainInterface:
 	; DUELIST_TYPE_AI_OPP
 	xor a
 	ld [wVBlankCounter], a
-	ld [wSkipDuelistIsThinkingDelay], a
 	ldtx hl, DuelistIsThinkingText
 	call DrawWideTextBox_PrintTextNoDelay
 	call AIDoAction_Turn
@@ -6612,19 +6611,6 @@ CheckSkipDelayAllowed:
 ; each call results in the execution of an OppActionTable function.
 AIMakeDecision:
 	ldh [hOppActionTableIndex], a
-	ld hl, wSkipDuelistIsThinkingDelay
-	ld a, [hl]
-	ld [hl], $0
-	or a
-	jr nz, .skip_delay
-.delay_loop
-	call DoFrame
-	ld a, [wVBlankCounter]
-	cp 60
-	jr c, .delay_loop
-
-.skip_delay
-	ldh a, [hOppActionTableIndex]
 	ld hl, wOpponentTurnEnded
 	ld [hl], 0
 	ld hl, OppActionTable
@@ -6632,17 +6618,7 @@ AIMakeDecision:
 	ld a, [wDuelFinished]
 	ld hl, wOpponentTurnEnded
 	or [hl]
-	jr nz, .turn_ended
-	ld a, [wSkipDuelistIsThinkingDelay]
-	or a
-	ret nz
-	ld [wVBlankCounter], a
-	ldtx hl, DuelistIsThinkingText
-	call DrawWideTextBox_PrintTextNoDelay
-	or a
-	ret
-
-.turn_ended
+	ret z
 	scf
 	ret
 
@@ -7010,10 +6986,7 @@ OppAction_PlayTrainerCard:
 	call LoadNonPokemonCardEffectCommands
 	call DisplayUsedTrainerCardDetailScreen
 	call PrintUsedTrainerCardDescription
-	call ExchangeRNG
-	ld a, $01
-	ld [wSkipDuelistIsThinkingDelay], a
-	ret
+	jp ExchangeRNG
 
 
 ; executes the effect commands of the Trainer card that is being played.
@@ -7038,14 +7011,17 @@ OppAction_ExecuteTrainerCardEffectCommands:
 ;	[hTempCardIndex_ff9f] = Attacking Pokemon's deck index (0-59)
 ;	[hTemp_ffa0] = the attack being used (0 = first attack, 1 = second attack)
 OppAction_BeginUseAttack:
+	; I added a 30 frame delay to better transition from the previous action.
+	; Feel free to delete the following 2 lines.
+	ld a, 30
+	call DoAFrames
+
 	ldh a, [hTempCardIndex_ff9f]
 	ld d, a
 	ldh a, [hTemp_ffa0]
 	ld e, a
 	call CopyAttackDataAndDamage_FromDeckIndex
 	call UpdateArenaCardIDsAndClearTwoTurnDuelVars
-	ld a, $01
-	ld [wSkipDuelistIsThinkingDelay], a
 	call CheckSmokescreenSubstatus
 	jr c, .has_status
 	ld a, DUELVARS_ARENA_CARD_STATUS
@@ -7080,10 +7056,7 @@ OppAction_UseAttack:
 	call DisplayOpponentUsedAttackScreen
 	call PrintPokemonsAttackText
 	call WaitForWideTextBoxInput
-	call ExchangeRNG
-	ld a, $01
-	ld [wSkipDuelistIsThinkingDelay], a
-	ret
+	jp ExchangeRNG
 .confusion_damage
 	call HandleConfusionDamageToSelf
 	; end the turn if dealing damage to self due to confusion
@@ -7134,10 +7107,7 @@ OppAction_UsePokemonPower:
 	ld [wTxRam2_b + 1], a
 	ldtx hl, WillUseThePokemonPowerText
 	call DrawWideTextBox_WaitForInput
-	call ExchangeRNG
-	ld a, $01
-	ld [wSkipDuelistIsThinkingDelay], a
-	ret
+	jp ExchangeRNG
 
 
 ; executes the EFFECTCMDTYPE_BEFORE_DAMAGE command of the used Pokemon Power
@@ -7145,27 +7115,18 @@ OppAction_ExecutePokemonPowerEffect:
 	xor a
 	ld [wce7e], a
 	ld a, EFFECTCMDTYPE_BEFORE_DAMAGE
-	call TryExecuteEffectCommandFunction
-	ld a, $01
-	ld [wSkipDuelistIsThinkingDelay], a
-	ret
+	jp TryExecuteEffectCommandFunction
 
 
 ; executes the EFFECTCMDTYPE_AFTER_DAMAGE command of the used Pokemon Power
 OppAction_6b15:
 	ld a, EFFECTCMDTYPE_AFTER_DAMAGE
-	call TryExecuteEffectCommandFunction
-	ld a, $01
-	ld [wSkipDuelistIsThinkingDelay], a
-	ret
+	jp TryExecuteEffectCommandFunction
 
 
 OppAction_TossCoinATimes:
 	call SerialRecv8Bytes
-	call TossCoinATimes
-	ld a, $01
-	ld [wSkipDuelistIsThinkingDelay], a
-	ret
+	jp TossCoinATimes
 
 
 ; input:

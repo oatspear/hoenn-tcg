@@ -32,40 +32,40 @@ AIActionTable_LegendaryArticuno:
 	ret
 
 .list_arena
-	db CHANSEY
-	db LAPRAS
-	db DITTO
-	db SEEL
-	db ARTICUNO_LV35
-	db ARTICUNO_LV37
+	db SEVIPER
+	db AGGRON
+	db ZIGZAGOON
+	db GOREBYSS
+	db SKARMORY
+	db PICHU
 	db $00
 
 .list_bench
-	db ARTICUNO_LV35
-	db SEEL
-	db LAPRAS
-	db CHANSEY
-	db DITTO
+	db SKARMORY
+	db GOREBYSS
+	db AGGRON
+	db SEVIPER
+	db ZIGZAGOON
 	db $00
 
 .list_retreat
-	ai_retreat SEEL,  -3
-	ai_retreat DITTO, -3
+	ai_retreat GOREBYSS,  -3
+	ai_retreat ZIGZAGOON, -3
 	db $00
 
 .list_energy
-	ai_energy SEEL,          3, +1
-	ai_energy DEWGONG,       4, +0
-	ai_energy LAPRAS,        3, +0
-	ai_energy ARTICUNO_LV35, 4, +1
-	ai_energy ARTICUNO_LV37, 3, +0
-	ai_energy CHANSEY,       0, -8
-	ai_energy DITTO,         3, +0
+	ai_energy GOREBYSS,          3, +1
+	ai_energy CORSOLA,       4, +0
+	ai_energy AGGRON,        3, +0
+	ai_energy SKARMORY, 4, +1
+	ai_energy PICHU, 3, +0
+	ai_energy SEVIPER,       0, -8
+	ai_energy ZIGZAGOON,         3, +0
 	db $00
 
 .list_prize
 	db GAMBLER
-	db ARTICUNO_LV37
+	db PICHU
 	db $00
 
 .store_list_pointers
@@ -95,13 +95,13 @@ ScoreLegendaryArticunoCards:
 ; otherwise, check if Articuno or Dewgong
 ; have more than half HP and can use second attack
 ; and if so, the next Pokémon to check is Lapras
-	ld a, LAPRAS
+	ld a, AGGRON
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .articuno
-	ld a, ARTICUNO_LV35
+	ld a, SKARMORY
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
-	ld a, DEWGONG
+	ld a, CORSOLA
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
 	jr .articuno
@@ -112,7 +112,7 @@ ScoreLegendaryArticunoCards:
 ; attached energy count, which skips calling the routine
 ; if this count is >= 3
 .lapras
-	ld a, LAPRAS
+	ld a, AGGRON
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .articuno
@@ -120,34 +120,34 @@ ScoreLegendaryArticunoCards:
 	call CountNumberOfEnergyCardsAttached
 	cp 3
 	jr nc, .articuno
-	ld a, LAPRAS
+	ld a, AGGRON
 	call RaiseAIScoreToAllMatchingIDsInBench
 	ret
 
 .articuno
-	ld a, ARTICUNO_LV35
+	ld a, SKARMORY
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .dewgong
-	ld a, ARTICUNO_LV35
+	ld a, SKARMORY
 	call RaiseAIScoreToAllMatchingIDsInBench
 	ret
 
 .dewgong
-	ld a, DEWGONG
+	ld a, CORSOLA
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .seel
-	ld a, DEWGONG
+	ld a, CORSOLA
 	call RaiseAIScoreToAllMatchingIDsInBench
 	ret
 
 .seel
-	ld a, SEEL
+	ld a, GOREBYSS
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	ret nc
-	ld a, SEEL
+	ld a, GOREBYSS
 	call RaiseAIScoreToAllMatchingIDsInBench
 	ret
 
@@ -182,7 +182,7 @@ AIDoTurn_LegendaryArticuno:
 	call AIProcessHandTrainerCards
 ; if used Professor Oak, process new hand
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_OAK
+	and AI_FLAG_USED_PROFESSOR_BIRCH
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards

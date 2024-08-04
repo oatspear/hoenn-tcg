@@ -32,42 +32,42 @@ AIActionTable_LegendaryZapdos:
 	ret
 
 .list_arena
-	db ELECTABUZZ_LV35
+	db NOSEPASS
 	db VOLTORB
-	db EEVEE
-	db ZAPDOS_LV40
-	db ZAPDOS_LV64
-	db ZAPDOS_LV68
+	db LINOONE
+	db TRAPINCH
+	db VIBRAVA
+	db FLYGON
 	db $00
 
 .list_bench
-	db ZAPDOS_LV64
-	db ZAPDOS_LV40
-	db EEVEE
+	db VIBRAVA
+	db TRAPINCH
+	db LINOONE
 	db VOLTORB
-	db ELECTABUZZ_LV35
+	db NOSEPASS
 	db $00
 
 .list_retreat
-	ai_retreat EEVEE,           -5
+	ai_retreat LINOONE,           -5
 	ai_retreat VOLTORB,         -5
-	ai_retreat ELECTABUZZ_LV35, -5
+	ai_retreat NOSEPASS, -5
 	db $00
 
 .list_energy
 	ai_energy VOLTORB,         1, -1
-	ai_energy ELECTRODE_LV35,  3, +0
-	ai_energy ELECTABUZZ_LV35, 2, -1
-	ai_energy JOLTEON_LV29,    3, +1
-	ai_energy ZAPDOS_LV40,     4, +2
-	ai_energy ZAPDOS_LV64,     4, +2
-	ai_energy ZAPDOS_LV68,     3, +1
-	ai_energy EEVEE,           3, +0
+	ai_energy ELECTRODE,  3, +0
+	ai_energy NOSEPASS, 2, -1
+	ai_energy MEDICHAM,    3, +1
+	ai_energy TRAPINCH,     4, +2
+	ai_energy VIBRAVA,     4, +2
+	ai_energy FLYGON,     3, +1
+	ai_energy LINOONE,           3, +0
 	db $00
 
 .list_prize
 	db GAMBLER
-	db ZAPDOS_LV68
+	db FLYGON
 	db $00
 
 .store_list_pointers
@@ -113,12 +113,12 @@ AIDoTurn_LegendaryZapdos:
 	ld a, VOLTORB
 	cp e
 	jr nz, .check_electabuzz
-	ld a, ELECTRODE_LV35
+	ld a, ELECTRODE
 	call LookForCardIDInHandList_Bank5
 	jr nc, .attach_normally
 	jr .voltorb_or_electabuzz
 .check_electabuzz
-	ld a, ELECTABUZZ_LV35
+	ld a, NOSEPASS
 	cp e
 	jr nz, .attach_normally
 

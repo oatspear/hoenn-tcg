@@ -779,7 +779,7 @@ wNumberPrizeCardsToTake:: ; ccc8
 wGotHeadsFromConfusionCheck:: ; ccc9
 	ds $1
 
-; used to store card indices of all stages, in order, of an in-play Pokémon
+; used to store card indices of all stages, in order, of an in-play Pokemon
 wAllStagesIndices:: ; ccca
 	ds $3
 
@@ -1114,17 +1114,17 @@ ENDU
 ; Unused wram bytes?
 	ds $a
 
-; information about the Defending Pokémon and
+; information about the Defending Pokemon and
 ; the Prize card count on both sides for AI:
-; type/color of the player's Active Pokémon
+; type/color of the player's Active Pokemon
 wAIPlayerColor:: ; cdcf
 	ds $1
 
-; weakness of the player's Active Pokémon
+; weakness of the player's Active Pokemon
 wAIPlayerWeakness:: ; cdd0
 	ds $1
 
-; resistance of the player's Active Pokémon
+; resistance of the player's Active Pokemon
 wAIPlayerResistance:: ; cdd1
 	ds $1
 
@@ -1193,7 +1193,7 @@ wPlayAreaEnergyAIScore:: ; cde4
 wcdea:: ; cdea
 	ds MAX_PLAY_AREA_POKEMON ; ds $6
 
-; whether AI cannot deal damage to the player's Active Pokémon
+; whether AI cannot deal damage to the player's Active Pokemon
 ; (due to No Damage or Effect substatus).
 ;	$00 = can damage
 ;	$01 = can't damage
@@ -1211,12 +1211,12 @@ wCurCardCanAttack:: ; cdf2
 	ds $1
 
 ; used to temporarily store the card deck index
-; while AI is deciding whether to evolve a Pokémon
-; or while deciding whether to play a Pokémon card from hand
+; while AI is deciding whether to evolve a Pokemon
+; or while deciding whether to play a Pokemon card from hand
 wTempAIPokemonCard:: ; cdf3
 	ds $1
 
-; used for AI to store whether this card can KO the Defending Pokémon
+; used for AI to store whether this card can KO the Defending Pokemon
 ; $00 = can't KO
 ; $01 = can KO
 wCurCardCanKO:: ; cdf4

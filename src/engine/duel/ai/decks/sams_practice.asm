@@ -77,12 +77,12 @@ SetSamsStartingPlayArea:
 ; outputs in a Play Area location of Raticate or Rattata
 ; in the Bench. If neither is found, just output PLAY_AREA_BENCH_1.
 GetPlayAreaLocationOfRaticateOrRattata:
-	ld a, RATICATE
+	ld a, GOLBAT
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	cp $ff
 	jr nz, .found
-	ld a, RATTATA
+	ld a, ZUBAT
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	cp $ff
@@ -130,33 +130,33 @@ AIPerformScriptedTurn:
 	ret
 
 .turn_2
-	ld a, RATTATA
+	ld a, ZUBAT
 	call LookForCardIDInHandList_Bank5
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_PLAY_BASIC_PKMN
 	bank1call AIMakeDecision
-	ld d, RATTATA
+	ld d, ZUBAT
 	ld e, FIGHTING_ENERGY
 	call AIAttachEnergyInHandToCardInPlayArea
 	ret
 
 .turn_3
-	ld a, RATTATA
+	ld a, ZUBAT
 	ld b, PLAY_AREA_ARENA
 	call LookForCardIDInPlayArea_Bank5
 	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, RATICATE
+	ld a, GOLBAT
 	call LookForCardIDInHandList_Bank5
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_EVOLVE_PKMN
 	bank1call AIMakeDecision
-	ld d, RATICATE
+	ld d, GOLBAT
 	ld e, LIGHTNING_ENERGY
 	call AIAttachEnergyInHandToCardInPlayArea
 	ret
 
 .turn_4
-	ld d, RATICATE
+	ld d, GOLBAT
 	ld e, LIGHTNING_ENERGY
 	call AIAttachEnergyInHandToCardInPlayArea
 	ret

@@ -29,9 +29,9 @@ CreateCardSetList:
 
 ; it's the same set as the input, i.e. PROMOTIONAL
 	ld a, e
-	cp VENUSAUR_LV64
+	cp SCEPTILE
 	jp z, .SetVenusaurLv64OwnedFlag
-	cp MEW_LV15
+	cp DEOXYS
 	jp z, .SetMewLv15OwnedFlag
 
 	push bc
@@ -95,7 +95,7 @@ CreateCardSetList:
 .loop_find_double_colorless
 	inc e
 	ld a, e
-	cp BULBASAUR
+	cp TREECKO
 	jr z, .skip_energy_cards
 	cp DOUBLE_COLORLESS_ENERGY
 	jr nz, .loop_find_double_colorless
@@ -185,7 +185,7 @@ CreateCardSetList:
 .PlaceVenusaurLv64InList
 	push af
 	push hl
-	ld e, VENUSAUR_LV64
+	ld e, SCEPTILE
 	; fallthrough
 
 ; places card in register e directly in the list
@@ -208,7 +208,7 @@ CreateCardSetList:
 .PlaceMewLv15InList
 	push af
 	push hl
-	ld e, MEW_LV15
+	ld e, DEOXYS
 	jr .PlaceCardInList
 
 
@@ -400,9 +400,9 @@ PrintCardSetListEntries:
 	ld a, [hl]
 	cp DOUBLE_COLORLESS_ENERGY + 1
 	jr c, .energy_card
-	cp VENUSAUR_LV64
+	cp SCEPTILE
 	jr z, .phantom_card
-	cp MEW_LV15
+	cp DEOXYS
 	jr z, .phantom_card
 
 	ld a, [wNumVisibleCardListEntries]

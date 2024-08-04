@@ -32,52 +32,52 @@ AIActionTable_LegendaryRonald:
 	ret
 
 .list_arena
-	db KANGASKHAN
-	db DRATINI
-	db EEVEE
-	db ZAPDOS_LV68
-	db ARTICUNO_LV37
-	db MOLTRES_LV37
+	db CRAWDAUNT
+	db SLAKOTH
+	db LINOONE
+	db FLYGON
+	db PICHU
+	db WAILORD
 	db $00
 
 .list_bench
-	db KANGASKHAN
-	db DRATINI
-	db EEVEE
+	db CRAWDAUNT
+	db SLAKOTH
+	db LINOONE
 	db $00
 
 .list_play_hand
-	db MOLTRES_LV37
-	db ZAPDOS_LV68
-	db KANGASKHAN
-	db DRATINI
-	db EEVEE
-	db ARTICUNO_LV37
+	db WAILORD
+	db FLYGON
+	db CRAWDAUNT
+	db SLAKOTH
+	db LINOONE
+	db PICHU
 	db $00
 
 .list_retreat
-	ai_retreat EEVEE, -2
+	ai_retreat LINOONE, -2
 	db $00
 
 .list_energy
-	ai_energy FLAREON_LV22,   3, +0
-	ai_energy MOLTRES_LV37,   3, +0
-	ai_energy VAPOREON_LV29,  3, +0
-	ai_energy ARTICUNO_LV37,  0, -8
-	ai_energy JOLTEON_LV24,   4, +0
-	ai_energy ZAPDOS_LV68,    0, -8
-	ai_energy KANGASKHAN,     4, -1
-	ai_energy EEVEE,          3, +0
-	ai_energy DRATINI,        3, +0
-	ai_energy DRAGONAIR,      4, +0
-	ai_energy DRAGONITE_LV41, 3, +0
+	ai_energy MARILL,   3, +0
+	ai_energy WAILORD,   3, +0
+	ai_energy ELECTRIKE,  3, +0
+	ai_energy PICHU,  0, -8
+	ai_energy MEDITITE,   4, +0
+	ai_energy FLYGON,    0, -8
+	ai_energy CRAWDAUNT,     4, -1
+	ai_energy LINOONE,          3, +0
+	ai_energy SLAKOTH,        3, +0
+	ai_energy VIGOROTH,      4, +0
+	ai_energy SLAKING, 3, +0
 	db $00
 
 .list_prize
-	db MOLTRES_LV37
-	db ARTICUNO_LV37
-	db ZAPDOS_LV68
-	db DRAGONITE_LV41
+	db WAILORD
+	db PICHU
+	db FLYGON
+	db SLAKING
 	db GAMBLER
 	db $00
 
@@ -111,10 +111,10 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_1 ; skip if cards in deck <= 9
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .skip_moltres_1 ; skip if Muk in play
-	ld a, MOLTRES_LV37
+	ld a, WAILORD
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres_1 ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a
@@ -147,7 +147,7 @@ AIDoTurn_LegendaryRonald:
 ; if not, then proceed to attack.
 	call AIProcessHandTrainerCards
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_OAK
+	and AI_FLAG_USED_PROFESSOR_BIRCH
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards
@@ -166,10 +166,10 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_2 ; skip if cards in deck <= 9
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .skip_moltres_2 ; skip if Muk in play
-	ld a, MOLTRES_LV37
+	ld a, WAILORD
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres_2 ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a

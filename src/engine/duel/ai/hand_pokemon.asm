@@ -328,7 +328,7 @@ AIDecideEvolution:
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
 	ld a, [wLoadedCard1ID]
-	cp MYSTERIOUS_FOSSIL
+	cp CLAW_FOSSIL
 	jr z, .mysterious_fossil
 	ld a, [wLoadedCard1Unknown2]
 	cp $02
@@ -347,13 +347,13 @@ AIDecideEvolution:
 	cp PIKACHU_DECK_ID
 	jr nz, .check_score
 	ld a, [wLoadedCard1ID]
-	cp PIKACHU_LV12
+	cp PIKACHU
 	jr z, .pikachu
-	cp PIKACHU_LV14
+	cp RAICHU
 	jr z, .pikachu
-	cp PIKACHU_LV16
+	cp PSYDUCK
 	jr z, .pikachu
-	cp PIKACHU_ALT_LV16
+	cp GOLDUCK
 	jr nz, .check_score
 .pikachu
 	ld a, 3
@@ -377,7 +377,7 @@ AIDecideEvolution:
 	or a
 	jr nz, .skip_reset_pluspower_atk
 	ld hl, wPreviousAIFlags
-	res 0, [hl] ; AI_FLAG_USED_PLUSPOWER
+	res 0, [hl] ; AI_FLAG_USED_TV_REPORTER
 .skip_reset_pluspower_atk
 	pop bc
 	jr .done_hand_card
@@ -400,7 +400,7 @@ AIDecideEvolution:
 AIDecideSpecialEvolutions:
 ; check if deck applies
 	ld a, [wOpponentDeckID]
-	cp LEGENDARY_DRAGONITE_DECK_ID
+	cp LEGENDARY_SLAKING_DECK_ID
 	jr z, .legendary_dragonite
 	cp INVINCIBLE_RONALD_DECK_ID
 	jr z, .invincible_ronald
@@ -410,11 +410,11 @@ AIDecideSpecialEvolutions:
 
 .legendary_dragonite
 	ld a, [wLoadedCard2ID]
-	cp CHARMELEON
+	cp SHELGON
 	jr z, .charmeleon
 	cp MAGIKARP
 	jr z, .magikarp
-	cp DRAGONAIR
+	cp VIGOROTH
 	jr z, .dragonair
 	ret
 
@@ -453,7 +453,7 @@ AIDecideSpecialEvolutions:
 
 .invincible_ronald
 	ld a, [wLoadedCard2ID]
-	cp GRIMER
+	cp NUMEL
 	jr z, .grimer
 	ret
 
@@ -467,7 +467,7 @@ AIDecideSpecialEvolutions:
 
 .legendary_ronald
 	ld a, [wLoadedCard2ID]
-	cp DRAGONAIR
+	cp VIGOROTH
 	jr z, .dragonair
 	ret
 
@@ -519,7 +519,7 @@ AIDecideSpecialEvolutions:
 
 ; if there's no Muk, raise score
 .check_muk
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .lower_score
 	ld a, 10
@@ -541,11 +541,11 @@ AIDecidePlayLegendaryBirds:
 ; check if card applies
 .begin
 	ld a, [wLoadedCard1ID]
-	cp ARTICUNO_LV37
+	cp PICHU
 	jr z, .articuno
-	cp MOLTRES_LV37
+	cp WAILORD
 	jr z, .moltres
-	cp ZAPDOS_LV68
+	cp FLYGON
 	jr z, .zapdos
 	ret
 
@@ -591,7 +591,7 @@ AIDecidePlayLegendaryBirds:
 
 .check_muk_and_snorlax
 	; checks for Muk in both Play Areas
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .subtract
 	; checks if player's active card is Snorlax
@@ -601,7 +601,7 @@ AIDecidePlayLegendaryBirds:
 	call GetCardIDFromDeckIndex
 	call SwapTurn
 	ld a, e
-	cp SNORLAX
+	cp SWELLOW
 	jr z, .subtract
 
 ; add
@@ -621,7 +621,7 @@ AIDecidePlayLegendaryBirds:
 
 .zapdos
 	; checks for Muk in both Play Areas
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .subtract
 	ret

@@ -117,7 +117,7 @@ HandleEnergyBurn::
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp CHARIZARD
+	cp SALAMENCE
 	ret nz
 	call CheckCannotUseDueToStatus
 	ret c

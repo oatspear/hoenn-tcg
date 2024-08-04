@@ -1662,7 +1662,7 @@ ParalysisEffect:
 	lb bc, PSN_DBLPSN, PARALYZED
 	jr QueueStatusCondition
 
-; the Defending Pokémon becomes double poisoned
+; the Defending Pokemon becomes double poisoned
 ; it takes 20 damage per turn rather than 10
 DoublePoisonEffect:
 	lb bc, CNF_SLP_PRZ, DOUBLE_POISONED
@@ -1683,12 +1683,12 @@ QueueStatusCondition:
 	cp [hl]
 	jr nz, .can_induce_status
 	ld a, [wTempNonTurnDuelistCardID]
-	cp CLEFAIRY_DOLL
+	cp ROOT_FOSSIL
 	jr z, .cant_induce_status
-	cp MYSTERIOUS_FOSSIL
+	cp CLAW_FOSSIL
 	jr z, .cant_induce_status
 	; Snorlax's Thick Skinned prevents it from being statused...
-	cp SNORLAX
+	cp SWELLOW
 	jr nz, .can_induce_status
 	call SwapTurn
 	; ...unless already so, or if affected by Muk's Toxic Gas
@@ -1845,7 +1845,7 @@ ConfuseBothActivePokemonEffect:
 
 SwordsDanceEffect:
 	ld a, [wTempTurnDuelistCardID]
-	cp SCYTHER
+	cp KINGDRA
 	ret nz
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
 ;	fallthrough
@@ -1861,7 +1861,7 @@ ApplySubstatus1ToDefendingCard:
 
 FocusEnergyEffect:
 	ld a, [wTempTurnDuelistCardID]
-	cp VAPOREON_LV29
+	cp ELECTRIKE
 	ret nz ; return if no VaporeonLv29
 	ld a, SUBSTATUS1_NEXT_TURN_DOUBLE_DAMAGE
 	jr ApplySubstatus1ToDefendingCard
@@ -1936,12 +1936,12 @@ DestinyBondEffect:
 ; (THE LAST FUNCTION IS ACTUALLY SUBSTATUS3)
 ;---------------------------------------------------------------------------------
 
-; Prevent 10 damage done to user by the Defending Pokémon next turn
+; Prevent 10 damage done to user by the Defending Pokemon next turn
 ReduceBy10Effect:
 	ld a, SUBSTATUS2_REDUCE_BY_10
 	jr ApplySubstatus2ToDefendingCard
 
-; Prevent 20 damage done to user by the Defending Pokémon next turn
+; Prevent 20 damage done to user by the Defending Pokemon next turn
 ReduceBy20Effect:
 	ld a, SUBSTATUS2_REDUCE_BY_20
 	jr ApplySubstatus2ToDefendingCard
@@ -3475,7 +3475,7 @@ EachNidoking20MoreDamageEffect:
 	jr z, .done
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp NIDOKING
+	cp LATIOS
 	jr nz, .next
 ;	ld a, d
 ;	cp $00 ; why check d? Card IDs are only 1 byte long
@@ -5750,7 +5750,7 @@ Shift_ChangeColorEffect:
 ;	call GetCardIDFromDeckIndex
 ;	ld a, e
 ;	pop de
-;	cp CHARIZARD
+;	cp SALAMENCE
 ;	jp nz, SetCarryEF
 ;	or a
 ;	ret
@@ -6606,7 +6606,7 @@ Defender_AttachDefenderEffect:
 
 ; increase number of Defender cards in this location by 1
 	ldh a, [hTemp_ffa0]
-	add DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	add DUELVARS_ARENA_CARD_ATTACHED_WALLYS_TRAINING
 	call GetTurnDuelistVariable
 	inc [hl]
 	call IsPlayerTurn
@@ -7227,13 +7227,13 @@ ImakuniEffect:
 	ld a, [wLoadedCard1ID]
 
 ; cannot confuse Clefairy Doll or Mysterious Fossil
-	cp CLEFAIRY_DOLL
+	cp ROOT_FOSSIL
 	jr z, .failed
-	cp MYSTERIOUS_FOSSIL
+	cp CLAW_FOSSIL
 	jr z, .failed
 
 ; cannot confuse Snorlax if its Pokemon Power is active
-	cp SNORLAX
+	cp SWELLOW
 	jr nz, .success
 	call CheckCannotUseDueToStatus
 	jr c, .success
@@ -7451,7 +7451,7 @@ PlusPowerEffect:
 	call PutHandCardInPlayArea
 
 ; increase number of PlusPower cards in this location by 1
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TV_REPORTER
 	call GetTurnDuelistVariable
 	inc [hl]
 	ret
@@ -8102,7 +8102,7 @@ ScoopUp_PlayerSelection:
 	ret
 
 ScoopUp_ReturnToHandEffect:
-; if card was in Bench, simply return Pokémon to hand
+; if card was in Bench, simply return Pokemon to hand
 	ldh a, [hTemp_ffa0]
 	or a
 	jr nz, .not_active

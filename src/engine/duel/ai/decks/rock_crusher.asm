@@ -33,34 +33,34 @@ AIActionTable_RockCrusher:
 
 .list_arena
 	db RHYHORN
-	db ONIX
+	db DONPHAN
 	db GEODUDE
-	db DIGLETT
+	db SOLROCK
 	db $00
 
 .list_bench
-	db DIGLETT
+	db SOLROCK
 	db GEODUDE
 	db RHYHORN
-	db ONIX
+	db DONPHAN
 	db $00
 
 .list_retreat
-	ai_retreat DIGLETT, -1
+	ai_retreat SOLROCK, -1
 	db $00
 
 .list_energy
-	ai_energy DIGLETT,  3, +1
-	ai_energy DUGTRIO,  4, +0
+	ai_energy SOLROCK,  3, +1
+	ai_energy ANORITH,  4, +0
 	ai_energy GEODUDE,  2, +1
 	ai_energy GRAVELER, 3, +0
 	ai_energy GOLEM,    4, +0
-	ai_energy ONIX,     2, -1
+	ai_energy DONPHAN,     2, -1
 	ai_energy RHYHORN,  3, +0
 	db $00
 
 .list_prize
-	db ENERGY_REMOVAL
+	db STEVEN
 	db RHYHORN
 	db $00
 

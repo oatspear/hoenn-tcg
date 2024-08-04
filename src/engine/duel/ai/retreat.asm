@@ -191,7 +191,7 @@ AIDecideWhetherToRetreat:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	pop de
-	cp PORYGON
+	cp TAILLOW
 	jr nz, .check_weakness_3
 
 ; handle Porygon
@@ -293,9 +293,9 @@ AIDecideWhetherToRetreat:
 	call GetCardIDFromDeckIndex
 	call SwapTurn
 	ld a, e
-	cp MR_MIME
+	cp CHIMECHO
 	jr z, .mr_mime_or_hitmonlee
-	cp HITMONLEE ; ??
+	cp GROUDON ; ??
 	jr nz, .check_retreat_cost
 
 ; check bench if there's any Pokémon
@@ -378,9 +378,9 @@ AIDecideWhetherToRetreat:
 	ld a, [wLoadedCard2ID]
 	pop hl
 	pop de
-	cp MYSTERIOUS_FOSSIL
+	cp CLAW_FOSSIL
 	jr z, .loop_ko_2
-	cp CLEFAIRY_DOLL
+	cp ROOT_FOSSIL
 	jr z, .loop_ko_2
 	ld a, e
 	ldh [hTempPlayAreaLocation_ff9d], a
@@ -400,9 +400,9 @@ AIDecideWhetherToRetreat:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp MYSTERIOUS_FOSSIL
+	cp CLAW_FOSSIL
 	jr z, .mysterious_fossil_or_clefairy_doll
-	cp CLEFAIRY_DOLL
+	cp ROOT_FOSSIL
 	jr z, .mysterious_fossil_or_clefairy_doll
 
 ; if wAIScore is at least 131, set carry
@@ -559,7 +559,7 @@ AIDecideBenchPokemonToSwitchTo:
 	call SwapTurn
 	call LoadCardDataToBuffer2_FromDeckIndex
 	call SwapTurn
-	cp MR_MIME
+	cp CHIMECHO
 	jr nz, .check_defending_weak
 	xor a
 	call EstimateDamage_VersusDefendingCard
@@ -692,9 +692,9 @@ AIDecideBenchPokemonToSwitchTo:
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call LoadCardDataToBuffer1_FromDeckIndex
-	cp MR_MIME
+	cp CHIMECHO
 	jr z, .raise_score
-	cp MEW_LV8
+	cp JIRACHI
 	jr nz, .asm_15cf0
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
@@ -718,9 +718,9 @@ AIDecideBenchPokemonToSwitchTo:
 ; lower AI score
 .mysterious_fossil_or_clefairy_doll
 	ld a, [wLoadedCard1ID]
-	cp MYSTERIOUS_FOSSIL
+	cp CLAW_FOSSIL
 	jr z, .lower_score_2
-	cp CLEFAIRY_DOLL
+	cp ROOT_FOSSIL
 	jr nz, .ai_score_bonus
 .lower_score_2
 	ld a, 10
@@ -828,9 +828,9 @@ AITryToRetreat:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp MYSTERIOUS_FOSSIL
+	cp CLAW_FOSSIL
 	jp z, .mysterious_fossil_or_clefairy_doll
-	cp CLEFAIRY_DOLL
+	cp ROOT_FOSSIL
 	jp z, .mysterious_fossil_or_clefairy_doll
 
 ; if card is Asleep or Paralyzed, set carry and exit

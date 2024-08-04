@@ -216,21 +216,21 @@ RemoveCardFromCollection::
 ; preserves bc and hl
 ; output:
 ;	d = number of different cards that the player has collected
-;	e = NUM_CARDS minus 1 if VENUSAUR_LV64 or MEW_LV15 has not been collected (minus 2 if neither)
+;	e = NUM_CARDS minus 1 if SCEPTILE or DEOXYS has not been collected (minus 2 if neither)
 GetCardAlbumProgress::
 	push hl
 	call EnableSRAM
 	ld e, NUM_CARDS
 	ld h, HIGH(sCardCollection)
-	ld l, VENUSAUR_LV64
+	ld l, SCEPTILE
 	bit CARD_NOT_OWNED_F, [hl]
 	jr z, .next1
-	dec e ; if VENUSAUR_LV64 isn't owned
+	dec e ; if SCEPTILE isn't owned
 .next1
-	ld l, MEW_LV15
+	ld l, DEOXYS
 	bit CARD_NOT_OWNED_F, [hl]
 	jr z, .next2
-	dec e ; if MEW_LV15 isn't owned
+	dec e ; if DEOXYS isn't owned
 .next2
 	ld d, LOW(sCardCollection)
 	ld l, d

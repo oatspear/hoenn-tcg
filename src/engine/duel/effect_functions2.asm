@@ -177,9 +177,9 @@ LookForCardsInDeck:
 	jr z, SetCarryEF2
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp NIDORANF
+	cp MASQUERAIN
 	jr z, .found_nidoran
-	cp NIDORANM
+	cp NINJASK
 	jr nz, .loop_deck_nidoran ; skip if not a Nidoran
 .found_nidoran
 	or a
@@ -698,10 +698,10 @@ FindNidoran:
 	bank1call DisplayCardList
 	jr c, .attempt_to_cancel ; the B button was pressed
 	call GetCardIDFromDeckIndex
-	ld bc, NIDORANF
+	ld bc, MASQUERAIN
 	call CompareDEtoBC
 	jr z, .selected_nidoran
-	ld bc, NIDORANM
+	ld bc, NINJASK
 	call CompareDEtoBC
 	jr nz, .play_sfx ; not a Nidoran
 
@@ -725,10 +725,10 @@ FindNidoran:
 	cp $ff
 	jr z, .exit
 	call GetCardIDFromDeckIndex
-	ld bc, NIDORANF
+	ld bc, MASQUERAIN
 	call CompareDEtoBC
 	jr z, .play_sfx ; found a Nidoran, return to selection process
-	ld bc, NIDORANM
+	ld bc, NINJASK
 	jr nz, .next_card
 	jr .play_sfx ; found a Nidoran, return to selection process
 
@@ -750,9 +750,9 @@ AIFindNidoran:
 	ret z ; reached the end of the list
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp NIDORANF
+	cp MASQUERAIN
 	ret z ; Nidoran found
-	cp NIDORANM
+	cp NINJASK
 	jr nz, .loop_deck ; card isn't a Nidoran
 	ret ; Nidoran found
 
@@ -760,7 +760,7 @@ FindOddish:
 	call CreateDeckCardList
 	ldtx hl, ChooseAnOddishFromDeckText
 	ldtx bc, OddishName
-	lb de, SEARCHEFFECT_CARD_ID, ODDISH
+	lb de, SEARCHEFFECT_CARD_ID, BELLOSSOM
 	call LookForCardsInDeck
 	jr c, .exit ; no Oddish in the deck
 
@@ -774,7 +774,7 @@ FindOddish:
 	bank1call DisplayCardList
 	jr c, .attempt_to_cancel ; the B button was pressed
 	call GetCardIDFromDeckIndex
-	ld bc, ODDISH
+	ld bc, BELLOSSOM
 	call CompareDEtoBC
 	jr nz, .play_sfx ; not an Oddish
 
@@ -798,7 +798,7 @@ FindOddish:
 	cp $ff
 	jr z, .exit
 	call GetCardIDFromDeckIndex
-	ld bc, ODDISH
+	ld bc, BELLOSSOM
 	call CompareDEtoBC
 	jr nz, .next_card
 	jr .play_sfx ; found a Oddish, return to selection process
@@ -821,7 +821,7 @@ AIFindOddish:
 	ret z ; reached the end of the list
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp ODDISH
+	cp BELLOSSOM
 	jr nz, .loop_deck ; card isn't an Oddish
 	ret ; Oddish found
 
@@ -829,7 +829,7 @@ FindBellsprout:
 	call CreateDeckCardList
 	ldtx hl, ChooseABellsproutFromDeckText
 	ldtx bc, BellsproutName
-	lb de, SEARCHEFFECT_CARD_ID, BELLSPROUT
+	lb de, SEARCHEFFECT_CARD_ID, TORCHIC
 	call LookForCardsInDeck
 	jr c, .exit ; no Bellsprout in the Deck
 
@@ -843,7 +843,7 @@ FindBellsprout:
 	bank1call DisplayCardList
 	jr c, .attempt_to_cancel ; the B button was pressed
 	call GetCardIDFromDeckIndex
-	ld bc, BELLSPROUT
+	ld bc, TORCHIC
 	call CompareDEtoBC
 	jr nz, .play_sfx ; not a Bellsprout
 
@@ -867,7 +867,7 @@ FindBellsprout:
 	cp $ff
 	jr z, .exit
 	call GetCardIDFromDeckIndex
-	ld bc, BELLSPROUT
+	ld bc, TORCHIC
 	call CompareDEtoBC
 	jr nz, .next_card
 	jr .play_sfx ; found a Bellsprout, return to selection process
@@ -890,7 +890,7 @@ AIFindBellsprout:
 	ret z ; reached the end of the list
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp BELLSPROUT
+	cp TORCHIC
 	jr nz, .loop_deck ; card isn't a Bellsprout
 	ret ; Bellsprout found
 
@@ -898,7 +898,7 @@ FindKrabby:
 	call CreateDeckCardList
 	ldtx hl, ChooseAKrabbyFromDeckText
 	ldtx bc, KrabbyName
-	lb de, SEARCHEFFECT_CARD_ID, KRABBY
+	lb de, SEARCHEFFECT_CARD_ID, KYOGRE
 	call LookForCardsInDeck
 	jr c, .exit ; no Krabby in the deck
 
@@ -912,7 +912,7 @@ FindKrabby:
 	bank1call DisplayCardList
 	jr c, .attempt_to_cancel ; the B button was pressed
 	call GetCardIDFromDeckIndex
-	ld bc, KRABBY
+	ld bc, KYOGRE
 	call CompareDEtoBC
 	jr nz, .play_sfx ; not a Krabby
 
@@ -936,7 +936,7 @@ FindKrabby:
 	cp $ff
 	jr z, .exit
 	call GetCardIDFromDeckIndex
-	ld bc, KRABBY
+	ld bc, KYOGRE
 	call CompareDEtoBC
 	jr nz, .next_card
 	jr .play_sfx ; found a Krabby, return to selection process
@@ -959,6 +959,6 @@ AIFindKrabby:
 	ret z ; reached the end of the list
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp KRABBY
+	cp KYOGRE
 	jr nz, .loop_deck ; card isn't a Krabby
 	ret ; Krabby found

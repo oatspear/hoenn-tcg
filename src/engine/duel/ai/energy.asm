@@ -126,10 +126,10 @@ AIProcessEnergyCards:
 ; and there's VenusaurLv67 in own Play Area,
 ; add to AI score
 .check_venusaur
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .check_if_active
-	ld a, VENUSAUR_LV67
+	ld a, WURMPLE
 	call CountPokemonIDInPlayArea
 	jr nc, .check_if_active
 	ld a, 1
@@ -429,7 +429,7 @@ DetermineAIScoreOfAttackEnergyRequirement:
 ; if there is no surplus energy, encourage playing energy.
 .discard_energy
 	ld a, [wLoadedCard1ID]
-	cp ZAPDOS_LV64
+	cp VIBRAVA
 	jr z, .check_evolution
 	call CheckIfNoSurplusEnergyForAttack
 	jr c, .asm_166cd
@@ -668,11 +668,11 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 ; for these to be treated differently.
 ; for both attacks, load its energy cost.
 	ld a, b
-	cp ZAPDOS_LV64
+	cp VIBRAVA
 	jr z, .zapdos2
-	cp CHARIZARD
+	cp SALAMENCE
 	jr z, .charizard_or_exeggutor
-	cp EXEGGUTOR
+	cp MAGCARGO
 	jr z, .charizard_or_exeggutor
 	ld hl, wLoadedCard2Atk2EnergyCost
 	jr .fire
@@ -916,7 +916,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 
 ; check if AI is playing any of the applicable decks.
 	ld a, [wOpponentDeckID]
-	cp LEGENDARY_DRAGONITE_DECK_ID
+	cp LEGENDARY_SLAKING_DECK_ID
 	jr z, .legendary_dragonite_deck
 	cp FIRE_CHARGE_DECK_ID
 	jr z, .fire_charge_deck
@@ -934,9 +934,9 @@ CheckSpecificDecksToAttachDoubleColorless:
 ; check for Charmander and Dratini.
 .legendary_dragonite_deck
 	call .get_id
-	cp CHARMANDER
+	cp BAGON
 	jr z, .check_colorless_attached
-	cp DRATINI
+	cp SLAKOTH
 	jr z, .check_colorless_attached
 	jr .no_carry
 
@@ -944,7 +944,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 ; check for Growlithe.
 .fire_charge_deck
 	call .get_id
-	cp GROWLITHE
+	cp RAYQUAZA
 	jr z, .check_colorless_attached
 	jr .no_carry
 
@@ -952,7 +952,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 ; check for Dratini.
 .legendary_ronald_deck
 	call .get_id
-	cp DRATINI
+	cp SLAKOTH
 	jr z, .check_colorless_attached
 	jr .no_carry
 

@@ -32,43 +32,43 @@ AIActionTable_LegendaryDragonite:
 	ret
 
 .list_arena
-	db KANGASKHAN
-	db LAPRAS
-	db CHARMANDER
-	db DRATINI
+	db CRAWDAUNT
+	db AGGRON
+	db BAGON
+	db SLAKOTH
 	db MAGIKARP
 	db $00
 
 .list_bench
-	db CHARMANDER
+	db BAGON
 	db MAGIKARP
-	db DRATINI
-	db LAPRAS
-	db KANGASKHAN
+	db SLAKOTH
+	db AGGRON
+	db CRAWDAUNT
 	db $00
 
 .list_retreat
-	ai_retreat CHARMANDER, -1
+	ai_retreat BAGON, -1
 	ai_retreat MAGIKARP,   -5
 	db $00
 
 .list_energy
-	ai_energy CHARMANDER,     3, +1
-	ai_energy CHARMELEON,     4, +1
-	ai_energy CHARIZARD,      5, +0
+	ai_energy BAGON,     3, +1
+	ai_energy SHELGON,     4, +1
+	ai_energy SALAMENCE,      5, +0
 	ai_energy MAGIKARP,       3, +1
 	ai_energy GYARADOS,       4, -1
-	ai_energy DRATINI,        2, +0
-	ai_energy DRAGONAIR,      4, +0
-	ai_energy DRAGONITE_LV41, 3, -1
-	ai_energy KANGASKHAN,     2, -2
-	ai_energy LAPRAS,         3, +0
+	ai_energy SLAKOTH,        2, +0
+	ai_energy VIGOROTH,      4, +0
+	ai_energy SLAKING, 3, -1
+	ai_energy CRAWDAUNT,     2, -2
+	ai_energy AGGRON,         3, +0
 	db $00
 
 .list_prize
 	db GAMBLER
-	db DRAGONITE_LV41
-	db KANGASKHAN
+	db SLAKING
+	db CRAWDAUNT
 	db $00
 
 .store_list_pointers
@@ -111,7 +111,7 @@ AIDoTurn_LegendaryDragonite:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, KANGASKHAN
+	ld a, CRAWDAUNT
 	cp e
 	jr nz, .attach_normally
 	call CreateEnergyCardListFromHand
@@ -135,7 +135,7 @@ AIDoTurn_LegendaryDragonite:
 ; if used Professor Oak, process new hand
 ; if not, then proceed to attack.
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_OAK
+	and AI_FLAG_USED_PROFESSOR_BIRCH
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards

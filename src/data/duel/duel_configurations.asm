@@ -64,7 +64,7 @@ DeckIDDuelConfigurations:
 	tx GrandMasterText ; rank
 	dw NULL ; element
 
-	db LEGENDARY_DRAGONITE_DECK_ID ; deck ID
+	db LEGENDARY_SLAKING_DECK_ID ; deck ID
 	db ROD_PIC ; NPC portrait
 	tx RodNPCName ; name text ID
 	db PRIZES_6 ; number of prize cards

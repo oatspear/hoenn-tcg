@@ -63,8 +63,8 @@ Script_Man1:
 
 .ows_dcd7
 	print_npc_text Man1PlayerReceivePikachuAltLv16Text
-	give_card PIKACHU_ALT_LV16
-	show_card_received_screen PIKACHU_ALT_LV16
+	give_card GOLDUCK
+	show_card_received_screen GOLDUCK
 	print_npc_text Man1ThankYouText
 	set_event EVENT_MAN1_GIFT_SEQUENCE_STATE, MAN1_GIFT_SEQUENCE_COMPLETE
 	quit_script_fully
@@ -130,8 +130,8 @@ Script_BeatImakuni:
 	print_npc_text ImakuniPlayerWonSixWinsText
 .give_imakuni_card
 	print_npc_text ImakuniGivesImakuniText
-	give_card IMAKUNI_CARD
-	show_card_received_screen IMAKUNI_CARD
+	give_card ARCHIE
+	show_card_received_screen ARCHIE
 .done
 	print_npc_text ImakuniPlayerWonEndText
 	script_jump Script_LostToImakuni.imakuni_common

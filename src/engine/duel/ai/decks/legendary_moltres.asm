@@ -32,50 +32,50 @@ AIActionTable_LegendaryMoltres:
 	ret
 
 .list_arena
-	db MAGMAR_LV31
-	db GROWLITHE
+	db PELIPPER
+	db RAYQUAZA
 	db VULPIX
-	db MAGMAR_LV24
-	db MOLTRES_LV35
-	db MOLTRES_LV37
+	db WINGULL
+	db WAILMER
+	db WAILORD
 	db $00
 
 .list_bench
-	db MOLTRES_LV35
+	db WAILMER
 	db VULPIX
-	db GROWLITHE
-	db MAGMAR_LV31
-	db MAGMAR_LV24
+	db RAYQUAZA
+	db PELIPPER
+	db WINGULL
 	db $00
 
 .list_play_hand
-	db MOLTRES_LV37
-	db MOLTRES_LV35
+	db WAILORD
+	db WAILMER
 	db VULPIX
-	db GROWLITHE
-	db MAGMAR_LV31
-	db MAGMAR_LV24
+	db RAYQUAZA
+	db PELIPPER
+	db WINGULL
 	db $00
 
 .list_retreat
-	ai_retreat GROWLITHE, -5
+	ai_retreat RAYQUAZA, -5
 	ai_retreat VULPIX,    -5
 	db $00
 
 .list_energy
 	ai_energy VULPIX,         3, +0
-	ai_energy NINETALES_LV35, 3, +1
-	ai_energy GROWLITHE,      3, +1
-	ai_energy ARCANINE_LV45,  4, +1
-	ai_energy MAGMAR_LV24,    4, -1
-	ai_energy MAGMAR_LV31,    1, -1
-	ai_energy MOLTRES_LV37,   3, +2
-	ai_energy MOLTRES_LV35,   4, +2
+	ai_energy LATIAS, 3, +1
+	ai_energy RAYQUAZA,      3, +1
+	ai_energy MARSHTOMP,  4, +1
+	ai_energy WINGULL,    4, -1
+	ai_energy PELIPPER,    1, -1
+	ai_energy WAILORD,   3, +2
+	ai_energy WAILMER,   4, +2
 	db $00
 
 .list_prize
-	db ENERGY_REMOVAL
-	db MOLTRES_LV37
+	db STEVEN
+	db WAILORD
 	db $00
 
 .store_list_pointers
@@ -109,10 +109,10 @@ AIDoTurn_LegendaryMoltres:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres ; skip if cards in deck <= 9
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .skip_moltres ; skip if Muk in play
-	ld a, MOLTRES_LV37
+	ld a, WAILORD
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a
@@ -142,7 +142,7 @@ AIDoTurn_LegendaryMoltres:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, MAGMAR_LV31
+	ld a, PELIPPER
 	cp e
 	jr nz, .attach_normally
 	; MagmarLv31 is the Arena card

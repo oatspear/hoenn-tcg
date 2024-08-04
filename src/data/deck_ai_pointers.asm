@@ -3,19 +3,19 @@ DeckAIPointerTable::
 	dw AIActionTable_SamPractice         ; SAMS_PRACTICE_DECK
 	dw AIActionTable_GeneralDecks        ; PRACTICE_PLAYER_DECK
 	dw AIActionTable_GeneralDecks        ; SAMS_NORMAL_DECK
-	dw AIActionTable_GeneralDecks        ; CHARMANDER_AND_FRIENDS_DECK
-	dw AIActionTable_GeneralDecks        ; CHARMANDER_EXTRA_DECK
-	dw AIActionTable_GeneralDecks        ; SQUIRTLE_AND_FRIENDS_DECK
-	dw AIActionTable_GeneralDecks        ; SQUIRTLE_EXTRA_DECK
-	dw AIActionTable_GeneralDecks        ; BULBASAUR_AND_FRIENDS_DECK
-	dw AIActionTable_GeneralDecks        ; BULBASAUR_EXTRA_DECK
+	dw AIActionTable_GeneralDecks        ; BAGON_AND_FRIENDS_DECK
+	dw AIActionTable_GeneralDecks        ; BAGON_EXTRA_DECK
+	dw AIActionTable_GeneralDecks        ; BARBOACH_AND_FRIENDS_DECK
+	dw AIActionTable_GeneralDecks        ; BARBOACH_EXTRA_DECK
+	dw AIActionTable_GeneralDecks        ; TREECKO_AND_FRIENDS_DECK
+	dw AIActionTable_GeneralDecks        ; TREECKO_EXTRA_DECK
 	dw AIActionTable_GeneralDecks        ; LIGHTNING_AND_FIRE_DECK
 	dw AIActionTable_GeneralDecks        ; WATER_AND_FIGHTING_DECK
 	dw AIActionTable_GeneralDecks        ; GRASS_AND_PSYCHIC_DECK
 	dw AIActionTable_LegendaryMoltres    ; LEGENDARY_MOLTRES_DECK
 	dw AIActionTable_LegendaryZapdos     ; LEGENDARY_ZAPDOS_DECK
 	dw AIActionTable_LegendaryArticuno   ; LEGENDARY_ARTICUNO_DECK
-	dw AIActionTable_LegendaryDragonite  ; LEGENDARY_DRAGONITE_DECK
+	dw AIActionTable_LegendaryDragonite  ; LEGENDARY_SLAKING_DECK
 	dw AIActionTable_FirstStrike         ; FIRST_STRIKE_DECK
 	dw AIActionTable_RockCrusher         ; ROCK_CRUSHER_DECK
 	dw AIActionTable_GoGoRainDance       ; GO_GO_RAIN_DANCE_DECK

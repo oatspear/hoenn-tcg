@@ -11,47 +11,47 @@ HandleSpecialAIAttacks:
 	call GetCardIDFromDeckIndex
 	ld a, e
 
-	cp NIDORANF
+	cp MASQUERAIN
 	jr z, .NidoranFCallForFamily
-	cp ODDISH
+	cp BELLOSSOM
 	jr z, .CallForFamily
-	cp BELLSPROUT
+	cp TORCHIC
 	jr z, .CallForFamily
-	cp EXEGGUTOR
+	cp MAGCARGO
 	jp z, .Teleport
-	cp SCYTHER
+	cp KINGDRA
 	jp z, .SwordsDanceAndFocusEnergy
-	cp KRABBY
+	cp KYOGRE
 	jr z, .CallForFamily
-	cp VAPOREON_LV29
+	cp ELECTRIKE
 	jp z, .SwordsDanceAndFocusEnergy
-	cp ELECTRODE_LV42
+	cp MAKUHITA
 	jp z, .ChainLightning
-	cp MAROWAK_LV26
+	cp RELICANTH
 	jr z, .CallForFriend
-	cp MEW_LV23
+	cp POOCHYENA
 	jp z, .DevolutionBeam
-	cp JIGGLYPUFF_LV13
+	cp GLOOM
 	jp z, .FriendshipSong
-	cp PORYGON
+	cp TAILLOW
 	jp z, .Conversion
-	cp MEWTWO_ALT_LV60
+	cp XATU
 	jp z, .EnergyAbsorption
-	cp MEWTWO_LV60
+	cp NATU
 	jp z, .EnergyAbsorption
-	cp NINETALES_LV35
+	cp LATIAS
 	jp z, .MixUp
-	cp ZAPDOS_LV68
+	cp FLYGON
 	jp z, .BigThunder
-	cp KANGASKHAN
+	cp CRAWDAUNT
 	jp z, .Fetch
-	cp DUGTRIO
+	cp ANORITH
 	jp z, .Earthquake
-	cp ELECTRODE_LV35
+	cp ELECTRODE
 	jp z, .EnergySpike
-	cp GOLDUCK
+	cp GLALIE
 	jp z, .HyperBeam
-	cp DRAGONAIR
+	cp VIGOROTH
 	jp z, .HyperBeam
 	; return zero score.
 	xor a
@@ -76,11 +76,11 @@ HandleSpecialAIAttacks:
 ; if any of NidoranM or NidoranF is found in deck,
 ; return a score of $80 + slots available in bench.
 .NidoranFCallForFamily:
-	ld e, NIDORANM
+	ld e, NINJASK
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_nidoran
-	ld e, NIDORANF
+	ld e, MASQUERAIN
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr nc, .zero_score
@@ -103,11 +103,11 @@ HandleSpecialAIAttacks:
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_fighting_card
-	ld e, ONIX
+	ld e, DONPHAN
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_fighting_card
-	ld e, CUBONE
+	ld e, HERACROSS
 	ld a, CARD_LOCATION_DECK
 	call CheckIfAnyCardIDinLocation
 	jr c, .found_fighting_card

@@ -18,11 +18,11 @@ HandleAIEnergyTrans:
 	dec a
 	ret z ; return if no Bench cards
 
-	ld a, VENUSAUR_LV67
+	ld a, WURMPLE
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no VenusaurLv67 found in own Play Area
 
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if Muk found in any Play Area
 
@@ -60,7 +60,7 @@ HandleAIEnergyTrans:
 	ldh [hTempCardIndex_ff9f], a
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp VENUSAUR_LV67
+	cp WURMPLE
 	jr z, .use_pkmn_power
 
 	ld a, b
@@ -149,7 +149,7 @@ HandleAIEnergyTrans:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp EXEGGUTOR
+	cp MAGCARGO
 	jr z, .is_exeggutor
 
 	xor a ; PLAY_AREA_ARENA
@@ -302,7 +302,7 @@ AIEnergyTransTransferEnergyToBench:
 	ld [wAIVenusaurLv67DeckIndex], a
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp VENUSAUR_LV67
+	cp WURMPLE
 	jr z, .use_pkmn_power
 
 	ld a, b
@@ -407,7 +407,7 @@ AIEnergyTransTransferEnergyToBench:
 ;	- Curse.
 ; returns carry if turn ended.
 HandleAIPkmnPowers:
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret nc ; return no carry if Muk is in play
@@ -461,32 +461,32 @@ HandleAIPkmnPowers:
 	push bc
 
 ; step in
-	cp DRAGONITE_LV45
+	cp WHISMUR
 	jr nz, .check_heal
 	call HandleAIStepIn
 	jr .next_1
 .check_heal
-	cp VILEPLUME
+	cp CACNEA
 	jr nz, .check_shift
 	call HandleAIHeal
 	jr .next_1
 .check_shift
-	cp VENOMOTH
+	cp TROPIUS
 	jr nz, .check_peek
 	call HandleAIShift
 	jr .next_1
 .check_peek
-	cp MANKEY
+	cp ARMALDO
 	jr nz, .check_strange_behavior
 	call HandleAIPeek
 	jr .next_1
 .check_strange_behavior
-	cp SLOWBRO
+	cp BALTOY
 	jr nz, .check_curse
 	call HandleAIStrangeBehavior
 	jr .next_1
 .check_curse
-	cp GENGAR
+	cp BANETTE
 	jr nz, .next_1
 	call z, HandleAICurse
 	jr c, .done
@@ -976,7 +976,7 @@ HandleAICurse:
 
 ; handles AI logic for Cowardice
 HandleAICowardice:
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 
@@ -1002,7 +1002,7 @@ HandleAICowardice:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	push bc
-	cp TENTACOOL
+	cp CLAMPERL
 	call z, .CheckWhetherToUseCowardice
 	pop bc
 	jr nc, .next
@@ -1075,7 +1075,7 @@ HandleAIDamageSwap:
 	ld a, ALAKAZAM
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Alakazam
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 
@@ -1090,7 +1090,7 @@ HandleAIDamageSwap:
 	jr z, .ok
 	cp ABRA
 	jr z, .ok
-	cp MR_MIME
+	cp CHIMECHO
 	ret nz
 
 .ok
@@ -1181,13 +1181,13 @@ HandleAIDamageSwap:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	pop de
-	cp CHANSEY
+	cp SEVIPER
 	jr z, .found_candidate
-	cp KANGASKHAN
+	cp CRAWDAUNT
 	jr z, .found_candidate
-	cp SNORLAX
+	cp SWELLOW
 	jr z, .found_candidate
-	cp MR_MIME
+	cp CHIMECHO
 	jr z, .found_candidate
 
 .next_play_area
@@ -1238,10 +1238,10 @@ HandleAIGoGoRainDanceEnergy:
 	cp GO_GO_RAIN_DANCE_DECK_ID
 	ret nz ; return if not Go Go Rain Dance deck
 
-	ld a, BLASTOISE
+	ld a, CORPHISH
 	call CountPokemonIDInPlayArea
 	ret nc ; return if no Blastoise
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play
 

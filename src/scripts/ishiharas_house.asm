@@ -120,11 +120,11 @@ Script_Ishihara:
 	print_text_quit_fully Text072c
 
 .check_if_clefable_owned
-	jump_if_card_owned CLEFABLE, .check_if_clefable_in_collection
+	jump_if_card_owned SABLEYE, .check_if_clefable_in_collection
 	print_text_quit_fully Text072d
 
 .check_if_clefable_in_collection
-	jump_if_card_in_collection CLEFABLE, .do_clefable_trade
+	jump_if_card_in_collection SABLEYE, .do_clefable_trade
 	print_text_quit_fully Text072e
 
 .do_clefable_trade
@@ -133,9 +133,9 @@ Script_Ishihara:
 	zero_out_event_value EVENT_ISHIHARA_WANTS_TO_TRADE
 	print_npc_text Text072f
 	print_text Text0730
-	take_card CLEFABLE
-	give_card SURFING_PIKACHU_LV13
-	show_card_received_screen SURFING_PIKACHU_LV13
+	take_card SABLEYE
+	give_card LANTURN
+	show_card_received_screen LANTURN
 	print_text_quit_fully Text0731
 
 .ows_dbcc
@@ -146,11 +146,11 @@ Script_Ishihara:
 	print_text_quit_fully Text072c
 
 .check_if_ditto_owned
-	jump_if_card_owned DITTO, .check_if_ditto_in_collection
+	jump_if_card_owned ZIGZAGOON, .check_if_ditto_in_collection
 	print_text_quit_fully Text0734
 
 .check_if_ditto_in_collection
-	jump_if_card_in_collection DITTO, .do_ditto_trade
+	jump_if_card_in_collection ZIGZAGOON, .do_ditto_trade
 	print_text_quit_fully Text0735
 
 .do_ditto_trade
@@ -159,9 +159,9 @@ Script_Ishihara:
 	zero_out_event_value EVENT_ISHIHARA_WANTS_TO_TRADE
 	print_npc_text Text072f
 	print_text Text0736
-	take_card DITTO
-	give_card FLYING_PIKACHU
-	show_card_received_screen FLYING_PIKACHU
+	take_card ZIGZAGOON
+	give_card CHINCHOU
+	show_card_received_screen CHINCHOU
 	print_text_quit_fully Text0737
 
 .ows_dc05
@@ -172,11 +172,11 @@ Script_Ishihara:
 	print_text_quit_fully Text072c
 
 .check_if_chansey_owned
-	jump_if_card_owned CHANSEY, .check_if_chansey_in_collection
+	jump_if_card_owned SEVIPER, .check_if_chansey_in_collection
 	print_text_quit_fully Text073a
 
 .check_if_chansey_in_collection
-	jump_if_card_in_collection CHANSEY, .do_chansey_trade
+	jump_if_card_in_collection SEVIPER, .do_chansey_trade
 	print_text_quit_fully Text073b
 
 .do_chansey_trade
@@ -185,9 +185,9 @@ Script_Ishihara:
 	zero_out_event_value EVENT_ISHIHARA_WANTS_TO_TRADE
 	print_npc_text Text072f
 	print_text Text073c
-	take_card CHANSEY
-	give_card SURFING_PIKACHU_ALT_LV13
-	show_card_received_screen SURFING_PIKACHU_ALT_LV13
+	take_card SEVIPER
+	give_card BELDUM
+	show_card_received_screen BELDUM
 	print_text_quit_fully Text073d
 
 .ows_dc3e

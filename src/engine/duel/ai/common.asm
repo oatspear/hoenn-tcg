@@ -13,7 +13,7 @@ CheckIfPlayerHasPokemonOtherThanMewtwoLv53:
 	cp TYPE_ENERGY
 	jr nc, .next
 	ld a, [wLoadedCard2ID]
-	cp MEWTWO_LV53
+	cp WOBBUFFET
 	jr nz, .not_mewtwo1
 .next
 	inc e

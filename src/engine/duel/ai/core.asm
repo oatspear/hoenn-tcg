@@ -190,22 +190,22 @@ CheckIfEnergyIsUseful:
 	ld a, [wTempCardID]
 
 	ld d, PSYCHIC_ENERGY
-	cp EXEGGCUTE
+	cp SLUGMA
 	jr z, .check_energy
-	cp EXEGGUTOR
+	cp MAGCARGO
 	jr z, .check_energy
-	cp PSYDUCK
+	cp SNORUNT
 	jr z, .check_energy
-	cp GOLDUCK
+	cp GLALIE
 	jr z, .check_energy
 
 	ld d, WATER_ENERGY
-	cp SURFING_PIKACHU_LV13
+	cp LANTURN
 	jr z, .check_energy
-	cp SURFING_PIKACHU_ALT_LV13
+	cp BELDUM
 	jr z, .check_energy
 
-	cp EEVEE
+	cp LINOONE
 	jr nz, .check_type
 	ld a, e
 	cp WATER_ENERGY
@@ -1211,7 +1211,7 @@ CheckDamageToMrMime:
 	call GetCardIDFromDeckIndex
 	call SwapTurn
 	ld a, e
-	cp MR_MIME
+	cp CHIMECHO
 	pop bc
 	jr nz, .set_carry
 	ld a, b
@@ -1901,15 +1901,15 @@ AISelectSpecialAttackParameters:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp MEW_LV23
+	cp POOCHYENA
 	jr z, .DevolutionBeam
-	cp MEWTWO_ALT_LV60
+	cp XATU
 	jr z, .EnergyAbsorption
-	cp MEWTWO_LV60
+	cp NATU
 	jr z, .EnergyAbsorption
-	cp EXEGGUTOR
+	cp MAGCARGO
 	jr z, .Teleport
-	cp ELECTRODE_LV35
+	cp ELECTRODE
 	jr z, .EnergySpike
 	; fallthrough
 

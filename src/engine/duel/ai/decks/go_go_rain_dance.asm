@@ -32,41 +32,41 @@ AIActionTable_GoGoRainDance:
 	ret
 
 .list_arena
-	db LAPRAS
+	db AGGRON
 	db HORSEA
 	db GOLDEEN
-	db SQUIRTLE
+	db BARBOACH
 	db $00
 
 .list_bench
-	db SQUIRTLE
+	db BARBOACH
 	db HORSEA
 	db GOLDEEN
-	db LAPRAS
+	db AGGRON
 	db $00
 
 .list_retreat
-	ai_retreat SQUIRTLE,  -3
-	ai_retreat WARTORTLE, -2
+	ai_retreat BARBOACH,  -3
+	ai_retreat WHISCASH, -2
 	ai_retreat HORSEA,    -1
 	db $00
 
 .list_energy
-	ai_energy SQUIRTLE,  2, +0
-	ai_energy WARTORTLE, 3, +0
-	ai_energy BLASTOISE, 5, +0
+	ai_energy BARBOACH,  2, +0
+	ai_energy WHISCASH, 3, +0
+	ai_energy CORPHISH, 5, +0
 	ai_energy GOLDEEN,   1, +0
 	ai_energy SEAKING,   2, +0
 	ai_energy HORSEA,    2, +0
 	ai_energy SEADRA,    3, +0
-	ai_energy LAPRAS,    3, +0
+	ai_energy AGGRON,    3, +0
 	db $00
 
 .list_prize
 	db GAMBLER
-	db ENERGY_RETRIEVAL
-	db SUPER_ENERGY_RETRIEVAL
-	db BLASTOISE
+	db MAXIE
+	db LANETTES_NET_SEARCH
+	db CORPHISH
 	db $00
 
 .store_list_pointers

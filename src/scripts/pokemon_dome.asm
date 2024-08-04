@@ -513,7 +513,7 @@ Script_BeatJack:
 	ask_question_jump_default_yes PrepareForTheDuelText, .ows_fa90
 	test_if_event_false EVENT_RECEIVED_LEGENDARY_CARDS
 	print_variable_npc_text Text059a, Text059b
-	start_duel PRIZES_6, LEGENDARY_DRAGONITE_DECK_ID, MUSIC_DUEL_THEME_3
+	start_duel PRIZES_6, LEGENDARY_SLAKING_DECK_ID, MUSIC_DUEL_THEME_3
 	quit_script_fully
 
 .ows_fa90

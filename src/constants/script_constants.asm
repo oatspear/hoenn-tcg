@@ -111,7 +111,7 @@
 	const EVENT_RECEIVED_ZAPDOS                        ; $6d
 	const EVENT_RECEIVED_MOLTRES                       ; $6e
 	const EVENT_RECEIVED_ARTICUNO                      ; $6f
-	const EVENT_RECEIVED_DRAGONITE                     ; $70
+	const EVENT_RECEIVED_SLAKING                     ; $70
 	const EVENT_LEGENDARY_CARDS_RECEIVED_FLAGS         ; $71
 	const EVENT_GIFT_CENTER_MENU_CHOICE                ; $72
 	const EVENT_AARON_BOOSTER_REWARD                   ; $73

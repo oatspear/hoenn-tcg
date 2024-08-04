@@ -32,36 +32,36 @@ AIActionTable_InvincibleRonald:
 	ret
 
 .list_arena
-	db KANGASKHAN
-	db MAGMAR_LV31
-	db CHANSEY
+	db CRAWDAUNT
+	db PELIPPER
+	db SEVIPER
 	db GEODUDE
-	db SCYTHER
-	db GRIMER
+	db KINGDRA
+	db NUMEL
 	db $00
 
 .list_bench
-	db GRIMER
-	db SCYTHER
+	db NUMEL
+	db TAILLOW
 	db GEODUDE
-	db CHANSEY
-	db MAGMAR_LV31
-	db KANGASKHAN
+	db SEVIPER
+	db PELIPPER
+	db CRAWDAUNT
 	db $00
 
 .list_retreat
-	ai_retreat GRIMER, -1
+	ai_retreat NUMEL, -1
 	db $00
 
 .list_energy
-	ai_energy GRIMER,         1, -1
-	ai_energy MUK,            3, -1
-	ai_energy SCYTHER,        4, +1
-	ai_energy MAGMAR_LV31,    2, +0
+	ai_energy NUMEL,         1, -1
+	ai_energy CAMERUPT,            3, -1
+	ai_energy TAILLOW,        4, +1
+	ai_energy PELIPPER,    2, +0
 	ai_energy GEODUDE,        2, +0
 	ai_energy GRAVELER,       3, +0
-	ai_energy CHANSEY,        4, +0
-	ai_energy KANGASKHAN,     4, -1
+	ai_energy SEVIPER,        4, +0
+	ai_energy CRAWDAUNT,     4, -1
 	db $00
 
 .list_prize

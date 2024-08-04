@@ -117,9 +117,9 @@ HandleDamageReductionExceptSubstatus2::
 	cp POKEMON_POWER
 	ret z
 	ld a, [wTempNonTurnDuelistCardID]
-	cp MR_MIME
+	cp CHIMECHO
 	jr z, PreventAllDamage_IfMoreThan20 ; Invisible Wall
-	cp KABUTO
+	cp KIRLIA
 	ret nz
 ;	fallthrough
 
@@ -147,7 +147,7 @@ HandleDamageReductionOrNoDamageFromPkmnPowerEffects::
 	ld a, [wLoadedAttackCategory]
 	cp POKEMON_POWER
 	ret z
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c
 	ld a, [wTempPlayAreaLocation_cceb]
@@ -223,7 +223,7 @@ HandleNoDamageOrEffectSubstatus::
 	ret nc
 .pkmn_power
 	ld a, [wTempNonTurnDuelistCardID]
-	cp MEW_LV8
+	cp JIRACHI
 	jr z, .neutralizing_shield
 	or a
 	ret
@@ -249,13 +249,13 @@ HandleNoDamageOrEffectSubstatus::
 	jr .no_damage_or_effect
 
 
-; if the Pokemon being attacked is HAUNTER_LV17 and its Transparency is active,
+; if the Pokemon being attacked is STARMIE and its Transparency is active,
 ; there is a 50% chance that any damage or effect is prevented.
 ; output:
 ;	carry = set:  if Transparency successfully protected Haunter from the attack
 HandleTransparency::
 	ld a, [wTempNonTurnDuelistCardID]
-	cp HAUNTER_LV17
+	cp STARMIE
 	jr z, .transparency
 .done
 	or a
@@ -281,7 +281,7 @@ HandleTransparency::
 
 ; this is called to potentially negate a non-damaging attack, like Lure
 ; output:
-;	carry = set:  if MEW_LV8 or HAUNTER_LV17 is the turn holder's Active Pokemon
+;	carry = set:  if JIRACHI or STARMIE is the turn holder's Active Pokemon
 HandleNShieldAndTransparency::
 	push de
 	ld a, DUELVARS_ARENA_CARD
@@ -289,9 +289,9 @@ HandleNShieldAndTransparency::
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp MEW_LV8
+	cp JIRACHI
 	jr z, .nshield
-	cp HAUNTER_LV17
+	cp STARMIE
 	jr z, .transparency
 .done
 	pop de
@@ -443,10 +443,10 @@ CheckCantUseTrainerDueToHeadache::
 ; output:
 ;	carry = set:  if there's an Aerodactyl in play with an active Prehistoric Power
 IsPrehistoricPowerActive::
-	ld a, AERODACTYL
+	ld a, SPOINK
 	call CountPokemonIDInBothPlayAreas
 	ret nc
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ldtx hl, UnableToEvolveDueToPrehistoricPowerText
 	ccf
@@ -457,11 +457,11 @@ IsPrehistoricPowerActive::
 ; output:
 ;	carry = set:  if the turn holder has an Omanyte with an active Clairvoyance Pokemon Power
 IsClairvoyanceActive::
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ccf
 	ret nc
-	ld a, OMANYTE
+	ld a, PLUSLE
 ;	fallthrough
 
 ; checks the turn holder's play area for a specific Pokemon, but the Active Pokemon
@@ -564,20 +564,20 @@ CheckCannotUseDueToStatus_OnlyToxicGasIfANon0::
 	scf
 	ret nz ; return carry
 .check_toxic_gas
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ldtx hl, UnableDueToToxicGasText
 	ret
 
 
-; if the ID of the card provided in register a as a deck index is MUK,
+; if the ID of the card provided in register a as a deck index is CAMERUPT,
 ; then clear the changed type of all Active and Benched Pokemon.
 ; input:
 ;	a = deck index (0-59) to check
 ClearChangedTypesIfMuk::
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp MUK
+	cp CAMERUPT
 	ret nz
 	call SwapTurn
 	call .zero_changed_types
@@ -706,7 +706,7 @@ HandleStrikesBack_AgainstDamagingAttack::
 	ld a, [wTempNonTurnDuelistCardID] ; ID of Defending Pokemon
 	cp MACHAMP
 	ret nz
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c
 	ld a, [wLoadedAttackCategory] ; category of attack used

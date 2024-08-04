@@ -32,38 +32,38 @@ AIActionTable_FireCharge:
 	ret
 
 .list_arena
-	db JIGGLYPUFF_LV14
-	db CHANSEY
-	db TAUROS
-	db MAGMAR_LV24
-	db JIGGLYPUFF_LV12
-	db GROWLITHE
+	db VILEPLUME
+	db SEVIPER
+	db ABSOL
+	db WINGULL
+	db ODDISH
+	db RAYQUAZA
 	db $00
 
 .list_bench
-	db JIGGLYPUFF_LV14
-	db CHANSEY
-	db GROWLITHE
-	db MAGMAR_LV24
-	db JIGGLYPUFF_LV12
-	db TAUROS
+	db VILEPLUME
+	db SEVIPER
+	db RAYQUAZA
+	db WINGULL
+	db ODDISH
+	db ABSOL
 	db $00
 
 .list_retreat
-	ai_retreat JIGGLYPUFF_LV12, -1
-	ai_retreat CHANSEY,         -1
-	ai_retreat GROWLITHE,       -1
+	ai_retreat ODDISH, -1
+	ai_retreat SEVIPER,         -1
+	ai_retreat RAYQUAZA,       -1
 	db $00
 
 .list_energy
-	ai_energy GROWLITHE,       3, +0
-	ai_energy ARCANINE_LV45,   4, +0
-	ai_energy MAGMAR_LV24,     3, +0
-	ai_energy JIGGLYPUFF_LV12, 3, +0
-	ai_energy JIGGLYPUFF_LV14, 2, +0
-	ai_energy WIGGLYTUFF,      3, +0
-	ai_energy CHANSEY,         4, +0
-	ai_energy TAUROS,          3, +0
+	ai_energy RAYQUAZA,       3, +0
+	ai_energy MARSHTOMP,   4, +0
+	ai_energy WINGULL,     3, +0
+	ai_energy ODDISH, 3, +0
+	ai_energy VILEPLUME, 2, +0
+	ai_energy GULPIN,      3, +0
+	ai_energy SEVIPER,         4, +0
+	ai_energy ABSOL,          3, +0
 	db $00
 
 .list_prize

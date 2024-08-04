@@ -1006,11 +1006,11 @@ PutHandPokemonCardInPlayArea::
 	add e
 	ld l, a
 	ld [hl], $0
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TV_REPORTER
 	add e
 	ld l, a
 	ld [hl], $0
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_WALLYS_TRAINING
 	add e
 	ld l, a
 	ld [hl], $0
@@ -1094,9 +1094,9 @@ EmptyPlayAreaSlot::
 	call .init_duelvar
 	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
 	call .init_duelvar
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_WALLYS_TRAINING
 	call .init_duelvar
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TV_REPORTER
 	; fallthrough
 .init_duelvar
 	add e
@@ -1170,9 +1170,9 @@ SwapPlayAreaPokemon::
 	call .swap_duelvar
 	ld a, DUELVARS_ARENA_CARD_CHANGED_TYPE
 	call .swap_duelvar
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_PLUSPOWER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_TV_REPORTER
 	call .swap_duelvar
-	ld a, DUELVARS_ARENA_CARD_ATTACHED_DEFENDER
+	ld a, DUELVARS_ARENA_CARD_ATTACHED_WALLYS_TRAINING
 	call .swap_duelvar
 	set CARD_LOCATION_PLAY_AREA_F, d
 	set CARD_LOCATION_PLAY_AREA_F, e
@@ -1384,7 +1384,7 @@ ProcessPlayedPokemonCard::
 	call DrawWideTextBox_WaitForInput
 	call ExchangeRNG
 	ld a, [wLoadedCard1ID]
-	cp MUK
+	cp CAMERUPT
 	jr z, .use_pokemon_power
 	ld a, $01 ; check only Muk
 	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
@@ -2082,7 +2082,7 @@ ApplyDamageModifiers_DamageToSelf::
 ApplyAttachedPluspower::
 	push de
 	call GetTurnDuelistVariable
-	ld de, PLUSPOWER
+	ld de, TV_REPORTER
 	call CountCardIDInLocation
 	ld l, a
 	ld h, 10
@@ -2103,7 +2103,7 @@ ApplyAttachedPluspower::
 ApplyAttachedDefender::
 	push de
 	call GetTurnDuelistVariable
-	ld de, DEFENDER
+	ld de, WALLYS_TRAINING
 	call CountCardIDInLocation
 	ld l, a
 	ld h, 20
@@ -2422,7 +2422,7 @@ GetLoadedCard1RetreatCost::
 	jr z, .no_more_bench
 	call GetCardIDFromDeckIndex
 	ld a, e
-	cp DODRIO
+	cp KOFFING
 	jr nz, .not_dodrio
 	inc c
 .not_dodrio
@@ -2435,7 +2435,7 @@ GetLoadedCard1RetreatCost::
 	ld a, [wLoadedCard1RetreatCost] ; use the regular retreat cost
 	ret
 .dodrio_found
-	ld a, MUK
+	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .muk_found
 	ld a, [wLoadedCard1RetreatCost]

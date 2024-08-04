@@ -32,37 +32,37 @@ AIActionTable_FlowerPower:
 	ret
 
 .list_arena
-	db ODDISH
-	db EXEGGCUTE
-	db BULBASAUR
+	db BELLOSSOM
+	db SLUGMA
+	db TREECKO
 	db $00
 
 .list_bench
-	db BULBASAUR
-	db EXEGGCUTE
-	db ODDISH
+	db TREECKO
+	db SLUGMA
+	db BELLOSSOM
 	db $00
 
 .list_retreat
-	ai_retreat GLOOM,     -2
-	ai_retreat VILEPLUME, -2
-	ai_retreat BULBASAUR, -2
-	ai_retreat IVYSAUR,   -2
+	ai_retreat ROSELIA,     -2
+	ai_retreat CACNEA, -2
+	ai_retreat TREECKO, -2
+	ai_retreat GROVYLE,   -2
 	db $00
 
 .list_energy
-	ai_energy BULBASAUR,      3, +0
-	ai_energy IVYSAUR,        4, +0
-	ai_energy VENUSAUR_LV67,  4, +0
-	ai_energy ODDISH,         2, +0
-	ai_energy GLOOM,          3, -1
-	ai_energy VILEPLUME,      3, -1
-	ai_energy EXEGGCUTE,      3, +0
-	ai_energy EXEGGUTOR,     22, +0
+	ai_energy TREECKO,      3, +0
+	ai_energy GROVYLE,        4, +0
+	ai_energy WURMPLE,  4, +0
+	ai_energy BELLOSSOM,         2, +0
+	ai_energy ROSELIA,          3, -1
+	ai_energy CACNEA,      3, -1
+	ai_energy SLUGMA,      3, +0
+	ai_energy MAGCARGO,     22, +0
 	db $00
 
 .list_prize
-	db VENUSAUR_LV67
+	db WURMPLE
 	db $00
 
 .store_list_pointers

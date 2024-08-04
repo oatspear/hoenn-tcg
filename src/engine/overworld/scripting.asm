@@ -560,7 +560,7 @@ EventVarMasks:
 	event_def $19, %00100000 ; EVENT_RECEIVED_ZAPDOS
 	event_def $19, %00010000 ; EVENT_RECEIVED_MOLTRES
 	event_def $19, %00001000 ; EVENT_RECEIVED_ARTICUNO
-	event_def $19, %00000100 ; EVENT_RECEIVED_DRAGONITE
+	event_def $19, %00000100 ; EVENT_RECEIVED_SLAKING
 	event_def $19, %00111100 ; EVENT_LEGENDARY_CARDS_RECEIVED_FLAGS
 	event_def $1a, %11111100 ; EVENT_GIFT_CENTER_MENU_CHOICE
 	event_def $1a, %00000011 ; EVENT_AARON_BOOSTER_REWARD
@@ -1416,10 +1416,10 @@ ScriptCommand_PickNextMan1RequestedCard:
 
 Man1RequestedCardsList:
 	db GRAVELER
-	db OMASTAR
-	db PARASECT
+	db MINUN
+	db LILEEP
 	db RAPIDASH
-	db WEEZING
+	db ALTARIA
 .end
 
 
@@ -1757,49 +1757,49 @@ ScriptCommand_PickChallengeCupPrizeCard:
 	jp IncreaseScriptPointerBy1
 
 ChallengeCupPrizeCards:
-	db MEWTWO_LV60
+	db NATU
 	tx MewtwoTradeCardName
 
-	db MEW_LV8
+	db JIRACHI
 	tx MewTradeCardName
 
-	db ARCANINE_LV34
+	db MUDKIP
 	tx ArcanineTradeCardName
 
-	db PIKACHU_LV16
+	db PSYDUCK
 	tx PikachuTradeCardName
 
-	db PIKACHU_ALT_LV16
+	db GOLDUCK
 	tx PikachuTradeCardName
 
-	db SURFING_PIKACHU_LV13
+	db LANTURN
 	tx SurfingPikachuTradeCardName
 
-	db SURFING_PIKACHU_ALT_LV13
+	db BELDUM
 	tx SurfingPikachuTradeCardName
 
-	db ELECTABUZZ_LV20
+	db HARIYAMA
 	tx ElectabuzzTradeCardName
 
-	db SLOWPOKE_LV9
+	db GRUMPIG
 	tx SlowpokeTradeCardName
 
-	db MEWTWO_ALT_LV60
+	db XATU
 	tx MewtwoTradeCardName
 
-	db MEWTWO_LV60
+	db NATU
 	tx MewtwoTradeCardName
 
-	db MEW_LV8
+	db JIRACHI
 	tx MewTradeCardName
 
-	db JIGGLYPUFF_LV12
+	db ODDISH
 	tx JigglypuffTradeCardName
 
-	db SUPER_ENERGY_RETRIEVAL
+	db LANETTES_NET_SEARCH
 	tx SuperEnergyRetrievalTradeCardName
 
-	db FLYING_PIKACHU
+	db CHINCHOU
 	tx FlyingPikachuTradeCardName
 .end
 
@@ -1834,23 +1834,23 @@ ScriptCommand_PickLegendaryCard:
 	jr ScriptCommand_PickChallengeCupPrizeCard.get_card_from_list
 
 LegendaryCards:
-	db ZAPDOS_LV68
+	db FLYGON
 	tx ZapdosLegendaryCardName
 
-	db MOLTRES_LV37
+	db WAILORD
 	tx MoltresLegendaryCardName
 
-	db ARTICUNO_LV37
+	db PICHU
 	tx ArticunoLegendaryCardName
 
-	db DRAGONITE_LV41
+	db SLAKING
 	tx DragoniteLegendaryCardName
 
 LegendaryCardEvents:
 	db EVENT_RECEIVED_ZAPDOS
 	db EVENT_RECEIVED_MOLTRES
 	db EVENT_RECEIVED_ARTICUNO
-	db EVENT_RECEIVED_DRAGONITE
+	db EVENT_RECEIVED_SLAKING
 
 
 ; preserves de and hl

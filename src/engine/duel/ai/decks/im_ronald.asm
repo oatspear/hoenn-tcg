@@ -32,42 +32,42 @@ AIActionTable_ImRonald:
 	ret
 
 .list_arena
-	db LAPRAS
-	db SEEL
-	db CHARMANDER
-	db CUBONE
-	db SQUIRTLE
-	db GROWLITHE
+	db AGGRON
+	db GOREBYSS
+	db BAGON
+	db HERACROSS
+	db BARBOACH
+	db RAYQUAZA
 	db $00
 
 .list_bench
-	db CHARMANDER
-	db SQUIRTLE
-	db SEEL
-	db CUBONE
-	db GROWLITHE
-	db LAPRAS
+	db BAGON
+	db BARBOACH
+	db GOREBYSS
+	db HERACROSS
+	db RAYQUAZA
+	db AGGRON
 	db $00
 
 .list_retreat
 	db $00
 
 .list_energy
-	ai_energy CHARMANDER,     3, +0
-	ai_energy CHARMELEON,     5, +0
-	ai_energy GROWLITHE,      2, +0
-	ai_energy ARCANINE_LV45,  4, +0
-	ai_energy SQUIRTLE,       2, +0
-	ai_energy WARTORTLE,      3, +0
-	ai_energy SEEL,           3, +0
-	ai_energy DEWGONG,        4, +0
-	ai_energy LAPRAS,         3, +0
-	ai_energy CUBONE,         3, +0
-	ai_energy MAROWAK_LV26,   3, +0
+	ai_energy BAGON,     3, +0
+	ai_energy SHELGON,     5, +0
+	ai_energy RAYQUAZA,      2, +0
+	ai_energy MARSHTOMP,  4, +0
+	ai_energy BARBOACH,       2, +0
+	ai_energy WHISCASH,      3, +0
+	ai_energy GOREBYSS,           3, +0
+	ai_energy CORSOLA,        4, +0
+	ai_energy AGGRON,         3, +0
+	ai_energy HERACROSS,         3, +0
+	ai_energy RELICANTH,   3, +0
 	db $00
 
 .list_prize
-	db LAPRAS
+	db AGGRON
 	db $00
 
 .store_list_pointers

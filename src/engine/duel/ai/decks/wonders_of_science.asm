@@ -32,39 +32,39 @@ AIActionTable_WondersOfScience:
 	ret
 
 .list_arena
-	db MEWTWO_LV53
-	db MEWTWO_ALT_LV60
-	db MEWTWO_LV60
-	db GRIMER
-	db KOFFING
-	db PORYGON
+	db WOBBUFFET
+	db XATU
+	db NATU
+	db NUMEL
+	db TORKOAL
+	db TAILLOW
 	db $00
 
 .list_bench
-	db GRIMER
-	db KOFFING
-	db MEWTWO_ALT_LV60
-	db MEWTWO_LV60
-	db MEWTWO_LV53
-	db PORYGON
+	db NUMEL
+	db TORKOAL
+	db XATU
+	db NATU
+	db WOBBUFFET
+	db TAILLOW
 	db $00
 
 .list_retreat
 	db $00
 
 .list_energy
-	ai_energy GRIMER,          3, +0
-	ai_energy MUK,             4, +0
-	ai_energy KOFFING,         2, +0
-	ai_energy WEEZING,         3, +0
-	ai_energy MEWTWO_LV53,     2, -1
-	ai_energy MEWTWO_ALT_LV60, 2, -1
-	ai_energy MEWTWO_LV60,     2, -1
-	ai_energy PORYGON,         2, -1
+	ai_energy NUMEL,          3, +0
+	ai_energy CAMERUPT,             4, +0
+	ai_energy TORKOAL,         2, +0
+	ai_energy ALTARIA,         3, +0
+	ai_energy WOBBUFFET,     2, -1
+	ai_energy XATU, 2, -1
+	ai_energy NATU,     2, -1
+	ai_energy TAILLOW,         2, -1
 	db $00
 
 .list_prize
-	db MUK
+	db CAMERUPT
 	db $00
 
 .store_list_pointers

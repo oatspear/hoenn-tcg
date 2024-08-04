@@ -213,8 +213,8 @@ Script_ee76:
 .ows_ee7d
 	set_event EVENT_LAD2_STATE, LAD2_SLOWPOKE_GONE
 	print_text FoundLv9SlowpokeText
-	give_card SLOWPOKE_LV9
-	show_card_received_screen SLOWPOKE_LV9
+	give_card GRUMPIG
+	show_card_received_screen GRUMPIG
 	quit_script_fully
 
 Script_Mania:

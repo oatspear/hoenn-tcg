@@ -59,11 +59,11 @@ Script_Lass2:
 	print_text_quit_fully Text06ee
 
 .ows_e648
-	jump_if_card_owned ODDISH, .ows_e64f
+	jump_if_card_owned BELLOSSOM, .ows_e64f
 	print_text_quit_fully Text06ef
 
 .ows_e64f
-	jump_if_card_in_collection ODDISH, .ows_e656
+	jump_if_card_in_collection BELLOSSOM, .ows_e656
 	print_text_quit_fully Text06f0
 
 .ows_e656
@@ -71,9 +71,9 @@ Script_Lass2:
 	set_event EVENT_LASS2_TRADE_STATE, LASS2_TRADE_2_AVAILABLE
 	print_npc_text Text06f1
 	print_text Text06f2
-	take_card ODDISH
-	give_card VILEPLUME
-	show_card_received_screen VILEPLUME
+	take_card BELLOSSOM
+	give_card CACNEA
+	show_card_received_screen CACNEA
 	print_text_quit_fully Text06f3
 
 .ows_e66a
@@ -84,11 +84,11 @@ Script_Lass2:
 	print_text_quit_fully Text06f6
 
 .ows_e67f
-	jump_if_card_owned CLEFAIRY, .ows_e686
+	jump_if_card_owned TENTACRUEL, .ows_e686
 	print_text_quit_fully Text06f7
 
 .ows_e686
-	jump_if_card_in_collection CLEFAIRY, .ows_e68d
+	jump_if_card_in_collection TENTACRUEL, .ows_e68d
 	print_text_quit_fully Text06f8
 
 .ows_e68d
@@ -96,9 +96,9 @@ Script_Lass2:
 	set_event EVENT_LASS2_TRADE_STATE, LASS2_TRADE_3_AVAILABLE
 	print_npc_text Text06f9
 	print_text Text06fa
-	take_card CLEFAIRY
-	give_card PIKACHU_LV16
-	show_card_received_screen PIKACHU_LV16
+	take_card TENTACRUEL
+	give_card PSYDUCK
+	show_card_received_screen PSYDUCK
 	print_text_quit_fully Text06f3
 
 .ows_e6a1
@@ -109,11 +109,11 @@ Script_Lass2:
 	print_text_quit_fully Text06fd
 
 .ows_e6b6
-	jump_if_card_owned CHARIZARD, .ows_e6bd
+	jump_if_card_owned SALAMENCE, .ows_e6bd
 	print_text_quit_fully Text06fe
 
 .ows_e6bd
-	jump_if_card_in_collection CHARIZARD, .ows_e6c4
+	jump_if_card_in_collection SALAMENCE, .ows_e6c4
 	print_text_quit_fully Text06ff
 
 .ows_e6c4
@@ -121,9 +121,9 @@ Script_Lass2:
 	set_event EVENT_LASS2_TRADE_STATE, LASS2_TRADES_COMPLETE
 	print_npc_text Text0700
 	print_text Text0701
-	take_card CHARIZARD
-	give_card BLASTOISE
-	show_card_received_screen BLASTOISE
+	take_card SALAMENCE
+	give_card CORPHISH
+	show_card_received_screen CORPHISH
 	print_text_quit_fully Text06f3
 
 Script_Granny2:

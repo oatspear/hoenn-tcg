@@ -600,8 +600,8 @@ ENDM
 	txsymbol Lv             ; $11
 	txsymbol E              ; $12
 	txsymbol DAMAGE_COUNTER ; $13
-	txsymbol PLUSPOWER      ; $14
-	txsymbol DEFENDER       ; $15
+	txsymbol TV_REPORTER      ; $14
+	txsymbol WALLYS_TRAINING       ; $15
 	txsymbol BOX_HEADER_L   ; $16
 	txsymbol BOX_HEADER_R   ; $17
 	txsymbol BOX_TOP_L      ; $18

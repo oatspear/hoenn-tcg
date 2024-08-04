@@ -86,10 +86,10 @@ Script_Specs2:
 	print_text_quit_fully Text074d
 
 Data_ebe7:
-	db PORYGON
-	db DITTO
-	db MUK
-	db WEEZING
+	db TAILLOW
+	db ZIGZAGOON
+	db CAMERUPT
+	db ALTARIA
 
 NPCMovement_ebeb:
 	db WEST | NO_MOVE

@@ -32,54 +32,54 @@ AIActionTable_PowerfulRonald:
 	ret
 
 .list_arena
-	db KANGASKHAN
-	db ELECTABUZZ_LV35
-	db HITMONCHAN
-	db MR_MIME
-	db LICKITUNG
-	db HITMONLEE
-	db TAUROS
-	db JYNX
-	db MEWTWO_LV53
-	db DODUO
+	db CRAWDAUNT
+	db NOSEPASS
+	db RALTS
+	db CHIMECHO
+	db WEEZING
+	db GROUDON
+	db ABSOL
+	db WYNAUT
+	db WOBBUFFET
+	db MUK
 	db $00
 
 .list_bench
-	db KANGASKHAN
-	db HITMONLEE
-	db HITMONCHAN
-	db TAUROS
-	db DODUO
-	db JYNX
-	db MEWTWO_LV53
-	db ELECTABUZZ_LV35
-	db MR_MIME
-	db LICKITUNG
+	db CRAWDAUNT
+	db GROUDON
+	db RALTS
+	db ABSOL
+	db MUK
+	db WYNAUT
+	db WOBBUFFET
+	db NOSEPASS
+	db CHIMECHO
+	db WEEZING
 	db $00
 
 .list_retreat
-	ai_retreat KANGASKHAN, -1
-	ai_retreat DODUO,      -1
-	ai_retreat DODRIO,     -1
+	ai_retreat CRAWDAUNT, -1
+	ai_retreat MUK,      -1
+	ai_retreat KOFFING,     -1
 	db $00
 
 .list_energy
-	ai_energy ELECTABUZZ_LV35, 2, +1
-	ai_energy HITMONLEE,       3, +1
-	ai_energy HITMONCHAN,      3, +1
-	ai_energy MR_MIME,         2, +0
-	ai_energy JYNX,            3, +0
-	ai_energy MEWTWO_LV53,     2, +0
-	ai_energy DODUO,           3, -1
-	ai_energy DODRIO,          3, -1
-	ai_energy LICKITUNG,       2, +0
-	ai_energy KANGASKHAN,      4, -1
-	ai_energy TAUROS,          3, +0
+	ai_energy NOSEPASS, 2, +1
+	ai_energy GROUDON,       3, +1
+	ai_energy RALTS,      3, +1
+	ai_energy CHIMECHO,         2, +0
+	ai_energy WYNAUT,            3, +0
+	ai_energy WOBBUFFET,     2, +0
+	ai_energy MUK,           3, -1
+	ai_energy KOFFING,          3, -1
+	ai_energy WEEZING,       2, +0
+	ai_energy CRAWDAUNT,      4, -1
+	ai_energy ABSOL,          3, +0
 	db $00
 
 .list_prize
 	db GAMBLER
-	db ENERGY_REMOVAL
+	db STEVEN
 	db $00
 
 .store_list_pointers

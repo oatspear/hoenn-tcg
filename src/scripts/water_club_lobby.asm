@@ -40,12 +40,12 @@ Script_Gal1:
 	quit_script_fully
 
 .ows_e0eb
-	jump_if_card_owned LAPRAS, .ows_e0f3
+	jump_if_card_owned AGGRON, .ows_e0f3
 	print_npc_text Gal1DontOwnCardText
 	quit_script_fully
 
 .ows_e0f3
-	jump_if_card_in_collection LAPRAS, .ows_e0fb
+	jump_if_card_in_collection AGGRON, .ows_e0fb
 	print_npc_text Gal1CardInDeckText
 	quit_script_fully
 
@@ -53,9 +53,9 @@ Script_Gal1:
 	set_event EVENT_GAL1_TRADE_STATE, GAL1_TRADE_COMPLETED
 	print_npc_text Gal1LetsTradeText
 	print_text Gal1TradeCompleteText
-	take_card LAPRAS
-	give_card ARCANINE_LV34
-	show_card_received_screen ARCANINE_LV34
+	take_card AGGRON
+	give_card MUDKIP
+	show_card_received_screen MUDKIP
 	print_npc_text Gal1ThanksText
 	quit_script_fully
 

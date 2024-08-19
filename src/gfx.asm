@@ -1431,9 +1431,9 @@ DoubleColorlessEnergyCardGfx::
 	INCBIN "gfx/cards/doublecolorlessenergy.2bpp"
 	INCBIN "gfx/cards/doublecolorlessenergy.pal"
 
-BulbasaurCardGfx::
-	INCBIN "gfx/cards/bulbasaur.2bpp"
-	INCBIN "gfx/cards/bulbasaur.pal"
+TreeckoCardGfx::
+	INCBIN "gfx/cards/treecko.2bpp"
+	INCBIN "gfx/cards/treecko.pal"
 
 IvysaurCardGfx::
 	INCBIN "gfx/cards/ivysaur.2bpp"

@@ -206,7 +206,7 @@ BasicPokemonDescriptionText:
 	text " Basic Pokémon are the lowest"
 	line " evolutionary stage and act as the"
 	line " base for your Evolution cards."
-	line " Bulbasaur, Charmander, and Squirtle"
+	line " Treecko, Charmander, and Squirtle"
 	line " are some examples of Basic Pokémon."
 	line ""
 	line " Basic Pokémon can be put directly"
@@ -1446,8 +1446,8 @@ SquirtleAndFriendsDeckChoiceText:
 	text "Squirtle & Friends Deck"
 	done
 
-BulbasaurAndFriendsDeckChoiceText:
-	text "Bulbasaur & Friends Deck"
+TreeckoAndFriendsDeckChoiceText:
+	text "Treecko & Friends Deck"
 	done
 
 SelectDeckToTakeText:

@@ -34,11 +34,11 @@ AIActionTable_FlowerPower:
 .list_arena
 	db ODDISH
 	db EXEGGCUTE
-	db BULBASAUR
+	db TREECKO
 	db $00
 
 .list_bench
-	db BULBASAUR
+	db TREECKO
 	db EXEGGCUTE
 	db ODDISH
 	db $00
@@ -46,12 +46,12 @@ AIActionTable_FlowerPower:
 .list_retreat
 	ai_retreat GLOOM,     -2
 	ai_retreat VILEPLUME, -2
-	ai_retreat BULBASAUR, -2
+	ai_retreat TREECKO, -2
 	ai_retreat IVYSAUR,   -2
 	db $00
 
 .list_energy
-	ai_energy BULBASAUR,      3, +0
+	ai_energy TREECKO,      3, +0
 	ai_energy IVYSAUR,        4, +0
 	ai_energy VENUSAUR_LV67,  4, +0
 	ai_energy ODDISH,         2, +0

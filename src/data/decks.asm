@@ -9,8 +9,8 @@ DeckPointers::
 	dw CharmanderExtraDeck
 	dw SquirtleAndFriendsDeck
 	dw SquirtleExtraDeck
-	dw BulbasaurAndFriendsDeck
-	dw BulbasaurExtraDeck
+	dw TreeckoAndFriendsDeck
+	dw TreeckoExtraDeck
 	dw LightningAndFireDeck
 	dw WaterAndFightingDeck
 	dw GrassAndPsychicDeck
@@ -92,7 +92,7 @@ UnnamedDeck:
 	card_item EEVEE,            4
 	card_item TANGELA_LV12,     4
 	card_item VENUSAUR_LV64,    4
-	card_item BULBASAUR,        4
+	card_item TREECKO,        4
 	card_item IVYSAUR,          4
 	card_item POKEMON_BREEDER,  4
 	deck_list_end
@@ -289,7 +289,7 @@ UnnamedDeck2:
 	card_item ODDISH,                   4
 	card_item GLOOM,                    2
 	card_item VILEPLUME,                2
-	card_item BULBASAUR,                4
+	card_item TREECKO,                4
 	card_item IVYSAUR,                  3
 	card_item CHARMANDER,               4
 	card_item CHARMELEON,               3
@@ -308,7 +308,7 @@ UnnamedDeck2:
 	card_item FIRE_ENERGY,              4
 	card_item GRASS_ENERGY,            20
 	card_item KANGASKHAN,               4
-	card_item BULBASAUR,                4
+	card_item TREECKO,                4
 	card_item IVYSAUR,                  3
 	card_item VENUSAUR_LV67,            2
 	card_item CHARMANDER,               4
@@ -364,7 +364,7 @@ UnnamedDeck2:
 	card_item EEVEE,            4
 	card_item TANGELA_LV12,     4
 	card_item VENUSAUR_LV64,    4
-	card_item BULBASAUR,        4
+	card_item TREECKO,        4
 	card_item IVYSAUR,          4
 	card_item POKEMON_BREEDER,  4
 	deck_list_end
@@ -391,7 +391,7 @@ UnnamedDeck2:
 	card_item JIGGLYPUFF_LV14,    4
 	card_item WEEDLE,             4
 	card_item AERODACTYL,         4
-	card_item BULBASAUR,          4
+	card_item TREECKO,          4
 	card_item IVYSAUR,            4
 	card_item VENUSAUR_LV67,      4
 	deck_list_end
@@ -654,7 +654,7 @@ CharmanderExtraDeck:
 	card_item GRASS_ENERGY,    4
 	card_item WATER_ENERGY,    4
 	card_item PSYCHIC_ENERGY,  3
-	card_item BULBASAUR,       1
+	card_item TREECKO,       1
 	card_item IVYSAUR,         1
 	card_item NIDORANF,        2
 	card_item CATERPIE,        2
@@ -734,12 +734,12 @@ SquirtleExtraDeck:
 	deck_list_end
 	tx SquirtleExtraDeckName
 
-BulbasaurAndFriendsDeck:
+TreeckoAndFriendsDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,    11
 	card_item FIRE_ENERGY,      3
 	card_item WATER_ENERGY,     9
-	card_item BULBASAUR,        2
+	card_item TREECKO,        2
 	card_item IVYSAUR,          1
 	card_item VENUSAUR_LV67,    1
 	card_item CATERPIE,         2
@@ -768,9 +768,9 @@ BulbasaurAndFriendsDeck:
 	card_item FULL_HEAL,        2
 	card_item REVIVE,           1
 	deck_list_end
-	tx BulbasaurAndFriendsDeckName
+	tx TreeckoAndFriendsDeckName
 
-BulbasaurExtraDeck:
+TreeckoExtraDeck:
 	deck_list_start
 	card_item LIGHTNING_ENERGY,  4
 	card_item PSYCHIC_ENERGY,    4
@@ -792,7 +792,7 @@ BulbasaurExtraDeck:
 	card_item GUST_OF_WIND,      1
 	card_item GRASS_ENERGY,     30 ; irrelevant
 	deck_list_end
-	tx BulbasaurExtraDeckName
+	tx TreeckoExtraDeckName
 
 LightningAndFireDeck:
 	deck_list_start
@@ -1063,7 +1063,7 @@ FlowerPowerDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,     18
 	card_item PSYCHIC_ENERGY,    4
-	card_item BULBASAUR,         4
+	card_item TREECKO,         4
 	card_item IVYSAUR,           3
 	card_item VENUSAUR_LV67,     2
 	card_item ODDISH,            4
@@ -1565,7 +1565,7 @@ FlowerGardenDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,            24
 	card_item DOUBLE_COLORLESS_ENERGY,  2
-	card_item BULBASAUR,                3
+	card_item TREECKO,                3
 	card_item IVYSAUR,                  2
 	card_item VENUSAUR_LV67,            2
 	card_item ODDISH,                   3

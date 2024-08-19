@@ -1904,7 +1904,7 @@ ScriptCommand_ChooseStarterDeckMultichoice:
 .text_entries
 	tx CharmanderAndFriendsDeckChoiceText
 	tx SquirtleAndFriendsDeckChoiceText
-	tx BulbasaurAndFriendsDeckChoiceText
+	tx TreeckoAndFriendsDeckChoiceText
 
 
 ; displays a textbox with multiple choices and a cursor.

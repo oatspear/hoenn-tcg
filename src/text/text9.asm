@@ -1235,29 +1235,33 @@ DoubleColorlessEnergyDescription:
 	line "   to pay Colorless Energy costs.)"
 	done
 
-BulbasaurName:
-	text "Bulbasaur"
+TreeckoName:
+	text "Treecko"
 	done
 
-LeechSeedName:
-	text "Leech Seed"
+EnergyBallName:
+	text "Energy Ball"
 	done
 
-BulbasaursLeechSeedDescription:
-	text "Unless all damage from this attack"
-	line "is prevented, you may remove 1"
-	line "damage counter from Bulbasaur."
+TreeckosEnergyBallDescription:
+	text "Does 10 more damage for each Energy"
+	line "attached to this Pokémon but not used"
+	line "to pay for this attack’s Energy cost."
+	line "You can’t add more than 20 damage in this way."
 	done
 
-SeedName:
-	text "Seed"
+TreeckosAbsorbDescription:
+	text "Heal 10 damage from this Pokémon."
+
+WoodGeckoName:
+	text "Wood Gecko"
 	done
 
-BulbasaurDescription:
-	text "A strange seed was planted on its"
-	line "back at birth. Thus, a plant"
-	line "sprouted and now grows with this"
-	line "Pokémon."
+TreeckoDescription:
+	text "It makes its nest in a giant tree in the"
+	line "forest. It ferociously guards against"
+	line "anything nearing its territory. It is said"
+	line "to be the protector of the forest's trees."
 	done
 
 IvysaurName:

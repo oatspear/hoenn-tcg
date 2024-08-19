@@ -11,7 +11,7 @@ CardPointers::
 	dw FightingEnergyCard
 	dw PsychicEnergyCard
 	dw DoubleColorlessEnergyCard
-	dw BulbasaurCard
+	dw TreeckoCard
 	dw IvysaurCard
 	dw VenusaurLv64Card
 	dw VenusaurLv67Card
@@ -235,55 +235,54 @@ CardPointers::
 	dw NULL
 	assert_table_length NUM_CARDS + 2
 
-BulbasaurCard:
+TreeckoCard:
 	db TYPE_PKMN_GRASS ; type
-	gfx BulbasaurCardGfx ; gfx
-	tx BulbasaurName ; name
+	gfx TreeckoCardGfx ; gfx
+	tx TreeckoName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
-	db BULBASAUR
-	db 40 ; hp
+	db TREECKO
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
-	energy GRASS, 2 ; energies
-	tx LeechSeedName ; name
-	tx BulbasaursLeechSeedDescription ; description
+	energy COLORLESS, 1 ; energies
+	tx EnergyBallName ; name
+	tx TreeckosEnergyBallDescription ; description
 	dw NONE ; description (cont)
-	db 20 ; damage
-	db DAMAGE_NORMAL ; category
-	dw Drain10EffectCommands ; effect commands
-	db NONE ; flags 1
-	db HEAL_USER ; flags 2
-	db NONE ; flags 3
-	db 1
-	db ATK_ANIM_DRAIN ; animation
-
-	; attack 2
-	energy 0 ; energies
-	dw NONE ; name
-	dw NONE ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw NONE ; effect commands
+	db 10 ; damage
+	db DAMAGE_PLUS ; category
+	dw PsychicEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_NONE ; animation
+	db 1
+	db ATK_ANIM_GLOW_EFFECT ; animation
+
+	; attack 2
+	energy GRASS, 1, COLORLESS, 1 ; energies
+	tx AbsorbName ; name
+	tx TreeckosAbsorbDescription ; description
+	db 20 ; damage
+	db DAMAGE_NORMAL ; category
+	dw DrainHalfEffectCommands ; effect commands
+	db NONE ; flags 1
+	db HEAL_USER ; flags 2
+	db NONE ; flags 3
+	db 2
+	db ATK_ANIM_DRAIN ; animation
 
 	db 1 ; retreat cost
 	db WR_FIRE ; weakness
 	db NONE ; resistance
-	tx SeedName ; category
-	db 1 ; Pokedex number
+	tx WoodGeckoName ; category
+	dw 252 ; Pokedex number
 	db 0
-	db 13 ; level
-	db 2, 4 ; length
-	dw 15 * 10 ; weight
-	tx BulbasaurDescription ; description
+	db 7 ; level
+	db 1, 8 ; length
+	dw 11 * 10 ; weight
+	tx TreeckoDescription ; description
 	db 16
 
 IvysaurCard:
@@ -295,7 +294,7 @@ IvysaurCard:
 	db IVYSAUR
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx BulbasaurName ; pre-evo name
+	tx TreeckoName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies

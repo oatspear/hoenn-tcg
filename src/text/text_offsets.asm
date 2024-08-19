@@ -485,8 +485,8 @@ TextOffsets::
 	textpointer CharmanderExtraDeckName                            ; 0x01e1
 	textpointer SquirtleAndFriendsDeckName                         ; 0x01e2
 	textpointer SquirtleExtraDeckName                              ; 0x01e3
-	textpointer BulbasaurAndFriendsDeckName                        ; 0x01e4
-	textpointer BulbasaurExtraDeckName                             ; 0x01e5
+	textpointer TreeckoAndFriendsDeckName                        ; 0x01e4
+	textpointer TreeckoExtraDeckName                             ; 0x01e5
 	textpointer FirstStrikeDeckName                                ; 0x01e6
 	textpointer RockCrusherDeckName                                ; 0x01e7
 	textpointer GoGoRainDanceDeckName                              ; 0x01e8
@@ -701,7 +701,7 @@ TextOffsets::
 	textpointer FireChargeText                                     ; 0x02b9
 	textpointer CharmanderAndFriendsText                           ; 0x02ba
 	textpointer SquirtleAndFriendsText                             ; 0x02bb
-	textpointer BulbasaurAndFriendsText                            ; 0x02bc
+	textpointer TreeckoAndFriendsText                            ; 0x02bc
 	textpointer PsychicMachampText                                 ; 0x02bd
 	textpointer WaterBeetleText                                    ; 0x02be
 	textpointer LegendaryMoltresText                               ; 0x02bf
@@ -751,7 +751,7 @@ TextOffsets::
 	textpointer FireChargeDescriptionText                          ; 0x02eb
 	textpointer CharmanderAndFriendsDescriptionText                ; 0x02ec
 	textpointer SquirtleAndFriendsDescriptionText                  ; 0x02ed
-	textpointer BulbasaurAndFriendsDescriptionText                 ; 0x02ee
+	textpointer TreeckoAndFriendsDescriptionText                 ; 0x02ee
 	textpointer PsychicMachampDescriptionText                      ; 0x02ef
 	textpointer WaterBeetleDescriptionText                         ; 0x02f0
 	textpointer LegendaryMoltresDescriptionText                    ; 0x02f1
@@ -1021,7 +1021,7 @@ TextOffsets::
 	textpointer SelectDeckToDuelText                               ; 0x03f9
 	textpointer CharmanderAndFriendsDeckChoiceText                 ; 0x03fa
 	textpointer SquirtleAndFriendsDeckChoiceText                   ; 0x03fb
-	textpointer BulbasaurAndFriendsDeckChoiceText                  ; 0x03fc
+	textpointer TreeckoAndFriendsDeckChoiceText                  ; 0x03fc
 	textpointer SelectDeckToTakeText                               ; 0x03fd
 	textpointer HowCanIHelpText                                    ; 0x03fe
 	textpointer SamNormalMenuText                                  ; 0x03ff
@@ -2059,11 +2059,12 @@ TextOffsets::
 	textpointer PsychicEnergyDescription                           ; 0x0807
 	textpointer DoubleColorlessEnergyName                          ; 0x0808
 	textpointer DoubleColorlessEnergyDescription                   ; 0x0809
-	textpointer BulbasaurName                                      ; 0x080a
-	textpointer LeechSeedName                                      ; 0x080b
-	textpointer BulbasaursLeechSeedDescription                     ; 0x080c
-	textpointer SeedName                                           ; 0x080d
-	textpointer BulbasaurDescription                               ; 0x080e
+	textpointer TreeckoName                                        ; 0x080a
+	textpointer EnergyBallName                                     ; 0x080b
+	textpointer TreeckosEnergyBallDescription                      ; 0x080c
+	textpointer TreeckosAbsorbDescription                          ; 0x080d
+	textpointer WoodGeckoName                                      ; 0x0bb8
+	textpointer TreeckoDescription                                 ; 0x080e
 	textpointer IvysaurName                                        ; 0x080f
 	textpointer VineWhipName                                       ; 0x0810
 	textpointer PoisonPowderName                                   ; 0x0811
@@ -3001,3 +3002,4 @@ TextOffsets::
 	textpointer ChooseTrainerCardText                              ; 0x0bb5
 	textpointer ChooseTrainerCardFromDeckText                      ; 0x0bb6
 	textpointer Draw2CardsText                                     ; 0x0bb7
+;	textpointer WoodGeckoName                                      ; 0x0bb8

@@ -1236,7 +1236,7 @@ DoubleColorlessEnergyDescription:
 	done
 
 BulbasaurName:
-	text "Bulbasaur"
+	text "Treecko"
 	done
 
 LeechSeedName:
@@ -1250,7 +1250,7 @@ BulbasaursLeechSeedDescription:
 	done
 
 SeedName:
-	text "Seed"
+	text "Wood Gecko"
 	done
 
 BulbasaurDescription:
@@ -1261,7 +1261,7 @@ BulbasaurDescription:
 	done
 
 IvysaurName:
-	text "Ivysaur"
+	text "Grovyle"
 	done
 
 VineWhipName:
@@ -1284,7 +1284,7 @@ IvysaurDescription:
 	done
 
 VenusaurName:
-	text "Venusaur"
+	text "Sceptile"
 	done
 
 SolarPowerName:
@@ -1449,7 +1449,7 @@ ButterfreeDescription:
 	done
 
 WeedleName:
-	text "Weedle"
+	text "Lotad"
 	done
 
 PoisonStingName:
@@ -1462,7 +1462,7 @@ MayInflictPoisonDescription:
 	done
 
 HairyBugName:
-	text "Hairy Bug"
+	text "Water Wood"
 	done
 
 WeedleDescription:

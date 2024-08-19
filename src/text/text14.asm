@@ -56,3 +56,30 @@ ChooseTrainerCardFromDeckText:
 Draw2CardsText:
 	text "Draw 2 cards."
 	done
+
+MayInflictBurnDescription:
+	text "Flip a coin. If heads, the"
+	line "Defending Pokémon is now Burned."
+	done
+
+SingeName:
+	text "Singe"
+	done 	
+
+CircularStepsDescription:
+	text "This attack does 10 damage times"
+	line "the number of other Pokémon in play"
+	line "(both yours and your opponent’s)."
+	done 		
+
+EnergyBallName:
+	text "Energy Ball"
+	done 	
+
+EnergyBallDescription:
+	text "Does 10 more damage for each Energy"
+	line "attached to this Pokémon but not"
+	line "used to pay for this attack’s" 
+	line "Energy cost. You can’t add more"
+	line "than 20 damage in this way."
+	done 			

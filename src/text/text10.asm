@@ -1,5 +1,5 @@
 KakunaName:
-	text "Kakuna"
+	text "Lombre"
 	done
 
 KakunasStiffenDescription:
@@ -16,11 +16,11 @@ KakunaDescription:
 	done
 
 BeedrillName:
-	text "Beedrill"
+	text "Ludicolo"
 	done
 
 TwineedleName:
-	text "Twineedle"
+	text "Circular Steps"
 	done
 
 DoubleAttackX30Description:
@@ -778,7 +778,7 @@ PinsirDescription:
 	done
 
 CharmanderName:
-	text "Charmander"
+	text "Torchic"
 	done
 
 EmberName:
@@ -792,7 +792,7 @@ EmberDescription:
 	done
 
 LizardName:
-	text "Lizard"
+	text "Chick"
 	done
 
 CharmanderDescription:
@@ -803,7 +803,7 @@ CharmanderDescription:
 	done
 
 CharmeleonName:
-	text "Charmeleon"
+	text "Combusken"
 	done
 
 FlamethrowerName:
@@ -817,7 +817,7 @@ CharmeleonsFlamethrowerDescription:
 	done
 
 FlameName:
-	text "Flame"
+	text "Young Fowl"
 	done
 
 CharmeleonDescription:
@@ -827,7 +827,7 @@ CharmeleonDescription:
 	done
 
 CharizardName:
-	text "Charizard"
+	text "Blaziken"
 	done
 
 EnergyBurnName:
@@ -1218,7 +1218,7 @@ SquirtleDescription:
 	done
 
 WartortleName:
-	text "Wartortle"
+	text "Marshtomp"
 	done
 
 WartortlesWithdrawDescription:
@@ -1239,20 +1239,20 @@ WartortleDescription:
 	done
 
 BlastoiseName:
-	text "Blastoise"
+	text "Swampert"
 	done
 
 RainDanceName:
-	text "Rain Dance"
+	text "Water Call"
 	done
 
 RainDanceDescription:
-	text "As often as you like during your"
-	line "turn (before your attack), you may"
-	line "attach 1 <WATER> Energy card to 1 of"
-	line "your <WATER> Pokémon. (This doesn't use"
-	line "up your 1 Energy card attachment"
-	line "for the turn.)"
+	text "Once per turn (before your attack),"
+	line "you may attach a <WATER> Energy card"
+	line "from your hand to your Active Pkmn."
+	line "This power can’t be used if this "
+	line "Pokémon is affected by a Special"
+	line "Condition."
 	done
 
 RainDanceDescriptionCont:
@@ -1288,7 +1288,7 @@ PsyduckName:
 	done
 
 HeadacheName:
-	text "Headache"
+	text "Torment"
 	done
 
 HeadacheDescription:

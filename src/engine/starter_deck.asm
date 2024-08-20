@@ -4,7 +4,7 @@
 ; - a = starter deck chosen
 ;   $0 = Charmander
 ;   $1 = Squirtle
-;   $2 = Bulbasaur
+;   $2 = Treecko
 _AddStarterDeck:
 	add a
 	ld e, a
@@ -56,7 +56,7 @@ _AddStarterDeck:
 	; main deck, extra cards
 	db CHARMANDER_AND_FRIENDS_DECK_ID, CHARMANDER_EXTRA_DECK_ID
 	db SQUIRTLE_AND_FRIENDS_DECK_ID,   SQUIRTLE_EXTRA_DECK_ID
-	db BULBASAUR_AND_FRIENDS_DECK_ID,  BULBASAUR_EXTRA_DECK_ID
+	db TREECKO_AND_FRIENDS_DECK_ID,  TREECKO_EXTRA_DECK_ID
 
 ; clears saved data (card Collection/saved decks/Card Pop! data/etc)
 ; then adds the starter decks as saved decks
@@ -83,7 +83,7 @@ InitSaveData:
 	ld a, SQUIRTLE_AND_FRIENDS_DECK
 	ld hl, sSavedDeck2
 	call CopyDeckNameAndCards
-	ld a, BULBASAUR_AND_FRIENDS_DECK
+	ld a, TREECKO_AND_FRIENDS_DECK
 	ld hl, sSavedDeck3
 	call CopyDeckNameAndCards
 

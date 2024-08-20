@@ -95,7 +95,7 @@ CreateCardSetList:
 .loop_find_double_colorless
 	inc e
 	ld a, e
-	cp BULBASAUR
+	cp TREECKO
 	jr z, .skip_energy_cards
 	cp DOUBLE_COLORLESS_ENERGY
 	jr nz, .loop_find_double_colorless

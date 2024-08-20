@@ -5866,7 +5866,7 @@ AIDecide_PokemonTrader_FlowerGarden:
 ; Play Area or in the hand. If there is, choose it as target.
 ; otherwise, check if the evolution card is in
 ; hand and if so, choose it as target instead.
-	ld b, BULBASAUR
+	ld b, TREECKO
 	ld a, IVYSAUR
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
@@ -5874,7 +5874,7 @@ AIDecide_PokemonTrader_FlowerGarden:
 	ld a, VENUSAUR_LV67
 	call LookForCardIDInDeck_GivenCardIDInHandAndPlayArea
 	jr c, .find_duplicates
-	ld a, BULBASAUR
+	ld a, TREECKO
 	ld b, IVYSAUR
 	call LookForCardIDInDeck_GivenCardIDInHand
 	jr c, .find_duplicates

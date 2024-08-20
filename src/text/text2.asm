@@ -514,12 +514,12 @@ SquirtleExtraDeckName:
 	text "Squirtle extra"
 	done
 
-BulbasaurAndFriendsDeckName:
-	text "Bulbasaur & Friends"
+TreeckoAndFriendsDeckName:
+	text "Treecko & Friends"
 	done
 
-BulbasaurExtraDeckName:
-	text "Bulbasaur extra"
+TreeckoExtraDeckName:
+	text "Treecko extra"
 	done
 
 FirstStrikeDeckName:
@@ -1447,8 +1447,8 @@ SquirtleAndFriendsText:
 	text "Squirtle & Friends"
 	done
 
-BulbasaurAndFriendsText:
-	text "Bulbasaur & Friends"
+TreeckoAndFriendsText:
+	text "Treecko & Friends"
 	done
 
 PsychicMachampText:
@@ -1689,9 +1689,9 @@ SquirtleAndFriendsDescriptionText:
 	line "Squirtle, Charmander and Pikachu"
 	done
 
-BulbasaurAndFriendsDescriptionText:
+TreeckoAndFriendsDescriptionText:
 	text "A Grass, Lightning and Psychic Deck:"
-	line "Bulbasaur, Pikachu and Abra"
+	line "Treecko, Pikachu and Abra"
 	done
 
 PsychicMachampDescriptionText:

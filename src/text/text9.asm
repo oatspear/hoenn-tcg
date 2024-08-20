@@ -1245,9 +1245,10 @@ EnergyBallName:
 
 TreeckosEnergyBallDescription:
 	text "Does 10 more damage for each Energy"
-	line "attached to this Pokémon but not used"
-	line "to pay for this attack’s Energy cost."
-	line "You can’t add more than 20 damage in this way."
+	line "attached to this Pokémon but not"
+	line "used to pay for this attack's"
+	line "Energy cost. You can't add more"
+  line "than 20 damage in this way."
 	done
 
 TreeckosAbsorbDescription:

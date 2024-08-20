@@ -1227,56 +1227,6 @@ VolbeatCard:
 	tx NidokingDescription ; description
 	db 0
 
-ZubatCard:
-	db TYPE_PKMN_GRASS ; type
-	gfx ZubatCardGfx ; gfx
-	tx ZubatName ; name
-	db CIRCLE ; rarity
-	db LABORATORY | FOSSIL ; sets
-	db VOLBEAT
-	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
-
-	; attack 1
-	energy COLORLESS, 2 ; energies
-	tx SupersonicName ; name
-	tx MayInflictConfusionDescription ; description
-	dw NONE ; description (cont)
-	db 0 ; damage
-	db DAMAGE_NORMAL ; category
-	dw MayInflictConfusionNoDamageEffectCommands ; effect commands
-	db INFLICT_CONFUSION ; flags 1
-	db NONE ; flags 2
-	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_SUPERSONIC ; animation
-
-	; attack 2
-	energy GRASS, 1, COLORLESS, 1 ; energies
-	tx LeechLifeName ; name
-	tx ZubatsLeechLifeDescription ; description
-	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
-	dw DrainAllEffectCommands ; effect commands
-	db NONE ; flags 1
-	db HEAL_USER ; flags 2
-	db NONE ; flags 3
-	db 3
-	db ATK_ANIM_DRAIN ; animation
-
-	db 0 ; retreat cost
-	db WR_PSYCHIC ; weakness
-	db WR_FIGHTING ; resistance
-	tx BatName ; category
-	dw 41 ; Pokedex number
-	db 10 ; level
-	db 2, 7 ; length
-	dw 17 * 10 ; weight
-	tx ZubatDescription ; description
-	db 16
-
 IllumiseCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx IllumiseCardGfx ; gfx

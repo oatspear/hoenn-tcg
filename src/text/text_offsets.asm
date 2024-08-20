@@ -320,7 +320,7 @@ TextOffsets::
 	textpointer WouldYouLikeToCheckTheDeckText                     ; 0x013c
 	textpointer PleaseSelectTheDeckText                            ; 0x013d
 	textpointer PleaseSelectThePlayAreaText                        ; 0x013e
-	textpointer NidoranMMasquerainText                               ; 0x013f
+	textpointer NidoranMNidoranFText                               ; 0x013f
 	textpointer BasicFightingPokemonText                           ; 0x0140
 	textpointer BasicPokemonText                                   ; 0x0141
 	textpointer EvolutionCardText                                  ; 0x0142

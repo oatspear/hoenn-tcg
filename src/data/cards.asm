@@ -330,7 +330,7 @@ DoubleColorlessEnergyCard:
 TreeckoCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx TreeckoCardGfx ; gfx
-	tx BulbasaurName ; name
+	tx TreeckoName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db TREECKO
@@ -341,7 +341,7 @@ TreeckoCard:
 	; attack 1
 	energy GRASS, 2 ; energies
 	tx LeechSeedName ; name
-	tx BulbasaursLeechSeedDescription ; description
+	tx TreeckosLeechSeedDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -374,19 +374,19 @@ TreeckoCard:
 	db 13 ; level
 	db 2, 4 ; length
 	dw 15 * 10 ; weight
-	tx BulbasaurDescription ; description
+	tx TreeckoDescription ; description
 	db 16
 
 GrovyleCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx GrovyleCardGfx ; gfx
-	tx IvysaurName ; name
+	tx GrovyleName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db GROVYLE
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx BulbasaurName ; pre-evo name
+	tx TreeckoName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -424,7 +424,7 @@ GrovyleCard:
 	db 20 ; level
 	db 3, 3 ; length
 	dw 29 * 10 ; weight
-	tx IvysaurDescription ; description
+	tx GrovyleDescription ; description
 	db 16
 
 SceptileCard:
@@ -436,7 +436,7 @@ SceptileCard:
 	db SCEPTILE
 	db 100 ; hp
 	db STAGE2 ; stage
-	tx IvysaurName ; pre-evo name
+	tx GrovyleName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -486,7 +486,7 @@ WurmpleCard:
 	db WURMPLE
 	db 100 ; hp
 	db STAGE2 ; stage
-	tx IvysaurName ; pre-evo name
+	tx GrovyleName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -530,7 +530,7 @@ WurmpleCard:
 SilcoonCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SilcoonCardGfx ; gfx
-	tx CaterpieName ; name
+	tx SilcoonName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db SILCOON
@@ -574,24 +574,24 @@ SilcoonCard:
 	db 13 ; level
 	db 1, 0 ; length
 	dw 6 * 10 ; weight
-	tx CaterpieDescription ; description
+	tx SilcoonDescription ; description
 	db 19
 
 BeautiflyCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx BeautiflyCardGfx ; gfx
-	tx MetapodName ; name
+	tx BeautiflyName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db BEAUTIFLY
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx CaterpieName ; pre-evo name
+	tx SilcoonName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx StiffenName ; name
-	tx MetapodsStiffenDescription ; description
+	tx BeautiflysStiffenDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -624,19 +624,19 @@ BeautiflyCard:
 	db 21 ; level
 	db 2, 4 ; length
 	dw 22 * 10 ; weight
-	tx MetapodDescription ; description
+	tx BeautiflyDescription ; description
 	db 16
 
 CascoonCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx CascoonCardGfx ; gfx
-	tx ButterfreeName ; name
+	tx CascoonName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db CASCOON
 	db 70 ; hp
 	db STAGE2 ; stage
-	tx MetapodName ; pre-evo name
+	tx BeautiflyName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -655,8 +655,8 @@ CascoonCard:
 	; attack 2
 	energy GRASS, 4 ; energies
 	tx MegaDrainName ; name
-	tx ButterfreesMegaDrainDescription ; description
-	tx ButterfreesMegaDrainDescriptionCont ; description (cont)
+	tx CascoonsMegaDrainDescription ; description
+	tx CascoonsMegaDrainDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DrainHalfEffectCommands ; effect commands
@@ -674,13 +674,13 @@ CascoonCard:
 	db 28 ; level
 	db 3, 7 ; length
 	dw 71 * 10 ; weight
-	tx ButterfreeDescription ; description
+	tx CascoonDescription ; description
 	db 0
 
 LotadCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LotadCardGfx ; gfx
-	tx WeedleName ; name
+	tx LotadName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db LOTAD
@@ -724,24 +724,24 @@ LotadCard:
 	db 12 ; level
 	db 1, 0 ; length
 	dw 7 * 10 ; weight
-	tx WeedleDescription ; description
+	tx LotadDescription ; description
 	db 19
 
 LombreCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LombreCardGfx ; gfx
-	tx KakunaName ; name
+	tx LombreName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db LOMBRE
 	db 80 ; hp
 	db STAGE1 ; stage
-	tx WeedleName ; pre-evo name
+	tx LotadName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx StiffenName ; name
-	tx KakunasStiffenDescription ; description
+	tx LombresStiffenDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -774,19 +774,19 @@ LombreCard:
 	db 23 ; level
 	db 2, 0 ; length
 	dw 22 * 10 ; weight
-	tx KakunaDescription ; description
+	tx LombreDescription ; description
 	db 16
 
 LudicoloCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LudicoloCardGfx ; gfx
-	tx BeedrillName ; name
+	tx LudicoloName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db LUDICOLO
 	db 80 ; hp
 	db STAGE2 ; stage
-	tx KakunaName ; pre-evo name
+	tx LombreName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
@@ -824,13 +824,13 @@ LudicoloCard:
 	db 32 ; level
 	db 3, 3 ; length
 	dw 65 * 10 ; weight
-	tx BeedrillDescription ; description
+	tx LudicoloDescription ; description
 	db 0
 
 SeedotCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SeedotCardGfx ; gfx
-	tx EkansName ; name
+	tx SeedotName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SEEDOT
@@ -874,19 +874,19 @@ SeedotCard:
 	db 10 ; level
 	db 6, 7 ; length
 	dw 15 * 10 ; weight
-	tx EkansDescription ; description
+	tx SeedotDescription ; description
 	db 19
 
 SurskitCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SurskitCardGfx ; gfx
-	tx ArbokName ; name
+	tx SurskitName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SURSKIT
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx EkansName ; pre-evo name
+	tx SeedotName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -924,13 +924,13 @@ SurskitCard:
 	db 27 ; level
 	db 11, 6 ; length
 	dw 143 * 10 ; weight
-	tx ArbokDescription ; description
+	tx SurskitDescription ; description
 	db 0
 
 MasquerainCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx MasquerainCardGfx ; gfx
-	tx NidoranFName ; name
+	tx MasquerainName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db MASQUERAIN
@@ -955,7 +955,7 @@ MasquerainCard:
 	; attack 2
 	energy GRASS, 2 ; energies
 	tx CallForFamilyName ; name
-	tx NidoranFsCallForFamilyDescription ; description
+	tx MasquerainsCallForFamilyDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -974,19 +974,19 @@ MasquerainCard:
 	db 13 ; level
 	db 1, 4 ; length
 	dw 15 * 10 ; weight
-	tx NidoranFDescription ; description
+	tx MasquerainDescription ; description
 	db 19
 
 ShroomishCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx ShroomishCardGfx ; gfx
-	tx NidorinaName ; name
+	tx ShroomishName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db SHROOMISH
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx NidoranFName ; pre-evo name
+	tx MasquerainName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1024,7 +1024,7 @@ ShroomishCard:
 	db 24 ; level
 	db 2, 7 ; length
 	dw 44 * 10 ; weight
-	tx NidorinaDescription ; description
+	tx ShroomishDescription ; description
 	db 16
 
 NincadaCard:
@@ -1036,7 +1036,7 @@ NincadaCard:
 	db NINCADA
 	db 90 ; hp
 	db STAGE2 ; stage
-	tx NidorinaName ; pre-evo name
+	tx ShroomishName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 1 ; energies

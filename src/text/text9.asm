@@ -1235,33 +1235,33 @@ DoubleColorlessEnergyDescription:
 	line "   to pay Colorless Energy costs.)"
 	done
 
-BulbasaurName:
-	text "Bulbasaur"
+TreeckoName:
+	text "Treecko"
 	done
 
 LeechSeedName:
 	text "Leech Seed"
 	done
 
-BulbasaursLeechSeedDescription:
+TreeckosLeechSeedDescription:
 	text "Unless all damage from this attack"
 	line "is prevented, you may remove 1"
-	line "damage counter from Bulbasaur."
+	line "damage counter from Treecko."
 	done
 
 SeedName:
 	text "Seed"
 	done
 
-BulbasaurDescription:
+TreeckoDescription:
 	text "A strange seed was planted on its"
 	line "back at birth. Thus, a plant"
 	line "sprouted and now grows with this"
 	line "Pokémon."
 	done
 
-IvysaurName:
-	text "Ivysaur"
+GrovyleName:
+	text "Grovyle"
 	done
 
 VineWhipName:
@@ -1277,7 +1277,7 @@ InflictPoisonDescription:
 	line "Poisoned."
 	done
 
-IvysaurDescription:
+GrovyleDescription:
 	text "When the bulb on its back grows"
 	line "large, the Pokémon seems to lose the"
 	line "ability to stand on its hind legs."
@@ -1355,8 +1355,8 @@ VenusaurLv67Description:
 	line "the move to seek sunlight."
 	done
 
-CaterpieName:
-	text "Caterpie"
+SilcoonName:
+	text "Silcoon"
 	done
 
 StringShotName:
@@ -1372,23 +1372,23 @@ WormName:
 	text "Worm"
 	done
 
-CaterpieDescription:
+SilcoonDescription:
 	text "Its short feet are tipped with"
 	line "suction pads that enable it to"
 	line "tirelessly climb slopes and walls."
 	done
 
-MetapodName:
-	text "Metapod"
+BeautiflyName:
+	text "Beautifly"
 	done
 
 StiffenName:
 	text "Stiffen"
 	done
 
-MetapodsStiffenDescription:
+BeautiflysStiffenDescription:
 	text "Flip a coin. If heads, prevent all"
-	line "damage done to Metapod during your"
+	line "damage done to Beautifly during your"
 	line "opponent's next turn. (Any other"
 	line "effects of attacks still happen.)"
 	done
@@ -1401,14 +1401,14 @@ CocoonName:
 	text "Cocoon"
 	done
 
-MetapodDescription:
+BeautiflyDescription:
 	text "It is vulnerable to attack because"
 	line "its shell is soft, exposing its weak"
 	line "and tender body."
 	done
 
-ButterfreeName:
-	text "Butterfree"
+CascoonName:
+	text "Cascoon"
 	done
 
 WhirlwindName:
@@ -1423,17 +1423,17 @@ WhirlwindDescription:
 	line "switching the Pokémon.)"
 	done
 
-ButterfreesMegaDrainDescription:
+CascoonsMegaDrainDescription:
 	text "Remove a number of damage counters"
-	line "from Butterfree equal to half the"
+	line "from Cascoon equal to half the"
 	line "damage done to the Defending Pokémon"
 	line "(after applying Weakness and"
 	line "Resistance) (rounded up to the"
 	line "nearest 10)."
 	done
 
-ButterfreesMegaDrainDescriptionCont:
-	text "If Butterfree has fewer damage"
+CascoonsMegaDrainDescriptionCont:
+	text "If Cascoon has fewer damage"
 	line "counters than that, remove all of"
 	line "them."
 	done
@@ -1442,14 +1442,14 @@ ButterflyName:
 	text "Butterfly"
 	done
 
-ButterfreeDescription:
+CascoonDescription:
 	text "In battle, it flaps its wings at"
 	line "high speed to release highly toxic"
 	line "dust into the air."
 	done
 
-WeedleName:
-	text "Weedle"
+LotadName:
+	text "Lotad"
 	done
 
 PoisonStingName:
@@ -1465,7 +1465,7 @@ HairyBugName:
 	text "Hairy Bug"
 	done
 
-WeedleDescription:
+LotadDescription:
 	text "Often found in forests, eating"
 	line "leaves. It has a sharp, venomous"
 	line "stinger on its head."

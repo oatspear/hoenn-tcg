@@ -9,8 +9,8 @@ DeckPointers::
 	dw CharmanderExtraDeck
 	dw SquirtleAndFriendsDeck
 	dw SquirtleExtraDeck
-	dw BulbasaurAndFriendsDeck
-	dw BulbasaurExtraDeck
+	dw TreeckoAndFriendsDeck
+	dw TreeckoExtraDeck
 	dw LightningAndFireDeck
 	dw WaterAndFightingDeck
 	dw GrassAndPsychicDeck
@@ -734,7 +734,7 @@ SquirtleExtraDeck:
 	deck_list_end
 	tx SquirtleExtraDeckName
 
-BulbasaurAndFriendsDeck:
+TreeckoAndFriendsDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,    11
 	card_item FIRE_ENERGY,      3
@@ -768,9 +768,9 @@ BulbasaurAndFriendsDeck:
 	card_item LAVA_COOKIE,        2
 	card_item REVIVE,           1
 	deck_list_end
-	tx BulbasaurAndFriendsDeckName
+	tx TreeckoAndFriendsDeckName
 
-BulbasaurExtraDeck:
+TreeckoExtraDeck:
 	deck_list_start
 	card_item LIGHTNING_ENERGY,  4
 	card_item PSYCHIC_ENERGY,    4
@@ -792,7 +792,7 @@ BulbasaurExtraDeck:
 	card_item ENERGY_SWITCH,      1
 	card_item GRASS_ENERGY,     30 ; irrelevant
 	deck_list_end
-	tx BulbasaurExtraDeckName
+	tx TreeckoExtraDeckName
 
 LightningAndFireDeck:
 	deck_list_start

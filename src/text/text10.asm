@@ -1,22 +1,22 @@
-KakunaName:
-	text "Kakuna"
+LombreName:
+	text "Lombre"
 	done
 
-KakunasStiffenDescription:
+LombresStiffenDescription:
 	text "Flip a coin. If heads, prevent all"
-	line "damage done to Kakuna during your"
+	line "damage done to Lombre during your"
 	line "opponent's next turn. (Any other"
 	line "effects of attacks still happen.)"
 	done
 
-KakunaDescription:
+LombreDescription:
 	text "Almost incapable of moving, this"
 	line "Pokémon can only harden its shell to"
 	line "protect itself from predators."
 	done
 
-BeedrillName:
-	text "Beedrill"
+LudicoloName:
+	text "Ludicolo"
 	done
 
 TwineedleName:
@@ -32,14 +32,14 @@ PoisonBeeName:
 	text "Poison Bee"
 	done
 
-BeedrillDescription:
+LudicoloDescription:
 	text "Flies at high speed and attacks"
 	line "using the large, venomous stingers"
 	line "on its forelegs and tail."
 	done
 
-EkansName:
-	text "Ekans"
+SeedotName:
+	text "Seedot"
 	done
 
 SpitPoisonName:
@@ -54,14 +54,14 @@ SnakeName:
 	text "Snake"
 	done
 
-EkansDescription:
+SeedotDescription:
 	text "Moves silently and stealthily."
 	line "Eats the eggs of birds, such as"
 	line "Pidgey and Spearow, whole."
 	done
 
-ArbokName:
-	text "Arbok"
+SurskitName:
+	text "Surskit"
 	done
 
 TerrorStrikeName:
@@ -85,13 +85,13 @@ CobraName:
 	text "Cobra"
 	done
 
-ArbokDescription:
+SurskitDescription:
 	text "It is rumored that the ferocious"
 	line "warning markings on its belly differ"
 	line "from area to area."
 	done
 
-NidoranFName:
+MasquerainName:
 	text "Nidoran♀"
 	done
 
@@ -108,7 +108,7 @@ CallForFamilyName:
 	text "Call for Family"
 	done
 
-NidoranFsCallForFamilyDescription:
+MasquerainsCallForFamilyDescription:
 	text "Search your deck for a Basic Pokémon"
 	line "named Nidoran♀ or Nidoran♂ and put"
 	line "it onto your Bench. Shuffle your"
@@ -120,14 +120,14 @@ PoisonPinName:
 	text "Poison Pin"
 	done
 
-NidoranFDescription:
+MasquerainDescription:
 	text "Although small, its venomous barbs"
 	line "make this Pokémon dangerous."
 	line "The female has smaller horns."
 	done
 
-NidorinaName:
-	text "Nidorina"
+ShroomishName:
+	text "Shroomish"
 	done
 
 SupersonicName:
@@ -143,7 +143,7 @@ DoubleKickName:
 	text "Double Kick"
 	done
 
-NidorinaDescription:
+ShroomishDescription:
 	text "The female's horn develops slowly."
 	line "Prefers physical attacks such as"
 	line "clawing and biting."

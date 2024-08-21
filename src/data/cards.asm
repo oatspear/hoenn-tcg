@@ -1183,7 +1183,7 @@ VolbeatCard:
 	tx NidokingName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
-	db NIDOKING
+	db VOLBEAT
 	db 90 ; hp
 	db STAGE2 ; stage
 	tx NidorinoName ; pre-evo name

@@ -57,7 +57,7 @@ cards = {
 	0x16: "NIDOQUEEN",
 	0x17: "NIDORANM",
 	0x18: "NIDORINO",
-	0x19: "NIDOKING",
+	0x19: "VOLBEAT",
 	0x1a: "ZUBAT",
 	0x1b: "GOLBAT",
 	0x1c: "ODDISH",

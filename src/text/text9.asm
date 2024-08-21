@@ -1283,8 +1283,8 @@ GrovyleDescription:
 	line "ability to stand on its hind legs."
 	done
 
-VenusaurName:
-	text "Venusaur"
+SceptileName:
+	text "Sceptile"
 	done
 
 SolarPowerName:
@@ -1310,7 +1310,7 @@ MegaDrainName:
 	text "Mega Drain"
 	done
 
-VenusaursMegaDrainDescription:
+SceptilesMegaDrainDescription:
 	text "Remove a number of damage counters"
 	line "from Venusaur equal to half the"
 	line "damage done to the Defending Pokémon"
@@ -1319,16 +1319,20 @@ VenusaursMegaDrainDescription:
 	line "nearest 10)."
 	done
 
-VenusaursMegaDrainDescriptionCont:
+SceptilesMegaDrainDescriptionCont:
 	text "If Venusaur has fewer damage"
 	line "counters than that, remove all of"
 	line "them."
 	done
 
-VenusaurLv64Description:
+SceptileDescription:
 	text "The flower on its back catches"
 	line "the sun's rays. The sunlight is then"
 	line "absorbed and used for energy."
+	done
+
+WurmpleName:
+	text "Wurmple"
 	done
 
 EnergyTransName:
@@ -1349,7 +1353,7 @@ SolarBeamName:
 	text "Solarbeam"
 	done
 
-VenusaurLv67Description:
+WurmpleDescription:
 	text "This plant blooms when it is"
 	line "absorbing solar energy. It stays on"
 	line "the move to seek sunlight."

@@ -430,7 +430,7 @@ GrovyleCard:
 SceptileCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SceptileCardGfx ; gfx
-	tx VenusaurName ; name
+	tx SceptileName ; name
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db SCEPTILE
@@ -445,7 +445,7 @@ SceptileCard:
 	tx SolarPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw VenusaurSolarPowerEffectCommands ; effect commands
+	dw SceptileSolarPowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -455,8 +455,8 @@ SceptileCard:
 	; attack 2
 	energy GRASS, 4 ; energies
 	tx MegaDrainName ; name
-	tx VenusaursMegaDrainDescription ; description
-	tx VenusaursMegaDrainDescriptionCont ; description (cont)
+	tx SceptilesMegaDrainDescription ; description
+	tx SceptilesMegaDrainDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DrainHalfEffectCommands ; effect commands
@@ -474,19 +474,19 @@ SceptileCard:
 	db 64 ; level
 	db 6, 7 ; length
 	dw 221 * 10 ; weight
-	tx VenusaurLv64Description ; description
+	tx SceptileDescription ; description
 	db 0
 
 WurmpleCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx WurmpleCardGfx ; gfx
-	tx VenusaurName ; name
+	tx WurmpleName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db WURMPLE
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx GrovyleName ; pre-evo name
+	db BASIC ; stage
+	tx NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -495,7 +495,7 @@ WurmpleCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw VenusaurEnergyTransEffectCommands ; effect commands
+	dw WurmpleEnergyTransEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -524,7 +524,7 @@ WurmpleCard:
 	db 67 ; level
 	db 6, 7 ; length
 	dw 221 * 10 ; weight
-	tx VenusaurLv67Description ; description
+	tx WurmpleDescription ; description
 	db 0
 
 SilcoonCard:
@@ -535,8 +535,8 @@ SilcoonCard:
 	db EVOLUTION | NONE ; sets
 	db SILCOON
 	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	dw WurmpleName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -585,7 +585,7 @@ BeautiflyCard:
 	db EVOLUTION | NONE ; sets
 	db BEAUTIFLY
 	db 70 ; hp
-	db STAGE1 ; stage
+	db STAGE2 ; stage
 	tx SilcoonName ; pre-evo name
 
 	; attack 1
@@ -1030,7 +1030,7 @@ ShroomishCard:
 NincadaCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx NincadaCardGfx ; gfx
-	tx NidoqueenName ; name
+	tx NincadaName ; name
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db NINCADA

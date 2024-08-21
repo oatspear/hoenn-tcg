@@ -123,7 +123,7 @@ AIProcessEnergyCards:
 	call AddToAIScore
 
 ; if there's no Muk in any Play Area
-; and there's VenusaurLv67 in own Play Area,
+; and there's Wurmple in own Play Area,
 ; add to AI score
 .check_venusaur
 	ld a, CAMERUPT

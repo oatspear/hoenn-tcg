@@ -2070,23 +2070,24 @@ TextOffsets::
 	textpointer PoisonPowderName                                   ; 0x0811
 	textpointer InflictPoisonDescription                           ; 0x0812
 	textpointer GrovyleDescription                                 ; 0x0813
-	textpointer VenusaurName                                       ; 0x0814
+	textpointer SceptileName                                       ; 0x0814
 	textpointer SolarPowerName                                     ; 0x0815
 	textpointer SolarPowerDescription                              ; 0x0816
 	textpointer SolarPowerDescriptionCont                          ; 0x0817
 	textpointer MegaDrainName                                      ; 0x0818
-	textpointer VenusaursMegaDrainDescription                      ; 0x0819
-	textpointer VenusaursMegaDrainDescriptionCont                  ; 0x081a
-	textpointer VenusaurLv64Description                            ; 0x081b
+	textpointer SceptilesMegaDrainDescription                      ; 0x0819
+	textpointer SceptilesMegaDrainDescriptionCont                  ; 0x081a
+	textpointer SceptileDescription                                ; 0x081b
+	textpointer WurmpleName                                        ; 0x0bb8
 	textpointer EnergyTransName                                    ; 0x081c
 	textpointer EnergyTransDescription                             ; 0x081d
 	textpointer SolarBeamName                                      ; 0x081e
-	textpointer VenusaurLv67Description                            ; 0x081f
-	textpointer SilcoonName                                       ; 0x0820
+	textpointer WurmpleDescription                                 ; 0x081f
+	textpointer SilcoonName                                        ; 0x0820
 	textpointer StringShotName                                     ; 0x0821
 	textpointer MayInflictParalysisDescription                     ; 0x0822
 	textpointer WormName                                           ; 0x0823
-	textpointer SilcoonDescription                                ; 0x0824
+	textpointer SilcoonDescription                                 ; 0x0824
 	textpointer BeautiflyName                                        ; 0x0825
 	textpointer StiffenName                                        ; 0x0826
 	textpointer BeautiflysStiffenDescription                         ; 0x0827
@@ -3002,3 +3003,4 @@ TextOffsets::
 	textpointer ChooseTrainerCardText                              ; 0x0bb5
 	textpointer ChooseTrainerCardFromDeckText                      ; 0x0bb6
 	textpointer Draw2CardsText                                     ; 0x0bb7
+	; 0x0bb8 is for WurmpleName at line 2081

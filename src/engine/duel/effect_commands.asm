@@ -774,14 +774,14 @@ MirrorMoveEffectCommands:
 ; only 14/26 have an actual effect function
 ;---------------------------------------------------------------------------------
 
-VenusaurEnergyTransEffectCommands:
+WurmpleEnergyTransEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, EnergyTransCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, EnergyTrans_TransferEffect
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, EnergyTrans_AIEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, EnergyTrans_PrintProcedureText
 	db  $00
 
-VenusaurSolarPowerEffectCommands:
+SceptileSolarPowerEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SolarPowerCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, SolarPower_RemoveStatusEffect
 	db  $00

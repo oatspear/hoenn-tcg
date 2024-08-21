@@ -486,7 +486,7 @@ WurmpleCard:
 	db WURMPLE
 	db 100 ; hp
 	db BASIC ; stage
-	tx NONE ; pre-evo name
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -536,7 +536,7 @@ SilcoonCard:
 	db SILCOON
 	db 40 ; hp
 	db STAGE1 ; stage
-	dw WurmpleName ; pre-evo name
+	tx WurmpleName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -886,7 +886,7 @@ SurskitCard:
 	db SURSKIT
 	db 60 ; hp
 	db BASIC ; stage
-	tx NONE ; pre-evo name
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -936,7 +936,7 @@ MasquerainCard:
 	db MASQUERAIN
 	db 60 ; hp
 	db STAGE1 ; stage
-	dw SurskitName ; pre-evo name
+	tx SurskitName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -986,7 +986,7 @@ ShroomishCard:
 	db SHROOMISH
 	db 70 ; hp
 	db BASIC ; stage
-	tx NONE ; pre-evo name
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1036,7 +1036,7 @@ NincadaCard:
 	db NINCADA
 	db 90 ; hp
 	db BASIC ; stage
-	tx NONE ; pre-evo name
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 1 ; energies

@@ -635,8 +635,8 @@ CascoonCard:
 	db EVOLUTION | JUNGLE ; sets
 	db CASCOON
 	db 70 ; hp
-	db STAGE2 ; stage
-	tx BeautiflyName ; pre-evo name
+	db STAGE1 ; stage
+	tx WurmpleName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -885,8 +885,8 @@ SurskitCard:
 	db LABORATORY | FOSSIL ; sets
 	db SURSKIT
 	db 60 ; hp
-	db STAGE1 ; stage
-	tx SeedotName ; pre-evo name
+	db BASIC ; stage
+	tx NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -935,8 +935,8 @@ MasquerainCard:
 	db MYSTERY | JUNGLE ; sets
 	db MASQUERAIN
 	db 60 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	dw SurskitName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -985,8 +985,8 @@ ShroomishCard:
 	db MYSTERY | JUNGLE ; sets
 	db SHROOMISH
 	db 70 ; hp
-	db STAGE1 ; stage
-	tx MasquerainName ; pre-evo name
+	db BASIC ; stage
+	tx NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1035,8 +1035,8 @@ NincadaCard:
 	db MYSTERY | JUNGLE ; sets
 	db NINCADA
 	db 90 ; hp
-	db STAGE2 ; stage
-	tx ShroomishName ; pre-evo name
+	db BASIC ; stage
+	tx NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 1 ; energies
@@ -1074,13 +1074,13 @@ NincadaCard:
 	db 43 ; level
 	db 4, 3 ; length
 	dw 132 * 10 ; weight
-	tx NidoqueenDescription ; description
+	tx NincadaDescription ; description
 	db 0
 
 NinjaskCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx NinjaskCardGfx ; gfx
-	tx NidoranMName ; name
+	tx NinjaskName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db NINJASK
@@ -1136,7 +1136,7 @@ ShedinjaCard:
 	db SHEDINJA
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx NidoranMName ; pre-evo name
+	tx NincadaName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies

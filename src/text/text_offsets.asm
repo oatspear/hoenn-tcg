@@ -2137,13 +2137,13 @@ TextOffsets::
 	textpointer MayInflictConfusionDescription                     ; 0x0853
 	textpointer DoubleKickName                                     ; 0x0854
 	textpointer ShroomishDescription                                ; 0x0855
-	textpointer NidoqueenName                                      ; 0x0856
+	textpointer NincadaName                                      ; 0x0856
 	textpointer BoyfriendsName                                     ; 0x0857
 	textpointer BoyfriendsDescription                              ; 0x0858
 	textpointer MegaPunchName                                      ; 0x0859
 	textpointer DrillName                                          ; 0x085a
-	textpointer NidoqueenDescription                               ; 0x085b
-	textpointer NidoranMName                                       ; 0x085c
+	textpointer NincadaDescription                               ; 0x085b
+	textpointer NinjaskName                                       ; 0x085c
 	textpointer HornHazardName                                     ; 0x085d
 	textpointer MayDoNothingDescription                            ; 0x085e
 	textpointer NidoranMDescription                                ; 0x085f

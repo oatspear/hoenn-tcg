@@ -149,8 +149,8 @@ ShroomishDescription:
 	line "clawing and biting."
 	done
 
-NidoqueenName:
-	text "Nidoqueen"
+NincadaName:
+	text "Nincada"
 	done
 
 BoyfriendsName:
@@ -170,14 +170,14 @@ DrillName:
 	text "Drill"
 	done
 
-NidoqueenDescription:
+NincadaDescription:
 	text "Its hard scales provide strong"
 	line "protection. It uses its hefty bulk"
 	line "to execute powerful moves."
 	done
 
-NidoranMName:
-	text "Nidoran♂"
+NinjaskName:
+	text "Ninjask"
 	done
 
 HornHazardName:

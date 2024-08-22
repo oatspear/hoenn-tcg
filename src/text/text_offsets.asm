@@ -2146,25 +2146,25 @@ TextOffsets::
 	textpointer NinjaskName                                       ; 0x085c
 	textpointer HornHazardName                                     ; 0x085d
 	textpointer MayDoNothingDescription                            ; 0x085e
-	textpointer NidoranMDescription                                ; 0x085f
-	textpointer NidorinoName                                       ; 0x0860
+	textpointer NinjaskDescription                                ; 0x085f
+	textpointer ShedinjaName                                       ; 0x0860
 	textpointer HornDrillName                                      ; 0x0861
-	textpointer NidorinoDescription                                ; 0x0862
-	textpointer NidokingName                                       ; 0x0863
+	textpointer ShedinjaDescription                                ; 0x0862
+	textpointer VolbeatName                                       ; 0x0863
 	textpointer ThrashName                                         ; 0x0864
 	textpointer ThrashDescription                                  ; 0x0865
 	textpointer ToxicName                                          ; 0x0866
 	textpointer ToxicDescription                                   ; 0x0867
-	textpointer NidokingDescription                                ; 0x0868
-	textpointer ZubatName                                          ; 0x0869
+	textpointer VolbeatDescription                                ; 0x0868
+	textpointer LatiosName                                          ; 0x0869
 	textpointer LeechLifeName                                      ; 0x086a
 	textpointer ZubatsLeechLifeDescription                         ; 0x086b
 	textpointer BatName                                            ; 0x086c
-	textpointer ZubatDescription                                   ; 0x086d
-	textpointer GolbatName                                         ; 0x086e
+	textpointer LatiosDescription                                   ; 0x086d
+	textpointer IllumiseName                                         ; 0x086e
 	textpointer WingAttackName                                     ; 0x086f
 	textpointer GolbatsLeechLifeDescription                        ; 0x0870
-	textpointer GolbatDescription                                  ; 0x0871
+	textpointer IllumiseDescription                                  ; 0x0871
 	textpointer OddishName                                         ; 0x0872
 	textpointer SproutName                                         ; 0x0873
 	textpointer SproutDescription                                  ; 0x0874
@@ -2794,13 +2794,13 @@ TextOffsets::
 	textpointer HurricaneName                                      ; 0x0ae4
 	textpointer HurricaneDescription                               ; 0x0ae5
 	textpointer PidgeotLv40Description                             ; 0x0ae6
-	textpointer RattataName                                        ; 0x0ae7
+	textpointer ZubatName                                        ; 0x0ae7
 	textpointer RatName                                            ; 0x0ae8
-	textpointer RattataDescription                                 ; 0x0ae9
-	textpointer RaticateName                                       ; 0x0aea
+	textpointer ZubatDescription                                 ; 0x0ae9
+	textpointer GolbatName                                       ; 0x0aea
 	textpointer SuperFangName                                      ; 0x0aeb
 	textpointer SuperFangDescription                               ; 0x0aec
-	textpointer RaticateDescription                                ; 0x0aed
+	textpointer GolbatDescription                                ; 0x0aed
 	textpointer SpearowName                                        ; 0x0aee
 	textpointer PeckName                                           ; 0x0aef
 	textpointer SpearowsMirrorMoveDescription                      ; 0x0af0

@@ -10,9 +10,10 @@ LombresStiffenDescription:
 	done
 
 LombreDescription:
-	text "Almost incapable of moving, this"
-	line "Pokémon can only harden its shell to"
-	line "protect itself from predators."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 LudicoloName:
@@ -33,9 +34,10 @@ PoisonBeeName:
 	done
 
 LudicoloDescription:
-	text "Flies at high speed and attacks"
-	line "using the large, venomous stingers"
-	line "on its forelegs and tail."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 SeedotName:
@@ -55,9 +57,10 @@ SnakeName:
 	done
 
 SeedotDescription:
-	text "Moves silently and stealthily."
-	line "Eats the eggs of birds, such as"
-	line "Pidgey and Spearow, whole."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 SurskitName:
@@ -86,9 +89,10 @@ CobraName:
 	done
 
 SurskitDescription:
-	text "It is rumored that the ferocious"
-	line "warning markings on its belly differ"
-	line "from area to area."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 MasquerainName:
@@ -121,9 +125,10 @@ PoisonPinName:
 	done
 
 MasquerainDescription:
-	text "Although small, its venomous barbs"
-	line "make this Pokémon dangerous."
-	line "The female has smaller horns."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 ShroomishName:
@@ -144,9 +149,10 @@ DoubleKickName:
 	done
 
 ShroomishDescription:
-	text "The female's horn develops slowly."
-	line "Prefers physical attacks such as"
-	line "clawing and biting."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 NincadaName:
@@ -171,9 +177,10 @@ DrillName:
 	done
 
 NincadaDescription:
-	text "Its hard scales provide strong"
-	line "protection. It uses its hefty bulk"
-	line "to execute powerful moves."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 NinjaskName:
@@ -189,28 +196,30 @@ MayDoNothingDescription:
 	line "does nothing."
 	done
 
-NidoranMDescription:
-	text "Stiffens its ears to sense danger."
-	line "The larger, more powerful of its"
-	line "horns secretes venom."
+NinjaskDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-NidorinoName:
-	text "Nidorino"
+ShedinjaName:
+	text "Shedinja"
 	done
 
 HornDrillName:
 	text "Horn Drill"
 	done
 
-NidorinoDescription:
-	text "An aggressive Pokémon that is quick"
-	line "to attack. The horn on its head"
-	line "secretes a powerful venom."
+ShedinjaDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-NidokingName:
-	text "Nidoking"
+VolbeatName:
+	text "Volbeat"
 	done
 
 ThrashName:
@@ -237,14 +246,15 @@ ToxicDescription:
 	line "already Poisoned)."
 	done
 
-NidokingDescription:
-	text "Uses its powerful tail in battle to"
-	line "smash, constrict, then break its"
-	line "prey's bones."
+VolbeatDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-ZubatName:
-	text "Zubat"
+LatiosName:
+	text "Latios"
 	done
 
 LeechLifeName:
@@ -264,14 +274,15 @@ BatName:
 	text "Bat"
 	done
 
-ZubatDescription:
-	text "Forms colonies in perpetually dark"
-	line "places. Uses ultrasonic waves to"
-	line "identify and approach targets."
+LatiosDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-GolbatName:
-	text "Golbat"
+IllumiseName:
+	text "Illumise"
 	done
 
 WingAttackName:
@@ -287,10 +298,11 @@ GolbatsLeechLifeDescription:
 	line "than that, remove all of them."
 	done
 
-GolbatDescription:
-	text "Once it strikes, it will not stop"
-	line "draining energy from the victim"
-	line "even if it gets too heavy to fly."
+IllumiseDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 OddishName:

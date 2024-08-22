@@ -560,22 +560,23 @@ PidgeotLv40Description:
 	line "unwary prey such as Magikarp."
 	done
 
-RattataName:
-	text "Rattata"
+ZubatName:
+	text "Zubat"
 	done
 
 RatName:
 	text "Rat"
 	done
 
-RattataDescription:
-	text "Bites anything when it attacks."
-	line "Small and very quick, it is a"
-	line "common sight in many places."
+ZubatDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-RaticateName:
-	text "Raticate"
+GolbatName:
+	text "Golbat"
 	done
 
 SuperFangName:
@@ -589,10 +590,11 @@ SuperFangDescription:
 	line "to the nearest 10)."
 	done
 
-RaticateDescription:
-	text "It uses its whiskers to maintain"
-	line "its balance. It seems to slow down"
-	line "if they are cut off."
+GolbatDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 SpearowName:

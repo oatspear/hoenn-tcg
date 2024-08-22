@@ -1085,8 +1085,8 @@ NinjaskCard:
 	db COLOSSEUM | NONE ; sets
 	db NINJASK
 	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx NincadaName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1124,13 +1124,13 @@ NinjaskCard:
 	db 20 ; level
 	db 1, 4 ; length
 	dw 15 * 10 ; weight
-	tx NidoranMDescription ; description
+	tx NinjaskDescription ; description
 	db 19
 
 ShedinjaCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx ShedinjaCardGfx ; gfx
-	tx NidorinoName ; name
+	tx ShedinjaName ; name
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db SHEDINJA
@@ -1174,19 +1174,19 @@ ShedinjaCard:
 	db 25 ; level
 	db 2, 11 ; length
 	dw 43 * 10 ; weight
-	tx NidorinoDescription ; description
+	tx ShedinjaDescription ; description
 	db 16
 
 VolbeatCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx VolbeatCardGfx ; gfx
-	tx NidokingName ; name
+	tx VolbeatName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db VOLBEAT
 	db 90 ; hp
-	db STAGE2 ; stage
-	tx NidorinoName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -1224,19 +1224,19 @@ VolbeatCard:
 	db 48 ; level
 	db 4, 7 ; length
 	dw 137 * 10 ; weight
-	tx NidokingDescription ; description
+	tx VolbeatDescription ; description
 	db 0
 
 IllumiseCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx IllumiseCardGfx ; gfx
-	tx GolbatName ; name
+	tx IllumiseName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db ILLUMISE
 	db 60 ; hp
-	db STAGE1 ; stage
-	tx ZubatName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
@@ -1274,7 +1274,7 @@ IllumiseCard:
 	db 29 ; level
 	db 5, 3 ; length
 	dw 121 * 10 ; weight
-	tx GolbatDescription ; description
+	tx IllumiseDescription ; description
 	db 0
 
 BellossomCard:
@@ -2730,13 +2730,13 @@ LatiasCard:
 LatiosCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LatiosCardGfx ; gfx
-	tx NidokingName ; name
+	tx LatiosName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db LATIOS
 	db 90 ; hp
 	db STAGE2 ; stage
-	tx NidorinoName ; pre-evo name
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -2774,7 +2774,7 @@ LatiosCard:
 	db 48 ; level
 	db 4, 7 ; length
 	dw 137 * 10 ; weight
-	tx NidokingDescription ; description
+	tx LatiosDescription ; description
 	db 0
 
 RayquazaCard:
@@ -8230,7 +8230,7 @@ ShiftryCard:
 ZubatCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx ZubatCardGfx ; gfx
-	tx RattataName ; name
+	tx ZubatName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db ZUBAT
@@ -8274,19 +8274,19 @@ ZubatCard:
 	db 9 ; level
 	db 1, 0 ; length
 	dw 8 * 10 ; weight
-	tx RattataDescription ; description
+	tx ZubatDescription ; description
 	db 19
 
 GolbatCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx GolbatCardGfx ; gfx
-	tx RaticateName ; name
+	tx GolbatName ; name
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db GOLBAT
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx RattataName ; pre-evo name
+	tx ZubatName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8324,7 +8324,7 @@ GolbatCard:
 	db 41 ; level
 	db 2, 4 ; length
 	dw 41 * 10 ; weight
-	tx RaticateDescription ; description
+	tx GolbatDescription ; description
 	db 3
 
 CrobatCard:

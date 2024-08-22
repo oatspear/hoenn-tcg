@@ -1254,10 +1254,10 @@ SeedName:
 	done
 
 TreeckoDescription:
-	text "A strange seed was planted on its"
-	line "back at birth. Thus, a plant"
-	line "sprouted and now grows with this"
-	line "Pokémon."
+	text " Booster Pack: Evolution"
+	line " Original Set: Plasma Freeze 6"
+	line " Original Art: Naoki Saito"
+	line " Pixel Art: Paperfire88"
 	done
 
 GrovyleName:
@@ -1278,9 +1278,10 @@ InflictPoisonDescription:
 	done
 
 GrovyleDescription:
-	text "When the bulb on its back grows"
-	line "large, the Pokémon seems to lose the"
-	line "ability to stand on its hind legs."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 SceptileName:
@@ -1326,9 +1327,10 @@ SceptilesMegaDrainDescriptionCont:
 	done
 
 SceptileDescription:
-	text "The flower on its back catches"
-	line "the sun's rays. The sunlight is then"
-	line "absorbed and used for energy."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 WurmpleName:
@@ -1354,9 +1356,10 @@ SolarBeamName:
 	done
 
 WurmpleDescription:
-	text "This plant blooms when it is"
-	line "absorbing solar energy. It stays on"
-	line "the move to seek sunlight."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 SilcoonName:
@@ -1377,9 +1380,10 @@ WormName:
 	done
 
 SilcoonDescription:
-	text "Its short feet are tipped with"
-	line "suction pads that enable it to"
-	line "tirelessly climb slopes and walls."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 BeautiflyName:
@@ -1406,9 +1410,10 @@ CocoonName:
 	done
 
 BeautiflyDescription:
-	text "It is vulnerable to attack because"
-	line "its shell is soft, exposing its weak"
-	line "and tender body."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 CascoonName:
@@ -1447,9 +1452,10 @@ ButterflyName:
 	done
 
 CascoonDescription:
-	text "In battle, it flaps its wings at"
-	line "high speed to release highly toxic"
-	line "dust into the air."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 LotadName:
@@ -1470,9 +1476,10 @@ HairyBugName:
 	done
 
 LotadDescription:
-	text "Often found in forests, eating"
-	line "leaves. It has a sharp, venomous"
-	line "stinger on its head."
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 ;	ds $20

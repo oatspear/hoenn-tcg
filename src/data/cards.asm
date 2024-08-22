@@ -1280,13 +1280,13 @@ IllumiseCard:
 BellossomCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx BellossomCardGfx ; gfx
-	tx OddishName ; name
+	tx BellossomName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db BELLOSSOM
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE2 ; stage
+	tx GloomName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1324,7 +1324,7 @@ BellossomCard:
 	db 8 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx OddishDescription ; description
+	tx BellossomDescription ; description
 	db 16
 
 RoseliaCard:
@@ -1336,7 +1336,7 @@ RoseliaCard:
 	db ROSELIA
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx OddishName ; pre-evo name
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -8530,7 +8530,7 @@ SableyeCard:
 OddishCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx OddishCardGfx ; gfx
-	tx JigglypuffName ; name
+	tx OddishName ; name
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db ODDISH
@@ -8574,19 +8574,19 @@ OddishCard:
 	db 12 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv12Description ; description
+	tx OddishDescription ; description
 	db 16
 
 GloomCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx GloomCardGfx ; gfx
-	tx JigglypuffName ; name
+	tx GloomName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | GB ; sets
 	db GLOOM
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx OddishName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8624,19 +8624,19 @@ GloomCard:
 	db 13 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv13Description ; description
+	tx GloomDescription ; description
 	db 16
 
 VileplumeCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx VileplumeCardGfx ; gfx
-	tx JigglypuffName ; name
+	tx VileplumeName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db VILEPLUME
 	db 60 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE2 ; stage
+	tx GloomName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8674,7 +8674,7 @@ VileplumeCard:
 	db 14 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv14Description ; description
+	tx VileplumeDescription ; description
 	db 16
 
 GulpinCard:
@@ -8685,8 +8685,8 @@ GulpinCard:
 	db COLOSSEUM | JUNGLE ; sets
 	db GULPIN
 	db 80 ; hp
-	db STAGE1 ; stage
-	tx JigglypuffName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -9992,14 +9992,14 @@ ZangooseCard:
 
 IgglybuffCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx IgglybuffCardGfx ; gfx
+	tx IgglybuffName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db IGGLYBUFF
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BABY ; stage
+	dw NONE ; pre-evo name
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -10023,19 +10023,19 @@ IgglybuffCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx IgglybuffDescription ; description
 	db 0
 
 JigglypuffCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx JigglypuffCardGfx ; gfx
+	tx JigglypuffName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db JIGGLYPUFF
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	tx IgglybuffName ; pre-evo name
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -10059,19 +10059,19 @@ JigglypuffCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx JigglypuffDescription ; description
 	db 0
 
 WigglytuffCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx WigglytuffCardGfx ; gfx
+	tx WigglytuffName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db WIGGLYTUFF
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db STAGE1 ; stage
+	tx Jigglypuff ; pre-evo name
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -10095,7 +10095,7 @@ WigglytuffCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx WigglytuffDescription ; description
 	db 0
 
 CastformCard:

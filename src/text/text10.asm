@@ -305,8 +305,8 @@ IllumiseDescription:
 	line " Pixel Art: "
 	done
 
-OddishName:
-	text "Oddish"
+BellossomName:
+	text "Bellossom"
 	done
 
 SproutName:
@@ -325,10 +325,11 @@ WeedName:
 	text "Weed"
 	done
 
-OddishDescription:
-	text "During the day, it keeps its face"
-	line "buried in the ground. At night,"
-	line "it wanders around sowing its seeds."
+BellossomDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 GloomName:

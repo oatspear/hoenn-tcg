@@ -60,7 +60,7 @@ cards = {
 	0x19: "VOLBEAT",
 	0x1a: "LATIOS",
 	0x1b: "ILLUMISE",
-	0x1c: "ODDISH",
+	0x1c: "BELLOSSOM",
 	0x1d: "GLOOM",
 	0x1e: "VILEPLUME",
 	0x1f: "PARAS",

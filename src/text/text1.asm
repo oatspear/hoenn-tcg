@@ -1287,7 +1287,7 @@ ChooseResistanceYouWishToChangeText:
 
 ChoosePokemonToCopyWithShiftText:
 	text "Choose the Pokémon you want to copy"
-	line "with Venomoth's Shift."
+	line "with Tropius's Shift."
 	done
 
 ChangedTheWeaknessOfPokemonToColorText:

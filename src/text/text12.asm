@@ -699,8 +699,8 @@ ClefableDescription:
 	line "the moment it senses people."
 	done
 
-JigglypuffName:
-	text "Jigglypuff"
+OddishName:
+	text "Oddish"
 	done
 
 FirstAidName:
@@ -724,7 +724,7 @@ BalloonName:
 	text "Balloon"
 	done
 
-JigglypuffLv12Description:
+OddishDescription:
 	text "When its huge eyes light up, it"
 	line "sings a mysteriously soothing melody"
 	line "that lulls its enemies to sleep."
@@ -753,7 +753,11 @@ ExpandDescription:
 	line "Resistance)."
 	done
 
-JigglypuffLv13Description:
+GloomName:
+	text "Gloom"
+	done
+
+GloomDescription:
 	text "Uses its alluring eyes to enrapture"
 	line "its foe. It then sings a pleasing"
 	line "melody that lulls the foe to sleep."
@@ -763,14 +767,18 @@ LullabyName:
 	text "Lullaby"
 	done
 
-JigglypuffLv14Description:
+VileplumeName:
+	text "Vileplume"
+	done
+
+VileplumeDescription:
 	text "When its huge eyes light up, it"
 	line "sings a mysteriously soothing melody"
 	line "that lulls its enemies to sleep."
 	done
 
-WigglytuffName:
-	text "Wigglytuff"
+GulpinName:
+	text "Gulpin"
 	done
 
 DoTheWaveName:
@@ -782,7 +790,7 @@ DoTheWaveDescription:
 	line "for each of your Benched Pokémon."
 	done
 
-WigglytuffDescription:
+GulpinDescription:
 	text "The body is soft and rubbery. When"
 	line "angered, it will suck in air and"
 	line "inflate itself to an enormous size."

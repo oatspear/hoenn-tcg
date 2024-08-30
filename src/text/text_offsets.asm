@@ -2170,37 +2170,37 @@ TextOffsets::
 	textpointer SproutDescription                                  ; 0x0874
 	textpointer WeedName                                           ; 0x0875
 	textpointer BellossomDescription                                  ; 0x0876
-	textpointer GloomName                                          ; 0x0877
+	textpointer RoseliaName                                          ; 0x0877
 	textpointer FoulOdorName                                       ; 0x0878
 	textpointer FoulOdorDescription                                ; 0x0879
-	textpointer GloomDescription                                   ; 0x087a
-	textpointer VileplumeName                                      ; 0x087b
+	textpointer RoseliaDescription                                   ; 0x087a
+	textpointer CacneaName                                      ; 0x087b
 	textpointer HealName                                           ; 0x087c
 	textpointer HealDescription                                    ; 0x087d
 	textpointer PetalDanceName                                     ; 0x087e
 	textpointer PetalDanceDescription                              ; 0x087f
 	textpointer FlowerName                                         ; 0x0880
-	textpointer VileplumeDescription                               ; 0x0881
-	textpointer ParasName                                          ; 0x0882
+	textpointer CacneaDescription                               ; 0x0881
+	textpointer CacturneName                                          ; 0x0882
 	textpointer ScratchName                                        ; 0x0883
 	textpointer SporeName                                          ; 0x0884
 	textpointer InflictSleepDescription                            ; 0x0885
 	textpointer MushroomName                                       ; 0x0886
-	textpointer ParasDescription                                   ; 0x0887
-	textpointer ParasectName                                       ; 0x0888
+	textpointer CacturneDescription                                   ; 0x0887
+	textpointer LileepName                                       ; 0x0888
 	textpointer SlashName                                          ; 0x0889
-	textpointer ParasectDescription                                ; 0x088a
-	textpointer VenonatName                                        ; 0x088b
-	textpointer VenonatLeechLifeDescription                        ; 0x088c
+	textpointer LileepDescription                                ; 0x088a
+	textpointer CradilyName                                        ; 0x088b
+	textpointer CradilyLeechLifeDescription                        ; 0x088c
 	textpointer InsectName                                         ; 0x088d
-	textpointer VenonatDescription                                 ; 0x088e
-	textpointer VenomothName                                       ; 0x088f
+	textpointer CradilyDescription                                 ; 0x088e
+	textpointer TropiusName                                       ; 0x088f
 	textpointer ShiftName                                          ; 0x0890
 	textpointer ShiftDescription                                   ; 0x0891
 	textpointer VenomPowderName                                    ; 0x0892
 	textpointer VenomPowderDescription                             ; 0x0893
 	textpointer PoisonmothName                                     ; 0x0894
-	textpointer VenomothDescription                                ; 0x0895
+	textpointer TropiusDescription                                ; 0x0895
 	textpointer BellsproutName                                     ; 0x0896
 	textpointer BellsproutsCallForFamilyDescription                ; 0x0897
 	textpointer BellsproutDescription                              ; 0x0898
@@ -2820,24 +2820,26 @@ TextOffsets::
 	textpointer ClefablesMetronomeDescription                      ; 0x0afe
 	textpointer ClefablesMinimizeDescription                       ; 0x0aff
 	textpointer ClefableDescription                                ; 0x0b00
-	textpointer JigglypuffName                                     ; 0x0b01
+	textpointer OddishName                                         ; 0x0b01
 	textpointer FirstAidName                                       ; 0x0b02
 	textpointer FirstAidDescription                                ; 0x0b03
 	textpointer DoubleEdgeName                                     ; 0x0b04
 	textpointer JigglypuffsDoubleEdgeDescription                   ; 0x0b05
 	textpointer BalloonName                                        ; 0x0b06
-	textpointer JigglypuffLv12Description                          ; 0x0b07
+	textpointer OddishDescription                                  ; 0x0b07
 	textpointer FriendshipSongName                                 ; 0x0b08
 	textpointer FriendshipSongDescription                          ; 0x0b09
 	textpointer ExpandName                                         ; 0x0b0a
 	textpointer ExpandDescription                                  ; 0x0b0b
-	textpointer JigglypuffLv13Description                          ; 0x0b0c
+	textpointer GloomName                                          ; 0x0bbf
+	textpointer GloomDescription                                   ; 0x0b0c
 	textpointer LullabyName                                        ; 0x0b0d
-	textpointer JigglypuffLv14Description                          ; 0x0b0e
-	textpointer WigglytuffName                                     ; 0x0b0f
+	textpointer VileplumeName                                      ; 0x0bc0
+	textpointer VileplumeDescription                               ; 0x0b0e
+	textpointer GulpinName                                         ; 0x0b0f
 	textpointer DoTheWaveName                                      ; 0x0b10
 	textpointer DoTheWaveDescription                               ; 0x0b11
-	textpointer WigglytuffDescription                              ; 0x0b12
+	textpointer GulpinDescription                                  ; 0x0b12
 	textpointer MeowthName                                         ; 0x0b13
 	textpointer CatPunchName                                       ; 0x0b14
 	textpointer CatPunchDescription                                ; 0x0b15
@@ -3003,4 +3005,12 @@ TextOffsets::
 	textpointer ChooseTrainerCardText                              ; 0x0bb5
 	textpointer ChooseTrainerCardFromDeckText                      ; 0x0bb6
 	textpointer Draw2CardsText                                     ; 0x0bb7
-	; 0x0bb8 is for WurmpleName at line 2081
+	;textpointer WurmpleName at line 2081                          ; 0x0bb8
+	textpointer IgglybuffName                                      ; 0x0bb9
+	textpointer IgglybuffDescription                               ; 0x0bba
+	textpointer JigglypuffName                                     ; 0x0bbb
+	textpointer JigglypuffDescription                              ; 0x0bbc
+	textpointer WigglytuffName                                     ; 0x0bbd
+	textpointer WigglytuffDescription                              ; 0x0bbe
+	;textpointer GloomName at line 2834                            ; 0x0bbf
+	;textpointer VileplumeName at line 2837                        ; 0x0bc0

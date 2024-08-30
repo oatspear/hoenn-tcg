@@ -96,7 +96,7 @@ SurskitDescription:
 	done
 
 MasquerainName:
-	text "Nidoran♀"
+	text "Masquerain"
 	done
 
 FurySwipesName:
@@ -332,8 +332,8 @@ BellossomDescription:
 	line " Pixel Art: "
 	done
 
-GloomName:
-	text "Gloom"
+RoseliaName:
+	text "Roselia"
 	done
 
 FoulOdorName:
@@ -346,14 +346,14 @@ FoulOdorDescription:
 	line "damage)."
 	done
 
-GloomDescription:
+RoseliaDescription:
 	text "The fluid that oozes from its mouth"
 	line "isn't drool; it is a nectar that is"
 	line "used to attract prey."
 	done
 
-VileplumeName:
-	text "Vileplume"
+CacneaName:
+	text "Cacnea"
 	done
 
 HealName:
@@ -384,14 +384,14 @@ FlowerName:
 	text "Flower"
 	done
 
-VileplumeDescription:
+CacneaDescription:
 	text "The larger its petals, the more"
 	line "toxic pollen it contains. Its big"
 	line "head is heavy and hard to hold up."
 	done
 
-ParasName:
-	text "Paras"
+CacturneName:
+	text "Cacturne"
 	done
 
 ScratchName:
@@ -410,36 +410,36 @@ MushroomName:
 	text "Mushroom"
 	done
 
-ParasDescription:
+CacturneDescription:
 	text "Burrows to suck tree roots."
 	line "The mushrooms on its back grow by"
 	line "drawing nutrients from the bug host."
 	done
 
-ParasectName:
-	text "Parasect"
+LileepName:
+	text "Lileep"
 	done
 
 SlashName:
 	text "Slash"
 	done
 
-ParasectDescription:
+LileepDescription:
 	text "A host-parasite pair in which the"
 	line "parasite mushroom has taken over"
 	line "the host bug. Prefers damp places."
 	done
 
-VenonatName:
-	text "Venonat"
+CradilyName:
+	text "Cradily"
 	done
 
-VenonatLeechLifeDescription:
+CradilyLeechLifeDescription:
 	text "Remove a number of damage counters"
-	line "from Venonat equal to the damage"
+	line "from Cradily equal to the damage"
 	line "done to the Defending Pokémon (after"
 	line "applying Weakness and Resistance)."
-	line "If Venonat has fewer damage counters"
+	line "If Cradily has fewer damage counters"
 	line "than that, remove all of them."
 	done
 
@@ -447,14 +447,14 @@ InsectName:
 	text "Insect"
 	done
 
-VenonatDescription:
+CradilyDescription:
 	text "Lives in the shadows of tall trees"
 	line "where it eats insects."
 	line "It is attracted by light at night."
 	done
 
-VenomothName:
-	text "Venomoth"
+TropiusName:
+	text "Tropius"
 	done
 
 ShiftName:
@@ -464,9 +464,9 @@ ShiftName:
 ShiftDescription:
 	text "Once during your turn (before your"
 	line "attack), you may change the type of"
-	line "Venomoth to the type of any other"
+	line "Tropius to the type of any other"
 	line "Pokémon in play other than <COLORLESS>."
-	line "This power can't be used if Venomoth"
+	line "This power can't be used if Tropius"
 	line "is Asleep, Confused, or Paralyzed."
 	done
 
@@ -484,7 +484,7 @@ PoisonmothName:
 	text "Poisonmoth"
 	done
 
-VenomothDescription:
+TropiusDescription:
 	text "The dust-like scales covering its"
 	line "wings are color-coded to indicate"
 	line "the kinds of poison it has."

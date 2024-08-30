@@ -56,3 +56,27 @@ ChooseTrainerCardFromDeckText:
 Draw2CardsText:
 	text "Draw 2 cards."
 	done
+
+IgglybuffName:
+	text "Igglybuff"
+	done
+
+IgglybuffDescription:
+	text "Igglybuff"
+	done
+
+JigglypuffName:
+	text "Jigglypuff"
+	done
+
+JigglypuffDescription:
+	text "Jigglypuff"
+	done
+
+WigglytuffName:
+	text "Wigglytuff"
+	done
+
+WigglytuffDescription:
+	text "Wigglytuff"
+	done

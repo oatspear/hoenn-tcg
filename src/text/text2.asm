@@ -1595,7 +1595,7 @@ FlowerGardenDescriptionText:
 	done
 
 KaleidoscopeDescriptionText:
-	text "Uses Venomoth's Pokémon Power to"
+	text "Uses Tropius's Pokémon Power to"
 	line "change the opponent's Weakness."
 	done
 

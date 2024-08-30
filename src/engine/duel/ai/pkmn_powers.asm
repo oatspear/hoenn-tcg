@@ -630,11 +630,11 @@ HandleAIHeal:
 
 ; checks whether AI uses Shift.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Venomoth
+;	c = Play Area location (PLAY_AREA_*) of Tropius
 HandleAIShift:
 	ld a, c
 	or a
-	ret nz ; return if Venomoth is not Arena card
+	ret nz ; return if Tropius is not Arena card
 
 	ldh [hTemp_ffa0], a
 	call GetArenaCardColor
@@ -647,7 +647,7 @@ HandleAIShift:
 	or a
 	ret z ; return if Defending Pokemon has no weakness
 	and b
-	ret nz ; return if Venomoth is already Defending card's weakness type
+	ret nz ; return if Tropius is already Defending card's weakness type
 
 ; check whether there's a card in play with
 ; the same color as the Player's card weakness

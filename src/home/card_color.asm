@@ -1,5 +1,5 @@
 ; output:
-;	a = Active Pokemon's type/color (accounting for Venomoth's Shift Pokemon Power if active)
+;	a = Active Pokemon's type/color (accounting for Tropius's Shift Pokemon Power if active)
 GetArenaCardColor::
 	xor a ; PLAY_AREA_ARENA
 ;	fallthrough
@@ -9,7 +9,7 @@ GetArenaCardColor::
 ;	a = play area location offset of the desired card (PLAY_AREA_* constant)
 ; output:
 ;	a = type/color of the turn holder's Pokemon from input
-;	    (accounting for Venomoth's Shift Pokemon Power if active)
+;	    (accounting for Tropius's Shift Pokemon Power if active)
 GetPlayAreaCardColor::
 	push hl
 	push de

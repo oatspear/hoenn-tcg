@@ -792,7 +792,7 @@ VileplumeHealEffectCommands:
 	db  $00
 
 ; also handled in home/card_color.asm
-VenomothShiftEffectCommands:
+TropiusShiftEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, OncePerTurnPokePowerCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Shift_ChangeColorEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, Shift_PlayerSelection

@@ -186,7 +186,7 @@ HandleAIEnergyTrans:
 	ret
 
 .is_exeggutor
-; in case it's Exeggutor in Arena, return carry
+; in case it's Magcargo in Arena, return carry
 ; if there are any Grass energy cards in Bench.
 	call .CountGrassEnergyInBench
 	or a
@@ -1010,7 +1010,7 @@ HandleAICowardice:
 ; checks whether AI uses Cowardice.
 ; return carry if Pkmn Power was used.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Tentacool.
+;	c = Play Area location (PLAY_AREA_*) of Clamperl.
 .CheckWhetherToUseCowardice
 	ld a, c
 	ldh [hTemp_ffa0], a
@@ -1219,7 +1219,7 @@ HandleAIGoGoRainDanceEnergy:
 
 	ld a, CORPHISH
 	call CountPokemonIDInPlayArea
-	ret nc ; return if no Blastoise
+	ret nc ; return if no Corphish
 	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play

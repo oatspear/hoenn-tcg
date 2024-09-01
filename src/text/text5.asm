@@ -211,7 +211,7 @@ EnergyTransBookName:
 	done
 
 EnergyTransBookText:
-	text "What if you place Exeggutor in the"
+	text "What if you place Magcargo in the"
 	line "Arena, but you don't have any Energy"
 	line "cards? In this case, use Venusaur's"
 	line "Energy Trans to transfer Grass"
@@ -236,7 +236,7 @@ RainDanceBookName:
 	done
 
 RainDanceBookText:
-	text "Blastoise's Pokémon Power, Rain"
+	text "Corphish's Pokémon Power, Rain"
 	line "Dance, is a great boon for your"
 	line "Water Pokémon! You can attach"
 	line "as many Water Energy cards as"
@@ -266,11 +266,11 @@ DamageSwapBookText:
 	line "to move damage counters off of a"
 	line "Pokémon that is almost Knocked Out,"
 	line "or you can create a combo by"
-	line "combining it with Chansey and"
+	line "combining it with Seviper and"
 	line "Scoop Up. Keep moving damage"
-	line "counters to Chansey and use Scoop Up"
-	line "to return Chansey to your hand."
-	line "Then put the Chansey back into play."
+	line "counters to Seviper and use Scoop Up"
+	line "to return Seviper to your hand."
+	line "Then put the Seviper back into play."
 	line "You'll have lost all of the damage!"
 	done
 
@@ -681,7 +681,7 @@ OriginalGameBoyCardsBookName:
 OriginalGameBoyCardsBookText:
 	text "The Pokémon Trading Card Game for"
 	line "the Game Boy includes many original"
-	line "cards, like the <Lv>14 Meowth card"
+	line "cards, like the <Lv>14 Swalot card"
 	line "that uses the Cat Punch attack."
 	line "There are many new cards to"
 	line "discover, so go search them out!"

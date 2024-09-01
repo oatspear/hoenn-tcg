@@ -877,7 +877,7 @@ GrassAndPsychicDeck:
 	card_item DUSKULL,         3
 	card_item DUSCLOPS,           2
 	card_item WYNAUT,            1
-	card_item GRIMER,       1
+	card_item NUMEL,       1
 	card_item ABSOL,          1
 	card_item ACRO_BIKE,            2
 	card_item ENERGY_SEARCH,   2
@@ -1408,7 +1408,7 @@ WaterfrontPokemonDeck:
 	card_item LAIRON,           1
 	card_item LUNATONE,     2
 	card_item BALTOY,           1
-	card_item GRIMER,         1
+	card_item NUMEL,         1
 	card_item SLAKOTH,           2
 	card_item VIGOROTH,         1
 	card_item ACRO_BIKE,              2
@@ -1716,7 +1716,7 @@ LovelyNidoranDeck:
 	card_item ALTARIA,          1
 	card_item PINSIR,           1
 	card_item CARVANHA,      2
-	card_item GRIMER,        2
+	card_item NUMEL,        2
 	card_item MUK,            2
 	card_item PROFESSOR_BIRCH,    1
 	card_item ACRO_BIKE,             2
@@ -1836,7 +1836,7 @@ ImakuniDeck:
 	card_item BALTOY,         3
 	card_item DUSKULL,         4
 	card_item DUSCLOPS,           3
-	card_item GRIMER,       4
+	card_item NUMEL,       4
 	card_item ARCHIE,    4
 	card_item REPEAT_BALL,     2
 	card_item VS_SEEKER,   2

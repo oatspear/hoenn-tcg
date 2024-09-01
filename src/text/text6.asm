@@ -1140,7 +1140,7 @@ Text05d9:
 	line "To provide some examples,"
 	line "Squirtle is a Basic Pokémon," 
 	line "Wartortle is a Stage 1 Pokémon,"
-	line "and Blastoise is a Stage 2 Pokémon."
+	line "and Corphish is a Stage 2 Pokémon."
 	line "Basic Pokémon are the only cards"
 	line "that can be put directly into play."
 	line "An in-play Basic Pokémon can be"
@@ -1150,7 +1150,7 @@ Text05d9:
 	line "Therefore, a Squirtle is needed"
 	line "before you can play a Wartortle,"
 	line "and a Wartortle is needed before"
-	line "you can play a Blastoise."
+	line "you can play a Corphish."
 	done
 
 Text05da:

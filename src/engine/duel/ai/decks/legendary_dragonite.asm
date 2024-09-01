@@ -105,7 +105,7 @@ AIDoTurn_LegendaryDragonite:
 	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .skip_energy_attach_1
 
-; if Arena card is Kangaskhan and doesn't
+; if Arena card is Crawdaunt and doesn't
 ; have Energy cards attached, try attaching from hand.
 ; otherwise run normal AI energy attach routine.
 	ld a, DUELVARS_ARENA_CARD

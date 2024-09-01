@@ -2334,7 +2334,7 @@ AIDecide_ProfessorOak:
 	call CountPokemonIDInPlayArea
 	jr nc, .check_hand
 
-; at least one Blastoise in AI Play Area
+; at least one Corphish in AI Play Area
 	ld a, WATER_ENERGY
 	farcall LookForCardIDInHand
 	jr nc, .check_hand
@@ -2554,7 +2554,7 @@ AIDecide_ProfessorOak:
 	jp .check_cards_hand
 
 ; handles Wonders of Science AI logic.
-; if there's either Grimer or Muk in hand,
+; if there's either Numel or Muk in hand,
 ; do not play Professor Oak.
 .HandleWondersOfScienceDeck
 	ld a, NUMEL
@@ -2603,7 +2603,7 @@ AIDecide_EnergyRetrieval:
 
 ; handle Go Go Rain Dance deck
 ; return no carry if there's no Muk card in play and
-; if there's no Blastoise card in Play Area
+; if there's no Corphish card in Play Area
 ; if there's a Muk in play, continue as normal
 	ld a, [wOpponentDeckID]
 	cp GO_GO_RAIN_DANCE_DECK_ID
@@ -2858,7 +2858,7 @@ AIDecide_SuperEnergyRetrieval:
 
 ; handle Go Go Rain Dance deck
 ; return no carry if there's no Muk card in play and
-; if there's no Blastoise card in Play Area
+; if there's no Corphish card in Play Area
 ; if there's a Muk in play, continue as normal
 	ld a, [wOpponentDeckID]
 	cp GO_GO_RAIN_DANCE_DECK_ID
@@ -4027,7 +4027,7 @@ AIDecide_ScoopUp:
 	cp SEVIPER
 	jr nz, .no_carry
 
-; here either ArticunoLv37 or Chansey
+; here either ArticunoLv37 or Seviper
 ; is the Arena Card.
 .articuno_or_chansey
 ; if can't KO defending Pokemon, check if defending Pokemon
@@ -5209,7 +5209,7 @@ AIDecide_ComputerSearch_WondersOfScience:
 
 ; Professor Oak not in deck, move on to
 ; look for other cards instead.
-; if Grimer or Muk are not in hand,
+; if Numel or Muk are not in hand,
 ; check whether to use Computer Search on them.
 .look_in_hand
 	ld a, NUMEL
@@ -5223,7 +5223,7 @@ AIDecide_ComputerSearch_WondersOfScience:
 	or a
 	ret
 
-; first check Grimer
+; first check Numel
 ; if in deck, check cards to discard.
 .target_grimer
 	ld e, NUMEL
@@ -5484,7 +5484,7 @@ AIDecide_PokemonTrader_LegendaryArticuno:
 .check_hand
 	ld a, SEVIPER
 	call CheckIfHasCardIDInHand
-	ret c ; found Chansey
+	ret c ; found Seviper
 	ld a, ZIGZAGOON
 	call CheckIfHasCardIDInHand
 	ret c ; found Ditto
@@ -5500,7 +5500,7 @@ AIDecide_PokemonTrader_LegendaryArticuno:
 AIDecide_PokemonTrader_LegendaryDragonite:
 ; if has less than 5 cards of energy
 ; and of Pokemon in hand/Play Area,
-; target a Kangaskhan in deck.
+; target a Crawdaunt in deck.
 	farcall CountOppEnergyCardsInHandAndAttached
 	cp 5
 	jr c, .kangaskhan

@@ -111,11 +111,11 @@ CallForOddishEffectCommands:
 	dbw EFFECTCMDTYPE_AI_SELECTION, CallForOddish_AISelection
 	db  $00
 
-CallForBellsproutEffectCommands:
+CallForTorchicEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, CallForF_CheckDeckAndPlayArea
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, CallForF_PutInPlayAreaEffect
-	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CallForBellsprout_PlayerSelection
-	dbw EFFECTCMDTYPE_AI_SELECTION, CallForBellsprout_AISelection
+	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, CallForTorchic_PlayerSelection
+	dbw EFFECTCMDTYPE_AI_SELECTION, CallForTorchic_AISelection
 	db  $00
 
 CallForKrabbyEffectCommands:
@@ -746,15 +746,15 @@ DittoMorphEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MorphEffect
 	db  $00
 
-ClefairyMetronomeEffectCommands:
+TentacruelMetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DefendingPokemon_AttackCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ClefairyMetronome_UseAttackEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, TentacruelMetronome_UseAttackEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Metronome_AISelection
 	db  $00
 
-ClefableMetronomeEffectCommands:
+SableyeMetronomeEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, DefendingPokemon_AttackCheck
-	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, ClefableMetronome_UseAttackEffect
+	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, SableyeMetronome_UseAttackEffect
 	dbw EFFECTCMDTYPE_AI_SELECTION, Metronome_AISelection
 	db  $00
 
@@ -814,11 +814,11 @@ MoltresFiregiverEffectCommands:
 	db  $00
 
 ; actual effect handled in engine/duel/core.asm
-BlastoiseRainDanceEffectCommands:
+CorphishRainDanceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryEF ; passive pokemon power
 	db  $00
 
-TentacoolCowardiceEffectCommands:
+ClamperlCowardiceEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, CowardiceCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, Cowardice_RemoveFromPlayAreaEffect
 	dbw EFFECTCMDTYPE_REQUIRE_SELECTION, PossibleSwitch_PlayerSelection

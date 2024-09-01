@@ -80,3 +80,43 @@ WigglytuffName:
 WigglytuffDescription:
 	text "Wigglytuff"
 	done
+
+SwabluName:
+	text "Swablu"
+	done
+
+SwabluDescription:
+	text "Swablu"
+	done
+
+DoduoName:
+	text "Doduo"
+	done
+
+DoduoDescription:
+	text "Doduo"
+	done
+
+DodrioName:
+	text "Dodrio"
+	done
+
+DodrioDescription:
+	text "Dodrio"
+	done
+
+DeoxysName:
+	text "Deoxys"
+	done
+
+PoochyenaName:
+	text "Poochyena"
+	done
+
+PoochyenaDescription:
+	text "Poochyena"
+	done
+
+CarvanhaName:
+	text "Carvanha"
+	done

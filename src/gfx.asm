@@ -1555,6 +1555,10 @@ BlazikenCardGfx::
 	INCBIN "gfx/cards/victreebel.2bpp"
 	INCBIN "gfx/cards/victreebel.pal"
 
+GyaradosCardGfx::
+	INCBIN "gfx/cards/gyarados.2bpp"
+	INCBIN "gfx/cards/gyarados.pal"
+
 NumelCardGfx::
 	INCBIN "gfx/cards/grimer.2bpp"
 	INCBIN "gfx/cards/grimer.pal"
@@ -1571,13 +1575,13 @@ MagcargoCardGfx::
 	INCBIN "gfx/cards/exeggutor.2bpp"
 	INCBIN "gfx/cards/exeggutor.pal"
 
-TorkoalCardGfx::
-	INCBIN "gfx/cards/koffing.2bpp"
-	INCBIN "gfx/cards/koffing.pal"
-
 ;	ds $58
 
 SECTION "Card Gfx 3", ROMX
+
+TorkoalCardGfx::
+	INCBIN "gfx/cards/koffing.2bpp"
+	INCBIN "gfx/cards/koffing.pal"
 
 AltariaCardGfx::
 	INCBIN "gfx/cards/weezing.2bpp"
@@ -1659,13 +1663,13 @@ AzumarillCardGfx::
 	INCBIN "gfx/cards/flareon2.2bpp"
 	INCBIN "gfx/cards/flareon2.pal"
 
-WailmerCardGfx::
-	INCBIN "gfx/cards/moltres1.2bpp"
-	INCBIN "gfx/cards/moltres1.pal"
-
 ;	ds $58
 
 SECTION "Card Gfx 4", ROMX
+
+WailmerCardGfx::
+	INCBIN "gfx/cards/moltres1.2bpp"
+	INCBIN "gfx/cards/moltres1.pal"
 
 WailordCardGfx::
 	INCBIN "gfx/cards/moltres2.2bpp"
@@ -1747,13 +1751,13 @@ GoldeenCardGfx::
 	INCBIN "gfx/cards/goldeen.2bpp"
 	INCBIN "gfx/cards/goldeen.pal"
 
-SeakingCardGfx::
-	INCBIN "gfx/cards/seaking.2bpp"
-	INCBIN "gfx/cards/seaking.pal"
-
 ;	ds $58
 
 SECTION "Card Gfx 5", ROMX
+
+SeakingCardGfx::
+	INCBIN "gfx/cards/seaking.2bpp"
+	INCBIN "gfx/cards/seaking.pal"
 
 AronCardGfx::
 	INCBIN "gfx/cards/staryu.2bpp"
@@ -1766,10 +1770,6 @@ LaironCardGfx::
 MagikarpCardGfx::
 	INCBIN "gfx/cards/magikarp.2bpp"
 	INCBIN "gfx/cards/magikarp.pal"
-
-GyaradosCardGfx::
-	INCBIN "gfx/cards/gyarados.2bpp"
-	INCBIN "gfx/cards/gyarados.pal"
 
 AggronCardGfx::
 	INCBIN "gfx/cards/lapras.2bpp"
@@ -2368,3 +2368,15 @@ JigglypuffCardGfx::
 WigglytuffCardGfx::
 	INCBIN "gfx/cards/wigglytuff.2bpp"
 	INCBIN "gfx/cards/wigglytuff.pal"
+
+DoduoCardGfx::
+	INCBIN "gfx/cards/doduo.2bpp"
+	INCBIN "gfx/cards/doduo.pal"
+
+DodrioCardGfx::
+	INCBIN "gfx/cards/dodrio.2bpp"
+	INCBIN "gfx/cards/dodrio.pal"
+
+SwabluCardGfx::
+	INCBIN "gfx/cards/swablu.2bpp"
+	INCBIN "gfx/cards/swablu.pal"

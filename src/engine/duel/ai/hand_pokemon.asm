@@ -393,7 +393,7 @@ AIDecideEvolution:
 	ret
 
 ; determine AI score for evolving
-; Charmeleon, Magikarp, Dragonair and Grimer
+; Charmeleon, Magikarp, Dragonair and Numel
 ; in certain decks
 AIDecideSpecialEvolutions:
 ; check if deck applies
@@ -455,7 +455,7 @@ AIDecideSpecialEvolutions:
 	jr z, .grimer
 	ret
 
-; check if Grimer is not active card
+; check if Numel is not active card
 .grimer
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	or a ; active card

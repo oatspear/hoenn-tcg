@@ -646,7 +646,7 @@ CheckIfEvolutionNeedsEnergyForAttack:
 ; returns in e the card ID of the energy required for
 ; the Discard/Energy Boost attack loaded in wSelectedAttack.
 ; if it's ZapdosLv64's Thunderbolt attack, return no carry.
-; if it's Charizard's Fire Spin or Exeggutor's Big Eggsplosion
+; if it's Charizard's Fire Spin or Magcargo's Big Eggsplosion
 ; attack, don't return energy card ID, but set carry.
 ; output:
 ;	b = 1 if needs color energy, 0 otherwise;
@@ -664,7 +664,7 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 	jr z, .first_attack
 
 ; check if second attack is ZapdosLv64's Thunderbolt,
-; Charizard's Fire Spin or Exeggutor's Big Eggsplosion,
+; Charizard's Fire Spin or Magcargo's Big Eggsplosion,
 ; for these to be treated differently.
 ; for both attacks, load its energy cost.
 	ld a, b
@@ -728,7 +728,7 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 	or a
 	ret
 
-; Charizard's Fire Spin and Exeggutor's Big Eggsplosion,
+; Charizard's Fire Spin and Magcargo's Big Eggsplosion,
 ; return carry.
 .charizard_or_exeggutor
 	lb bc, $00, $01

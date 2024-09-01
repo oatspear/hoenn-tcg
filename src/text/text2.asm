@@ -1701,7 +1701,7 @@ PsychicMachampDescriptionText:
 
 WaterBeetleDescriptionText:
 	text "An evolution deck with Lotad,"
-	line "Nidoran♂ and Bellsprout."
+	line "Nidoran♂ and Torchic."
 	done
 
 LegendaryMoltresDescriptionText:

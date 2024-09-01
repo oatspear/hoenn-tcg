@@ -490,26 +490,26 @@ TropiusDescription:
 	line "the kinds of poison it has."
 	done
 
-BellsproutName:
-	text "Bellsprout"
+TorchicName:
+	text "Torchic"
 	done
 
-BellsproutsCallForFamilyDescription:
+TorchicsCallForFamilyDescription:
 	text "Search your deck for a Basic Pokémon"
-	line "named Bellsprout and put it onto"
+	line "named Torchic and put it onto"
 	line "your Bench. Shuffle your deck"
 	line "afterward. (You can't use this"
 	line "attack if your Bench is full.)"
 	done
 
-BellsproutDescription:
+TorchicDescription:
 	text "A carnivorous Pokémon that traps and"
 	line "eats bugs. It uses its root feet to"
 	line "soak up needed moisture."
 	done
 
-WeepinbellName:
-	text "Weepinbell"
+CombuskenName:
+	text "Combusken"
 	done
 
 RazorLeafName:
@@ -520,22 +520,22 @@ FlycatcherName:
 	text "Flycatcher"
 	done
 
-WeepinbellDescription:
+CombuskenDescription:
 	text "It spits out poisonpowder to"
 	line "immobilize the enemy, and then"
 	line "finishes the enemy with a spray of"
 	line "acid."
 	done
 
-VictreebelName:
-	text "Victreebel"
+BlazikenName:
+	text "Blaziken"
 	done
 
 LureName:
 	text "Lure"
 	done
 
-VictreebelsLureDescription:
+BlazikensLureDescription:
 	text "If your opponent has any Benched"
 	line "Pokémon, choose 1 of them and switch"
 	line "it with his or her Active Pokémon."
@@ -545,20 +545,20 @@ AcidName:
 	text "Acid"
 	done
 
-VictreebelsAcidDescription:
+BlazikensAcidDescription:
 	text "Flip a coin. If heads, the"
 	line "Defending Pokémon can't retreat"
 	line "during your opponent's next turn."
 	done
 
-VictreebelDescription:
+BlazikenDescription:
 	text "Said to live in huge colonies deep"
 	line "in jungles, although no one has ever"
 	line "returned from there."
 	done
 
-GrimerName:
-	text "Grimer"
+NumelName:
+	text "Numel"
 	done
 
 NastyGooName:
@@ -569,8 +569,8 @@ MinimizeName:
 	text "Minimize"
 	done
 
-GrimersMinimizeDescription:
-	text "All damage done by attacks to Grimer"
+NumelsMinimizeDescription:
+	text "All damage done by attacks to Numel"
 	line "during your opponent's next turn is"
 	line "reduced by 20 (after applying"
 	line "Weakness and Resistance)."
@@ -580,14 +580,14 @@ SludgeName:
 	text "Sludge"
 	done
 
-GrimerDescription:
+NumelDescription:
 	text "Appears in filthy areas. Thrives by"
 	line "sucking up polluted sludge that is"
 	line "pumped out of factories."
 	done
 
-MukName:
-	text "Muk"
+CameruptName:
+	text "Camerupt"
 	done
 
 ToxicGasName:
@@ -601,38 +601,38 @@ ToxicGasDescription:
 	line "Confused, or Paralyzed."
 	done
 
-MukDescription:
+CameruptDescription:
 	text "Thickly covered with a filthy, vile"
 	line "sludge. It is so toxic, even its"
 	line "footprints contain poison."
 	done
 
-ExeggcuteName:
-	text "Exeggcute"
+SlugmaName:
+	text "Slugma"
 	done
 
 HypnosisName:
 	text "Hypnosis"
 	done
 
-ExeggcutesLeechSeedDescription:
+SlugmasLeechSeedDescription:
 	text "Unless all damage from this attack"
 	line "is prevented, you may remove 1"
-	line "damage counter from Exeggcute."
+	line "damage counter from Slugma."
 	done
 
 EggName:
 	text "Egg"
 	done
 
-ExeggcuteDescription:
+SlugmaDescription:
 	text "Often mistaken for eggs."
 	line "When disturbed, they quickly gather"
 	line "and attack in swarms."
 	done
 
-ExeggutorName:
-	text "Exeggutor"
+MagcargoName:
+	text "Magcargo"
 	done
 
 TeleportName:
@@ -640,7 +640,7 @@ TeleportName:
 	done
 
 TeleportDescription:
-	text "Switch Exeggutor with 1 of your"
+	text "Switch Magcargo with 1 of your"
 	line "Benched Pokémon."
 	done
 
@@ -651,7 +651,7 @@ BigEggsplosionName:
 BigEggsplosionDescription:
 	text "Flip a number of coins equal to the"
 	line "number of Energy attached to"
-	line "Exeggutor. This attack does"
+	line "Magcargo. This attack does"
 	line "20 damage times the number of heads."
 	done
 
@@ -659,15 +659,15 @@ CoconutName:
 	text "Coconut"
 	done
 
-ExeggutorDescription:
+MagcargoDescription:
 	text "Legend has it that on rare"
 	line "occasions, one of its heads will"
 	line "drop off and continue on as an"
-	line "Exeggcute."
+	line "Slugma."
 	done
 
-KoffingName:
-	text "Koffing"
+TorkoalName:
+	text "Torkoal"
 	done
 
 FoulGasName:
@@ -684,14 +684,14 @@ PoisonGasName:
 	text "Poison Gas"
 	done
 
-KoffingDescription:
+TorkoalDescription:
 	text "Because it stores several kinds of"
 	line "toxic gases in its body, it is prone"
 	line "to exploding without warning."
 	done
 
-WeezingName:
-	text "Weezing"
+AltariaName:
+	text "Altaria"
 	done
 
 SmogName:
@@ -710,10 +710,10 @@ WeezingsSelfdestructDescription:
 	line "60 damage to itself."
 	done
 
-WeezingDescription:
+AltariaDescription:
 	text "Where two kinds of poison gases"
-	line "meet, two Koffings can fuse into a"
-	line "Weezing over many years."
+	line "meet, two Torkoals can fuse into a"
+	line "Altaria over many years."
 	done
 
 TangelaName:
@@ -1251,8 +1251,8 @@ WartortleDescription:
 	line "moves its ears to maintain balance."
 	done
 
-BlastoiseName:
-	text "Blastoise"
+CorphishName:
+	text "Corphish"
 	done
 
 RainDanceName:
@@ -1270,7 +1270,7 @@ RainDanceDescription:
 
 RainDanceDescriptionCont:
 	text "This power can't be used if"
-	line "Blastoise is Asleep, Confused, or"
+	line "Corphish is Asleep, Confused, or"
 	line "Paralyzed."
 	done
 
@@ -1281,7 +1281,7 @@ HydroPumpName:
 HydroPumpDescription:
 	text "Does 40 damage plus 10 more damage"
 	line "for each <WATER> Energy attached to"
-	line "Blastoise but not used to pay for"
+	line "Corphish but not used to pay for"
 	line "this attack's Energy cost. You can't"
 	line "add more than 20 damage in this way."
 	done
@@ -1290,7 +1290,7 @@ ShellfishName:
 	text "Shellfish"
 	done
 
-BlastoiseDescription:
+CorphishDescription:
 	text "A brutal Pokémon with pressurized"
 	line "water jets on its shell. They are"
 	line "used for high-speed tackles."
@@ -1417,8 +1417,8 @@ PoliwrathDescription:
 	line "overtakes the best human swimmers."
 	done
 
-TentacoolName:
-	text "Tentacool"
+ClamperlName:
+	text "Clamperl"
 	done
 
 CowardiceName:
@@ -1428,10 +1428,10 @@ CowardiceName:
 CowardiceDescription:
 	text "At any time during your turn"
 	line "(before your attack), you may return"
-	line "Tentacool to your hand. (Discard all"
-	line "cards attached to Tentacool.) This"
+	line "Clamperl to your hand. (Discard all"
+	line "cards attached to Clamperl.) This"
 	line "power can't be used the turn you put"
-	line "Tentacool into play or if Tentacool"
+	line "Clamperl into play or if Clamperl"
 	line "is Asleep, Confused, or Paralyzed."
 	done
 
@@ -1439,21 +1439,21 @@ JellyfishName:
 	text "Jellyfish"
 	done
 
-TentacoolDescription:
+ClamperlDescription:
 	text "Drifts in shallow seas. Anglers who"
 	line "hook them by accident are often"
 	line "punished by its stinging acid."
 	done
 
-TentacruelName:
-	text "Tentacruel"
+HuntailName:
+	text "Huntail"
 	done
 
 JellyfishStingName:
 	text "Jellyfish Sting"
 	done
 
-TentacruelDescription:
+HuntailDescription:
 	text "The tentacles are normally kept"
 	line "short. On hunts, they are extended"
 	line "to ensnare and immobilize prey."

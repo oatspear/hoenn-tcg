@@ -3005,6 +3005,11 @@ TextOffsets::
 	textpointer ChooseTrainerCardText                              ; 0x0bb5
 	textpointer ChooseTrainerCardFromDeckText                      ; 0x0bb6
 	textpointer Draw2CardsText                                     ; 0x0bb7
+	textpointer SingeName                                     	   ; 0x0bb8
+	textpointer MayInflictBurnDescription                          ; 0x0bb9
+	textpointer CircularStepsDescription                           ; 0x0bca
+	textpointer EnergyBallName                                     ; 0x0bcb
+	textpointer EnergyBallDescription			                   ; 0x0bcc
 	;textpointer WurmpleName at line 2081                          ; 0x0bb8
 	textpointer IgglybuffName                                      ; 0x0bb9
 	textpointer IgglybuffDescription                               ; 0x0bba

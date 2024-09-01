@@ -1250,7 +1250,7 @@ TreeckosLeechSeedDescription:
 	done
 
 SeedName:
-	text "Seed"
+	text "Wood Gecko"
 	done
 
 TreeckoDescription:
@@ -1472,7 +1472,7 @@ MayInflictPoisonDescription:
 	done
 
 HairyBugName:
-	text "Hairy Bug"
+	text "Water Wood"
 	done
 
 LotadDescription:

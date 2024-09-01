@@ -334,7 +334,7 @@ TreeckoCard:
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db TREECKO
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
@@ -684,17 +684,17 @@ LotadCard:
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db LOTAD
-	db 40 ; hp
+	db 50 ; hp
 	db BASIC ; stage
 	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
-	tx PoisonStingName ; name
-	tx MayInflictPoisonDescription ; description
+	tx EnergyBallName ; name
+	tx EnergyBallDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
-	db DAMAGE_NORMAL ; category
+	db DAMAGE_PLUS ; category
 	dw MayInflictPoisonEffectCommands ; effect commands
 	db INFLICT_POISON ; flags 1
 	db NONE ; flags 2
@@ -734,7 +734,7 @@ LombreCard:
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db LOMBRE
-	db 80 ; hp
+	db 70 ; hp
 	db STAGE1 ; stage
 	tx LotadName ; pre-evo name
 
@@ -743,14 +743,14 @@ LombreCard:
 	tx StiffenName ; name
 	tx LombresStiffenDescription ; description
 	dw NONE ; description (cont)
-	db 0 ; damage
+	db 20 ; damage
 	db RESIDUAL ; category
-	dw WithdrawEffectCommands ; effect commands
+	dw HeadacheEffectCommands ; effect commands
 	db NONE ; flags 1
-	db NULLIFY_OR_WEAKEN_ATTACK ; flags 2
+	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
-	db 0
-	db ATK_ANIM_PROTECT ; animation
+	db 2
+	db ATK_ANIM_GLOW_EFFECT ; animation
 
 	; attack 2
 	energy GRASS, 2 ; energies
@@ -789,11 +789,11 @@ LudicoloCard:
 	tx LombreName ; pre-evo name
 
 	; attack 1
-	energy COLORLESS, 3 ; energies
+	energy COLORLESS, 2, GRASS, 1 ; energies
 	tx TwineedleName ; name
-	tx DoubleAttackX30Description ; description
+	tx CircularStepsDescription ; description
 	dw NONE ; description (cont)
-	db 30 ; damage
+	db 10 ; damage
 	db DAMAGE_X ; category
 	dw Flip2For30EffectCommands ; effect commands
 	db NONE ; flags 1
@@ -2540,11 +2540,11 @@ BagonCard:
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
-	tx ScratchName ; name
-	dw NONE ; description
+	tx SingeName ; name
+	tx MayInflictBurnDescription ; description
 	dw NONE ; description (cont)
-	db 10 ; damage
-	db DAMAGE_NORMAL ; category
+	db 0 ; damage
+	db RESIDUAL ; category
 	dw NONE ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2

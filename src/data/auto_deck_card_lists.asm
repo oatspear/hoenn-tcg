@@ -1001,7 +1001,7 @@ SquirtleAndFriendsCardList:
 	card_item LAVA_COOKIE,         1
 	deck_list_end
 
-BulbasaurAndFriendsCardList:
+TreeckoAndFriendsCardList:
 	deck_list_start
 	card_item GRASS_ENERGY,     9
 	card_item LIGHTNING_ENERGY, 8

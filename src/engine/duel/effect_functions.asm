@@ -985,20 +985,20 @@ CallForOddish_AISelection:
 	ret
 
 
-; handles the Player's selection of a Bellsprout card from their deck
+; handles the Player's selection of a Torchic card from their deck
 ; (actual logic is in effect_functions2.asm)
 ; output:
 ;	[hTemp_ffa0] = deck index of the chosen card ($ff if no card was chosen)
-CallForBellsprout_PlayerSelection:
-	farcall FindBellsprout
+CallForTorchic_PlayerSelection:
+	farcall FindTorchic
 	ret
 
 
-; AI picks the first Bellsprout in the deck (actual logic in effect_functions2.asm)
+; AI picks the first Torchic in the deck (actual logic in effect_functions2.asm)
 ; output:
 ;	[hTemp_ffa0] = deck index of the chosen card ($ff if no card was chosen)
-CallForBellsprout_AISelection:
-	farcall AIFindBellsprout
+CallForTorchic_AISelection:
+	farcall AIFindTorchic
 	ret
 
 
@@ -5770,7 +5770,7 @@ MorphEffect:
 	or a
 	jr z, .skip_discard_stage_below
 
-; if this is an Evolved Pokemon (in case it's used by Clefable's Metronome attack),
+; if this is an Evolved Pokemon (in case it's used by Sableye's Metronome attack),
 ; then first discard the lower stage card.
 	push hl
 	xor a
@@ -5861,11 +5861,11 @@ Metronome_AISelection:
 	ret
 
 
-ClefairyMetronome_UseAttackEffect:
+TentacruelMetronome_UseAttackEffect:
 	ld a, 3 ; Energy cost of this attack
 	jr HandlePlayerMetronomeEffect
 
-ClefableMetronome_UseAttackEffect:
+SableyeMetronome_UseAttackEffect:
 	ld a, 1 ; Energy cost of this attack
 ;	fallthrough
 

@@ -20,7 +20,7 @@ HandleAIEnergyTrans:
 
 	ld a, WURMPLE
 	call CountPokemonIDInPlayArea
-	ret nc ; return if no VenusaurLv67 found in own Play Area
+	ret nc ; return if no Wurmple found in own Play Area
 
 	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
@@ -47,7 +47,7 @@ HandleAIEnergyTrans:
 .TransferEnergyToArena
 	ld [wAINumberOfEnergyTransCards], a
 
-; look for VenusaurLv67 in Play Area
+; look for Wurmple in Play Area
 ; so that its PKMN Power can be used.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -186,7 +186,7 @@ HandleAIEnergyTrans:
 	ret
 
 .is_exeggutor
-; in case it's Exeggutor in Arena, return carry
+; in case it's Magcargo in Arena, return carry
 ; if there are any Grass energy cards in Bench.
 	call .CountGrassEnergyInBench
 	or a
@@ -283,7 +283,7 @@ AIEnergyTransTransferEnergyToBench:
 	ret nc
 
 ; AI decided that an energy card is needed
-; so look for VenusaurLv67 in Play Area
+; so look for Wurmple in Play Area
 ; so that its PKMN Power can be used.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -294,7 +294,7 @@ AIEnergyTransTransferEnergyToBench:
 	add b
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
-	ld [wAIVenusaurLv67DeckIndex], a
+	ld [wAIWurmpleDeckIndex], a
 	call GetCardIDFromDeckIndex
 	ld a, e
 	cp WURMPLE
@@ -311,7 +311,7 @@ AIEnergyTransTransferEnergyToBench:
 .use_pkmn_power
 	ld a, b
 	ldh [hTemp_ffa0], a
-	ld [wAIVenusaurLv67PlayAreaLocation], a
+	ld [wAIWurmplePlayAreaLocation], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
 	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
@@ -321,7 +321,7 @@ AIEnergyTransTransferEnergyToBench:
 .loop_energy
 	xor a
 	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, [wAIVenusaurLv67PlayAreaLocation]
+	ld a, [wAIWurmplePlayAreaLocation]
 	ldh [hTemp_ffa0], a
 
 	; returns when Arena card has no Grass energy cards attached.
@@ -364,7 +364,7 @@ AIEnergyTransTransferEnergyToBench:
 	ld a, 30
 	call DoAFrames
 
-	ld a, [wAIVenusaurLv67DeckIndex]
+	ld a, [wAIWurmpleDeckIndex]
 	ldh [hTempCardIndex_ff9f], a
 	ld d, a
 	ld e, FIRST_ATTACK_OR_PKMN_POWER
@@ -630,11 +630,11 @@ HandleAIHeal:
 
 ; checks whether AI uses Shift.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Venomoth
+;	c = Play Area location (PLAY_AREA_*) of Tropius
 HandleAIShift:
 	ld a, c
 	or a
-	ret nz ; return if Venomoth is not Arena card
+	ret nz ; return if Tropius is not Arena card
 
 	ldh [hTemp_ffa0], a
 	call GetArenaCardColor
@@ -647,7 +647,7 @@ HandleAIShift:
 	or a
 	ret z ; return if Defending Pokemon has no weakness
 	and b
-	ret nz ; return if Venomoth is already Defending card's weakness type
+	ret nz ; return if Tropius is already Defending card's weakness type
 
 ; check whether there's a card in play with
 ; the same color as the Player's card weakness
@@ -1010,7 +1010,7 @@ HandleAICowardice:
 ; checks whether AI uses Cowardice.
 ; return carry if Pkmn Power was used.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Tentacool.
+;	c = Play Area location (PLAY_AREA_*) of Clamperl.
 .CheckWhetherToUseCowardice
 	ld a, c
 	ldh [hTemp_ffa0], a
@@ -1219,7 +1219,7 @@ HandleAIGoGoRainDanceEnergy:
 
 	ld a, CORPHISH
 	call CountPokemonIDInPlayArea
-	ret nc ; return if no Blastoise
+	ret nc ; return if no Corphish
 	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ret c ; return if there's Muk in play

@@ -23,7 +23,7 @@ MultichoiceTextbox_ConfigTable_ChooseDeckStarterDeck:
 	db $06, $04     ; x, y coordinate to start printing next text
 	tx SquirtleAndFriendsDeckChoiceText       ; text id to print next
 	db $06, $06     ; x, y coordinate to start printing next text
-	tx BulbasaurAndFriendsDeckChoiceText      ; text id to print next
+	tx TreeckoAndFriendsDeckChoiceText      ; text id to print next
 	db $ff          ; marker byte -- end text entries
 	db $05, $02     ; cursor starting x, y
 	db $02          ; number of tiles the cursor moves per toggle

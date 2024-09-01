@@ -401,8 +401,8 @@ MewtwoLv60Description:
 	line "never-before-seen violent Pokémon."
 	done
 
-MewName:
-	text "Mew"
+JirachiName:
+	text "Jirachi"
 	done
 
 NeutralizingShieldName:
@@ -422,7 +422,7 @@ NewSpeciesName:
 	text "New Species"
 	done
 
-MewLv8Description:
+JirachiDescription:
 	text "So rare that it is still said to be"
 	line "a mirage by many experts. Only a few"
 	line "people have seen it worldwide."
@@ -438,7 +438,7 @@ MysteryAttackDescription:
 	line "a random effect."
 	done
 
-MewLv15Description:
+DeoxysDescription:
 	text "When viewed through a microscope,"
 	line "this Pokémon's short, fine, delicate"
 	line "hair can be seen."
@@ -466,32 +466,32 @@ DevolutionBeamDescription:
 	line "hand."
 	done
 
-PidgeyName:
-	text "Pidgey"
+MightyenaName:
+	text "Mightyena"
 	done
 
 TinyBirdName:
 	text "Tiny Bird"
 	done
 
-PidgeyDescription:
+MightyenaDescription:
 	text "A common sight in forests and woods."
 	line "It flaps its wings at ground level"
 	line "to kick up blinding sand."
 	done
 
-PidgeottoName:
-	text "Pidgeotto"
+DustoxName:
+	text "Dustox"
 	done
 
 MirrorMoveName:
 	text "Mirror Move"
 	done
 
-PidgeottosMirrorMoveDescription:
-	text "If Pidgeotto was attacked last turn,"
+DustoxsMirrorMoveDescription:
+	text "If Dustox was attacked last turn,"
 	line "do the final result of that attack"
-	line "on Pidgeotto to the Defending"
+	line "on Dustox to the Defending"
 	line "Pokémon."
 	done
 
@@ -499,14 +499,14 @@ BirdName:
 	text "Bird"
 	done
 
-PidgeottoDescription:
+DustoxDescription:
 	text "Very protective of its sprawling"
 	line "territory, this Pokémon will"
 	line "fiercely peck at any intruder."
 	done
 
-PidgeotName:
-	text "Pidgeot"
+NuzleafName:
+	text "Nuzleaf"
 	done
 
 SlicingWindName:
@@ -527,7 +527,7 @@ GaleName:
 	done
 
 GaleDescription:
-	text "Switch Pidgeot with 1 of your"
+	text "Switch Nuzleaf with 1 of your"
 	line "Benched Pokémon chosen at random."
 	line "If your opponent has any Benched"
 	line "Pokémon, switch the Defending"
@@ -536,7 +536,7 @@ GaleDescription:
 	line "switching the Pokémon.)"
 	done
 
-PidgeotLv38Description:
+NuzleafDescription:
 	text "This Pokémon flies at Mach 2 speed,"
 	line "seeking prey. Its large talons are"
 	line "feared as wicked weapons."
@@ -554,28 +554,33 @@ HurricaneDescription:
 	line "hand."
 	done
 
-PidgeotLv40Description:
+ShiftryName:
+	text "Shiftry"
+	done
+
+ShiftryDescription:
 	text "When hunting, it skims the surface"
 	line "of water at high speed to pick off"
 	line "unwary prey such as Magikarp."
 	done
 
-RattataName:
-	text "Rattata"
+ZubatName:
+	text "Zubat"
 	done
 
 RatName:
 	text "Rat"
 	done
 
-RattataDescription:
-	text "Bites anything when it attacks."
-	line "Small and very quick, it is a"
-	line "common sight in many places."
+ZubatDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-RaticateName:
-	text "Raticate"
+GolbatName:
+	text "Golbat"
 	done
 
 SuperFangName:
@@ -589,41 +594,42 @@ SuperFangDescription:
 	line "to the nearest 10)."
 	done
 
-RaticateDescription:
-	text "It uses its whiskers to maintain"
-	line "its balance. It seems to slow down"
-	line "if they are cut off."
+GolbatDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-SpearowName:
-	text "Spearow"
+CrobatName:
+	text "Crobat"
 	done
 
 PeckName:
 	text "Peck"
 	done
 
-SpearowsMirrorMoveDescription:
-	text "If Spearow was attacked last turn,"
+CrobatsMirrorMoveDescription:
+	text "If Crobat was attacked last turn,"
 	line "do the final result of that attack"
-	line "on Spearow to the Defending Pokémon."
+	line "on Crobat to the Defending Pokémon."
 	done
 
-SpearowDescription:
+CrobatDescription:
 	text "Eats bugs in grassy areas. It has to"
 	line "flap its short wings at high speed"
 	line "to stay airborne."
 	done
 
-FearowName:
-	text "Fearow"
+TentacoolName:
+	text "Tentacool"
 	done
 
-FearowsAgilityDescription:
+TentacoolsAgilityDescription:
 	text "Flip a coin. If heads, during your"
 	line "opponent's next turn, prevent all"
 	line "effects of attacks, including"
-	line "damage, done to Fearow."
+	line "damage, done to Tentacool."
 	done
 
 DrillPeckName:
@@ -634,14 +640,14 @@ BeakName:
 	text "Beak"
 	done
 
-FearowDescription:
+TentacoolDescription:
 	text "With its huge and magnificent wings,"
 	line "it can keep aloft without ever"
 	line "having to land for rest."
 	done
 
-ClefairyName:
-	text "Clefairy"
+TentacruelName:
+	text "Tentacruel"
 	done
 
 SingName:
@@ -652,12 +658,12 @@ MetronomeName:
 	text "Metronome"
 	done
 
-ClefairysMetronomeDescription:
+TentacruelsMetronomeDescription:
 	text "Choose 1 of the Defending Pokémon's"
 	line "attacks. Metronome copies that"
 	line "attack except for its Energy costs."
 	line "(No matter what type the Defending"
-	line "Pokemon is, Clefairy's type is"
+	line "Pokemon is, Tentacruel's type is"
 	line "still Colorless.)"
 	done
 
@@ -665,40 +671,40 @@ FairyName:
 	text "Fairy"
 	done
 
-ClefairyDescription:
+TentacruelDescription:
 	text "Its magical and cute appeal has many"
 	line "admirers. It is rare and found only"
 	line "in certain areas."
 	done
 
-ClefableName:
-	text "Clefable"
+SableyeName:
+	text "Sableye"
 	done
 
-ClefablesMetronomeDescription:
+SableyesMetronomeDescription:
 	text "Choose 1 of the Defending Pokémon's"
 	line "attacks. Metronome copies that"
 	line "attack except for its Energy costs."
 	line "(No matter what type the Defending"
-	line "Pokémon is, Clefable's type is"
+	line "Pokémon is, Sableye's type is"
 	line "still Colorless.)"
 	done
 
-ClefablesMinimizeDescription:
+SableyesMinimizeDescription:
 	text "All damage done by attacks to"
-	line "Clefable during your opponent's next"
+	line "Sableye during your opponent's next"
 	line "turn is reduced by 20 (after"
 	line "applying Weakness and Resistance)."
 	done
 
-ClefableDescription:
+SableyeDescription:
 	text "A timid Fairy Pokémon that is"
 	line "rarely seen. It will run and hide"
 	line "the moment it senses people."
 	done
 
-JigglypuffName:
-	text "Jigglypuff"
+OddishName:
+	text "Oddish"
 	done
 
 FirstAidName:
@@ -722,7 +728,7 @@ BalloonName:
 	text "Balloon"
 	done
 
-JigglypuffLv12Description:
+OddishDescription:
 	text "When its huge eyes light up, it"
 	line "sings a mysteriously soothing melody"
 	line "that lulls its enemies to sleep."
@@ -751,7 +757,11 @@ ExpandDescription:
 	line "Resistance)."
 	done
 
-JigglypuffLv13Description:
+GloomName:
+	text "Gloom"
+	done
+
+GloomDescription:
 	text "Uses its alluring eyes to enrapture"
 	line "its foe. It then sings a pleasing"
 	line "melody that lulls the foe to sleep."
@@ -761,14 +771,18 @@ LullabyName:
 	text "Lullaby"
 	done
 
-JigglypuffLv14Description:
+VileplumeName:
+	text "Vileplume"
+	done
+
+VileplumeDescription:
 	text "When its huge eyes light up, it"
 	line "sings a mysteriously soothing melody"
 	line "that lulls its enemies to sleep."
 	done
 
-WigglytuffName:
-	text "Wigglytuff"
+GulpinName:
+	text "Gulpin"
 	done
 
 DoTheWaveName:
@@ -780,14 +794,14 @@ DoTheWaveDescription:
 	line "for each of your Benched Pokémon."
 	done
 
-WigglytuffDescription:
+GulpinDescription:
 	text "The body is soft and rubbery. When"
 	line "angered, it will suck in air and"
 	line "inflate itself to an enormous size."
 	done
 
-MeowthName:
-	text "Meowth"
+SwalotName:
+	text "Swalot"
 	done
 
 CatPunchName:
@@ -807,7 +821,7 @@ ScratchCatName:
 	text "Scratch Cat"
 	done
 
-MeowthLv14Description:
+SwalotDescription:
 	text "Appears to be more active at night."
 	line "It loves round and shiny things, so"
 	line "it can't stop from picking them up."
@@ -821,14 +835,14 @@ PayDayDescription:
 	text "Flip a coin. If heads, draw a card."
 	done
 
-MeowthLv15Description:
+CarvanhaDescription:
 	text "Adores circular objects. Wanders"
 	line "the streets on a nightly basis to"
 	line "look for dropped loose change."
 	done
 
-PersianName:
-	text "Persian"
+SharpedoName:
+	text "Sharpedo"
 	done
 
 PounceName:
@@ -837,7 +851,7 @@ PounceName:
 
 PounceDescription:
 	text "If the Defending Pokémon attacks"
-	line "Persian during your opponent's next"
+	line "Sharpedo during your opponent's next"
 	line "turn, any damage done by the attack"
 	line "is reduced by 10 (after applying"
 	line "Weakness and Resistance)."
@@ -849,14 +863,14 @@ ClassyCatName:
 	text "Classy Cat"
 	done
 
-PersianDescription:
+SharpedoDescription:
 	text "Although its fur has many admirers,"
 	line "it is tough to raise as a pet"
 	line "because of its fickle meanness."
 	done
 
-FarfetchdName:
-	text "Farfetch'd"
+GrimerName:
+	text "Grimer"
 	done
 
 LeekSlapName:
@@ -867,8 +881,8 @@ LeekSlapDescription:
 	text "Flip a coin. If tails, this attack"
 	line "does nothing. Either way, you can't"
 	line "use this attack again as long as"
-	line "Farfetch'd stays in play (even"
-	line "putting Farfetch'd on the Bench"
+	line "Grimer stays in play (even"
+	line "putting Grimer on the Bench"
 	line "won't let you use it again)."
 	done
 
@@ -880,14 +894,14 @@ WildDuckName:
 	text "Wild Duck"
 	done
 
-FarfetchdDescription:
+GrimerDescription:
 	text "The sprig of green onions it holds"
 	line "is its weapon. This sprig is used"
 	line "much like a metal sword."
 	done
 
-DoduoName:
-	text "Doduo"
+MukName:
+	text "Muk"
 	done
 
 FuryAttackName:
@@ -898,14 +912,14 @@ TwinBirdName:
 	text "Twin Bird"
 	done
 
-DoduoDescription:
+MukDescription:
 	text "A bird that makes up for its poor"
 	line "flying with its fast foot speed."
 	line "Leaves giant footprints."
 	done
 
-DodrioName:
-	text "Dodrio"
+KoffingName:
+	text "Koffing"
 	done
 
 RetreatAidName:
@@ -927,14 +941,14 @@ TriplebirdName:
 	text "Triplebird"
 	done
 
-DodrioDescription:
+KoffingDescription:
 	text "Uses its three brains to execute"
 	line "complex plans. While two heads"
 	line "sleep, one head stays awake."
 	done
 
-LickitungName:
-	text "Lickitung"
+WeezingName:
+	text "Weezing"
 	done
 
 TongueWrapName:
@@ -945,14 +959,14 @@ LickingName:
 	text "Licking"
 	done
 
-LickitungDescription:
+WeezingDescription:
 	text "Its tongue can be extended like a"
 	line "chameleon's. It leaves a stinging"
 	line "sensation when it licks enemies."
 	done
 
-ChanseyName:
-	text "Chansey"
+SeviperName:
+	text "Seviper"
 	done
 
 ScrunchName:
@@ -961,23 +975,23 @@ ScrunchName:
 
 ScrunchDescription:
 	text "Flip a coin. If heads, prevent all"
-	line "damage done to Chansey during your"
+	line "damage done to Seviper during your"
 	line "opponent's next turn. (Any other"
 	line "effects of attacks still happen.)"
 	done
 
-ChanseysDoubleEdgeDescription:
-	text "Chansey does 80 damage to itself."
+SevipersDoubleEdgeDescription:
+	text "Seviper does 80 damage to itself."
 	done
 
-ChanseyDescription:
+SeviperDescription:
 	text "A rare and elusive Pokémon that is"
 	line "said to bring happiness to those"
 	line "who manage to catch it."
 	done
 
-KangaskhanName:
-	text "Kangaskhan"
+CrawdauntName:
+	text "Crawdaunt"
 	done
 
 FetchName:
@@ -996,14 +1010,14 @@ ParentName:
 	text "Parent"
 	done
 
-KangaskhanDescription:
+CrawdauntDescription:
 	text "The infant rarely ventures out of"
 	line "its mother's protective pouch until"
 	line "it is three years old."
 	done
 
-TaurosName:
-	text "Tauros"
+AbsolName:
+	text "Absol"
 	done
 
 RampageName:
@@ -1012,8 +1026,8 @@ RampageName:
 
 RampageDescription:
 	text "Does 20 damage plus 10 more damage"
-	line "for each damage counter on Tauros."
-	line "Flip a coin. If tails, Tauros is"
+	line "for each damage counter on Absol."
+	line "Flip a coin. If tails, Absol is"
 	line "now Confused (after doing damage)."
 	done
 
@@ -1021,7 +1035,7 @@ WildBullName:
 	text "Wild Bull"
 	done
 
-TaurosDescription:
+AbsolDescription:
 	text "When it targets an enemy, it charges"
 	line "furiously while whipping its body"
 	line "with its long tails."

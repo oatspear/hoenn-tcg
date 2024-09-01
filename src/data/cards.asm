@@ -330,7 +330,7 @@ DoubleColorlessEnergyCard:
 TreeckoCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx TreeckoCardGfx ; gfx
-	tx BulbasaurName ; name
+	tx TreeckoName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db TREECKO
@@ -341,7 +341,7 @@ TreeckoCard:
 	; attack 1
 	energy GRASS, 2 ; energies
 	tx LeechSeedName ; name
-	tx BulbasaursLeechSeedDescription ; description
+	tx TreeckosLeechSeedDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -374,19 +374,19 @@ TreeckoCard:
 	db 13 ; level
 	db 2, 4 ; length
 	dw 15 * 10 ; weight
-	tx BulbasaurDescription ; description
+	tx TreeckoDescription ; description
 	db 16
 
 GrovyleCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx GrovyleCardGfx ; gfx
-	tx IvysaurName ; name
+	tx GrovyleName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db GROVYLE
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx BulbasaurName ; pre-evo name
+	tx TreeckoName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -424,19 +424,19 @@ GrovyleCard:
 	db 20 ; level
 	db 3, 3 ; length
 	dw 29 * 10 ; weight
-	tx IvysaurDescription ; description
+	tx GrovyleDescription ; description
 	db 16
 
 SceptileCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SceptileCardGfx ; gfx
-	tx VenusaurName ; name
+	tx SceptileName ; name
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db SCEPTILE
 	db 100 ; hp
 	db STAGE2 ; stage
-	tx IvysaurName ; pre-evo name
+	tx GrovyleName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -445,7 +445,7 @@ SceptileCard:
 	tx SolarPowerDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw VenusaurSolarPowerEffectCommands ; effect commands
+	dw SceptileSolarPowerEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -455,8 +455,8 @@ SceptileCard:
 	; attack 2
 	energy GRASS, 4 ; energies
 	tx MegaDrainName ; name
-	tx VenusaursMegaDrainDescription ; description
-	tx VenusaursMegaDrainDescriptionCont ; description (cont)
+	tx SceptilesMegaDrainDescription ; description
+	tx SceptilesMegaDrainDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DrainHalfEffectCommands ; effect commands
@@ -474,19 +474,19 @@ SceptileCard:
 	db 64 ; level
 	db 6, 7 ; length
 	dw 221 * 10 ; weight
-	tx VenusaurLv64Description ; description
+	tx SceptileDescription ; description
 	db 0
 
 WurmpleCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx WurmpleCardGfx ; gfx
-	tx VenusaurName ; name
+	tx WurmpleName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db WURMPLE
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx IvysaurName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -495,7 +495,7 @@ WurmpleCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw VenusaurEnergyTransEffectCommands ; effect commands
+	dw WurmpleEnergyTransEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -524,19 +524,19 @@ WurmpleCard:
 	db 67 ; level
 	db 6, 7 ; length
 	dw 221 * 10 ; weight
-	tx VenusaurLv67Description ; description
+	tx WurmpleDescription ; description
 	db 0
 
 SilcoonCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SilcoonCardGfx ; gfx
-	tx CaterpieName ; name
+	tx SilcoonName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db SILCOON
 	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx WurmpleName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -574,24 +574,24 @@ SilcoonCard:
 	db 13 ; level
 	db 1, 0 ; length
 	dw 6 * 10 ; weight
-	tx CaterpieDescription ; description
+	tx SilcoonDescription ; description
 	db 19
 
 BeautiflyCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx BeautiflyCardGfx ; gfx
-	tx MetapodName ; name
+	tx BeautiflyName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db BEAUTIFLY
 	db 70 ; hp
-	db STAGE1 ; stage
-	tx CaterpieName ; pre-evo name
+	db STAGE2 ; stage
+	tx SilcoonName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
 	tx StiffenName ; name
-	tx MetapodsStiffenDescription ; description
+	tx BeautiflysStiffenDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -624,19 +624,19 @@ BeautiflyCard:
 	db 21 ; level
 	db 2, 4 ; length
 	dw 22 * 10 ; weight
-	tx MetapodDescription ; description
+	tx BeautiflyDescription ; description
 	db 16
 
 CascoonCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx CascoonCardGfx ; gfx
-	tx ButterfreeName ; name
+	tx CascoonName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db CASCOON
 	db 70 ; hp
-	db STAGE2 ; stage
-	tx MetapodName ; pre-evo name
+	db STAGE1 ; stage
+	tx WurmpleName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -655,8 +655,8 @@ CascoonCard:
 	; attack 2
 	energy GRASS, 4 ; energies
 	tx MegaDrainName ; name
-	tx ButterfreesMegaDrainDescription ; description
-	tx ButterfreesMegaDrainDescriptionCont ; description (cont)
+	tx CascoonsMegaDrainDescription ; description
+	tx CascoonsMegaDrainDescriptionCont ; description (cont)
 	db 40 ; damage
 	db DAMAGE_NORMAL ; category
 	dw DrainHalfEffectCommands ; effect commands
@@ -674,13 +674,13 @@ CascoonCard:
 	db 28 ; level
 	db 3, 7 ; length
 	dw 71 * 10 ; weight
-	tx ButterfreeDescription ; description
+	tx CascoonDescription ; description
 	db 0
 
 LotadCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LotadCardGfx ; gfx
-	tx WeedleName ; name
+	tx LotadName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db LOTAD
@@ -724,24 +724,24 @@ LotadCard:
 	db 12 ; level
 	db 1, 0 ; length
 	dw 7 * 10 ; weight
-	tx WeedleDescription ; description
+	tx LotadDescription ; description
 	db 19
 
 LombreCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LombreCardGfx ; gfx
-	tx KakunaName ; name
+	tx LombreName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | NONE ; sets
 	db LOMBRE
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx WeedleName ; pre-evo name
+	tx LotadName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
-	tx HeadacheName ; name
-	tx HeadacheDescription ; description
+	tx StiffenName ; name
+	tx LombresStiffenDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db RESIDUAL ; category
@@ -774,19 +774,19 @@ LombreCard:
 	db 23 ; level
 	db 2, 0 ; length
 	dw 22 * 10 ; weight
-	tx KakunaDescription ; description
+	tx LombreDescription ; description
 	db 16
 
 LudicoloCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LudicoloCardGfx ; gfx
-	tx BeedrillName ; name
+	tx LudicoloName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db LUDICOLO
 	db 80 ; hp
 	db STAGE2 ; stage
-	tx KakunaName ; pre-evo name
+	tx LombreName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2, GRASS, 1 ; energies
@@ -824,13 +824,13 @@ LudicoloCard:
 	db 32 ; level
 	db 3, 3 ; length
 	dw 65 * 10 ; weight
-	tx BeedrillDescription ; description
+	tx LudicoloDescription ; description
 	db 0
 
 SeedotCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SeedotCardGfx ; gfx
-	tx EkansName ; name
+	tx SeedotName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SEEDOT
@@ -874,19 +874,19 @@ SeedotCard:
 	db 10 ; level
 	db 6, 7 ; length
 	dw 15 * 10 ; weight
-	tx EkansDescription ; description
+	tx SeedotDescription ; description
 	db 19
 
 SurskitCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx SurskitCardGfx ; gfx
-	tx ArbokName ; name
+	tx SurskitName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db SURSKIT
 	db 60 ; hp
-	db STAGE1 ; stage
-	tx EkansName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -924,19 +924,19 @@ SurskitCard:
 	db 27 ; level
 	db 11, 6 ; length
 	dw 143 * 10 ; weight
-	tx ArbokDescription ; description
+	tx SurskitDescription ; description
 	db 0
 
 MasquerainCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx MasquerainCardGfx ; gfx
-	tx NidoranFName ; name
+	tx MasquerainName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db MASQUERAIN
 	db 60 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx SurskitName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -955,7 +955,7 @@ MasquerainCard:
 	; attack 2
 	energy GRASS, 2 ; energies
 	tx CallForFamilyName ; name
-	tx NidoranFsCallForFamilyDescription ; description
+	tx MasquerainsCallForFamilyDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -974,19 +974,19 @@ MasquerainCard:
 	db 13 ; level
 	db 1, 4 ; length
 	dw 15 * 10 ; weight
-	tx NidoranFDescription ; description
+	tx MasquerainDescription ; description
 	db 19
 
 ShroomishCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx ShroomishCardGfx ; gfx
-	tx NidorinaName ; name
+	tx ShroomishName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db SHROOMISH
 	db 70 ; hp
-	db STAGE1 ; stage
-	tx NidoranFName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1024,19 +1024,19 @@ ShroomishCard:
 	db 24 ; level
 	db 2, 7 ; length
 	dw 44 * 10 ; weight
-	tx NidorinaDescription ; description
+	tx ShroomishDescription ; description
 	db 16
 
 NincadaCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx NincadaCardGfx ; gfx
-	tx NidoqueenName ; name
+	tx NincadaName ; name
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db NINCADA
 	db 90 ; hp
-	db STAGE2 ; stage
-	tx NidorinaName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 1 ; energies
@@ -1074,19 +1074,19 @@ NincadaCard:
 	db 43 ; level
 	db 4, 3 ; length
 	dw 132 * 10 ; weight
-	tx NidoqueenDescription ; description
+	tx NincadaDescription ; description
 	db 0
 
 NinjaskCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx NinjaskCardGfx ; gfx
-	tx NidoranMName ; name
+	tx NinjaskName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db NINJASK
 	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx NincadaName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1124,19 +1124,19 @@ NinjaskCard:
 	db 20 ; level
 	db 1, 4 ; length
 	dw 15 * 10 ; weight
-	tx NidoranMDescription ; description
+	tx NinjaskDescription ; description
 	db 19
 
 ShedinjaCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx ShedinjaCardGfx ; gfx
-	tx NidorinoName ; name
+	tx ShedinjaName ; name
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db SHEDINJA
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx NidoranMName ; pre-evo name
+	tx NincadaName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -1174,19 +1174,19 @@ ShedinjaCard:
 	db 25 ; level
 	db 2, 11 ; length
 	dw 43 * 10 ; weight
-	tx NidorinoDescription ; description
+	tx ShedinjaDescription ; description
 	db 16
 
 VolbeatCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx VolbeatCardGfx ; gfx
-	tx NidokingName ; name
+	tx VolbeatName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db VOLBEAT
 	db 90 ; hp
-	db STAGE2 ; stage
-	tx NidorinoName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -1224,19 +1224,19 @@ VolbeatCard:
 	db 48 ; level
 	db 4, 7 ; length
 	dw 137 * 10 ; weight
-	tx NidokingDescription ; description
+	tx VolbeatDescription ; description
 	db 0
 
 IllumiseCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx IllumiseCardGfx ; gfx
-	tx GolbatName ; name
+	tx IllumiseName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db ILLUMISE
 	db 60 ; hp
-	db STAGE1 ; stage
-	tx ZubatName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
@@ -1274,19 +1274,19 @@ IllumiseCard:
 	db 29 ; level
 	db 5, 3 ; length
 	dw 121 * 10 ; weight
-	tx GolbatDescription ; description
+	tx IllumiseDescription ; description
 	db 0
 
 BellossomCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx BellossomCardGfx ; gfx
-	tx OddishName ; name
+	tx BellossomName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db BELLOSSOM
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE2 ; stage
+	tx GloomName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1324,19 +1324,19 @@ BellossomCard:
 	db 8 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx OddishDescription ; description
+	tx BellossomDescription ; description
 	db 16
 
 RoseliaCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx RoseliaCardGfx ; gfx
-	tx GloomName ; name
+	tx RoseliaName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db ROSELIA
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx OddishName ; pre-evo name
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1374,19 +1374,19 @@ RoseliaCard:
 	db 22 ; level
 	db 2, 7 ; length
 	dw 19 * 10 ; weight
-	tx GloomDescription ; description
+	tx RoseliaDescription ; description
 	db 16
 
 CacneaCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx CacneaCardGfx ; gfx
-	tx VileplumeName ; name
+	tx CacneaName ; name
 	db STAR ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db CACNEA
 	db 80 ; hp
-	db STAGE2 ; stage
-	tx GloomName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -1424,13 +1424,13 @@ CacneaCard:
 	db 35 ; level
 	db 3, 11 ; length
 	dw 41 * 10 ; weight
-	tx VileplumeDescription ; description
+	tx CacneaDescription ; description
 	db 0
 
 CacturneCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx CacturneCardGfx ; gfx
-	tx ParasName ; name
+	tx CacturneName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db CACTURNE
@@ -1474,19 +1474,19 @@ CacturneCard:
 	db 8 ; level
 	db 1, 0 ; length
 	dw 12 * 10 ; weight
-	tx ParasDescription ; description
+	tx CacturneDescription ; description
 	db 16
 
 LileepCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx LileepCardGfx ; gfx
-	tx ParasectName ; name
+	tx LileepName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db LILEEP
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx ParasName ; pre-evo name
+	tx CacturneName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 2 ; energies
@@ -1524,13 +1524,13 @@ LileepCard:
 	db 28 ; level
 	db 3, 3 ; length
 	dw 65 * 10 ; weight
-	tx ParasectDescription ; description
+	tx LileepDescription ; description
 	db 0
 
 CradilyCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx CradilyCardGfx ; gfx
-	tx VenonatName ; name
+	tx CradilyName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db CRADILY
@@ -1555,7 +1555,7 @@ CradilyCard:
 	; attack 2
 	energy GRASS, 1, COLORLESS, 1 ; energies
 	tx LeechLifeName ; name
-	tx VenonatLeechLifeDescription ; description
+	tx CradilyLeechLifeDescription ; description
 	dw NONE ; description (cont)
 	db 10 ; damage
 	db DAMAGE_NORMAL ; category
@@ -1574,19 +1574,19 @@ CradilyCard:
 	db 12 ; level
 	db 3, 3 ; length
 	dw 66 * 10 ; weight
-	tx VenonatDescription ; description
+	tx CradilyDescription ; description
 	db 19
 
 TropiusCard:
 	db TYPE_PKMN_GRASS ; type
 	gfx TropiusCardGfx ; gfx
-	tx VenomothName ; name
+	tx TropiusName ; name
 	db STAR ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db TROPIUS
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx VenonatName ; pre-evo name
+	tx CradilyName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -1595,7 +1595,7 @@ TropiusCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw VenomothShiftEffectCommands ; effect commands
+	dw TropiusShiftEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -1624,7 +1624,7 @@ TropiusCard:
 	db 28 ; level
 	db 4, 11 ; length
 	dw 28 * 10 ; weight
-	tx VenomothDescription ; description
+	tx TropiusDescription ; description
 	db 0
 
 PinsirCard:
@@ -1678,9 +1678,9 @@ PinsirCard:
 	db 0
 
 TorchicCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx TorchicCardGfx ; gfx
-	tx BellsproutName ; name
+	tx TorchicName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db TORCHIC
@@ -1705,11 +1705,11 @@ TorchicCard:
 	; attack 2
 	energy GRASS, 1 ; energies
 	tx CallForFamilyName ; name
-	tx BellsproutsCallForFamilyDescription ; description
+	tx TorchicsCallForFamilyDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw CallForBellsproutEffectCommands ; effect commands
+	dw CallForTorchicEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db SPECIAL_AI_HANDLING ; flags 3
@@ -1724,19 +1724,19 @@ TorchicCard:
 	db 11 ; level
 	db 2, 4 ; length
 	dw 9 * 10 ; weight
-	tx BellsproutDescription ; description
+	tx TorchicDescription ; description
 	db 19
 
 CombuskenCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx CombuskenCardGfx ; gfx
-	tx WeepinbellName ; name
+	tx CombuskenName ; name
 	db DIAMOND ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db COMBUSKEN
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx BellsproutName ; pre-evo name
+	tx TorchicName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
@@ -1774,24 +1774,24 @@ CombuskenCard:
 	db 28 ; level
 	db 3, 3 ; length
 	dw 14 * 10 ; weight
-	tx WeepinbellDescription ; description
+	tx CombuskenDescription ; description
 	db 16
 
 BlazikenCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx BlazikenCardGfx ; gfx
-	tx VictreebelName ; name
+	tx BlazikenName ; name
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db BLAZIKEN
 	db 80 ; hp
 	db STAGE2 ; stage
-	tx WeepinbellName ; pre-evo name
+	tx CombuskenName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1 ; energies
 	tx LureName ; name
-	tx VictreebelsLureDescription ; description
+	tx BlazikensLureDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -1805,7 +1805,7 @@ BlazikenCard:
 	; attack 2
 	energy GRASS, 2 ; energies
 	tx AcidName ; name
-	tx VictreebelsAcidDescription ; description
+	tx BlazikensAcidDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -1824,11 +1824,11 @@ BlazikenCard:
 	db 42 ; level
 	db 5, 7 ; length
 	dw 34 * 10 ; weight
-	tx VictreebelDescription ; description
+	tx BlazikenDescription ; description
 	db 0
 
 GyaradosCard:
-	db TYPE_PKMN_WATER ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx GyaradosCardGfx ; gfx
 	tx GyaradosName ; name
 	db STAR ; rarity
@@ -1878,9 +1878,9 @@ GyaradosCard:
 	db 0
 
 NumelCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx NumelCardGfx ; gfx
-	tx GrimerName ; name
+	tx NumelName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db NUMEL
@@ -1905,7 +1905,7 @@ NumelCard:
 	; attack 2
 	energy GRASS, 1 ; energies
 	tx MinimizeName ; name
-	tx GrimersMinimizeDescription ; description
+	tx NumelsMinimizeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -1924,19 +1924,19 @@ NumelCard:
 	db 17 ; level
 	db 2, 11 ; length
 	dw 66 * 10 ; weight
-	tx GrimerDescription ; description
+	tx NumelDescription ; description
 	db 19
 
 CameruptCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx CameruptCardGfx ; gfx
-	tx MukName ; name
+	tx CameruptName ; name
 	db STAR ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db CAMERUPT
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx GrimerName ; pre-evo name
+	tx NumelName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -1974,13 +1974,13 @@ CameruptCard:
 	db 34 ; level
 	db 3, 11 ; length
 	dw 66 * 10 ; weight
-	tx MukDescription ; description
+	tx CameruptDescription ; description
 	db 0
 
 SlugmaCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx SlugmaCardGfx ; gfx
-	tx ExeggcuteName ; name
+	tx SlugmaName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db SLUGMA
@@ -2005,7 +2005,7 @@ SlugmaCard:
 	; attack 2
 	energy GRASS, 2 ; energies
 	tx LeechSeedName ; name
-	tx ExeggcutesLeechSeedDescription ; description
+	tx SlugmasLeechSeedDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -2024,19 +2024,19 @@ SlugmaCard:
 	db 14 ; level
 	db 1, 4 ; length
 	dw 6 * 10 ; weight
-	tx ExeggcuteDescription ; description
+	tx SlugmaDescription ; description
 	db 18
 
 MagcargoCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx MagcargoCardGfx ; gfx
-	tx ExeggutorName ; name
+	tx MagcargoName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db MAGCARGO
 	db 80 ; hp
 	db STAGE1 ; stage
-	tx ExeggcuteName ; pre-evo name
+	tx SlugmaName ; pre-evo name
 
 	; attack 1
 	energy PSYCHIC, 1 ; energies
@@ -2074,13 +2074,13 @@ MagcargoCard:
 	db 35 ; level
 	db 6, 7 ; length
 	dw 265 * 10 ; weight
-	tx ExeggutorDescription ; description
+	tx MagcargoDescription ; description
 	db 0
 
 TorkoalCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx TorkoalCardGfx ; gfx
-	tx KoffingName ; name
+	tx TorkoalName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
 	db TORKOAL
@@ -2124,19 +2124,19 @@ TorkoalCard:
 	db 13 ; level
 	db 2, 0 ; length
 	dw 2 * 10 ; weight
-	tx KoffingDescription ; description
+	tx TorkoalDescription ; description
 	db 16
 
 AltariaCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx AltariaCardGfx ; gfx
-	tx WeezingName ; name
+	tx AltariaName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db ALTARIA
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx KoffingName ; pre-evo name
+	tx SwabluName ; pre-evo name
 
 	; attack 1
 	energy GRASS, 2 ; energies
@@ -2174,11 +2174,11 @@ AltariaCard:
 	db 27 ; level
 	db 3, 11 ; length
 	dw 21 * 10 ; weight
-	tx WeezingDescription ; description
+	tx AltariaDescription ; description
 	db 0
 
 FeebasCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx FeebasCardGfx ; gfx
 	tx TangelaName ; name
 	db CIRCLE ; rarity
@@ -2228,7 +2228,7 @@ FeebasCard:
 	db 0
 
 MiloticCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx MiloticCardGfx ; gfx
 	tx TangelaName ; name
 	db CIRCLE ; rarity
@@ -2378,7 +2378,7 @@ NinetalesCard:
 	db 0
 
 HorseaCard:
-	db TYPE_PKMN_WATER ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx HorseaCardGfx ; gfx
 	tx HorseaName ; name
 	db CIRCLE ; rarity
@@ -2428,7 +2428,7 @@ HorseaCard:
 	db 19
 
 SeadraCard:
-	db TYPE_PKMN_WATER ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx SeadraCardGfx ; gfx
 	tx SeadraName ; name
 	db DIAMOND ; rarity
@@ -2478,7 +2478,7 @@ SeadraCard:
 	db 0
 
 KingdraCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx KingdraCardGfx ; gfx
 	tx ScytherName ; name
 	db STAR ; rarity
@@ -2728,15 +2728,15 @@ LatiasCard:
 	db 0
 
 LatiosCard:
-	db TYPE_PKMN_GRASS ; type
+	db TYPE_PKMN_FIRE ; type
 	gfx LatiosCardGfx ; gfx
-	tx NidokingName ; name
+	tx LatiosName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db LATIOS
 	db 90 ; hp
-	db STAGE2 ; stage
-	tx NidorinoName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy GRASS, 1, COLORLESS, 2 ; energies
@@ -2774,7 +2774,7 @@ LatiosCard:
 	db 48 ; level
 	db 4, 7 ; length
 	dw 137 * 10 ; weight
-	tx NidokingDescription ; description
+	tx LatiosDescription ; description
 	db 0
 
 RayquazaCard:
@@ -3530,13 +3530,13 @@ WhiscashCard:
 CorphishCard:
 	db TYPE_PKMN_WATER ; type
 	gfx CorphishCardGfx ; gfx
-	tx BlastoiseName ; name
+	tx CorphishName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db CORPHISH
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx WartortleName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -3545,7 +3545,7 @@ CorphishCard:
 	tx RainDanceDescriptionCont ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw BlastoiseRainDanceEffectCommands ; effect commands
+	dw CorphishRainDanceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -3574,7 +3574,7 @@ CorphishCard:
 	db 52 ; level
 	db 5, 3 ; length
 	dw 189 * 10 ; weight
-	tx BlastoiseDescription ; description
+	tx CorphishDescription ; description
 	db 0
 
 SnoruntCard:
@@ -3830,7 +3830,7 @@ WalreinCard:
 ClamperlCard:
 	db TYPE_PKMN_WATER ; type
 	gfx ClamperlCardGfx ; gfx
-	tx TentacoolName ; name
+	tx ClamperlName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db CLAMPERL
@@ -3845,7 +3845,7 @@ ClamperlCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw TentacoolCowardiceEffectCommands ; effect commands
+	dw ClamperlCowardiceEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -3874,19 +3874,19 @@ ClamperlCard:
 	db 10 ; level
 	db 2, 11 ; length
 	dw 100 * 10 ; weight
-	tx TentacoolDescription ; description
+	tx ClamperlDescription ; description
 	db 19
 
 HuntailCard:
 	db TYPE_PKMN_WATER ; type
 	gfx HuntailCardGfx ; gfx
-	tx TentacruelName ; name
+	tx HuntailName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | FOSSIL ; sets
 	db HUNTAIL
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx TentacoolName ; pre-evo name
+	tx ClamperlName ; pre-evo name
 
 	; attack 1
 	energy WATER, 1 ; energies
@@ -3924,7 +3924,7 @@ HuntailCard:
 	db 21 ; level
 	db 5, 3 ; length
 	dw 121 * 10 ; weight
-	tx TentacruelDescription ; description
+	tx HuntailDescription ; description
 	db 0
 
 GorebyssCard:
@@ -7880,7 +7880,7 @@ XatuCard:
 JirachiCard:
 	db TYPE_PKMN_PSYCHIC ; type
 	gfx JirachiCardGfx ; gfx
-	tx MewName ; name
+	tx JirachiName ; name
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db JIRACHI
@@ -7924,13 +7924,13 @@ JirachiCard:
 	db 8 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MewLv8Description ; description
+	tx JirachiDescription ; description
 	db 3
 
 DeoxysCard:
 	db TYPE_PKMN_PSYCHIC ; type
 	gfx DeoxysCardGfx ; gfx
-	tx MewName ; name
+	tx DeoxysName ; name
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db DEOXYS
@@ -7974,13 +7974,13 @@ DeoxysCard:
 	db 15 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MewLv15Description ; description
+	tx DeoxysDescription ; description
 	db 0
 
 PoochyenaCard:
-	db TYPE_PKMN_PSYCHIC ; type
+	db TYPE_PKMN_COLORLESS ; type
 	gfx PoochyenaCardGfx ; gfx
-	tx MewName ; name
+	tx PoochyenaName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db POOCHYENA
@@ -8024,19 +8024,19 @@ PoochyenaCard:
 	db 23 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MewLv8Description ; description
+	tx PoochyenaDescription ; description
 	db 8
 
 MightyenaCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx MightyenaCardGfx ; gfx
-	tx PidgeyName ; name
+	tx MightyenaName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | NONE ; sets
 	db MIGHTYENA
 	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx PoochyenaName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -8074,19 +8074,19 @@ MightyenaCard:
 	db 8 ; level
 	db 1, 0 ; length
 	dw 4 * 10 ; weight
-	tx PidgeyDescription ; description
+	tx MightyenaDescription ; description
 	db 18
 
 DustoxCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx DustoxCardGfx ; gfx
-	tx PidgeottoName ; name
+	tx DustoxName ; name
 	db STAR ; rarity
 	db EVOLUTION | NONE ; sets
 	db DUSTOX
 	db 60 ; hp
-	db STAGE1 ; stage
-	tx PidgeyName ; pre-evo name
+	db STAGE2 ; stage
+	tx CascoonName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -8105,7 +8105,7 @@ DustoxCard:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx MirrorMoveName ; name
-	tx PidgeottosMirrorMoveDescription ; description
+	tx DustoxsMirrorMoveDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
@@ -8124,19 +8124,19 @@ DustoxCard:
 	db 36 ; level
 	db 3, 7 ; length
 	dw 66 * 10 ; weight
-	tx PidgeottoDescription ; description
+	tx DustoxDescription ; description
 	db 16
 
 NuzleafCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx NuzleafCardGfx ; gfx
-	tx PidgeotName ; name
+	tx NuzleafName ; name
 	db STAR ; rarity
 	db LABORATORY | GB ; sets
 	db NUZLEAF
 	db 80 ; hp
-	db STAGE2 ; stage
-	tx PidgeottoName ; pre-evo name
+	db STAGE1 ; stage
+	tx SeedotName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
@@ -8174,19 +8174,19 @@ NuzleafCard:
 	db 38 ; level
 	db 4, 11 ; length
 	dw 87 * 10 ; weight
-	tx PidgeotLv38Description ; description
+	tx NuzleafDescription ; description
 	db 0
 
 ShiftryCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx ShiftryCardGfx ; gfx
-	tx PidgeotName ; name
+	tx ShiftryName ; name
 	db STAR ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db SHIFTRY
 	db 80 ; hp
 	db STAGE2 ; stage
-	tx PidgeottoName ; pre-evo name
+	tx NuzleafName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -8224,13 +8224,13 @@ ShiftryCard:
 	db 40 ; level
 	db 4, 11 ; length
 	dw 87 * 10 ; weight
-	tx PidgeotLv40Description ; description
+	tx ShiftryDescription ; description
 	db 0
 
 ZubatCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx ZubatCardGfx ; gfx
-	tx RattataName ; name
+	tx ZubatName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | NONE ; sets
 	db ZUBAT
@@ -8274,19 +8274,19 @@ ZubatCard:
 	db 9 ; level
 	db 1, 0 ; length
 	dw 8 * 10 ; weight
-	tx RattataDescription ; description
+	tx ZubatDescription ; description
 	db 19
 
 GolbatCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx GolbatCardGfx ; gfx
-	tx RaticateName ; name
+	tx GolbatName ; name
 	db DIAMOND ; rarity
 	db COLOSSEUM | NONE ; sets
 	db GOLBAT
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx RattataName ; pre-evo name
+	tx ZubatName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8324,19 +8324,19 @@ GolbatCard:
 	db 41 ; level
 	db 2, 4 ; length
 	dw 41 * 10 ; weight
-	tx RaticateDescription ; description
+	tx GolbatDescription ; description
 	db 3
 
 CrobatCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx CrobatCardGfx ; gfx
-	tx SpearowName ; name
+	tx CrobatName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db CROBAT
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE2 ; stage
+	tx GolbatName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8355,7 +8355,7 @@ CrobatCard:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx MirrorMoveName ; name
-	tx SpearowsMirrorMoveDescription ; description
+	tx CrobatsMirrorMoveDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db DAMAGE_NORMAL ; category
@@ -8374,24 +8374,24 @@ CrobatCard:
 	db 13 ; level
 	db 1, 0 ; length
 	dw 4 * 10 ; weight
-	tx SpearowDescription ; description
+	tx CrobatDescription ; description
 	db 19
 
 TentacoolCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx TentacoolCardGfx ; gfx
-	tx FearowName ; name
+	tx TentacoolName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db TENTACOOL
 	db 70 ; hp
-	db STAGE1 ; stage
-	tx SpearowName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
 	tx AgilityName ; name
-	tx FearowsAgilityDescription ; description
+	tx TentacoolsAgilityDescription ; description
 	dw NONE ; description (cont)
 	db 20 ; damage
 	db DAMAGE_NORMAL ; category
@@ -8424,19 +8424,19 @@ TentacoolCard:
 	db 27 ; level
 	db 3, 11 ; length
 	dw 84 * 10 ; weight
-	tx FearowDescription ; description
+	tx TentacoolDescription ; description
 	db 0
 
 TentacruelCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx TentacruelCardGfx ; gfx
-	tx ClefairyName ; name
+	tx TentacruelName ; name
 	db STAR ; rarity
 	db MYSTERY | NONE ; sets
 	db TENTACRUEL
 	db 40 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx TentacoolName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8455,11 +8455,11 @@ TentacruelCard:
 	; attack 2
 	energy COLORLESS, 3 ; energies
 	tx MetronomeName ; name
-	tx ClefairysMetronomeDescription ; description
+	tx TentacruelsMetronomeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ClefairyMetronomeEffectCommands ; effect commands
+	dw TentacruelMetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -8474,28 +8474,28 @@ TentacruelCard:
 	db 14 ; level
 	db 2, 0 ; length
 	dw 17 * 10 ; weight
-	tx ClefairyDescription ; description
+	tx TentacruelDescription ; description
 	db 18
 
 SableyeCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SableyeCardGfx ; gfx
-	tx ClefableName ; name
+	tx SableyeName ; name
 	db STAR ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db SABLEYE
 	db 70 ; hp
-	db STAGE1 ; stage
-	tx ClefairyName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
 	tx MetronomeName ; name
-	tx ClefablesMetronomeDescription ; description
+	tx SableyesMetronomeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw ClefableMetronomeEffectCommands ; effect commands
+	dw SableyeMetronomeEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -8505,7 +8505,7 @@ SableyeCard:
 	; attack 2
 	energy COLORLESS, 2 ; energies
 	tx MinimizeName ; name
-	tx ClefablesMinimizeDescription ; description
+	tx SableyesMinimizeDescription ; description
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
@@ -8524,13 +8524,13 @@ SableyeCard:
 	db 34 ; level
 	db 4, 3 ; length
 	dw 88 * 10 ; weight
-	tx ClefableDescription ; description
+	tx SableyeDescription ; description
 	db 0
 
 OddishCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx OddishCardGfx ; gfx
-	tx JigglypuffName ; name
+	tx OddishName ; name
 	db PROMOSTAR ; rarity
 	db PROMOTIONAL | PRO ; sets
 	db ODDISH
@@ -8574,19 +8574,19 @@ OddishCard:
 	db 12 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv12Description ; description
+	tx OddishDescription ; description
 	db 16
 
 GloomCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx GloomCardGfx ; gfx
-	tx JigglypuffName ; name
+	tx GloomName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | GB ; sets
 	db GLOOM
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx OddishName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8624,19 +8624,19 @@ GloomCard:
 	db 13 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv13Description ; description
+	tx GloomDescription ; description
 	db 16
 
 VileplumeCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx VileplumeCardGfx ; gfx
-	tx JigglypuffName ; name
+	tx VileplumeName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db VILEPLUME
 	db 60 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE2 ; stage
+	tx GloomName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8674,19 +8674,19 @@ VileplumeCard:
 	db 14 ; level
 	db 1, 8 ; length
 	dw 12 * 10 ; weight
-	tx JigglypuffLv14Description ; description
+	tx VileplumeDescription ; description
 	db 16
 
 GulpinCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx GulpinCardGfx ; gfx
-	tx WigglytuffName ; name
+	tx GulpinName ; name
 	db STAR ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db GULPIN
 	db 80 ; hp
-	db STAGE1 ; stage
-	tx JigglypuffName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8724,19 +8724,19 @@ GulpinCard:
 	db 36 ; level
 	db 3, 3 ; length
 	dw 26 * 10 ; weight
-	tx WigglytuffDescription ; description
+	tx GulpinDescription ; description
 	db 0
 
 SwalotCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SwalotCardGfx ; gfx
-	tx MeowthName ; name
+	tx SwalotName ; name
 	db CIRCLE ; rarity
 	db COLOSSEUM | GB ; sets
 	db SWALOT
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx GulpinName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -8774,13 +8774,13 @@ SwalotCard:
 	db 14 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MeowthLv14Description ; description
+	tx SwalotDescription ; description
 	db 16
 
 CarvanhaCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx CarvanhaCardGfx ; gfx
-	tx MeowthName ; name
+	tx CarvanhaName ; name
 	db CIRCLE ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db CARVANHA
@@ -8824,19 +8824,19 @@ CarvanhaCard:
 	db 15 ; level
 	db 1, 4 ; length
 	dw 9 * 10 ; weight
-	tx MeowthLv15Description ; description
+	tx CarvanhaDescription ; description
 	db 16
 
 SharpedoCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SharpedoCardGfx ; gfx
-	tx PersianName ; name
+	tx SharpedoName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db SHARPEDO
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx MeowthName ; pre-evo name
+	tx CarvanhaName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -8874,13 +8874,13 @@ SharpedoCard:
 	db 25 ; level
 	db 3, 3 ; length
 	dw 71 * 10 ; weight
-	tx PersianDescription ; description
+	tx SharpedoDescription ; description
 	db 0
 
 GrimerCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx GrimerCardGfx ; gfx
-	tx FarfetchdName ; name
+	tx GrimerName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | NONE ; sets
 	db GRIMER
@@ -8924,19 +8924,19 @@ GrimerCard:
 	db 20 ; level
 	db 2, 7 ; length
 	dw 33 * 10 ; weight
-	tx FarfetchdDescription ; description
+	tx GrimerDescription ; description
 	db 3
 
 MukCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx MukCardGfx ; gfx
-	tx DoduoName ; name
+	tx MukName ; name
 	db CIRCLE ; rarity
 	db LABORATORY | NONE ; sets
 	db MUK
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx GrimerName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -8974,19 +8974,19 @@ MukCard:
 	db 10 ; level
 	db 4, 7 ; length
 	dw 86 * 10 ; weight
-	tx DoduoDescription ; description
+	tx MukDescription ; description
 	db 19
 
 KoffingCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx KoffingCardGfx ; gfx
-	tx DodrioName ; name
+	tx KoffingName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | JUNGLE ; sets
 	db KOFFING
 	db 70 ; hp
-	db STAGE1 ; stage
-	tx DoduoName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9024,19 +9024,19 @@ KoffingCard:
 	db 28 ; level
 	db 5, 11 ; length
 	dw 188 * 10 ; weight
-	tx DodrioDescription ; description
+	tx KoffingDescription ; description
 	db 1
 
 WeezingCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WeezingCardGfx ; gfx
-	tx LickitungName ; name
+	tx WeezingName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db WEEZING
 	db 90 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx GrimerName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -9074,13 +9074,13 @@ WeezingCard:
 	db 26 ; level
 	db 3, 11 ; length
 	dw 144 * 10 ; weight
-	tx LickitungDescription ; description
+	tx WeezingDescription ; description
 	db 0
 
 SeviperCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SeviperCardGfx ; gfx
-	tx ChanseyName ; name
+	tx SeviperName ; name
 	db STAR ; rarity
 	db COLOSSEUM | NONE ; sets
 	db SEVIPER
@@ -9105,7 +9105,7 @@ SeviperCard:
 	; attack 2
 	energy COLORLESS, 4 ; energies
 	tx DoubleEdgeName ; name
-	tx ChanseysDoubleEdgeDescription ; description
+	tx SevipersDoubleEdgeDescription ; description
 	dw NONE ; description (cont)
 	db 80 ; damage
 	db DAMAGE_NORMAL ; category
@@ -9124,19 +9124,19 @@ SeviperCard:
 	db 55 ; level
 	db 3, 7 ; length
 	dw 76 * 10 ; weight
-	tx ChanseyDescription ; description
+	tx SeviperDescription ; description
 	db 8
 
 CrawdauntCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx CrawdauntCardGfx ; gfx
-	tx KangaskhanName ; name
+	tx CrawdauntName ; name
 	db STAR ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db CRAWDAUNT
 	db 90 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx CorphishName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -9174,13 +9174,13 @@ CrawdauntCard:
 	db 40 ; level
 	db 7, 3 ; length
 	dw 176 * 10 ; weight
-	tx KangaskhanDescription ; description
+	tx CrawdauntDescription ; description
 	db 0
 
 AbsolCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx AbsolCardGfx ; gfx
-	tx TaurosName ; name
+	tx AbsolName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | JUNGLE ; sets
 	db ABSOL
@@ -9224,7 +9224,7 @@ AbsolCard:
 	db 32 ; level
 	db 4, 7 ; length
 	dw 195 * 10 ; weight
-	tx TaurosDescription ; description
+	tx AbsolDescription ; description
 	db 0
 
 ZigzagoonCard:
@@ -9638,6 +9638,20 @@ LoudredCard:
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
 
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
+
 	; attack 2
 	energy COLORLESS, 4 ; energies
 	tx SlamName ; name
@@ -9663,8 +9677,6 @@ LoudredCard:
 	tx DragoniteDescription ; description
 	db 0
 
-
-
 ExploudCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
@@ -9675,6 +9687,20 @@ ExploudCard:
 	db 100 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -9711,6 +9737,20 @@ AzurillCard:
 	db 100 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -9749,6 +9789,20 @@ SkittyCard:
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
 
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
+
 	; attack 2
 	energy COLORLESS, 4 ; energies
 	tx SlamName ; name
@@ -9785,6 +9839,20 @@ DelcattyCard:
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
 
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
+
 	; attack 2
 	energy COLORLESS, 4 ; energies
 	tx SlamName ; name
@@ -9812,14 +9880,28 @@ DelcattyCard:
 
 DoduoCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx DoduoCardGfx ; gfx
+	tx DoduoName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db DODUO
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -9843,19 +9925,33 @@ DoduoCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx DoduoDescription ; description
 	db 0
 
 DodrioCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx DodrioCardGfx ; gfx
+	tx DodrioName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db DODRIO
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db STAGE1 ; stage
+	tx DoduoName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -9879,7 +9975,7 @@ DodrioCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx DodrioDescription ; description
 	db 0
 
 SpindaCard:
@@ -9892,6 +9988,20 @@ SpindaCard:
 	db 100 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -9920,14 +10030,28 @@ SpindaCard:
 
 SwabluCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx SwabluCardGfx ; gfx
+	tx SwabluName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db SWABLU
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -9951,7 +10075,7 @@ SwabluCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx SwabluDescription ; description
 	db 0
 
 ZangooseCard:
@@ -9964,6 +10088,20 @@ ZangooseCard:
 	db 100 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -9992,14 +10130,28 @@ ZangooseCard:
 
 IgglybuffCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx IgglybuffCardGfx ; gfx
+	tx IgglybuffName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db IGGLYBUFF
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BABY ; stage
+	dw NONE ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -10023,19 +10175,33 @@ IgglybuffCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx IgglybuffDescription ; description
 	db 0
 
 JigglypuffCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx JigglypuffCardGfx ; gfx
+	tx JigglypuffName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db JIGGLYPUFF
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	tx IgglybuffName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -10059,19 +10225,33 @@ JigglypuffCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx JigglypuffDescription ; description
 	db 0
 
 WigglytuffCard:
 	db TYPE_PKMN_COLORLESS ; type
-	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	gfx WigglytuffCardGfx ; gfx
+	tx WigglytuffName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db WIGGLYTUFF
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db STAGE1 ; stage
+	tx JigglypuffName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -10095,7 +10275,7 @@ WigglytuffCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx WigglytuffDescription ; description
 	db 0
 
 CastformCard:
@@ -10108,6 +10288,20 @@ CastformCard:
 	db 100 ; hp
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
+
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
 
 	; attack 2
 	energy COLORLESS, 4 ; energies
@@ -10145,6 +10339,20 @@ KecleonCard:
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
 
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
+
 	; attack 2
 	energy COLORLESS, 4 ; energies
 	tx SlamName ; name
@@ -10181,6 +10389,20 @@ GirafarigCard:
 	db STAGE2 ; stage
 	tx DragonairName ; pre-evo name
 
+	; attack 1
+	energy 0 ; energies
+	tx HealingWindName ; name
+	tx HealingWindDescription ; description
+	dw NONE ; description (cont)
+	db 0 ; damage
+	db POKEMON_POWER ; category
+	dw DragoniteHealingWindEffectCommands ; effect commands
+	db NONE ; flags 1
+	db NONE ; flags 2
+	db NONE ; flags 3
+	db 0
+	db ATK_ANIM_HEALING_WIND ; animation
+
 	; attack 2
 	energy COLORLESS, 4 ; energies
 	tx SlamName ; name
@@ -10205,7 +10427,6 @@ GirafarigCard:
 	dw 463 * 10 ; weight
 	tx DragoniteDescription ; description
 	db 0
-
 	
 ArchieCard:
 	db TYPE_TRAINER ; type

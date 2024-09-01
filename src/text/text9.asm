@@ -1235,7 +1235,7 @@ DoubleColorlessEnergyDescription:
 	line "   to pay Colorless Energy costs.)"
 	done
 
-BulbasaurName:
+TreeckoName:
 	text "Treecko"
 	done
 
@@ -1243,24 +1243,24 @@ LeechSeedName:
 	text "Leech Seed"
 	done
 
-BulbasaursLeechSeedDescription:
+TreeckosLeechSeedDescription:
 	text "Unless all damage from this attack"
 	line "is prevented, you may remove 1"
-	line "damage counter from Bulbasaur."
+	line "damage counter from Treecko."
 	done
 
 SeedName:
 	text "Wood Gecko"
 	done
 
-BulbasaurDescription:
-	text "A strange seed was planted on its"
-	line "back at birth. Thus, a plant"
-	line "sprouted and now grows with this"
-	line "Pokémon."
+TreeckoDescription:
+	text " Booster Pack: Evolution"
+	line " Original Set: Plasma Freeze 6"
+	line " Original Art: Naoki Saito"
+	line " Pixel Art: Paperfire88"
 	done
 
-IvysaurName:
+GrovyleName:
 	text "Grovyle"
 	done
 
@@ -1277,13 +1277,14 @@ InflictPoisonDescription:
 	line "Poisoned."
 	done
 
-IvysaurDescription:
-	text "When the bulb on its back grows"
-	line "large, the Pokémon seems to lose the"
-	line "ability to stand on its hind legs."
+GrovyleDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-VenusaurName:
+SceptileName:
 	text "Sceptile"
 	done
 
@@ -1310,7 +1311,7 @@ MegaDrainName:
 	text "Mega Drain"
 	done
 
-VenusaursMegaDrainDescription:
+SceptilesMegaDrainDescription:
 	text "Remove a number of damage counters"
 	line "from Venusaur equal to half the"
 	line "damage done to the Defending Pokémon"
@@ -1319,16 +1320,21 @@ VenusaursMegaDrainDescription:
 	line "nearest 10)."
 	done
 
-VenusaursMegaDrainDescriptionCont:
+SceptilesMegaDrainDescriptionCont:
 	text "If Venusaur has fewer damage"
 	line "counters than that, remove all of"
 	line "them."
 	done
 
-VenusaurLv64Description:
-	text "The flower on its back catches"
-	line "the sun's rays. The sunlight is then"
-	line "absorbed and used for energy."
+SceptileDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
+	done
+
+WurmpleName:
+	text "Wurmple"
 	done
 
 EnergyTransName:
@@ -1349,14 +1355,15 @@ SolarBeamName:
 	text "Solarbeam"
 	done
 
-VenusaurLv67Description:
-	text "This plant blooms when it is"
-	line "absorbing solar energy. It stays on"
-	line "the move to seek sunlight."
+WurmpleDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-CaterpieName:
-	text "Caterpie"
+SilcoonName:
+	text "Silcoon"
 	done
 
 StringShotName:
@@ -1372,23 +1379,24 @@ WormName:
 	text "Worm"
 	done
 
-CaterpieDescription:
-	text "Its short feet are tipped with"
-	line "suction pads that enable it to"
-	line "tirelessly climb slopes and walls."
+SilcoonDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-MetapodName:
-	text "Metapod"
+BeautiflyName:
+	text "Beautifly"
 	done
 
 StiffenName:
 	text "Stiffen"
 	done
 
-MetapodsStiffenDescription:
+BeautiflysStiffenDescription:
 	text "Flip a coin. If heads, prevent all"
-	line "damage done to Metapod during your"
+	line "damage done to Beautifly during your"
 	line "opponent's next turn. (Any other"
 	line "effects of attacks still happen.)"
 	done
@@ -1401,14 +1409,15 @@ CocoonName:
 	text "Cocoon"
 	done
 
-MetapodDescription:
-	text "It is vulnerable to attack because"
-	line "its shell is soft, exposing its weak"
-	line "and tender body."
+BeautiflyDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-ButterfreeName:
-	text "Butterfree"
+CascoonName:
+	text "Cascoon"
 	done
 
 WhirlwindName:
@@ -1423,17 +1432,17 @@ WhirlwindDescription:
 	line "switching the Pokémon.)"
 	done
 
-ButterfreesMegaDrainDescription:
+CascoonsMegaDrainDescription:
 	text "Remove a number of damage counters"
-	line "from Butterfree equal to half the"
+	line "from Cascoon equal to half the"
 	line "damage done to the Defending Pokémon"
 	line "(after applying Weakness and"
 	line "Resistance) (rounded up to the"
 	line "nearest 10)."
 	done
 
-ButterfreesMegaDrainDescriptionCont:
-	text "If Butterfree has fewer damage"
+CascoonsMegaDrainDescriptionCont:
+	text "If Cascoon has fewer damage"
 	line "counters than that, remove all of"
 	line "them."
 	done
@@ -1442,13 +1451,14 @@ ButterflyName:
 	text "Butterfly"
 	done
 
-ButterfreeDescription:
-	text "In battle, it flaps its wings at"
-	line "high speed to release highly toxic"
-	line "dust into the air."
+CascoonDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
-WeedleName:
+LotadName:
 	text "Lotad"
 	done
 
@@ -1465,10 +1475,11 @@ HairyBugName:
 	text "Water Wood"
 	done
 
-WeedleDescription:
-	text "Often found in forests, eating"
-	line "leaves. It has a sharp, venomous"
-	line "stinger on its head."
+LotadDescription:
+	text " Booster Pack: "
+	line " Original Set: "
+	line " Original Art: "
+	line " Pixel Art: "
 	done
 
 ;	ds $20

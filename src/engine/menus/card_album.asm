@@ -30,7 +30,7 @@ CreateCardSetList:
 ; it's the same set as the input, i.e. PROMOTIONAL
 	ld a, e
 	cp SCEPTILE
-	jp z, .SetVenusaurLv64OwnedFlag
+	jp z, .SetSceptileOwnedFlag
 	cp DEOXYS
 	jp z, .SetMewLv15OwnedFlag
 
@@ -122,7 +122,7 @@ CreateCardSetList:
 	ld a, [wOwnedPhantomCardFlags]
 	bit VENUSAUR_OWNED_PHANTOM_F, a
 	jr z, .check_mew
-	call .PlaceVenusaurLv64InList
+	call .PlaceSceptileInList
 .check_mew
 	bit MEW_OWNED_PHANTOM_F, a
 	jr z, .find_first_owned
@@ -178,11 +178,11 @@ CreateCardSetList:
 	pop hl
 	jp .loop_all_cards
 
-.SetVenusaurLv64OwnedFlag
+.SetSceptileOwnedFlag
 	ld a, (1 << VENUSAUR_OWNED_PHANTOM_F)
 	jr .SetPhantomOwnedFlag
 
-.PlaceVenusaurLv64InList
+.PlaceSceptileInList
 	push af
 	push hl
 	ld e, SCEPTILE

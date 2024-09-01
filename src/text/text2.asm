@@ -514,12 +514,12 @@ SquirtleExtraDeckName:
 	text "Squirtle extra"
 	done
 
-BulbasaurAndFriendsDeckName:
-	text "Bulbasaur & Friends"
+TreeckoAndFriendsDeckName:
+	text "Treecko & Friends"
 	done
 
-BulbasaurExtraDeckName:
-	text "Bulbasaur extra"
+TreeckoExtraDeckName:
+	text "Treecko extra"
 	done
 
 FirstStrikeDeckName:
@@ -1447,8 +1447,8 @@ SquirtleAndFriendsText:
 	text "Squirtle & Friends"
 	done
 
-BulbasaurAndFriendsText:
-	text "Bulbasaur & Friends"
+TreeckoAndFriendsText:
+	text "Treecko & Friends"
 	done
 
 PsychicMachampText:
@@ -1595,7 +1595,7 @@ FlowerGardenDescriptionText:
 	done
 
 KaleidoscopeDescriptionText:
-	text "Uses Venomoth's Pokémon Power to"
+	text "Uses Tropius's Pokémon Power to"
 	line "change the opponent's Weakness."
 	done
 
@@ -1689,9 +1689,9 @@ SquirtleAndFriendsDescriptionText:
 	line "Squirtle, Charmander and Pikachu"
 	done
 
-BulbasaurAndFriendsDescriptionText:
+TreeckoAndFriendsDescriptionText:
 	text "A Grass, Lightning and Psychic Deck:"
-	line "Bulbasaur, Pikachu and Abra"
+	line "Treecko, Pikachu and Abra"
 	done
 
 PsychicMachampDescriptionText:
@@ -1700,8 +1700,8 @@ PsychicMachampDescriptionText:
 	done
 
 WaterBeetleDescriptionText:
-	text "An evolution deck with Weedle,"
-	line "Nidoran♂ and Bellsprout."
+	text "An evolution deck with Lotad,"
+	line "Nidoran♂ and Torchic."
 	done
 
 LegendaryMoltresDescriptionText:

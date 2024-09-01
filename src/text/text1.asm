@@ -1287,7 +1287,7 @@ ChooseResistanceYouWishToChangeText:
 
 ChoosePokemonToCopyWithShiftText:
 	text "Choose the Pokémon you want to copy"
-	line "with Venomoth's Shift."
+	line "with Tropius's Shift."
 	done
 
 ChangedTheWeaknessOfPokemonToColorText:
@@ -1426,13 +1426,13 @@ ProcedureForEnergyTransferText:
 	line "4. Press the B Button to end."
 	done
 
-ChooseABellsproutFromDeckText:
-	text "Choose a Bellsprout"
+ChooseATorchicFromDeckText:
+	text "Choose a Torchic"
 	line "from the deck."
 	done
 
-ChooseABellsproutText:
-	text "Choose a Bellsprout."
+ChooseATorchicText:
+	text "Choose a Torchic."
 	done
 
 ChoosePkmnToRemoveDamageCounterText:

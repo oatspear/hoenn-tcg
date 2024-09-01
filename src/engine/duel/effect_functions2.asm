@@ -900,17 +900,17 @@ AIFindOddish:
 
 ; output:
 ;	[hTemp_ffa0] = deck index of the chosen card ($ff if no card was chosen)
-FindBellsprout:
+FindTorchic:
 	call CreateDeckCardList
-	ldtx hl, ChooseABellsproutFromDeckText
-	ldtx bc, BellsproutName
+	ldtx hl, ChooseATorchicFromDeckText
+	ldtx bc, TorchicName
 	lb de, SEARCHEFFECT_CARD_ID, TORCHIC
 	call LookForCardsInDeck
-	jr c, .exit ; no Bellsprout in the Deck
+	jr c, .exit ; no Torchic in the Deck
 
 ; draw deck list interface and print text
 	bank1call InitAndDrawCardListScreenLayout_WithSelectCheckMenu
-	ldtx hl, ChooseABellsproutText
+	ldtx hl, ChooseATorchicText
 	ldtx de, DuelistDeckText
 	call SetCardListHeaderText
 
@@ -920,9 +920,9 @@ FindBellsprout:
 	call GetCardIDFromDeckIndex
 	ld bc, TORCHIC
 	call CompareDEtoBC
-	jr nz, .play_sfx ; not a Bellsprout
+	jr nz, .play_sfx ; not a Torchic
 
-; a Bellsprout was selected
+; a Torchic was selected
 	ldh a, [hTempCardIndex_ff98]
 	ldh [hTemp_ffa0], a
 	or a
@@ -934,7 +934,7 @@ FindBellsprout:
 	jr .read_input
 
 ; see if the Player can exit the screen without selecting a card,
-; that is, if the deck contains no Bellsprout cards.
+; that is, if the deck contains no Torchic cards.
 .attempt_to_cancel
 	ld hl, wDuelTempList
 .next_card
@@ -945,9 +945,9 @@ FindBellsprout:
 	ld bc, TORCHIC
 	call CompareDEtoBC
 	jr nz, .next_card
-	jr .play_sfx ; found a Bellsprout, return to selection process
+	jr .play_sfx ; found a Torchic, return to selection process
 
-; no Bellsprout in the deck, can safely exit screen
+; no Torchic in the deck, can safely exit screen
 .exit
 	ld a, $ff
 	ldh [hTemp_ffa0], a
@@ -955,10 +955,10 @@ FindBellsprout:
 	ret
 
 
-; finds the first Bellsprout in the deck
+; finds the first Torchic in the deck
 ; output:
 ;	[hTemp_ffa0] = deck index of the chosen card ($ff if no card was chosen)
-AIFindBellsprout:
+AIFindTorchic:
 	call CreateDeckCardList
 	ld hl, wDuelTempList
 .loop_deck
@@ -969,8 +969,8 @@ AIFindBellsprout:
 	call GetCardIDFromDeckIndex
 	ld a, e
 	cp TORCHIC
-	jr nz, .loop_deck ; card isn't a Bellsprout
-	ret ; Bellsprout found
+	jr nz, .loop_deck ; card isn't a Torchic
+	ret ; Torchic found
 
 
 ; output:

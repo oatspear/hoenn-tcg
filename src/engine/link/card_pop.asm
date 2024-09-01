@@ -246,7 +246,7 @@ LookUpNameInCardPopNameList:
 ; decided from the names of both participants.
 ; the result will always be a non-Energy card that
 ; is not from a Promotional set, with the exception
-; of VenusaurLv64 and MewLv15.
+; of Sceptile and MewLv15.
 ; output:
 ;	a/e = card ID that was chosen
 ;	wLoadedCard1 = contains the card_data_struct of the chosen card
@@ -285,7 +285,7 @@ DecideCardToReceiveFromCardPop:
 ; 101/256 ~ 39% for Circle
 ;  90/256 ~ 35% for Diamond
 ;  63/256 ~ 25% for Star
-;   1/256 ~ .4% for VenusaurLv64 or MewLv15
+;   1/256 ~ .4% for Sceptile or MewLv15
 	ld a, e
 	cp 5
 	jr z, .venusaur1_or_mew2
@@ -320,14 +320,14 @@ DecideCardToReceiveFromCardPop:
 	ret
 
 .venusaur1_or_mew2
-; choose either VenusaurLv64 or MewLv15,
+; choose either Sceptile or MewLv15,
 ; depending on whether the lower bit of d is unset or set, respectively
 
 ; since the parameters for this decision is
 ; based on the cumulative xoring and addition
 ; of the players' names, they have the same parity,
 ; and thus, the lower bit in d will always be 1.
-; as a result, VenusaurLv64 is functionally unobtainable.
+; as a result, Sceptile is functionally unobtainable.
 	ld a, MUSIC_MEDAL
 	ld [wCardPopCardObtainSong], a
 	ld e, SCEPTILE

@@ -9,8 +9,8 @@ DeckPointers::
 	dw CharmanderExtraDeck
 	dw SquirtleAndFriendsDeck
 	dw SquirtleExtraDeck
-	dw BulbasaurAndFriendsDeck
-	dw BulbasaurExtraDeck
+	dw TreeckoAndFriendsDeck
+	dw TreeckoExtraDeck
 	dw LightningAndFireDeck
 	dw WaterAndFightingDeck
 	dw GrassAndPsychicDeck
@@ -734,7 +734,7 @@ SquirtleExtraDeck:
 	deck_list_end
 	tx SquirtleExtraDeckName
 
-BulbasaurAndFriendsDeck:
+TreeckoAndFriendsDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,    11
 	card_item FIRE_ENERGY,      3
@@ -768,9 +768,9 @@ BulbasaurAndFriendsDeck:
 	card_item LAVA_COOKIE,        2
 	card_item REVIVE,           1
 	deck_list_end
-	tx BulbasaurAndFriendsDeckName
+	tx TreeckoAndFriendsDeckName
 
-BulbasaurExtraDeck:
+TreeckoExtraDeck:
 	deck_list_start
 	card_item LIGHTNING_ENERGY,  4
 	card_item PSYCHIC_ENERGY,    4
@@ -792,7 +792,7 @@ BulbasaurExtraDeck:
 	card_item ENERGY_SWITCH,      1
 	card_item GRASS_ENERGY,     30 ; irrelevant
 	deck_list_end
-	tx BulbasaurExtraDeckName
+	tx TreeckoExtraDeckName
 
 LightningAndFireDeck:
 	deck_list_start
@@ -877,7 +877,7 @@ GrassAndPsychicDeck:
 	card_item DUSKULL,         3
 	card_item DUSCLOPS,           2
 	card_item WYNAUT,            1
-	card_item GRIMER,       1
+	card_item NUMEL,       1
 	card_item ABSOL,          1
 	card_item ACRO_BIKE,            2
 	card_item ENERGY_SEARCH,   2
@@ -1408,7 +1408,7 @@ WaterfrontPokemonDeck:
 	card_item LAIRON,           1
 	card_item LUNATONE,     2
 	card_item BALTOY,           1
-	card_item GRIMER,         1
+	card_item NUMEL,         1
 	card_item SLAKOTH,           2
 	card_item VIGOROTH,         1
 	card_item ACRO_BIKE,              2
@@ -1716,7 +1716,7 @@ LovelyNidoranDeck:
 	card_item ALTARIA,          1
 	card_item PINSIR,           1
 	card_item CARVANHA,      2
-	card_item GRIMER,        2
+	card_item NUMEL,        2
 	card_item MUK,            2
 	card_item PROFESSOR_BIRCH,    1
 	card_item ACRO_BIKE,             2
@@ -1836,7 +1836,7 @@ ImakuniDeck:
 	card_item BALTOY,         3
 	card_item DUSKULL,         4
 	card_item DUSCLOPS,           3
-	card_item GRIMER,       4
+	card_item NUMEL,       4
 	card_item ARCHIE,    4
 	card_item REPEAT_BALL,     2
 	card_item VS_SEEKER,   2

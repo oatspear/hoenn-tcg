@@ -1249,10 +1249,10 @@ wAIAttackIsNonDamaging:: ; ce02
 wAIRetreatedThisTurn:: ; ce03
 	ds $1
 
-; used by AI to store information of VenusaurLv67 while handling Energy Trans logic.
-wAIVenusaurLv67DeckIndex:: ; ce04
+; used by AI to store information of Wurmple while handling Energy Trans logic.
+wAIWurmpleDeckIndex:: ; ce04
 	ds $1
-wAIVenusaurLv67PlayAreaLocation:: ; ce05
+wAIWurmplePlayAreaLocation:: ; ce05
 	ds $1
 
 wce06:: ; ce06
@@ -2418,7 +2418,7 @@ wTotalNumCardsCollected:: ; d3cd
 	ds $1
 
 ; total number of cards to be collected
-; doesn't count the Phantom cards (VenusaurLv64 and MewLv15)
+; doesn't count the Phantom cards (Sceptile and MewLv15)
 ; unless they have already been collected
 wTotalNumCardsToCollect:: ; d3ce
 	ds $1

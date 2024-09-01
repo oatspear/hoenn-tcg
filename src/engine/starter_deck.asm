@@ -4,7 +4,7 @@
 ; - a = starter deck chosen
 ;   $0 = Charmander
 ;   $1 = Squirtle
-;   $2 = Bulbasaur
+;   $2 = Treecko
 _AddStarterDeck:
 	add a
 	ld e, a

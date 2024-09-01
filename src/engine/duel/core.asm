@@ -890,11 +890,11 @@ PlayPokemonCard:
 
 ; preserves all registers except af
 ; output:
-;	carry = set:  if the turn holder has a Blastoise and its Rain Dance Pokemon Power is active
+;	carry = set:  if the turn holder has a Corphish and its Rain Dance Pokemon Power is active
 IsRainDanceActive:
 	ld a, CORPHISH
 	call CountPokemonIDInPlayArea
-	ret nc ; return if there isn't a Blastoise with an active Pokemon Power in the play area
+	ret nc ; return if there isn't a Corphish with an active Pokemon Power in the play area
 	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	ccf

@@ -120,3 +120,91 @@ PoochyenaDescription:
 CarvanhaName:
 	text "Carvanha"
 	done
+
+WhismurName:
+	text "Whismur"
+	done
+
+WhismurDescription:
+	text "Whismur"
+	done
+
+LoudredName:
+	text "Loudred"
+	done
+
+LoudredDescription:
+	text "Loudred"
+	done
+
+ExploudName:
+	text "Exploud"
+	done
+
+ExploudDescription:
+	text "Exploud"
+	done
+
+AzurillName:
+	text "Azurill"
+	done
+
+AzurillDescription:
+	text "Azurill"
+	done
+
+SkittyName:
+	text "Skitty"
+	done
+
+SkittyDescription:
+	text "Skitty"
+	done
+
+DelcattyName:
+	text "Delcatty"
+	done
+
+DelcattyDescription:
+	text "Delcatty"
+	done
+
+SpindaName:
+	text "Spinda"
+	done
+
+SpindaDescription:
+	text "Spinda"
+	done
+
+ZangooseName:
+	text "Zangoose"
+	done
+
+ZangooseDescription:
+	text "Zangoose"
+	done
+
+CastformName:
+	text "Castform"
+	done
+
+CastformDescription:
+	text "Castform"
+	done
+
+KecleonName:
+	text "Kecleon"
+	done
+
+KecleonDescription:
+	text "Kecleon"
+	done
+
+GirafarigName:
+	text "Girafarig"
+	done
+
+GirafarigDescription:
+	text "Girafarig"
+	done

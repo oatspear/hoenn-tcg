@@ -1851,7 +1851,7 @@ QueueStatusCondition:
 	jr z, .cant_induce_status
 	cp CLAW_FOSSIL
 	jr z, .cant_induce_status
-	; Snorlax's Thick Skinned prevents it from being statused...
+	; Swellow's Thick Skinned prevents it from being statused...
 	cp SWELLOW
 	jr nz, .can_induce_status
 	call SwapTurn
@@ -5835,7 +5835,7 @@ MorphEffect:
 ; needs to be a Basic Pokemon that doesn't have
 ; the same ID as the Active Pokemon.
 ; output:
-;	carry = set:  if no Basic Pokemon were found in the deck (other than Ditto)
+;	carry = set:  if no Basic Pokemon were found in the deck (other than Zigzagoon)
 .PickRandomBasicPokemonFromDeck
 	call CreateDeckCardList
 	ret c ; return if the deck is empty
@@ -8215,7 +8215,7 @@ ImakuniEffect:
 	cp CLAW_FOSSIL
 	jr z, .failed
 
-; cannot confuse Snorlax if its Pokemon Power is active
+; cannot confuse Swellow if its Pokemon Power is active
 	cp SWELLOW
 	jr nz, .success
 	call CheckCannotUseDueToStatus

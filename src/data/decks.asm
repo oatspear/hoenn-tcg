@@ -17,7 +17,7 @@ DeckPointers::
 	dw LegendaryMoltresDeck
 	dw LegendaryZapdosDeck
 	dw LegendaryArticunoDeck
-	dw LegendaryDragoniteDeck
+	dw LegendarySlakingDeck
 	dw FirstStrikeDeck
 	dw RockCrusherDeck
 	dw GoGoRainDanceDeck
@@ -951,7 +951,7 @@ LegendaryArticunoDeck:
 	deck_list_end
 	tx LegendaryArticunoDeckName
 
-LegendaryDragoniteDeck:
+LegendarySlakingDeck:
 	deck_list_start
 	card_item WATER_ENERGY,            20
 	card_item DOUBLE_COLORLESS_ENERGY,  4
@@ -973,7 +973,7 @@ LegendaryDragoniteDeck:
 	card_item SWITCH,                   2
 	card_item GAMBLER,                  1
 	deck_list_end
-	tx LegendaryDragoniteDeckName
+	tx LegendarySlakingDeckName
 
 FirstStrikeDeck:
 	deck_list_start

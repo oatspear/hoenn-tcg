@@ -3236,7 +3236,7 @@ MarillCard:
 	db MARILL
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx EeveeName ; pre-evo name
+	tx LinooneName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
@@ -3286,7 +3286,7 @@ AzumarillCard:
 	db AZUMARILL
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx EeveeName ; pre-evo name
+	tx LinooneName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -4386,7 +4386,7 @@ ElectrikeCard:
 	db ELECTRIKE
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx EeveeName ; pre-evo name
+	tx LinooneName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -4436,7 +4436,7 @@ ManectricCard:
 	db MANECTRIC
 	db 80 ; hp
 	db STAGE1 ; stage
-	tx EeveeName ; pre-evo name
+	tx LinooneName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -5886,7 +5886,7 @@ MedititeCard:
 	db MEDITITE
 	db 60 ; hp
 	db STAGE1 ; stage
-	tx EeveeName ; pre-evo name
+	tx LinooneName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -5936,7 +5936,7 @@ MedichamCard:
 	db MEDICHAM
 	db 70 ; hp
 	db STAGE1 ; stage
-	tx EeveeName ; pre-evo name
+	tx LinooneName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 2 ; energies
@@ -9230,7 +9230,7 @@ AbsolCard:
 ZigzagoonCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx ZigzagoonCardGfx ; gfx
-	tx DittoName ; name
+	tx ZigzagoonName ; name
 	db STAR ; rarity
 	db LABORATORY | GB ; sets
 	db ZIGZAGOON
@@ -9259,7 +9259,7 @@ ZigzagoonCard:
 	tx MorphDescriptionCont ; description (cont)
 	db 0 ; damage
 	db RESIDUAL ; category
-	dw DittoMorphEffectCommands ; effect commands
+	dw ZigzagoonMorphEffectCommands ; effect commands
 	db NONE ; flags 1
 	db FLAG_2_BIT_6 ; flags 2
 	db NONE ; flags 3
@@ -9274,19 +9274,19 @@ ZigzagoonCard:
 	db 19 ; level
 	db 1, 0 ; length
 	dw 9 * 10 ; weight
-	tx DittoDescription ; description
+	tx ZigzagoonDescription ; description
 	db 0
 
 LinooneCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx LinooneCardGfx ; gfx
-	tx EeveeName ; name
+	tx LinooneName ; name
 	db CIRCLE ; rarity
 	db EVOLUTION | JUNGLE ; sets
 	db LINOONE
 	db 50 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx ZigzagoonName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 1 ; energies
@@ -9324,13 +9324,13 @@ LinooneCard:
 	db 12 ; level
 	db 1, 0 ; length
 	dw 14 * 10 ; weight
-	tx EeveeDescription ; description
+	tx LinooneDescription ; description
 	db 17
 
 TaillowCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx TaillowCardGfx ; gfx
-	tx PorygonName ; name
+	tx TaillowName ; name
 	db DIAMOND ; rarity
 	db LABORATORY | NONE ; sets
 	db TAILLOW
@@ -9374,19 +9374,19 @@ TaillowCard:
 	db 12 ; level
 	db 2, 7 ; length
 	dw 80 * 10 ; weight
-	tx PorygonDescription ; description
+	tx TaillowDescription ; description
 	db 0
 
 SwellowCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SwellowCardGfx ; gfx
-	tx SnorlaxName ; name
+	tx SwellowName ; name
 	db STAR ; rarity
 	db COLOSSEUM | JUNGLE ; sets
 	db SWELLOW
 	db 90 ; hp
-	db BASIC ; stage
-	dw NONE ; pre-evo name
+	db STAGE1 ; stage
+	tx TaillowName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9395,7 +9395,7 @@ SwellowCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw SnorlaxThickSkinnedEffectCommands ; effect commands
+	dw SwellowThickSkinnedEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9424,13 +9424,13 @@ SwellowCard:
 	db 20 ; level
 	db 6, 11 ; length
 	dw 1014 * 10 ; weight
-	tx SnorlaxDescription ; description
+	tx SwellowDescription ; description
 	db 0
 
 SlakothCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SlakothCardGfx ; gfx
-	tx DratiniName ; name
+	tx SlakothName ; name
 	db DIAMOND ; rarity
 	db MYSTERY | NONE ; sets
 	db SLAKOTH
@@ -9474,19 +9474,19 @@ SlakothCard:
 	db 10 ; level
 	db 5, 11 ; length
 	dw 7 * 10 ; weight
-	tx DratiniDescription ; description
+	tx SlakothDescription ; description
 	db 18
 
 VigorothCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx VigorothCardGfx ; gfx
-	tx DragonairName ; name
+	tx VigorothName ; name
 	db STAR ; rarity
 	db MYSTERY | NONE ; sets
 	db VIGOROTH
 	db 80 ; hp
 	db STAGE1 ; stage
-	tx DratiniName ; pre-evo name
+	tx SlakothName ; pre-evo name
 
 	; attack 1
 	energy COLORLESS, 3 ; energies
@@ -9524,19 +9524,19 @@ VigorothCard:
 	db 33 ; level
 	db 13, 1 ; length
 	dw 36 * 10 ; weight
-	tx DragonairDescription ; description
+	tx VigorothDescription ; description
 	db 16
 
 SlakingCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx SlakingCardGfx ; gfx
-	tx DragoniteName ; name
+	tx SlakingName ; name
 	db STAR ; rarity
 	db PROMOTIONAL | GB ; sets
 	db SLAKING
 	db 100 ; hp
 	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	tx VigorothName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9545,7 +9545,7 @@ SlakingCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9574,19 +9574,19 @@ SlakingCard:
 	db 41 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteLv41Description ; description
+	tx SlakingDescription ; description
 	db 0
 
 WhismurCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx WhismurName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db WHISMUR
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9595,7 +9595,7 @@ WhismurCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteStepInEffectCommands ; effect commands
+	dw SlakingStepInEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9624,19 +9624,19 @@ WhismurCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx WhismurDescription ; description
 	db 0
 
 LoudredCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx LoudredName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db LOUDRED
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db STAGE1 ; stage
+	tx WhismurName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9645,7 +9645,7 @@ LoudredCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9674,19 +9674,19 @@ LoudredCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx LoudredDescription ; description
 	db 0
 
 ExploudCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx ExploudName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db EXPLOUD
 	db 100 ; hp
 	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	tx LoudredName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9695,7 +9695,7 @@ ExploudCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9724,19 +9724,19 @@ ExploudCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx ExploudDescription ; description
 	db 0
 
 AzurillCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx AzurillName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db AZURILL
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BABY ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9745,7 +9745,7 @@ AzurillCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9774,20 +9774,20 @@ AzurillCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx AzurillDescription ; description
 	db 0
 
 
 SkittyCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx SkittyName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db SKITTY
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9796,7 +9796,7 @@ SkittyCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9825,19 +9825,19 @@ SkittyCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx SkittyDescription ; description
 	db 0
 
 DelcattyCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx DelcattyName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db DELCATTY
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db STAGE1 ; stage
+	tx SkittyName ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9846,7 +9846,7 @@ DelcattyCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9875,7 +9875,7 @@ DelcattyCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx DelcattyDescription ; description
 	db 0
 
 DoduoCard:
@@ -9896,7 +9896,7 @@ DoduoCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9946,7 +9946,7 @@ DodrioCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -9981,13 +9981,13 @@ DodrioCard:
 SpindaCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx SpindaName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db SPINDA
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -9996,7 +9996,7 @@ SpindaCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10025,7 +10025,7 @@ SpindaCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx SpindaDescription ; description
 	db 0
 
 SwabluCard:
@@ -10046,7 +10046,7 @@ SwabluCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10081,13 +10081,13 @@ SwabluCard:
 ZangooseCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx ZangooseName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db ZANGOOSE
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -10096,7 +10096,7 @@ ZangooseCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10125,7 +10125,7 @@ ZangooseCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx ZangooseDescription ; description
 	db 0
 
 IgglybuffCard:
@@ -10146,7 +10146,7 @@ IgglybuffCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10196,7 +10196,7 @@ JigglypuffCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10246,7 +10246,7 @@ WigglytuffCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10281,13 +10281,13 @@ WigglytuffCard:
 CastformCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx CastformName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db CASTFORM
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -10296,7 +10296,7 @@ CastformCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10325,19 +10325,19 @@ CastformCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx CastformDescription ; description
 	db 0
 
 KecleonCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx KecleonName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db KECLEON
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -10346,7 +10346,7 @@ KecleonCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10375,19 +10375,19 @@ KecleonCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx KecleonDescription ; description
 	db 0
 
 GirafarigCard:
 	db TYPE_PKMN_COLORLESS ; type
 	gfx WhismurCardGfx ; gfx
-	tx DragoniteName ; name
+	tx GirafarigName ; name
 	db STAR ; rarity
 	db MYSTERY | FOSSIL ; sets
 	db GIRAFARIG
 	db 100 ; hp
-	db STAGE2 ; stage
-	tx DragonairName ; pre-evo name
+	db BASIC ; stage
+	dw NONE ; pre-evo name
 
 	; attack 1
 	energy 0 ; energies
@@ -10396,7 +10396,7 @@ GirafarigCard:
 	dw NONE ; description (cont)
 	db 0 ; damage
 	db POKEMON_POWER ; category
-	dw DragoniteHealingWindEffectCommands ; effect commands
+	dw SlakingHealingWindEffectCommands ; effect commands
 	db NONE ; flags 1
 	db NONE ; flags 2
 	db NONE ; flags 3
@@ -10425,7 +10425,7 @@ GirafarigCard:
 	db 45 ; level
 	db 7, 3 ; length
 	dw 463 * 10 ; weight
-	tx DragoniteDescription ; description
+	tx GirafarigDescription ; description
 	db 0
 	
 ArchieCard:

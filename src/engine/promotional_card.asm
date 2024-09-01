@@ -1,6 +1,6 @@
 ; shows screen with the promotional card and received text
 ; depending on input a
-; if $0 = Legendary Molters, Articuno, Zapdos and Dragonite cards
+; if $0 = Legendary Molters, Articuno, Zapdos and Slaking cards
 ; otherwise, a card ID
 _ShowPromotionalCardScreen:
 	push af

@@ -31,4 +31,5 @@
 # *disasm.py output file
 *disasm_output.asm
 
+**/.DS_Store
 move-rom.sh

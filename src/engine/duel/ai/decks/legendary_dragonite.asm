@@ -1,4 +1,4 @@
-AIActionTable_LegendaryDragonite:
+AIActionTable_LegendarySlaking:
 	dw .do_turn ; unused
 	dw .do_turn
 	dw .start_duel
@@ -7,7 +7,7 @@ AIActionTable_LegendaryDragonite:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryDragonite
+	call AIDoTurn_LegendarySlaking
 	ret
 
 .start_duel
@@ -80,7 +80,7 @@ AIActionTable_LegendaryDragonite:
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
-AIDoTurn_LegendaryDragonite:
+AIDoTurn_LegendarySlaking:
 ; initialize variables
 	call InitAITurnVars
 	ld a, AI_TRAINER_CARD_PHASE_01

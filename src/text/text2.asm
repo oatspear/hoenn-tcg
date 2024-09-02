@@ -566,8 +566,8 @@ LegendaryArticunoDeckName:
 	text "Legendary Articuno"
 	done
 
-LegendaryDragoniteDeckName:
-	text "Legendary Dragonite"
+LegendarySlakingDeckName:
+	text "Legendary Slaking"
 	done
 
 ImRonaldDeckName:
@@ -1471,8 +1471,8 @@ LegendaryArticunoText:
 	text "Legendary Articuno"
 	done
 
-LegendaryDragoniteText:
-	text "Legendary Dragonite"
+LegendarySlakingText:
+	text "Legendary Slaking"
 	done
 
 MysteriousPokemonText:
@@ -1556,7 +1556,7 @@ RainDancerDescriptionText:
 
 CutePokemonDescriptionText:
 	text "A deck of cute Pokémon such as"
-	line "Pikachu and Eevee."
+	line "Pikachu and Linoone."
 	done
 
 PokemonFluteDescriptionText:
@@ -1719,9 +1719,9 @@ LegendaryArticunoDescriptionText:
 	line "Legendary Articuno!"
 	done
 
-LegendaryDragoniteDescriptionText:
+LegendarySlakingDescriptionText:
 	text "Heal your Pokémon with the"
-	line "Legendary Dragonite!"
+	line "Legendary Slaking!"
 	done
 
 MysteriousPokemonDescriptionText:

@@ -113,7 +113,7 @@ OpponentTitlesAndDeckNames:
 	tx LegendaryArticunoDeckName
 
 	tx GrandMasterText
-	tx LegendaryDragoniteDeckName
+	tx LegendarySlakingDeckName
 
 	tx FightingClubMasterText
 	tx FirstStrikeDeckName

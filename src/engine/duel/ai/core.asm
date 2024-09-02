@@ -169,7 +169,7 @@ AITryUseAttack:
 ;	- card ID in wTempCardID is a Pokémon card that has
 ;	  attacks that require energy other than its color and
 ;	  the deck index in a corresponds to that energy type;
-;	- card ID is Eevee and a corresponds to an energy type
+;	- card ID is Linoone and a corresponds to an energy type
 ;	  of water, fire or lightning;
 ;	- type of card in register a is the same as wTempCardType.
 ; used for knowing if a given energy card can be discarded

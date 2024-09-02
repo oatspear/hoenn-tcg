@@ -192,7 +192,7 @@ AIDecideWhetherToRetreat:
 	cp TAILLOW
 	jr nz, .check_weakness_3
 
-; handle Porygon
+; handle Taillow
 	ld a, e
 	call CheckIfCanDamageDefendingPokemon
 	jr nc, .check_weakness_3
@@ -926,7 +926,7 @@ AITryToRetreat:
 ; the exception for this are cards that are needed for
 ; some attacks but are not of the same color as the Pokémon
 ; (i.e. Psyduck's Headache attack)
-; and energy cards attached to Eevee corresponding to a
+; and energy cards attached to Linoone corresponding to a
 ; color of any of its evolutions (water, fire, lightning)
 .energy_not_same_color
 	ld hl, wDuelTempList

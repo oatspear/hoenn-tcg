@@ -496,9 +496,9 @@ HandleAIPkmnPowers:
 
 ; checks whether AI uses Step In.
 ; Step In is only activated if the AI's Active Pokemon is about to be KO'd
-; the Benched Dragonite must also have 4 Energy so that it can attack
+; the Benched Slaking must also have 4 Energy so that it can attack
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Dragonite.
+;	c = Play Area location (PLAY_AREA_*) of Slaking.
 HandleAIStepIn:
 	ld a, c
 	ldh [hTemp_ffa0], a
@@ -512,7 +512,7 @@ HandleAIStepIn:
 	ld a, [wTotalAttachedEnergies]
 	cp 4
 	ccf
-	ret nc ; Dragonite doesn't have enough Energy to attack
+	ret nc ; Slaking doesn't have enough Energy to attack
 	ld a, [wce08]
 	ldh [hTempCardIndex_ff9f], a
 	ld a, OPPACTION_USE_PKMN_POWER

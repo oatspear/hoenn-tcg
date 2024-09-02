@@ -2088,11 +2088,11 @@ AIDecide_PokemonBreeder:
 	push de
 	farcall CheckIfCanEvolveInto_BasicToStage2
 	pop de
-	call nc, .HandleDragoniteLv41Evolution
+	call nc, .HandleSlakingLv41Evolution
 	call nc, .can_evolve
 
 ; not possible to evolve or returned carry
-; when handling DragoniteLv41 evolution
+; when handling SlakingLv41 evolution
 	pop bc
 	inc e
 	dec c
@@ -2171,12 +2171,12 @@ AIDecide_PokemonBreeder:
 	or a
 	ret
 
-; return carry if card is evolving to DragoniteLv41 and if
+; return carry if card is evolving to SlakingLv41 and if
 ; - the card that is evolving is not Arena card and
 ;   number of damage counters in Play Area is under 8;
 ; - the card that is evolving is Arena card and has under 5
 ;   damage counters or has less than 3 energy cards attached.
-.HandleDragoniteLv41Evolution
+.HandleSlakingLv41Evolution
 	push af
 	push bc
 	push de
@@ -4001,7 +4001,7 @@ AIDecide_ScoopUp:
 	ret
 
 ; this deck will use Scoop Up on a benched ArticunoLv37.
-; it checks if the defending Pokemon is a Snorlax,
+; it checks if the defending Pokemon is a Swellow,
 ; but interestingly does not check for Muk in both Play Areas.
 ; will also use Scoop Up on
 .HandleLegendaryArticuno
@@ -4048,7 +4048,7 @@ AIDecide_ScoopUp:
 	jr .decide_switch
 
 .articuno_bench
-; skip if the defending card is Snorlax
+; skip if the defending card is Swellow
 	push af
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
@@ -5412,7 +5412,7 @@ AIDecide_PokemonTrader:
 	cp LEGENDARY_ARTICUNO_DECK_ID
 	jr z, AIDecide_PokemonTrader_LegendaryArticuno
 	cp LEGENDARY_SLAKING_DECK_ID
-	jp z, AIDecide_PokemonTrader_LegendaryDragonite
+	jp z, AIDecide_PokemonTrader_LegendarySlaking
 	cp LEGENDARY_RONALD_DECK_ID
 	jp z, AIDecide_PokemonTrader_LegendaryRonald
 	cp BLISTERING_POKEMON_DECK_ID
@@ -5487,7 +5487,7 @@ AIDecide_PokemonTrader_LegendaryArticuno:
 	ret c ; found Seviper
 	ld a, ZIGZAGOON
 	call CheckIfHasCardIDInHand
-	ret c ; found Ditto
+	ret c ; found Zigzagoon
 	ld a, PICHU
 	call CheckIfHasCardIDInHand
 	ret c ; found Articuno
@@ -5497,7 +5497,7 @@ AIDecide_PokemonTrader_LegendaryArticuno:
 	or a
 	ret
 
-AIDecide_PokemonTrader_LegendaryDragonite:
+AIDecide_PokemonTrader_LegendarySlaking:
 ; if has less than 5 cards of energy
 ; and of Pokemon in hand/Play Area,
 ; target a Crawdaunt in deck.
@@ -5570,7 +5570,7 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	ld [wce1a], a
 	ld a, VIGOROTH
 	call CheckIfHasCardIDInHand
-	ret c ; found Dragonair
+	ret c ; found Vigoroth
 	ld a, SHELGON
 	call CheckIfHasCardIDInHand
 	ret c ; found Charmeleon
@@ -5585,7 +5585,7 @@ AIDecide_PokemonTrader_LegendaryDragonite:
 	ret c ; found Charmander
 	ld a, SLAKOTH
 	call CheckIfHasCardIDInHand
-	ret c ; found Dratini
+	ret c ; found Slakoth
 	; none found
 
 .no_carry

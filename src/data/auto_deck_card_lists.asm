@@ -1164,7 +1164,7 @@ LegendaryArticunoCardList:
 	card_item GAMBLER,           1
 	deck_list_end
 
-LegendaryDragoniteCardList:
+LegendarySlakingCardList:
 	deck_list_start
 	card_item WATER_ENERGY,            20
 	card_item DOUBLE_COLORLESS_ENERGY,  4

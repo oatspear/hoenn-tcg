@@ -1122,8 +1122,8 @@ FlareonName:
 	text "Flareon"
 	done
 
-EeveeName:
-	text "Eevee"
+LinooneName:
+	text "Linoone"
 	done
 
 BiteName:

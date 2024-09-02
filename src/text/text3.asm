@@ -1409,8 +1409,8 @@ ArticunoLegendaryCardName:
 	text "<Lv>37 Articuno"
 	done
 
-DragoniteLegendaryCardName:
-	text "<Lv>41 Dragonite"
+SlakingLegendaryCardName:
+	text "<Lv>41 Slaking"
 	done
 
 SuperEnergyRetrievalTradeCardName:

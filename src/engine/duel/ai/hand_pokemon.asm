@@ -393,7 +393,7 @@ AIDecideEvolution:
 	ret
 
 ; determine AI score for evolving
-; Charmeleon, Magikarp, Dragonair and Numel
+; Charmeleon, Magikarp, Vigoroth and Numel
 ; in certain decks
 AIDecideSpecialEvolutions:
 ; check if deck applies
@@ -474,7 +474,7 @@ AIDecideSpecialEvolutions:
 	or a ; active card
 	jr z, .is_active
 
-; if Dragonair is benched, check all Pokémon in Play Area
+; if Vigoroth is benched, check all Pokémon in Play Area
 ; and sum all the damage in HP of all cards
 ; if this result is >= 70, check if there's
 ; a Muk in any duelist's Play Area
@@ -500,7 +500,7 @@ AIDecideSpecialEvolutions:
 	ld a, 10
 	jp SubFromAIScore
 
-; if Dragonair is active, check its damage in HP
+; if Vigoroth is active, check its damage in HP
 ; if this result is >= 50,
 ; and if at least 3 energy cards attached,
 ; check if there's a Muk in any duelist's Play Area
@@ -592,7 +592,7 @@ AIDecidePlayLegendaryBirds:
 	ld a, CAMERUPT
 	call CountPokemonIDInBothPlayAreas
 	jr c, .subtract
-	; checks if player's active card is Snorlax
+	; checks if player's active card is Swellow
 	ld a, DUELVARS_ARENA_CARD
 	call GetNonTurnDuelistVariable
 	call SwapTurn

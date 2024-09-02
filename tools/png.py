@@ -475,7 +475,7 @@ class Writer:
         # its purpose is to act as a dummy so that
         # ``Writer(x, y, **info)`` works, where `info` is a dictionary
         # returned by Reader.read and friends.
-        # Ditto for `colormap`.
+        # Zigzagoon for `colormap`.
 
         width, height = check_sizes(size, width, height)
         del size

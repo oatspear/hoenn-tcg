@@ -1116,32 +1116,32 @@ Text0732:
 	text "Hello, <RAMNAME>."
 	line "I suppose you're here because"
 	line "you heard that I was looking for"
-	line "a Ditto this time..."
+	line "a Zigzagoon this time..."
 	line "I'm thinking about trading"
 	line "my Flying Pikachu for one."
-	line "Do you have a Ditto?"
+	line "Do you have a Zigzagoon?"
 	done
 
 Text0733:
 	text "Hello, <RAMNAME>."
 	line "Are you enjoying the Pokémon TCG?"
-	line "I'm looking for a Ditto this time..."
+	line "I'm looking for a Zigzagoon this time..."
 	line "I'm thinking about trading"
 	line "my Flying Pikachu for one."
-	line "Do you have a Ditto?"
+	line "Do you have a Zigzagoon?"
 	done
 
 Text0734:
 	text "Hmmm..."
-	line "I see you don't have a Ditto card."
+	line "I see you don't have a Zigzagoon card."
 	line "I will only trade my"
-	line "Flying Pikachu for a Ditto."
+	line "Flying Pikachu for a Zigzagoon."
 	line "Please trade with me"
 	line "some other time..."
 	done
 
 Text0735:
-	text "Hmmm...I see all your Ditto cards"
+	text "Hmmm...I see all your Zigzagoon cards"
 	line "are in your deck."
 	line "I can't very well take a card"
 	line "you are using in duels."
@@ -1150,12 +1150,12 @@ Text0735:
 	done
 
 Text0736:
-	text "<RAMNAME> traded a Ditto"
+	text "<RAMNAME> traded a Zigzagoon"
 	line "for a Flying Pikachu!"
 	done
 
 Text0737:
-	text "Thank you for this Ditto."
+	text "Thank you for this Zigzagoon."
 	line "You've been a great help!"
 	done
 

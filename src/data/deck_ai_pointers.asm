@@ -15,7 +15,7 @@ DeckAIPointerTable::
 	dw AIActionTable_LegendaryMoltres    ; LEGENDARY_MOLTRES_DECK
 	dw AIActionTable_LegendaryZapdos     ; LEGENDARY_ZAPDOS_DECK
 	dw AIActionTable_LegendaryArticuno   ; LEGENDARY_ARTICUNO_DECK
-	dw AIActionTable_LegendaryDragonite  ; LEGENDARY_SLAKING_DECK
+	dw AIActionTable_LegendarySlaking  ; LEGENDARY_SLAKING_DECK
 	dw AIActionTable_FirstStrike         ; FIRST_STRIKE_DECK
 	dw AIActionTable_RockCrusher         ; ROCK_CRUSHER_DECK
 	dw AIActionTable_GoGoRainDance       ; GO_GO_RAIN_DANCE_DECK

@@ -1844,7 +1844,7 @@ LegendaryCards:
 	tx ArticunoLegendaryCardName
 
 	db SLAKING
-	tx DragoniteLegendaryCardName
+	tx SlakingLegendaryCardName
 
 LegendaryCardEvents:
 	db EVENT_RECEIVED_ZAPDOS

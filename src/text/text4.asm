@@ -279,7 +279,7 @@ Mail15Part1Text:
 	line "The final duel is here!"
 	line "I have some information on Rod,"
 	line "the leader of the Grand Masters."
-	line "Rod uses the Legendary Dragonite."
+	line "Rod uses the Legendary Slaking."
 	line "The longer the duel takes, the"
 	line "greater the advantages for his"
 	line "deck. His workhorse will be his"

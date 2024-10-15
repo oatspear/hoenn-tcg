@@ -1041,8 +1041,8 @@ AbsolDescription:
 	line "with its long tails."
 	done
 
-DittoName:
-	text "Ditto"
+ZigzagoonName:
+	text "Zigzagoon"
 	done
 
 MorphName:
@@ -1051,14 +1051,14 @@ MorphName:
 
 MorphDescription:
 	text "Remove all damage counters from"
-	line "Ditto. For the rest of the game,"
-	line "replace Ditto with a copy of a Basic"
-	line "Pokémon card (other than Ditto)"
+	line "Zigzagoon. For the rest of the game,"
+	line "replace Zigzagoon with a copy of a Basic"
+	line "Pokémon card (other than Zigzagoon)"
 	line "chosen at random from your deck."
 	done
 
 MorphDescriptionCont:
-	text "Ditto is no longer Asleep, Confused,"
+	text "Zigzagoon is no longer Asleep, Confused,"
 	line "Paralyzed, Poisoned, or anything"
 	line "else that might be the result of an"
 	line "attack (just as if you had evolved"
@@ -1069,7 +1069,7 @@ TransformName:
 	text "Transform"
 	done
 
-DittoDescription:
+ZigzagoonDescription:
 	text "When it spots an enemy, its body"
 	line "transfigures into an almost perfect"
 	line "copy of its opponent."
@@ -1081,7 +1081,7 @@ TailWagName:
 
 TailWagDescription:
 	text "Flip a coin. If heads, the Defending"
-	line "Pokémon can't attack Eevee during"
+	line "Pokémon can't attack Linoone during"
 	line "your opponent's next turn."
 	line "(Benching or evolving either Pokémon"
 	line "ends this effect.)"
@@ -1091,14 +1091,14 @@ EvolutionName:
 	text "Evolution"
 	done
 
-EeveeDescription:
+LinooneDescription:
 	text "Its genetic code is irregular."
 	line "It may mutate if it is exposed to"
 	line "radiation from elemental stones."
 	done
 
-PorygonName:
-	text "Porygon"
+TaillowName:
+	text "Taillow"
 	done
 
 Conversion1Name:
@@ -1117,7 +1117,7 @@ Conversion2Name:
 	done
 
 Conversion2Description:
-	text "Change Porygon's Resistance to a"
+	text "Change Taillow's Resistance to a"
 	line "type of your choice other than"
 	line "Colorless."
 	done
@@ -1126,14 +1126,14 @@ VirtualName:
 	text "Virtual"
 	done
 
-PorygonDescription:
+TaillowDescription:
 	text "A Pokémon that consists entirely of"
 	line "programming code. Capable of moving"
 	line "freely in cyberspace."
 	done
 
-SnorlaxName:
-	text "Snorlax"
+SwellowName:
+	text "Swellow"
 	done
 
 ThickSkinnedName:
@@ -1141,9 +1141,9 @@ ThickSkinnedName:
 	done
 
 ThickSkinnedDescription:
-	text "Snorlax can't become Asleep,"
+	text "Swellow can't become Asleep,"
 	line "Confused, Paralyzed, or Poisoned."
-	line "This power can't be used if Snorlax"
+	line "This power can't be used if Swellow"
 	line "is already Asleep, Confused, or"
 	line "Paralyzed."
 	done
@@ -1156,38 +1156,38 @@ SleepingName:
 	text "Sleeping"
 	done
 
-SnorlaxDescription:
+SwellowDescription:
 	text "Very lazy. Just eats and sleeps."
 	line "As its rotund bulk builds,"
 	line "it becomes steadily more slothful."
 	done
 
-DratiniName:
-	text "Dratini"
+SlakothName:
+	text "Slakoth"
 	done
 
-DratiniDescription:
+SlakothDescription:
 	text "Long considered a mythical Pokémon"
 	line "until recently, when a small colony"
 	line "was found living underwater."
 	done
 
-DragonairName:
-	text "Dragonair"
+VigorothName:
+	text "Vigoroth"
 	done
 
 SlamName:
 	text "Slam"
 	done
 
-DragonairDescription:
+VigorothDescription:
 	text "A mystical Pokémon that exudes a"
 	line "gentle aura. Has the ability to"
 	line "change climate conditions."
 	done
 
-DragoniteName:
-	text "Dragonite"
+SlakingName:
+	text "Slaking"
 	done
 
 HealingWindName:
@@ -1195,7 +1195,7 @@ HealingWindName:
 	done
 
 HealingWindDescription:
-	text "When you put Dragonite into play,"
+	text "When you put Slaking into play,"
 	line "remove 2 damage counters from each"
 	line "of your Pokémon. If a Pokémon has"
 	line "fewer damage counters than that,"
@@ -1203,7 +1203,7 @@ HealingWindDescription:
 	line "Pokémon."
 	done
 
-DragoniteLv41Description:
+SlakingLv41Description:
 	text "It is said that this Pokémon lives"
 	line "somewhere in the sea and that it"
 	line "flies. However, it is only a rumor."
@@ -1215,7 +1215,7 @@ StepInName:
 
 StepInDescription:
 	text "Once during your turn (before your"
-	line "attack), if Dragonite is on your"
+	line "attack), if Slaking is on your"
 	line "Bench, you may switch it with your"
 	line "Active Pokémon."
 	done
@@ -1225,7 +1225,7 @@ DoubleAttackX40Description:
 	line "40 damage times the number of heads."
 	done
 
-DragoniteDescription:
+SlakingDescription:
 	text "An extremely rarely seen marine"
 	line "Pokémon. Its intelligence is said"
 	line "to match that of humans."

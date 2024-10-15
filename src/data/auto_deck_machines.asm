@@ -79,7 +79,7 @@ AutoDeckMachineEntries:
 	auto_deck LegendaryMoltresCardList,     LegendaryMoltresText,     LegendaryMoltresDescriptionText
 	auto_deck LegendaryZapdosCardList,      LegendaryZapdosText,      LegendaryZapdosDescriptionText
 	auto_deck LegendaryArticunoCardList,    LegendaryArticunoText,    LegendaryArticunoDescriptionText
-	auto_deck LegendaryDragoniteCardList,   LegendaryDragoniteText,   LegendaryDragoniteDescriptionText
+	auto_deck LegendarySlakingCardList,   LegendarySlakingText,   LegendarySlakingDescriptionText
 	auto_deck MysteriousPokemonCardList,    MysteriousPokemonText,    MysteriousPokemonDescriptionText
 
 	assert_table_length NUM_DECK_MACHINE_SLOTS * NUM_DECK_MACHINES

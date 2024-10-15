@@ -777,7 +777,7 @@ LegendaryPokemonCardsVol4BookName:
 
 LegendaryPokemonCardsVol4BookText:
 	text "The fourth Legendary Pokémon Card"
-	line "is the <Lv>41 Dragonite."
+	line "is the <Lv>41 Slaking."
 	line "When played, its Healing Wind power"
 	line "will remove 2 damage counters from"
 	line "each of the player's Pokémon!"

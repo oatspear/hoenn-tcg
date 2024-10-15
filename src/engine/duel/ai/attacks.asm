@@ -551,7 +551,7 @@ GetAIScoreOfAttack:
 	call GetCardIDFromDeckIndex
 	call SwapTurn
 	ld a, e
-	; skip if player has Snorlax
+	; skip if player has Swellow
 	cp SWELLOW
 	jp z, .handle_special_atks
 

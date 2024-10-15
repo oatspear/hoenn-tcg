@@ -930,8 +930,8 @@ CheckSpecificDecksToAttachDoubleColorless:
 	or a
 	ret
 
-; if playing Legendary Dragonite deck,
-; check for Charmander and Dratini.
+; if playing Legendary Slaking deck,
+; check for Charmander and Slakoth.
 .legendary_dragonite_deck
 	call .get_id
 	cp BAGON
@@ -949,7 +949,7 @@ CheckSpecificDecksToAttachDoubleColorless:
 	jr .no_carry
 
 ; if playing Legendary Ronald deck,
-; check for Dratini.
+; check for Slakoth.
 .legendary_ronald_deck
 	call .get_id
 	cp SLAKOTH

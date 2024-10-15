@@ -742,7 +742,7 @@ MagneticStormEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, ShuffleAttachedEnergyEffect
 	db  $00
 
-DittoMorphEffectCommands:
+ZigzagoonMorphEffectCommands:
 	dbw EFFECTCMDTYPE_AFTER_DAMAGE, MorphEffect
 	db  $00
 
@@ -899,16 +899,16 @@ DodrioRetreatAidEffectCommands:
 	db  $00
 
 ; actual effect handled in the effect functions that cause special conditions
-SnorlaxThickSkinnedEffectCommands:
+SwellowThickSkinnedEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryEF ; passive pokemon power
 	db  $00
 
-DragoniteStepInEffectCommands:
+SlakingStepInEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_2, StepInCheck
 	dbw EFFECTCMDTYPE_BEFORE_DAMAGE, StepIn_SwitchEffect
 	db  $00
 
-DragoniteHealingWindEffectCommands:
+SlakingHealingWindEffectCommands:
 	dbw EFFECTCMDTYPE_INITIAL_EFFECT_1, SetCarryEF ; passive pokemon power
 	dbw EFFECTCMDTYPE_PKMN_POWER_TRIGGER, HealingWind_PlayAreaHealEffect
 	db  $00

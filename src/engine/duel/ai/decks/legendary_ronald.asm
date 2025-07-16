@@ -129,7 +129,7 @@ AIDoTurn_LegendaryRonald:
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wOncePerTurnActions]
 	or a
 	call z, AIProcessAndTryToPlayEnergy
 .skip_attach_energy_1
@@ -180,7 +180,7 @@ AIDoTurn_LegendaryRonald:
 	call AIProcessRetreat
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wOncePerTurnActions]
 	or a
 	call z, AIProcessAndTryToPlayEnergy
 .skip_attach_energy_2

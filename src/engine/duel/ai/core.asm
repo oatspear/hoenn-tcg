@@ -549,7 +549,7 @@ CheckIfCardCanBePlayed:
 	jr z, .trainer_card
 
 ; energy card
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wOncePerTurnActions]
 	or a
 	ret z
 	scf

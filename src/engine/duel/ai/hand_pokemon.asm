@@ -211,7 +211,7 @@ AIDecideEvolution:
 	jr z, .check_evolution_ko
 	ld a, 2
 	call AIDiscourage
-	ld a, [wAlreadyPlayedEnergy]
+	ld a, [wOncePerTurnActions]
 	or a
 	jr nz, .check_evolution_ko
 	call LookForEnergyNeededInHand

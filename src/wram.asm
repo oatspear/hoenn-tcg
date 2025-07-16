@@ -517,7 +517,7 @@ wDuelType:: ; cc09
 wGotHeadsFromSandAttackOrSmokescreenCheck:: ; cc0a
 	ds $1
 
-wAlreadyPlayedEnergy:: ; cc0b
+wOncePerTurnActions:: ; cc0b
 	ds $1
 
 ; set to TRUE if the confusion check coin toss in AttemptRetreat is tails

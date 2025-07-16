@@ -1762,3 +1762,7 @@ ThisDeckCanOnlyBeBuiltIfYouDismantleText:
 	text "This Deck can only be built if"
 	line "you dismantle another Deck."
 	done
+
+AlreadyRetreatedThisTurnText:
+	text "Already retreated this turn."
+	done

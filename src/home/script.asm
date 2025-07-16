@@ -1,5 +1,3 @@
-; output:
-;	carry = set:  if ?
 HandleMoveModeAPress::
 	ldh a, [hBankROM]
 	push af
@@ -55,14 +53,11 @@ HandleMoveModeAPress::
 	pop af
 	call BankswitchROM
 	ld l, MAP_SCRIPT_PRESSED_A
-	jp CallMapScriptPointerIfExists ; this function is in Bank $03
+	jp CallMapScriptPointerIfExists
 
-
-; sets a map script pointer in hl given the current map in wCurMap and which sub-script is in l
-; preserves bc and de
-; output:
-;	hl = map script pointer
-;	carry = set:  if the pointer was found
+; returns a map script pointer in hl given
+; current map in wCurMap and which sub-script in l
+; sets c if pointer is found
 GetMapScriptPointer::
 	push bc
 	push hl
@@ -96,22 +91,6 @@ GetMapScriptPointer::
 	pop bc
 	ret
 
-
-; loads some configurations for the duel against
-; the NPC whose deck ID is stored in wNPCDuelDeckID.
-; this includes NPC portrait, his/her name text ID, and the number of prize cards.
-; this was used in testing since these configurations
-; are stored in the script-related NPC data for normal gameplay.
-; preserves all registers except af
-; input:
-;	[wNPCDuelDeckID] = NPC's deck ID (*_DECK constant)
-; output:
-;	carry = set:  if a duel configuration was found for the given NPC deck ID
-GetNPCDuelConfigurations::
-	farcall _GetNPCDuelConfigurations
-	ret
-
-
 ; finds a Script from the first byte and puts the next two bytes (usually arguments?) into cb
 RunOverworldScript::
 	ld hl, wScriptPointer
@@ -140,8 +119,6 @@ RunOverworldScript::
 	pop bc
 	jp hl
 
-
-; preserves all registers except af
 ResetAnimationQueue::
 	ldh a, [hBankROM]
 	push af
@@ -151,8 +128,6 @@ ResetAnimationQueue::
 	pop af
 	jp BankswitchROM
 
-
-; preserves de
 FinishQueuedAnimations::
 	ldh a, [hBankROM]
 	push af
@@ -161,24 +136,11 @@ FinishQueuedAnimations::
 	call ClearAndDisableQueuedAnimations
 	jr c, .skip_clear_frame_func
 	xor a
-	ld hl, wDoFrameFunction
-	ld [hli], a
-	ld [hl], a
+	ld [wDoFrameFunction + 0], a
+	ld [wDoFrameFunction + 1], a
 .skip_clear_frame_func
-	call ZeroObjectPositionsAndToggleOAMCopy
+	call ZeroObjectPositions
+	ld a, 1
+	ld [wVBlankOAMCopyToggle], a
 	pop af
 	jp BankswitchROM
-
-
-;----------------------------------------
-;        UNREFERENCED FUNCTIONS
-;----------------------------------------
-;
-;Func_3b11::
-;	ldh a, [hBankROM]
-;	push af
-;	ld a, BANK(_GameLoop)
-;	call BankswitchROM
-;	call _GameLoop
-;	pop af
-;	jp BankswitchROM

@@ -1,12 +1,10 @@
 ; timer interrupt handler
-; preserves all registers
 TimerHandler::
 	push af
 	push hl
 	push de
 	push bc
 	ei
-	call SerialTimerHandler
 	; only trigger every fourth interrupt ≈ 60.24 Hz
 	ld hl, wTimerCounter
 	ld a, [hl]
@@ -37,9 +35,7 @@ TimerHandler::
 	pop af
 	reti
 
-
-; increments play time counter by a tick
-; preserves bc and de
+; increment play time counter by a tick
 IncrementPlayTimeCounter::
 	ld a, [wPlayTimeCounterEnable]
 	or a
@@ -69,9 +65,7 @@ IncrementPlayTimeCounter::
 	inc [hl]
 	ret
 
-
 ; setup timer to 16384/68 ≈ 240.94 Hz
-; preserves de and hl
 SetupTimer::
 	ld b, -68 ; Value for Normal Speed
 	call CheckForCGB
@@ -89,10 +83,7 @@ SetupTimer::
 	ldh [rTAC], a
 	ret
 
-
-; preserves all registers except af
-; output:
-;	carry = set:  if the console isn't a Game Boy Color
+; return carry if not CGB
 CheckForCGB::
 	ld a, [wConsole]
 	cp CONSOLE_CGB

@@ -57,10 +57,7 @@ ROMX $06
 	"Menus 4"
 	"Effect Commands"
 	"Animation Commands"
-	"IR Communications Core"
-	"Sprite Animations VBlank"
 	"Starter Deck"
-	"Link Functions"
 	"Promotional Card"
 	"Booster Pack Menu"
 	"Input Name"
@@ -72,17 +69,15 @@ ROMX $07
 	"Intro Sequence"
 	"Credits Sequence"
 	"Booster Packs"
-	"Coin Toss"
 ROMX $08
 	"AI Logic 2"
-ROMX $09
-	"Effect Functions"
 ROMX $0a
-	"Effect Functions 2"
-ROMX $0b
-	"Decks"
-ROMX $0c
+	"Card Pointers"
 	"Cards"
+ROMX $0b
+	"Effect Functions"
+ROMX $0c
+	"Decks"
 ROMX $0d
 	"Text 1"
 ROMX $0e
@@ -109,12 +104,6 @@ ROMX $18
 	"Text 12"
 ROMX $19
 	"Text 13"
-ROMX $1a
-	"Text 14"
-ROMX $1b
-	"Text Offsets"
-ROMX $1c
-	"SGB"
 ROMX $1d
 	"Gfx 1"
 ROMX $1e
@@ -142,17 +131,15 @@ ROMX $29
 	"Gfx 11"
 ROMX $2a
 	"Gfx 12"
-ROMX $2b
 	"Anims 1"
-ROMX $2c
+ROMX $2b
 	"Anims 2"
-ROMX $2d
+ROMX $2c
 	"Anims 3"
-ROMX $2e
+ROMX $2d
 	"Anims 4"
-ROMX $2f
 	"Palettes1"
-ROMX $30
+ROMX $2e
 	"Palettes2"
 ROMX $31
 	"Card Gfx 1"
@@ -187,13 +174,14 @@ ROMX $3f
 WRAM0
 	"WRAM0"
 	"WRAM0 Duels 1"
+	org $c600
 	"WRAM0 Text Engine"
 	"WRAM0 1"
-	"WRAM0 Serial Transfer"
 	"WRAM0 Duels 2"
 	"WRAM0 2"
 WRAMX 1
 	"WRAM1"
+	org $dd80
 	"WRAM1 Audio"
 VRAM $00
 	"VRAM0"
@@ -201,6 +189,10 @@ VRAM $01
 	"VRAM1"
 SRAM $00
 	"SRAM0"
+	org $a100
+	"Card and Deck SRAM"
+	org $b800
+	"General Data SRAM"
 SRAM $01
 	"SRAM1"
 SRAM $02

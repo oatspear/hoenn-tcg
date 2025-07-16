@@ -1,18 +1,3 @@
-HorseaName:
-	text "Horsea"
-	done
-
-OpponentAttackMayDoNothingDescription:
-	text "If the Defending Pokémon tries to"
-	line "attack during your opponent's next"
-	line "turn, your opponent flips a coin."
-	line "If tails, that attack does nothing."
-	done
-
-DragonName:
-	text "Dragon"
-	done
-
 HorseaDescription:
 	text "Known to shoot down flying bugs with"
 	line "precision blasts of ink from the"
@@ -33,7 +18,7 @@ SeadrasWaterGunDescription:
 
 SeadrasAgilityDescription:
 	text "Flip a coin. If heads, during your"
-	line "opponent's next turn, prevent all"
+	line "opponent's next turn, prevent all "
 	line "effects of attacks, including"
 	line "damage, done to Seadra."
 	done
@@ -311,8 +296,8 @@ FreezeName:
 
 ArticunoLv35Description:
 	text "A legendary bird Pokémon that is"
-	line "said to appear to doomed people"
-	line "who are lost in icy mountains."
+	line "said to appear to doomed people who"
+	line "are lost in icy mountains."
 	done
 
 QuickfreezeName:
@@ -336,7 +321,8 @@ IceBreathDescription:
 	line "Don't apply Weakness and Resistance"
 	line "for this attack. (Any other effects"
 	line "that would happen after applying"
-	line "Weakness/Resistance still happen.)"
+	line "Weakness and Resistance still"
+	line "happen.)"
 	done
 
 ArticunoLv37Description:
@@ -368,8 +354,8 @@ MouseName:
 
 PikachuLv12Description:
 	text "When several of these Pokémon"
-	line "gather, their electricity can"
-	line "cause lightning storms."
+	line "gather, their electricity can cause"
+	line "lightning storms."
 	done
 
 SparkName:
@@ -426,8 +412,8 @@ FlyDescription:
 	text "Flip a coin. If heads, during your"
 	line "opponent's next turn, prevent all"
 	line "effects of attacks, including"
-	line "damage, done to Flying Pikachu."
-	line "If tails, this attack does nothing"
+	line "damage, done to Flying Pikachu. "
+	line "If tails, this attack does nothing "
 	line "(not even damage)."
 	done
 
@@ -472,8 +458,8 @@ RaichusThunderDescription:
 	done
 
 RaichuLv40Description:
-	text "Its long tail serves as a ground"
-	line "to protect itself from its own"
+	text "Its long tail serves as a ground to"
+	line "protect itself from its own"
 	line "high-voltage power."
 	done
 
@@ -492,9 +478,9 @@ GigashockDescription:
 	done
 
 RaichuLv45Description:
-	text "Its long tail serves as a ground"
-	line "to protect itself from its own"
-	line "high-voltage power."
+	text "Its long tail serves as a ground to"
+	line "protect itself from its own high"
+	line "voltage power."
 	done
 
 MagnemiteName:
@@ -508,9 +494,9 @@ ThunderWaveName:
 MagnemitesSelfdestructDescription:
 	text "Does 10 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for"
-	line "Benched Pokémon.) Magnemite does"
-	line "40 damage to itself."
+	line "Weakness and Resistance for Benched"
+	line "Pokémon.) Magnemite does 40 damage"
+	line "to itself."
 	done
 
 MagnetName:
@@ -546,15 +532,15 @@ MagnetonName:
 MagnetonLv28sSelfdestructDescription:
 	text "Does 20 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for"
-	line "Benched Pokémon.) Magneton does"
-	line "80 damage to itself."
+	line "Weakness and Resistance for Benched"
+	line "Pokémon.)"
+	line "Magneton does 80 damage to itself."
 	done
 
 MagnetonLv28Description:
 	text "Formed by several Magnemites linked"
-	line "together. It frequently appears"
-	line "when sunspots flare up."
+	line "together. It frequently appears when"
+	line "sunspots flare up."
 	done
 
 SonicboomName:
@@ -565,15 +551,16 @@ SonicboomDescription:
 	text "Don't apply Weakness and Resistance"
 	line "for this attack. (Any other effects"
 	line "that would happen after applying"
-	line "Weakness/Resistance still happen.)"
+	line "Weakness and Resistance still"
+	line "happen.)"
 	done
 
 MagnetonLv35sSelfdestructDescription:
 	text "Does 20 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for"
-	line "Benched Pokémon.) Magneton does"
-	line "100 damage to itself."
+	line "Weakness and Resistance for Benched"
+	line "Pokémon.) Magneton does 100 damage"
+	line "to itself."
 	done
 
 MagnetonLv35Description:
@@ -592,8 +579,8 @@ BallName:
 
 VoltorbDescription:
 	text "Usually found in power plants."
-	line "Easily mistaken for a Poke Ball,"
-	line "it has zapped many people."
+	line "Easily mistaken for a Poke Ball, it"
+	line "has zapped many people."
 	done
 
 ElectrodeName:
@@ -605,7 +592,7 @@ EnergySpikeName:
 	done
 
 EnergySpikeDescription:
-	text "Search your deck for a Basic Energy"
+	text "Search your deck for a basic Energy"
 	line "card and attach it to 1 of your"
 	line "Pokémon. Shuffle your deck"
 	line "afterward."
@@ -661,7 +648,9 @@ LightScreenDescriptionCont:
 
 ElectabuzzsQuickAttackDescription:
 	text "Flip a coin. If heads, this attack"
-	line "does 10 damage plus 20 more damage."
+	line "does 10 damage plus 20 more damage; "
+	line "if tails, this attack does"
+	line "10 damage."
 	done
 
 ElectricName:
@@ -697,8 +686,8 @@ JolteonName:
 	done
 
 DoubleAttackX20Description:
-	text "Flip 2 coins. This attack does"
-	line "20 damage times the number of heads."
+	text "Flip 2 coins. This attack does 20"
+	line "damage times the number of heads."
 	done
 
 StunNeedleName:
@@ -720,14 +709,14 @@ PinMissileName:
 	done
 
 QuadrupleAttackX20Description:
-	text "Flip 4 coins. This attack does"
-	line "20 damage times the number of heads."
+	text "Flip 4 coins. This attack does 20"
+	line "damage times the number of heads."
 	done
 
 JolteonLv29Description:
 	text "It accumulates negative ions from"
-	line "the atmosphere to blast out"
-	line "10,000-volt lightning bolts."
+	line "the atmosphere to blast out 10,000-"
+	line "volt lightning bolts."
 	done
 
 ZapdosName:
@@ -826,14 +815,14 @@ SandslashName:
 	done
 
 TripleAttackX20Description:
-	text "Flip 3 coins. This attack does"
-	line "20 damage times the number of heads."
+	text "Flip 3 coins. This attack does 20"
+	line "damage times the number of heads."
 	done
 
 SandslashDescription:
 	text "Curls up into a spiny ball when"
-	line "threatened. It can roll while"
-	line "curled up to attack or escape."
+	line "threatened. It can roll while curled"
+	line "up to attack or escape."
 	done
 
 DiglettName:
@@ -854,8 +843,8 @@ MoleName:
 
 DiglettDescription:
 	text "Lives about three feet underground,"
-	line "where it feeds on plant roots."
-	line "It sometimes appears above ground."
+	line "where it feeds on plant roots. It"
+	line "sometimes appears above ground."
 	done
 
 DugtrioName:
@@ -868,10 +857,9 @@ EarthquakeName:
 
 EarthquakeDescription:
 	text "Does 10 damage to each of your own"
-	line "Benched Pokémon."
-	line ""
-	line "(Don't apply Weakness and Resistance"
-	line "for Benched Pokémon.)"
+	line "Benched Pokémon. (Don't apply"
+	line "Weakness and Resistance for Benched"
+	line "Pokémon.)"
 	done
 
 DugtrioDescription:
@@ -907,9 +895,9 @@ PigMonkeyName:
 	done
 
 MankeyDescription:
-	text "Extremely quick to anger."
-	line "It could be docile one moment,"
-	line "then thrashing away the next."
+	text "Extremely quick to anger. It could"
+	line "be docile one moment, then thrashing"
+	line "away the next."
 	done
 
 PrimeapeName:
@@ -926,7 +914,7 @@ TantrumDescription:
 	done
 
 PrimeapeDescription:
-	text "Always furious and tenacious to boot."
+	text "Always furious and tenacious to"
 	line "boot. It will not abandon chasing"
 	line "its quarry until its quarry is"
 	line "caught."
@@ -987,11 +975,11 @@ StrikesBackName:
 
 StrikesBackDescription:
 	text "Whenever your opponent's attack"
-	line "damages Machamp (even if Machamp"
-	line "is Knocked Out), this power does"
-	line "10 damage to the attacking Pokémon."
+	line "damages Machamp (even if Machamp is"
+	line "Knocked Out), this power does 10"
+	line "damage to the attacking Pokémon."
 	line "(Don't apply Weakness and"
-	line "Resistance.)"
+	line "Resistance.) "
 	done
 
 StrikesBackDescriptionCont:
@@ -1073,9 +1061,9 @@ AvalancheName:
 GolemsSelfdestructDescription:
 	text "Does 20 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for"
-	line "Benched Pokémon.) Golem does"
-	line "100 damage to itself."
+	line "Weakness and Resistance for Benched"
+	line "Pokémon.) Golem does 100 damage to"
+	line "itself."
 	done
 
 MegatonName:
@@ -1124,9 +1112,9 @@ SnivelDescription:
 	line "Cubone during your opponent's next"
 	line "turn, any damage done by the attack"
 	line "is reduced by 20 (after applying"
-	line "Weakness and Resistance)."
-	line "(Benching or evolving either Pokémon"
-	line "ends this effect.)"
+	line "Weakness and Resistance). (Benching"
+	line "or evolving either Pokémon ends this"
+	line "effect.)"
 	done
 
 CubonesRageDescription:
@@ -1158,10 +1146,10 @@ CallforFriendName:
 
 CallforFriendDescription:
 	text "Search your deck for a <FIGHTING> Basic"
-	line "Pokémon and put it onto your Bench."
-	line "Shuffle your deck afterward."
-	line "(You can't use this attack"
-	line "if your Bench is full.)"
+	line "Pokémon card and put it onto your"
+	line "Bench. Shuffle your deck afterward."
+	line "(You can't use this attack if your"
+	line "Bench is full.)"
 	done
 
 BonekeeperName:
@@ -1179,9 +1167,9 @@ BoneAttackName:
 	done
 
 BoneAttackDescription:
-	text "Flip a coin. If heads, the"
-	line "Defending Pokémon can't attack"
-	line "during your opponent's next turn."
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon can't attack during your"
+	line "opponent's next turn."
 	done
 
 WailName:
@@ -1265,9 +1253,9 @@ LeerName:
 	done
 
 LeerDescription:
-	text "Flip a coin. If heads, the"
-	line "Defending Pokémon can't attack Rhyhorn"
-	line "during your opponent's next turn."
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon can't attack Rhyhorn during"
+	line "your opponent's next turn."
 	line "(Benching or evolving either Pokémon"
 	line "ends this effect.)"
 	done
@@ -1295,13 +1283,13 @@ RamDescription:
 	line "If your opponent has any Benched"
 	line "Pokémon, he or she chooses 1 of them"
 	line "and switches it with the Defending"
-	line "Pokémon. (Do the damage before"
-	line "switching the Pokémon and"
+	line "Pokémon.(Do the damage before"
+	line "switching the Pokémon."
 	done
 
 RamDescriptionCont:
-	text "switch the Defending Pokémon even"
-	line "if Rhydon is Knocked Out.)"
+	text "Switch the Pokémon even if Rhydon"
+	line "is Knocked Out.)"
 	done
 
 RhydonDescription:
@@ -1357,8 +1345,8 @@ AbsorbDescription:
 	line "from Kabutops equal to half the"
 	line "damage done to the Defending"
 	line "Pokémon (after applying Weakness"
-	line "and Resistance) (rounded up to the"
-	line "nearest 10)."
+	line "and Resistance)"
+	line "(rounded up to the nearest 10)."
 	done
 
 AbsorbDescriptionCont:
@@ -1407,9 +1395,36 @@ PsiName:
 	done
 
 AbraDescription:
-	text "Using its ability to read minds,"
-	line "it will identify impending danger"
-	line "and teleport to safety."
+	text "Using its ability to read minds, it"
+	line "will identify impending danger and"
+	line "teleport to safety."
 	done
 
-;	ds $31
+KadabraName:
+	text "Kadabra"
+	done
+
+KadabrasRecoverDescription:
+	text "Discard 1 <PSYCHIC> Energy card attached to"
+	line "Kadabra in order to use this attack."
+	line "Remove all damage counters from"
+	line "Kadabra."
+	done
+
+SuperPsiName:
+	text "Super Psy"
+	done
+
+KadabraDescription:
+	text "It emits special alpha waves from"
+	line "its body that induce headaches even"
+	line "to those just nearby."
+	done
+
+AlakazamName:
+	text "Alakazam"
+	done
+
+DamageSwapName:
+	text "Damage Swap"
+	done

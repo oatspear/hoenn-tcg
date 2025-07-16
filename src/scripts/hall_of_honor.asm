@@ -1,12 +1,11 @@
 HallOfHonorLoadMap:
 	ld a, SFX_LEGENDARY_CARDS
-	call PlaySFX
-	ret
+	jp PlaySFX
 
 Script_fbe1:
 	start_script
 	print_text Text05b5
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_fbee
+	ask_question_jump_default_yes Text05b6, .ows_fbee
 	print_text Text05b7
 	quit_script_fully
 
@@ -19,11 +18,11 @@ Script_fbf1:
 	jump_if_event_true EVENT_RECEIVED_LEGENDARY_CARDS, .ows_fc10
 	max_out_event_value EVENT_RECEIVED_LEGENDARY_CARDS
 	print_text Text05b8
-	give_card FLYGON
-	give_card WAILORD
-	give_card PICHU
-	give_card SLAKING
-	show_card_received_screen $ff
+	give_card ZAPDOS_LV68
+	give_card MOLTRES_LV37
+	give_card ARTICUNO_LV37
+	give_card DRAGONITE_LV41
+	show_card_received_screen $ffff
 .ows_fc05
 	flash_screen 0
 	print_text Text05b9

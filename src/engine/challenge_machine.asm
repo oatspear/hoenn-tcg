@@ -14,9 +14,9 @@ ChallengeMachine_Reset:
 ; if a challenge is already in progress, then resume
 ; otherwise, start a new 5 round challenge
 ChallengeMachine_Start::
-	ld a, 0
+	xor a ; DOUBLE_SPACED
 	ld [wLineSeparation], a
-	call LoadConsolePaletteData
+	ld [wd317], a
 	call ChallengeMachine_Initialize
 
 	call EnableSRAM
@@ -217,16 +217,17 @@ ChallengeMachine_RecordDuelResult:
 	add hl, de
 	ld a, [wDuelResult]
 	or a
-	jr z, .won
-	ld a, 2 ; lost
-	ld [hl], a
-	jp DisableSRAM
-.won
+	jr nz, .lost
 	ld a, 1 ; won
 	ld [hl], a
 	call DisableSRAM
 	ld hl, sPresentConsecutiveWins
-;	fallthrough
+	jp ChallengeMachine_IncrementHLMax999
+
+.lost
+	ld a, 2 ; lost
+	ld [hl], a
+	jp DisableSRAM
 
 ; increment the value at hl
 ; without going above 999
@@ -238,7 +239,7 @@ ChallengeMachine_IncrementHLMax999:
 	jr nz, .increment
 	ld a, [hl]
 	cp LOW(999)
-	jp z, DisableSRAM ; done
+	jr z, .skip
 .increment
 	ld a, [hl]
 	add 1
@@ -246,6 +247,7 @@ ChallengeMachine_IncrementHLMax999:
 	ld a, [hl]
 	adc 0
 	ld [hl], a
+.skip
 	jp DisableSRAM
 
 ; update sMaximumConsecutiveWins if the player set a new record
@@ -260,8 +262,8 @@ ChallengeMachine_CheckForNewRecord:
 	ld a, [sPresentConsecutiveWins]
 	cp [hl]
 .high_bytes_different
-	jp c, DisableSRAM ; no record
-	jp z, DisableSRAM ; no record
+	jr c, .no_record
+	jr z, .no_record
 ; new record
 	ld hl, sMaximumConsecutiveWins
 	ld a, [sPresentConsecutiveWins]
@@ -275,6 +277,7 @@ ChallengeMachine_CheckForNewRecord:
 ; remember to show congrats message later
 	ld a, TRUE
 	ld [sConsecutiveWinRecordIncreased], a
+.no_record
 	jp DisableSRAM
 
 ; print the next opponent's name and ask the
@@ -351,10 +354,11 @@ ChallengeMachine_PrintFinalConsecutiveWinStreak:
 	jr nz, .streak
 	ld a, [sPresentConsecutiveWins]
 	cp 2
-	jp c, DisableSRAM ; no streak
+	jr c, .no_streak
 .streak
 	ldtx hl, ConsecutiveWinsEndedAtText
 	call PrintScrollableText_NoTextBoxLabel
+.no_streak
 	jp DisableSRAM
 
 ; if the player achieved a new record, play a jingle
@@ -399,37 +403,7 @@ ChallengeMachine_DrawScoreScreen:
 	ld hl, ChallengeMachine_PlayerScoreLabels
 	call PrintLabels
 	ld hl, ChallengeMachine_PlayerScoreValues
-;	fallthrough
-
-; print all scores in the table pointed to by hl
-ChallengeMachine_PrintScores:
-.loop
-	call EnableSRAM
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	or e
-	jp z, DisableSRAM; done
-	ld b, [hl]
-	inc hl
-	ld c, [hl]
-	inc hl
-	push hl
-	push bc
-	ld a, [de]
-	ld l, a
-	inc de
-	ld a, [de]
-	ld h, a
-	call ConvertWordToNumericalDigits
-	pop bc
-	call BCCoordToBGMap0Address
-	ld hl, wDecimalChars
-	ld b, 3
-	call SafeCopyDataHLtoDE
-	pop hl
-	jr .loop
+	jp ChallengeMachine_PrintScores
 
 ChallengeMachine_PlayerScoreLabels:
 	db 1, 0
@@ -479,43 +453,7 @@ ChallengeMachine_DrawOpponentList:
 	ld hl, ChallengeMachine_OpponentNumberLabels
 	call PrintLabels
 	call ChallengeMachine_PrintOpponentInfo
-;	fallthrough
-
-ChallengeMachine_PrintDuelResultIcons:
-	ld hl, sChallengeMachineDuelResults
-	ld c, NUM_CHALLENGE_MACHINE_OPPONENTS
-	lb de, 1, 2
-.print_loop
-	push hl
-	push bc
-	push de
-	call InitTextPrinting
-	call EnableSRAM
-	ld a, [hl]
-	add a
-	ld e, a
-	ld d, 0
-	ld hl, ChallengeMachine_DuelResultIcons
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call PrintTextNoDelay
-	pop de
-	pop bc
-	pop hl
-	inc hl
-	; down two rows
-	inc e
-	inc e
-	dec c
-	jr nz, .print_loop
-	jp DisableSRAM
-
-ChallengeMachine_DuelResultIcons:
-	tx ChallengeMachineNotDuelledIconText
-	tx ChallengeMachineDuelWonIconText
-	tx ChallengeMachineDuelLostIconText
+	jp ChallengeMachine_PrintDuelResultIcons
 
 ChallengeMachine_OpponentNumberLabels:
 	db 1, 0
@@ -605,8 +543,7 @@ ChallengeMachine_PrintOpponentClubStatus:
 	ld h, [hl]
 	ld l, a
 	or h
-	jr z, .no_element
-	call PrintTextNoDelay
+	call nz, PrintTextNoDelay
 .no_element
 	pop bc
 	ret
@@ -623,6 +560,77 @@ ChallengeMachine_GetOpponentNameAndDeck:
 	call _GetChallengeMachineDuelConfigurations
 	pop de
 	ret
+
+ChallengeMachine_PrintDuelResultIcons:
+	ld hl, sChallengeMachineDuelResults
+	ld c, NUM_CHALLENGE_MACHINE_OPPONENTS
+	lb de, 1, 2
+.print_loop
+	push hl
+	push bc
+	push de
+	call InitTextPrinting
+	call EnableSRAM
+	ld a, [hl]
+	add a
+	ld e, a
+	ld d, 0
+	ld hl, ChallengeMachine_DuelResultIcons
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call PrintTextNoDelay
+	pop de
+	pop bc
+	pop hl
+	inc hl
+
+; down two rows
+	inc e
+	inc e
+
+	dec c
+	jr nz, .print_loop
+	jp DisableSRAM
+
+ChallengeMachine_DuelResultIcons:
+	tx ChallengeMachineNotDuelledIconText
+	tx ChallengeMachineDuelWonIconText
+	tx ChallengeMachineDuelLostIconText
+
+; print all scores in the table pointed to by hl
+ChallengeMachine_PrintScores:
+.loop
+	call EnableSRAM
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	or e
+	jr z, .done
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	inc hl
+	push hl
+	push bc
+	ld a, [de]
+	ld l, a
+	inc de
+	ld a, [de]
+	ld h, a
+	call ConvertWordToNumericalDigits
+	pop bc
+	call BCCoordToBGMap0Address
+	ld hl, wDecimalChars
+	ld b, 3
+	call SafeCopyDataHLtoDE
+	pop hl
+	jr .loop
+
+.done
+	jp DisableSRAM
 
 ; if this is the first time the challenge machine has ever
 ; been used on this cartridge, then clear all vars and
@@ -792,7 +800,7 @@ ChallengeMachine_OpponentDeckIDs:
 	db LEGENDARY_MOLTRES_DECK_ID
 	db LEGENDARY_ZAPDOS_DECK_ID
 	db LEGENDARY_ARTICUNO_DECK_ID
-	db LEGENDARY_SLAKING_DECK_ID
+	db LEGENDARY_DRAGONITE_DECK_ID
 	db LIGHTNING_AND_FIRE_DECK_ID
 	db WATER_AND_FIGHTING_DECK_ID
 	db GRASS_AND_PSYCHIC_DECK_ID

@@ -1,44 +1,5 @@
-; writes from hl the pointer to the function to be called by DoFrame
-; preserves all registers except af
-; input:
-;	hl = function to be called by DoFrame
-; output:
-;	[wDoFrameFunction] = hl
-SetDoFrameFunction::
-	ld a, l
-	ld [wDoFrameFunction], a
-	ld a, h
-	ld [wDoFrameFunction + 1], a
-	ret
-
-
-; calls DoFrame a times
-; preserves all registers except af
-; input:
-;	a = number of times to run the DoFrame function
-DoAFrames::
-.loop
-	call DoFrame
-	dec a
-	jr nz, .loop
-	ret
-
-
-; preserves all registers
-DoFrameIfLCDEnabled::
-	push af
-	ldh a, [rLCDC]
-	bit LCDC_ENABLE_F, a
-	jr z, .done
-	call DoFrame
-.done
-	pop af
-	ret
-
-
 ; updates background, sprites and other game variables, halts until vblank, and reads user input
 ; if wDebugPauseAllowed is not 0, the game can be paused (and resumed) by pressing the SELECT button
-; preserves all registers
 DoFrame::
 	push af
 	push hl
@@ -69,10 +30,8 @@ DoFrame::
 	pop af
 	ret
 
-
-; handles D-pad repeat counter
+; handle D-pad repeat counter
 ; used to quickly scroll through menus when a relevant D-pad key is held
-; preserves bc and de
 HandleDPadRepeat::
 	ldh a, [hKeysHeld]
 	ldh [hDPadHeld], a

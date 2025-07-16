@@ -19,10 +19,7 @@ ClubEntranceAfterDuel:
 LoadClubEntrance:
 	call TryFirstRonaldDuel
 	call TrySecondRonaldDuel
-	call TryFirstRonaldEncounter
-	ret
-
-TryFirstRonaldEncounter:
+	; try first Ronald encounter
 	ld a, NPC_RONALD1
 	ld [wTempNPC], a
 	call FindLoadedNPC
@@ -147,8 +144,8 @@ Script_FirstRonaldDuel:
 Script_BeatFirstRonaldDuel:
 	start_script
 	print_npc_text Text064c
-	give_card ODDISH
-	show_card_received_screen ODDISH
+	give_card JIGGLYPUFF_LV12
+	show_card_received_screen JIGGLYPUFF_LV12
 	print_npc_text Text064d
 	script_jump Script_LostToFirstRonaldDuel.ows_e8fb
 
@@ -211,8 +208,8 @@ Script_SecondRonaldDuel:
 Script_BeatSecondRonaldDuel:
 	start_script
 	print_npc_text Text0651
-	give_card LANETTES_NET_SEARCH
-	show_card_received_screen LANETTES_NET_SEARCH
+	give_card SUPER_ENERGY_RETRIEVAL
+	show_card_received_screen SUPER_ENERGY_RETRIEVAL
 	print_npc_text Text0652
 	script_jump Script_LostToSecondRonaldDuel.ows_e959
 

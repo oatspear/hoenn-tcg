@@ -1,7 +1,4 @@
-; switches SRAM bank to a
-; preserves all registers
-; input:
-;	a = SRAM bank to use
+; switch SRAM bank to a
 BankswitchSRAM::
 	push af
 	ldh [hBankSRAM], a
@@ -11,9 +8,7 @@ BankswitchSRAM::
 	pop af
 	ret
 
-
-; enables external RAM (SRAM)
-; preserves all registers
+; enable external RAM (SRAM)
 EnableSRAM::
 	push af
 	ld a, SRAM_ENABLE
@@ -21,9 +16,7 @@ EnableSRAM::
 	pop af
 	ret
 
-
-; disables external RAM (SRAM)
-; preserves all registers
+; disable external RAM (SRAM)
 DisableSRAM::
 	push af
 	xor a ; SRAM_DISABLE

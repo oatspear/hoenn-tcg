@@ -11,7 +11,7 @@ _PauseMenu_Status:
 	ld hl, StatusScreenLabels
 	call PrintLabels
 	lb bc, 1, 1
-	call DrawPlayerPortrait
+	call DrawPauseMenuPlayerPortrait
 	lb bc, 12, 4
 	call PrintAlbumProgress
 	lb bc, 13, 6

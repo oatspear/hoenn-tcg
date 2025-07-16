@@ -52,10 +52,12 @@ GiveBoosterPack:
 	call PrintScrollableText_NoTextBoxLabel
 	call DisableLCD
 	call SetDefaultPalettes
-	call ZeroObjectPositionsAndToggleOAMCopy
-	ld a, $4
+	call ZeroObjectPositions
+	ld a, $1
+	ld [wVBlankOAMCopyToggle], a
+	ld a, $1
 	ld [wTextBoxFrameType], a
-	bank1call OpenBoosterPack
+	farcall OpenBoosterPack
 	farcall WhiteOutDMGPals
 	call DoFrameIfLCDEnabled
 	pop af
@@ -107,3 +109,6 @@ BoosterScenesAndNameTexts:
 
 	db SCENE_LABORATORY_BOOSTER, SCENE_LABORATORY_BOOSTER
 	tx LaboratoryBoosterText
+
+_PauseMenu_Exit:
+	ret

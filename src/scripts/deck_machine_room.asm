@@ -1,7 +1,6 @@
 DeckMachineRoomAfterDuel:
 	ld hl, .after_duel_table
-	call FindEndOfDuelScript
-	ret
+	jp FindEndOfDuelScript
 
 .after_duel_table
 	db NPC_AARON
@@ -87,7 +86,7 @@ Script_LostToAaron:
 Script_d932:
 	start_script
 	print_text Text0605
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_d93c
+	ask_question_jump_default_yes Text0606, .ows_d93c
 	quit_script_fully
 
 .ows_d93c
@@ -115,7 +114,7 @@ Script_d93f:
 	replace_map_blocks MAP_EVENT_FIGHTING_DECK_MACHINE
 	print_text Text060a
 .ows_d963
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_d969
+	ask_question_jump_default_yes Text060b, .ows_d969
 	quit_script_fully
 
 .ows_d969
@@ -168,7 +167,7 @@ Script_d995:
 	replace_map_blocks MAP_EVENT_ROCK_DECK_MACHINE
 	print_text Text060a
 .ows_d9b9
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_d9bf
+	ask_question_jump_default_yes Text060b, .ows_d9bf
 	quit_script_fully
 
 .ows_d9bf
@@ -196,7 +195,7 @@ Script_d9c2:
 	replace_map_blocks MAP_EVENT_WATER_DECK_MACHINE
 	print_text Text060a
 .ows_d9e6
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_d9ec
+	ask_question_jump_default_yes Text060b, .ows_d9ec
 	quit_script_fully
 
 .ows_d9ec
@@ -224,7 +223,7 @@ Script_d9ef:
 	replace_map_blocks MAP_EVENT_LIGHTNING_DECK_MACHINE
 	print_text Text060a
 .ows_da13
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_da19
+	ask_question_jump_default_yes Text060b, .ows_da19
 	quit_script_fully
 
 .ows_da19
@@ -252,7 +251,7 @@ Script_da1c:
 	replace_map_blocks MAP_EVENT_GRASS_DECK_MACHINE
 	print_text Text060a
 .ows_da40
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_da46
+	ask_question_jump_default_yes Text060b, .ows_da46
 	quit_script_fully
 
 .ows_da46
@@ -280,7 +279,7 @@ Script_da49:
 	replace_map_blocks MAP_EVENT_PSYCHIC_DECK_MACHINE
 	print_text Text060a
 .ows_da6d
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_da73
+	ask_question_jump_default_yes Text060b, .ows_da73
 	quit_script_fully
 
 .ows_da73
@@ -308,7 +307,7 @@ Script_da76:
 	replace_map_blocks MAP_EVENT_SCIENCE_DECK_MACHINE
 	print_text Text060a
 .ows_da9a
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_daa0
+	ask_question_jump_default_yes Text060b, .ows_daa0
 	quit_script_fully
 
 .ows_daa0
@@ -336,7 +335,7 @@ Script_daa3:
 	replace_map_blocks MAP_EVENT_FIRE_DECK_MACHINE
 	print_text Text060a
 .ows_dac7
-	ask_question_jump_default_yes WouldYouLikeToBuildADeckText, .ows_dacd
+	ask_question_jump_default_yes Text060b, .ows_dacd
 	quit_script_fully
 
 .ows_dacd

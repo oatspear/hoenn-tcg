@@ -1,32 +1,3 @@
-KadabraName:
-	text "Kadabra"
-	done
-
-KadabrasRecoverDescription:
-	text "Discard 1 <PSYCHIC> Energy card attached to"
-	line "Kadabra in order to use this attack."
-	line "Remove all damage counters from"
-	line "Kadabra."
-	done
-
-SuperPsiName:
-	text "Super Psy"
-	done
-
-KadabraDescription:
-	text "It emits special alpha waves from"
-	line "its body that induce headaches"
-	line "even to those just nearby."
-	done
-
-AlakazamName:
-	text "Alakazam"
-	done
-
-DamageSwapName:
-	text "Damage Swap"
-	done
-
 DamageSwapDescription:
 	text "As often as you like during your"
 	line "turn (before your attack), you may"
@@ -59,9 +30,9 @@ DopeyName:
 	done
 
 SlowpokeLv9Description:
-	text "Incredibly slow and dopey."
-	line "It takes 5 seconds for it to"
-	line "feel pain when under attack."
+	text "Incredibly slow and dopey. It takes"
+	line "5 seconds for it to feel pain when"
+	line "under attack."
 	done
 
 SpacingOutName:
@@ -123,8 +94,8 @@ SleepingGasName:
 	done
 
 MayInflictSleepDescription:
-	text "Flip a coin. If heads, the"
-	line "Defending Pokémon is now Asleep."
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Asleep."
 	done
 
 DestinyBondName:
@@ -158,9 +129,9 @@ EnergyConversionName:
 	done
 
 EnergyConversionDescription:
-	text "Put up to 2 Energy cards from"
-	line "your discard pile into your hand."
-	line "Gastly does 10 damage to itself."
+	text "Put up to 2 Energy cards from your"
+	line "discard pile into your hand. Gastly"
+	line "does 10 damage to itself."
 	done
 
 GastlyLv17Description:
@@ -257,8 +228,8 @@ PoundName:
 
 DrowzeeDescription:
 	text "Puts enemies to sleep, then eats"
-	line "their dreams. Occasionally gets"
-	line "sick from eating bad dreams."
+	line "their dreams. Occasionally gets sick"
+	line "from eating bad dreams."
 	done
 
 HypnoName:
@@ -270,15 +241,15 @@ ProphecyName:
 	done
 
 ProphecyDescription:
-	text "Look at up to 3 cards from the"
-	line "top of either player's deck and"
+	text "Look at up to 3 cards from the top"
+	line "of either player's deck and"
 	line "rearrange them as you like."
 	done
 
 HypnoDescription:
 	text "When it locks eyes with an enemy,"
-	line "it will use a mix of psi moves"
-	line "such as Hypnosis and Confusion."
+	line "it will use a mix of psi moves such"
+	line "as Hypnosis and Confusion."
 	done
 
 MrMimeName:
@@ -328,8 +299,8 @@ JynxName:
 	done
 
 DoubleAttackX10Description:
-	text "Flip 2 coins. This attack does"
-	line "10 damage times the number of heads."
+	text "Flip 2 coins. This attack does 10"
+	line "damage times the number of heads."
 	done
 
 JynxsMeditateDescription:
@@ -401,8 +372,8 @@ MewtwoLv60Description:
 	line "never-before-seen violent Pokémon."
 	done
 
-JirachiName:
-	text "Jirachi"
+MewName:
+	text "Mew"
 	done
 
 NeutralizingShieldName:
@@ -422,7 +393,7 @@ NewSpeciesName:
 	text "New Species"
 	done
 
-JirachiDescription:
+MewLv8Description:
 	text "So rare that it is still said to be"
 	line "a mirage by many experts. Only a few"
 	line "people have seen it worldwide."
@@ -435,11 +406,12 @@ MysteryAttackName:
 MysteryAttackDescription:
 	text "Does a random amount of damage to"
 	line "the Defending Pokémon and may cause"
-	line "a random effect."
+	line "a random effect to the Defending"
+	line "Pokémon."
 	done
 
-DeoxysDescription:
-	text "When viewed through a microscope,"
+MewLv15Description:
+	text "When viewed through a microscope, "
 	line "this Pokémon's short, fine, delicate"
 	line "hair can be seen."
 	done
@@ -462,36 +434,36 @@ DevolutionBeamDescription:
 	text "Choose an evolved Pokémon (Your"
 	line "own or your opponent's). Return"
 	line "the highest stage evolution card"
-	line "on that Pokémon to its player's"
+	line "on that Pokémon to Its player's"
 	line "hand."
 	done
 
-MightyenaName:
-	text "Mightyena"
+PidgeyName:
+	text "Pidgey"
 	done
 
 TinyBirdName:
 	text "Tiny Bird"
 	done
 
-MightyenaDescription:
+PidgeyDescription:
 	text "A common sight in forests and woods."
 	line "It flaps its wings at ground level"
 	line "to kick up blinding sand."
 	done
 
-DustoxName:
-	text "Dustox"
+PidgeottoName:
+	text "Pidgeotto"
 	done
 
 MirrorMoveName:
 	text "Mirror Move"
 	done
 
-DustoxsMirrorMoveDescription:
-	text "If Dustox was attacked last turn,"
+PidgeottosMirrorMoveDescription:
+	text "If Pidgeotto was attacked last turn,"
 	line "do the final result of that attack"
-	line "on Dustox to the Defending"
+	line "on Pidgeotto to the Defending"
 	line "Pokémon."
 	done
 
@@ -499,14 +471,14 @@ BirdName:
 	text "Bird"
 	done
 
-DustoxDescription:
+PidgeottoDescription:
 	text "Very protective of its sprawling"
 	line "territory, this Pokémon will"
 	line "fiercely peck at any intruder."
 	done
 
-NuzleafName:
-	text "Nuzleaf"
+PidgeotName:
+	text "Pidgeot"
 	done
 
 SlicingWindName:
@@ -519,7 +491,8 @@ SlicingWildDescription:
 	line "Don't apply Weakness and Resistance"
 	line "for this attack. (Any other effects"
 	line "that would happen after applying"
-	line "Weakness/Resistance still happen.)"
+	line "Weakness and Resistance still"
+	line "happen.)"
 	done
 
 GaleName:
@@ -527,7 +500,7 @@ GaleName:
 	done
 
 GaleDescription:
-	text "Switch Nuzleaf with 1 of your"
+	text "Switch Pidgeot with 1 of your"
 	line "Benched Pokémon chosen at random."
 	line "If your opponent has any Benched"
 	line "Pokémon, switch the Defending"
@@ -536,7 +509,7 @@ GaleDescription:
 	line "switching the Pokémon.)"
 	done
 
-NuzleafDescription:
+PidgeotLv38Description:
 	text "This Pokémon flies at Mach 2 speed,"
 	line "seeking prey. Its large talons are"
 	line "feared as wicked weapons."
@@ -554,33 +527,28 @@ HurricaneDescription:
 	line "hand."
 	done
 
-ShiftryName:
-	text "Shiftry"
-	done
-
-ShiftryDescription:
+PidgeotLv40Description:
 	text "When hunting, it skims the surface"
 	line "of water at high speed to pick off"
 	line "unwary prey such as Magikarp."
 	done
 
-ZubatName:
-	text "Zubat"
+RattataName:
+	text "Rattata"
 	done
 
 RatName:
 	text "Rat"
 	done
 
-ZubatDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+RattataDescription:
+	text "Bites anything when it attacks."
+	line "Small and very quick, it is a common"
+	line "sight in many places."
 	done
 
-GolbatName:
-	text "Golbat"
+RaticateName:
+	text "Raticate"
 	done
 
 SuperFangName:
@@ -594,42 +562,41 @@ SuperFangDescription:
 	line "to the nearest 10)."
 	done
 
-GolbatDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+RaticateDescription:
+	text "It uses its whiskers to maintain its"
+	line "balance. It seems to slow down if"
+	line "they are cut off."
 	done
 
-CrobatName:
-	text "Crobat"
+SpearowName:
+	text "Spearow"
 	done
 
 PeckName:
 	text "Peck"
 	done
 
-CrobatsMirrorMoveDescription:
-	text "If Crobat was attacked last turn,"
+SpearowsMirrorMoveDescription:
+	text "If Spearow was attacked last turn,"
 	line "do the final result of that attack"
-	line "on Crobat to the Defending Pokémon."
+	line "on Spearow to the Defending Pokémon."
 	done
 
-CrobatDescription:
+SpearowDescription:
 	text "Eats bugs in grassy areas. It has to"
 	line "flap its short wings at high speed"
 	line "to stay airborne."
 	done
 
-TentacoolName:
-	text "Tentacool"
+FearowName:
+	text "Fearow"
 	done
 
-TentacoolsAgilityDescription:
+FearowsAgilityDescription:
 	text "Flip a coin. If heads, during your"
 	line "opponent's next turn, prevent all"
 	line "effects of attacks, including"
-	line "damage, done to Tentacool."
+	line "damage, done to Fearow."
 	done
 
 DrillPeckName:
@@ -640,14 +607,14 @@ BeakName:
 	text "Beak"
 	done
 
-TentacoolDescription:
+FearowDescription:
 	text "With its huge and magnificent wings,"
 	line "it can keep aloft without ever"
 	line "having to land for rest."
 	done
 
-TentacruelName:
-	text "Tentacruel"
+ClefairyName:
+	text "Clefairy"
 	done
 
 SingName:
@@ -658,12 +625,12 @@ MetronomeName:
 	text "Metronome"
 	done
 
-TentacruelsMetronomeDescription:
+ClefairysMetronomeDescription:
 	text "Choose 1 of the Defending Pokémon's"
 	line "attacks. Metronome copies that"
 	line "attack except for its Energy costs."
 	line "(No matter what type the Defending"
-	line "Pokemon is, Tentacruel's type is"
+	line "Pokemon is, Clefairy's type is"
 	line "still Colorless.)"
 	done
 
@@ -671,40 +638,40 @@ FairyName:
 	text "Fairy"
 	done
 
-TentacruelDescription:
+ClefairyDescription:
 	text "Its magical and cute appeal has many"
 	line "admirers. It is rare and found only"
 	line "in certain areas."
 	done
 
-SableyeName:
-	text "Sableye"
+ClefableName:
+	text "Clefable"
 	done
 
-SableyesMetronomeDescription:
+ClefablesMetronomeDescription:
 	text "Choose 1 of the Defending Pokémon's"
 	line "attacks. Metronome copies that"
 	line "attack except for its Energy costs."
 	line "(No matter what type the Defending"
-	line "Pokémon is, Sableye's type is"
+	line "Pokémon is, Clefable's type is"
 	line "still Colorless.)"
 	done
 
-SableyesMinimizeDescription:
+ClefablesMinimizeDescription:
 	text "All damage done by attacks to"
-	line "Sableye during your opponent's next"
+	line "Clefable during your opponent's next"
 	line "turn is reduced by 20 (after"
 	line "applying Weakness and Resistance)."
 	done
 
-SableyeDescription:
-	text "A timid Fairy Pokémon that is"
-	line "rarely seen. It will run and hide"
-	line "the moment it senses people."
+ClefableDescription:
+	text "A timid Fairy Pokémon that is rarely"
+	line "seen. It will run and hide the"
+	line "moment it senses people."
 	done
 
-OddishName:
-	text "Oddish"
+JigglypuffName:
+	text "Jigglypuff"
 	done
 
 FirstAidName:
@@ -728,10 +695,11 @@ BalloonName:
 	text "Balloon"
 	done
 
-OddishDescription:
+JigglypuffLv12Description:
 	text "When its huge eyes light up, it"
-	line "sings a mysteriously soothing melody"
-	line "that lulls its enemies to sleep."
+	line "sings a mysteriously soothing"
+	line "melody that lulls its enemies to"
+	line "sleep."
 	done
 
 FriendshipSongName:
@@ -739,11 +707,11 @@ FriendshipSongName:
 	done
 
 FriendshipSongDescription:
-	text "Flip a coin. If heads, put a"
-	line "Basic Pokémon chosen at random"
-	line "from your deck onto your Bench."
-	line "(You can't use this attack if your"
-	line "Bench is full.)"
+	text "Flip a coin. If heads, put a Basic"
+	line "Pokémon card chosen at random from"
+	line "your deck onto your Bench. (You"
+	line "can't use this attack if your Bench"
+	line "is full.)"
 	done
 
 ExpandName:
@@ -757,11 +725,7 @@ ExpandDescription:
 	line "Resistance)."
 	done
 
-GloomName:
-	text "Gloom"
-	done
-
-GloomDescription:
+JigglypuffLv13Description:
 	text "Uses its alluring eyes to enrapture"
 	line "its foe. It then sings a pleasing"
 	line "melody that lulls the foe to sleep."
@@ -771,18 +735,14 @@ LullabyName:
 	text "Lullaby"
 	done
 
-VileplumeName:
-	text "Vileplume"
-	done
-
-VileplumeDescription:
+JigglypuffLv14Description:
 	text "When its huge eyes light up, it"
 	line "sings a mysteriously soothing melody"
 	line "that lulls its enemies to sleep."
 	done
 
-GulpinName:
-	text "Gulpin"
+WigglytuffName:
+	text "Wigglytuff"
 	done
 
 DoTheWaveName:
@@ -794,14 +754,14 @@ DoTheWaveDescription:
 	line "for each of your Benched Pokémon."
 	done
 
-GulpinDescription:
+WigglytuffDescription:
 	text "The body is soft and rubbery. When"
 	line "angered, it will suck in air and"
 	line "inflate itself to an enormous size."
 	done
 
-SwalotName:
-	text "Swalot"
+MeowthName:
+	text "Meowth"
 	done
 
 CatPunchName:
@@ -814,14 +774,15 @@ CatPunchDescription:
 	line "Don't apply Weakness and Resistance"
 	line "for this attack. (Any other effects"
 	line "that would happen after applying"
-	line "Weakness/Resistance still happen.)"
+	line "Weakness and Resistance still"
+	line "happen.)"
 	done
 
 ScratchCatName:
 	text "Scratch Cat"
 	done
 
-SwalotDescription:
+MeowthLv14Description:
 	text "Appears to be more active at night."
 	line "It loves round and shiny things, so"
 	line "it can't stop from picking them up."
@@ -835,14 +796,14 @@ PayDayDescription:
 	text "Flip a coin. If heads, draw a card."
 	done
 
-CarvanhaDescription:
+MeowthLv15Description:
 	text "Adores circular objects. Wanders"
 	line "the streets on a nightly basis to"
 	line "look for dropped loose change."
 	done
 
-SharpedoName:
-	text "Sharpedo"
+PersianName:
+	text "Persian"
 	done
 
 PounceName:
@@ -851,26 +812,26 @@ PounceName:
 
 PounceDescription:
 	text "If the Defending Pokémon attacks"
-	line "Sharpedo during your opponent's next"
+	line "Persian during your opponent's next"
 	line "turn, any damage done by the attack"
 	line "is reduced by 10 (after applying"
-	line "Weakness and Resistance)."
-	line "(Benching or evolving either Pokémon"
-	line "ends this effect.)"
+	line "Weakness and Resistance). (Benching"
+	line "or evolving either Pokémon ends this"
+	line "effect.)"
 	done
 
 ClassyCatName:
 	text "Classy Cat"
 	done
 
-SharpedoDescription:
+PersianDescription:
 	text "Although its fur has many admirers,"
 	line "it is tough to raise as a pet"
 	line "because of its fickle meanness."
 	done
 
-GrimerName:
-	text "Grimer"
+FarfetchdName:
+	text "Farfetch'd"
 	done
 
 LeekSlapName:
@@ -881,8 +842,8 @@ LeekSlapDescription:
 	text "Flip a coin. If tails, this attack"
 	line "does nothing. Either way, you can't"
 	line "use this attack again as long as"
-	line "Grimer stays in play (even"
-	line "putting Grimer on the Bench"
+	line "Farfetch'd stays in play (even"
+	line "putting Farfetch'd on the Bench"
 	line "won't let you use it again)."
 	done
 
@@ -894,14 +855,14 @@ WildDuckName:
 	text "Wild Duck"
 	done
 
-GrimerDescription:
+FarfetchdDescription:
 	text "The sprig of green onions it holds"
 	line "is its weapon. This sprig is used"
 	line "much like a metal sword."
 	done
 
-MukName:
-	text "Muk"
+DoduoName:
+	text "Doduo"
 	done
 
 FuryAttackName:
@@ -912,14 +873,14 @@ TwinBirdName:
 	text "Twin Bird"
 	done
 
-MukDescription:
+DoduoDescription:
 	text "A bird that makes up for its poor"
 	line "flying with its fast foot speed."
 	line "Leaves giant footprints."
 	done
 
-KoffingName:
-	text "Koffing"
+DodrioName:
+	text "Dodrio"
 	done
 
 RetreatAidName:
@@ -927,9 +888,9 @@ RetreatAidName:
 	done
 
 RetreatAidDescription:
-	text "As long as Dodrio is Benched,"
-	line "pay <COLORLESS> less to retreat your"
-	line "Active Pokémon."
+	text "As long as Dodrio is Benched, pay"
+	line "<COLORLESS> less to retreat your Active"
+	line "Pokémon."
 	done
 
 DodriosRageDescription:
@@ -941,14 +902,14 @@ TriplebirdName:
 	text "Triplebird"
 	done
 
-KoffingDescription:
+DodrioDescription:
 	text "Uses its three brains to execute"
 	line "complex plans. While two heads"
 	line "sleep, one head stays awake."
 	done
 
-WeezingName:
-	text "Weezing"
+LickitungName:
+	text "Lickitung"
 	done
 
 TongueWrapName:
@@ -959,14 +920,14 @@ LickingName:
 	text "Licking"
 	done
 
-WeezingDescription:
+LickitungDescription:
 	text "Its tongue can be extended like a"
 	line "chameleon's. It leaves a stinging"
 	line "sensation when it licks enemies."
 	done
 
-SeviperName:
-	text "Seviper"
+ChanseyName:
+	text "Chansey"
 	done
 
 ScrunchName:
@@ -975,23 +936,23 @@ ScrunchName:
 
 ScrunchDescription:
 	text "Flip a coin. If heads, prevent all"
-	line "damage done to Seviper during your"
+	line "damage done to Chansey during your"
 	line "opponent's next turn. (Any other"
 	line "effects of attacks still happen.)"
 	done
 
-SevipersDoubleEdgeDescription:
-	text "Seviper does 80 damage to itself."
+ChanseysDoubleEdgeDescription:
+	text "Chansey does 80 damage to itself."
 	done
 
-SeviperDescription:
+ChanseyDescription:
 	text "A rare and elusive Pokémon that is"
 	line "said to bring happiness to those"
 	line "who manage to catch it."
 	done
 
-CrawdauntName:
-	text "Crawdaunt"
+KangaskhanName:
+	text "Kangaskhan"
 	done
 
 FetchName:
@@ -1010,14 +971,14 @@ ParentName:
 	text "Parent"
 	done
 
-CrawdauntDescription:
+KangaskhanDescription:
 	text "The infant rarely ventures out of"
 	line "its mother's protective pouch until"
 	line "it is three years old."
 	done
 
-AbsolName:
-	text "Absol"
+TaurosName:
+	text "Tauros"
 	done
 
 RampageName:
@@ -1026,8 +987,8 @@ RampageName:
 
 RampageDescription:
 	text "Does 20 damage plus 10 more damage"
-	line "for each damage counter on Absol."
-	line "Flip a coin. If tails, Absol is"
+	line "for each damage counter on Tauros."
+	line "Flip a coin. If tails, Tauros is"
 	line "now Confused (after doing damage)."
 	done
 
@@ -1035,14 +996,14 @@ WildBullName:
 	text "Wild Bull"
 	done
 
-AbsolDescription:
+TaurosDescription:
 	text "When it targets an enemy, it charges"
 	line "furiously while whipping its body"
 	line "with its long tails."
 	done
 
-ZigzagoonName:
-	text "Zigzagoon"
+DittoName:
+	text "Ditto"
 	done
 
 MorphName:
@@ -1051,14 +1012,14 @@ MorphName:
 
 MorphDescription:
 	text "Remove all damage counters from"
-	line "Zigzagoon. For the rest of the game,"
-	line "replace Zigzagoon with a copy of a Basic"
-	line "Pokémon card (other than Zigzagoon)"
+	line "Ditto. For the rest of the game,"
+	line "replace Ditto with a copy of a Basic"
+	line "Pokémon card (other than Ditto)"
 	line "chosen at random from your deck."
 	done
 
 MorphDescriptionCont:
-	text "Zigzagoon is no longer Asleep, Confused,"
+	text "Ditto is no longer Asleep, Confused,"
 	line "Paralyzed, Poisoned, or anything"
 	line "else that might be the result of an"
 	line "attack (just as if you had evolved"
@@ -1069,7 +1030,7 @@ TransformName:
 	text "Transform"
 	done
 
-ZigzagoonDescription:
+DittoDescription:
 	text "When it spots an enemy, its body"
 	line "transfigures into an almost perfect"
 	line "copy of its opponent."
@@ -1081,24 +1042,24 @@ TailWagName:
 
 TailWagDescription:
 	text "Flip a coin. If heads, the Defending"
-	line "Pokémon can't attack Linoone during"
-	line "your opponent's next turn."
-	line "(Benching or evolving either Pokémon"
-	line "ends this effect.)"
+	line "Pokémon can't attack Eevee during"
+	line "your opponent's next turn. (Benching"
+	line "or evolving either Pokémon ends this"
+	line "effect.)"
 	done
 
 EvolutionName:
 	text "Evolution"
 	done
 
-LinooneDescription:
+EeveeDescription:
 	text "Its genetic code is irregular."
 	line "It may mutate if it is exposed to"
 	line "radiation from elemental stones."
 	done
 
-TaillowName:
-	text "Taillow"
+PorygonName:
+	text "Porygon"
 	done
 
 Conversion1Name:
@@ -1117,7 +1078,7 @@ Conversion2Name:
 	done
 
 Conversion2Description:
-	text "Change Taillow's Resistance to a"
+	text "Change Porygon's Resistance to a"
 	line "type of your choice other than"
 	line "Colorless."
 	done
@@ -1126,14 +1087,14 @@ VirtualName:
 	text "Virtual"
 	done
 
-TaillowDescription:
+PorygonDescription:
 	text "A Pokémon that consists entirely of"
 	line "programming code. Capable of moving"
 	line "freely in cyberspace."
 	done
 
-SwellowName:
-	text "Swellow"
+SnorlaxName:
+	text "Snorlax"
 	done
 
 ThickSkinnedName:
@@ -1141,9 +1102,9 @@ ThickSkinnedName:
 	done
 
 ThickSkinnedDescription:
-	text "Swellow can't become Asleep,"
+	text "Snorlax can't become Asleep,"
 	line "Confused, Paralyzed, or Poisoned."
-	line "This power can't be used if Swellow"
+	line "This power can't be used if Snorlax"
 	line "is already Asleep, Confused, or"
 	line "Paralyzed."
 	done
@@ -1156,38 +1117,38 @@ SleepingName:
 	text "Sleeping"
 	done
 
-SwellowDescription:
+SnorlaxDescription:
 	text "Very lazy. Just eats and sleeps."
 	line "As its rotund bulk builds,"
 	line "it becomes steadily more slothful."
 	done
 
-SlakothName:
-	text "Slakoth"
+DratiniName:
+	text "Dratini"
 	done
 
-SlakothDescription:
+DratiniDescription:
 	text "Long considered a mythical Pokémon"
 	line "until recently, when a small colony"
 	line "was found living underwater."
 	done
 
-VigorothName:
-	text "Vigoroth"
+DragonairName:
+	text "Dragonair"
 	done
 
 SlamName:
 	text "Slam"
 	done
 
-VigorothDescription:
+DragonairDescription:
 	text "A mystical Pokémon that exudes a"
 	line "gentle aura. Has the ability to"
 	line "change climate conditions."
 	done
 
-SlakingName:
-	text "Slaking"
+DragoniteName:
+	text "Dragonite"
 	done
 
 HealingWindName:
@@ -1195,15 +1156,15 @@ HealingWindName:
 	done
 
 HealingWindDescription:
-	text "When you put Slaking into play,"
+	text "When you put Dragonite into play,"
 	line "remove 2 damage counters from each"
-	line "of your Pokémon. If a Pokémon has"
+	line "of your Pokémon. If a Pokémon has "
 	line "fewer damage counters than that,"
 	line "remove all of them from that"
 	line "Pokémon."
 	done
 
-SlakingLv41Description:
+DragoniteLv41Description:
 	text "It is said that this Pokémon lives"
 	line "somewhere in the sea and that it"
 	line "flies. However, it is only a rumor."
@@ -1215,17 +1176,17 @@ StepInName:
 
 StepInDescription:
 	text "Once during your turn (before your"
-	line "attack), if Slaking is on your"
+	line "attack), if Dragonite is on your"
 	line "Bench, you may switch it with your"
 	line "Active Pokémon."
 	done
 
 DoubleAttackX40Description:
-	text "Flip 2 coins. This attack does"
-	line "40 damage times the number of heads."
+	text "Flip 2 coins. This attack does 40"
+	line "damage times the number of heads."
 	done
 
-SlakingDescription:
+DragoniteDescription:
 	text "An extremely rarely seen marine"
 	line "Pokémon. Its intelligence is said"
 	line "to match that of humans."
@@ -1236,9 +1197,8 @@ ProfessorOakName:
 	done
 
 ProfessorOakDescription:
-	text "         Discard your hand"
-	line ""
-	line "         and draw 7 cards."
+	text "Discard your hand, then draw 7"
+	line "cards."
 	done
 
 ImposterProfessorOakName:
@@ -1246,11 +1206,9 @@ ImposterProfessorOakName:
 	done
 
 ImposterProfessorOakDescription:
-	text "  Your opponent shuffles his or"
-	line ""
-	line "  her hand into his or her deck,"
-	line ""
-	line "  then draws 7 cards."
+	text "Your opponent shuffles his or her"
+	line "hand into his or her deck, then"
+	line "draws 7 cards."
 	done
 
 BillName:
@@ -1258,8 +1216,7 @@ BillName:
 	done
 
 BillDescription:
-	text ""
-	line "            Draw 2 cards."
+	text "Draw 2 cards."
 	done
 
 MrFujiName:
@@ -1267,11 +1224,9 @@ MrFujiName:
 	done
 
 MrFujiDescription:
-	text "  Choose a Pokémon on your Bench."
-	line ""
-	line "  Shuffle it and any cards"
-	line ""
-	line "  attached to it into your deck."
+	text "Choose a Pokémon on your Bench."
+	line "Shuffle it and any cards attached"
+	line "to it into your deck."
 	done
 
 LassName:
@@ -1279,10 +1234,10 @@ LassName:
 	done
 
 LassDescription:
-	text " You and your opponent show each"
-	line " other your hands, then shuffle all"
-	line " the Trainer cards from your hands"
-	line " into your decks."
+	text "You and your opponent show each"
+	line "other your hands, then shuffle all"
+	line "the Trainer cards from your hands"
+	line "into your decks."
 	done
 
 ImakuniName:
@@ -1303,12 +1258,12 @@ PokemonTraderName:
 	done
 
 PokemonTraderDescription:
-	text "  Trade 1 of the Basic Pokémon or"
-	line "  Evolution cards in your hand for"
-	line "  1 of the Basic Pokémon or"
-	line "  Evolution cards from your deck."
-	line "  Show both cards to your opponent."
-	line "  Shuffle your deck afterward."
+	text "Trade 1 of the Basic Pokémon or"
+	line "Evolution cards in your hand for 1"
+	line "of the Basic Pokémon or Evolution"
+	line "cards from your deck. Show both"
+	line "cards to your opponent."
+	line "Shuffle your deck afterward."
 	done
 
 PokemonBreederName:
@@ -1316,11 +1271,11 @@ PokemonBreederName:
 	done
 
 PokemonBreederDescription:
-	text " Put a Stage 2 Evolution card from"
-	line " your hand on the matching Basic"
-	line " Pokémon. You can only play this"
-	line " card when you would be allowed to"
-	line " evolve that Pokémon anyway."
+	text "Put a Stage 2 Evolution card from"
+	line "your hand on the matching Basic"
+	line "Pokémon. You can only play this card"
+	line "when you would be allowed to evolve"
+	line "that Pokémon anyway."
 	done
 
 ClefairyDollName:
@@ -1328,23 +1283,23 @@ ClefairyDollName:
 	done
 
 ClefairyDollDescription:
-	text " Play Clefairy Doll as if it were"
-	line " a Basic Pokémon. While in play,"
-	line " Clefairy Doll counts as a Pokémon"
-	line " (instead of a Trainer card)."
-	line " Clefairy Doll has no attacks,"
-	line " can't retreat, and can't be Asleep,"
-	line " Confused, Paralyzed, or Poisoned."
+	text "Play Clefairy Doll as if it were a"
+	line "Basic Pokémon. While in play,"
+	line "Clefairy Doll counts as a Pokémon"
+	line "(instead of a Trainer card)."
+	line "Clefairy Doll has no attacks, can't"
+	line "retreat, and can't be Asleep,"
+	line "Confused, Paralyzed, or Poisoned."
 	done
 
 ClefairyDollDescriptionCont:
-	text " If Clefairy Doll is Knocked Out,"
-	line " it doesn't count as a Knocked Out"
-	line " Pokémon. (Discard it anyway.)"
-	line " At any time during your turn"
-	line " (before your attack), you may"
-	line " discard Clefairy Doll from play."
-	line " (Use the ”PKMN Power” menu.)"
+	text "If Clefairy Doll is Knocked Out, it"
+	line "doesn't count as a Knocked Out"
+	line "Pokémon. At any time during your"
+	line "turn before your attack, you may"
+	line "discard Clefairy Doll."
+	line "(Use GameBoy Pokémon Power menu"
+	line "option to do this.)"
 	done
 
 MysteriousFossilDescription:
@@ -1360,11 +1315,11 @@ MysteriousFossilDescription:
 MysteriousFossilDescriptionCont:
 	text "If Mysterious Fossil is Knocked Out,"
 	line "it doesn't count as a Knocked Out"
-	line "Pokémon. (Discard it anyway.)"
-	line "At any time during your turn"
-	line "(before your attack), you may"
-	line "discard Mysterious Fossil from play."
-	line "(Use the ”PKMN Power” menu.)"
+	line "Pokémon. (Discard it anyway.) At any"
+	line "time during your turn before your"
+	line "attack, you may discard Mysterious"
+	line "Fossil from play. (Use GameBoy Poké-"
+	line "mon Power menu option to do this.)"
 	done
 
 EnergyRetrievalName:
@@ -1372,11 +1327,9 @@ EnergyRetrievalName:
 	done
 
 EnergyRetrievalDescription:
-	text " Trade 1 of the other cards in your"
-	line ""
-	line " hand for up to 2 Basic Energy"
-	line ""
-	line " cards from your discard pile."
+	text "Trade 1 of the other cards in your"
+	line "hand for up to 2 basic Energy cards"
+	line "from your discard pile."
 	done
 
 SuperEnergyRetrievalName:
@@ -1384,11 +1337,9 @@ SuperEnergyRetrievalName:
 	done
 
 SuperEnergyRetrievalDescription:
-	text " Trade 2 of the other cards in your"
-	line ""
-	line " hand for up to 4 Basic Energy"
-	line ""
-	line " cards from your discard pile."
+	text "Trade 2 of the other cards in your"
+	line "hand for up to 4 basic Energy cards"
+	line "from your discard pile."
 	done
 
 EnergySearchName:
@@ -1396,10 +1347,9 @@ EnergySearchName:
 	done
 
 EnergySearchDescription:
-	text " Search your deck for a Basic Energy"
-	line " card, show it to your opponent,"
-	line " and put it into your hand."
-	line " Shuffle your deck afterward."
+	text "Search your deck for a basic Energy"
+	line "card and put it into your hand."
+	line "Shuffle your deck afterward."
 	done
 
 EnergyRemovalName:
@@ -1407,11 +1357,9 @@ EnergyRemovalName:
 	done
 
 EnergyRemovalDescription:
-	text "  Choose 1 Energy card attached"
-	line ""
-	line "  to 1 of your opponent's Pokémon"
-	line ""
-	line "  and discard it."
+	text "Choose 1 Energy card attached to 1"
+	line "of your opponent's Pokémon and"
+	line "discard it."
 	done
 
 SuperEnergyRemovalName:
@@ -1419,12 +1367,47 @@ SuperEnergyRemovalName:
 	done
 
 SuperEnergyRemovalDescription:
-	text "   Discard 1 Energy card attached"
-	line "   to 1 of your own Pokémon in"
-	line "   order to choose 1 of your"
-	line "   opponent's Pokémon and up to"
-	line "   2 Energy cards attached to it."
-	line "   Discard those Energy cards."
+	text "Discard 1 Energy card attached to 1"
+	line "of your own Pokémon in order to"
+	line "choose 1 of your opponent's Pokémon"
+	line "and up to 2 Energy cards attached"
+	line "to it. Discard those Energy cards."
 	done
 
-;	ds $9
+SwitchName:
+	text "Switch"
+	done
+
+SwitchDescription:
+	text "Switch 1 of your Benched Pokémon"
+	line "with your Active Pokémon."
+	done
+
+PokemonCenterName:
+	text "Pokémon Center"
+	done
+
+PokemonCenterDescription:
+	text "Remove all damage counters from all"
+	line "of your own Pokémon with damage"
+	line "counters on them, then discard all"
+	line "Energy cards attached to those"
+	line "Pokémon."
+	done
+
+PokeBallName:
+	text "Poké Ball"
+	done
+
+PokeBallDescription:
+	text "Flip a coin. If heads, you may"
+	line "search your deck for any Basic"
+	line "Pokémon or Evolution card. Show that"
+	line "card to your opponent, then put it"
+	line "into your hand. Shuffle your deck"
+	line "afterward."
+	done
+
+ScoopUpName:
+	text "Scoop Up"
+	done

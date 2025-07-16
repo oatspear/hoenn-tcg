@@ -1,6 +1,7 @@
-; preserves de
 Func_12871:
-	call ZeroObjectPositionsAndToggleOAMCopy
+	call ZeroObjectPositions
+	ld a, $01
+	ld [wVBlankOAMCopyToggle], a
 	call Set_OBJ_8x8
 	call SetDefaultPalettes
 	xor a
@@ -10,10 +11,9 @@ Func_12871:
 	ldh [hWY], a
 	jp SetWindowOff
 
-
-; same as SetDefaultConsolePalettes but
-; forces all wBGP, wOBP0 and wOBP1 to be the default
-; preserves all registers except af
+; same as SetDefaultConsolePalettes
+; but forces all wBGP, wOBP0 and wOBP1
+; to be the default
 SetDefaultPalettes:
 	push hl
 	push bc
@@ -22,7 +22,7 @@ SetDefaultPalettes:
 	ld [wBGP], a
 	ld [wOBP0], a
 	ld [wOBP1], a
-	ld a, 4
+	ld a, $1
 	ld [wTextBoxFrameType], a
 	bank1call SetDefaultConsolePalettes
 	call FlushAllPalettes

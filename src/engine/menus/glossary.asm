@@ -5,7 +5,7 @@ OpenGlossaryScreen:
 
 	xor a
 	ld [wInPlayAreaCurPosition], a
-	ld de, OpenGlossaryScreen_TransitionTable ; this data is stored in bank $02.
+	ld de, OpenGlossaryScreen_TransitionTable ; this data is stored in bank 2.
 	ld hl, wMenuInputTablePointer
 	ld [hl], e
 	inc hl
@@ -25,13 +25,15 @@ OpenGlossaryScreen:
 	farcall YourOrOppPlayAreaScreen_HandleInput
 	jr nc, .next
 
-	cp -1 ; B button
+	cp -1 ; b button
 	jr nz, .check_button
-	jp ZeroObjectPositionsAndToggleOAMCopy
+
+	farcall ZeroObjectPositionsWithCopyToggleOn
+	ret
 
 .check_button
 	push af
-	call ZeroObjectPositionsAndToggleOAMCopy
+	farcall ZeroObjectPositionsWithCopyToggleOn
 	pop af
 
 	cp $09 ; $09: next page or prev page
@@ -44,8 +46,8 @@ OpenGlossaryScreen:
 	jr .next
 
 .on_select
-	ld a, $1
-	call PlaySFXConfirmOrCancel_Bank6
+	ld a, $01
+	farcall PlaySFXConfirmOrCancel
 .change_page
 	ld a, [wGlossaryPageNo]
 	xor $01 ; swap page
@@ -53,31 +55,28 @@ OpenGlossaryScreen:
 	call .print_menu
 	jr .next
 
-; displays the Glossary menu
+; display glossary menu.
 .display_menu
 	xor a
 	ld [wTileMapFill], a
-	call ZeroObjectPositionsAndToggleOAMCopy
+	call ZeroObjectPositions
+	ld a, $01
+	ld [wVBlankOAMCopyToggle], a
 	call DoFrame
 	call EmptyScreen
 	call Set_OBJ_8x8
 	farcall LoadCursorTile
+
+	lb de, 5, 0
+	call InitTextPrinting
+	ldtx hl, PokemonCardGlossaryText
+	call ProcessTextFromID
 	call .print_menu
 	ldtx hl, ChooseWordAndPressAButtonText
 	jp DrawWideTextBox_PrintText
 
-; prints texts in the Glossary menu
+; print texts in glossary menu.
 .print_menu
-; print Glossary at the top of the page and then draw the page borders
-	ld hl, GlossaryTextData
-	call PlaceTextItems
-
-; alternate header separator that uses a text box tile (it's also colored)
-;	lb bc, 0, 1
-;	ld a, SYM_BOX_BOTTOM
-;	call FillBGMapLineWithA
-
-; print the current page number in the bottom right corner
 	ld hl, wDefaultText
 
 	ld a, TX_SYMBOL
@@ -101,40 +100,38 @@ OpenGlossaryScreen:
 
 	ld [hl], TX_END
 
-	lb de, 17, 10
+	lb de, 16, 1
 	call InitTextPrinting
 	ld hl, wDefaultText
 	call ProcessText
 
-; print the page-specific text
-	lb de, 1, 2
+	lb de, 1, 3
+	call InitTextPrinting
 	ld a, [wGlossaryPageNo]
 	or a
 	jr nz, .page_two
-; page one
-	ldtx hl, GlossaryMenuPage1LeftText
-	call InitTextPrinting_ProcessTextFromID
-	ld d, 12
-	ldtx hl, GlossaryMenuPage1RightText
-	jp InitTextPrinting_ProcessTextFromID
-.page_two
-	ldtx hl, GlossaryMenuPage2LeftText
-	call InitTextPrinting_ProcessTextFromID
-	ld d, 12
-	ldtx hl, GlossaryMenuPage2RightText
-	jp InitTextPrinting_ProcessTextFromID
 
-; draws the Glossary description screen and prints the description
+	ldtx hl, GlossaryMenuPage1Text
+	jr .page_one
+
+.page_two
+	ldtx hl, GlossaryMenuPage2Text
+.page_one
+	jp ProcessTextFromID
+
+; display glossary description.
 .print_description
 	push af
 	xor a
 	ld [wTileMapFill], a
 	call EmptyScreen
-	lb de, 0, 0
-	lb bc, 20, 18
+	lb de, 5, 0
+	call InitTextPrinting
+	ldtx hl, PokemonCardGlossaryText
+	call ProcessTextFromID
+	lb de, 0, 4
+	lb bc, 20, 14
 	call DrawRegularTextBox
-	lb de, 0, 2
-	call DrawTextBoxSeparator
 
 	ld a, [wGlossaryPageNo]
 	or a
@@ -160,24 +157,24 @@ OpenGlossaryScreen:
 	ld a, [hli]
 	push hl
 	ld d, a
-	ld e, 1
+	ld e, $02
 	call InitTextPrinting
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	call ProcessTextFromID
 	pop hl
-	lb de, 1, 4
+	lb de, 1, 5
 	call InitTextPrinting
 	inc hl
 	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, $01 ; text isn't double-spaced
+	ld a, SINGLE_SPACED
 	ld [wLineSeparation], a
 	call ProcessTextFromID
-	xor a ; text is double-spaced
+	xor a ; DOUBLE_SPACED
 	ld [wLineSeparation], a
 	call EnableLCD
 .loop
@@ -187,17 +184,8 @@ OpenGlossaryScreen:
 	jr z, .loop
 
 	ld a, -1
-	jp PlaySFXConfirmOrCancel_Bank6
-
-GlossaryTextData:
-	textitem 6, 0, GlossaryFWText
-	textitem 0, 1, HorizontalLineSeparatorText
-	textitem 10, 1, IntersectingLines1Text
-	textitem 10, 2, VerticalLinesX5Text
-	textitem 10, 3, VerticalLinesX4Text
-	textitem 0, 11, HorizontalLineSeparatorText
-	textitem 10, 11, IntersectingLines2Text
-	db $ff
+	farcall PlaySFXConfirmOrCancel
+	ret
 
 ; unit: 5 bytes.
 ; [structure]
@@ -209,23 +197,23 @@ MACRO glossary_entry
 ENDM
 
 GlossaryData1:
-	glossary_entry 3, AboutActivePokemonAndBenchText, ActivePokemonAndBenchDescriptionText
+	glossary_entry 7, AboutTheDeckText, DeckDescriptionText
+	glossary_entry 5, AboutTheDiscardPileText, DiscardPileDescriptionText
+	glossary_entry 7, AboutTheHandText, HandDescriptionText
+	glossary_entry 6, AboutTheArenaText, ArenaDescriptionText
+	glossary_entry 6, AboutTheBenchText, BenchDescriptionText
+	glossary_entry 4, AboutTheActivePokemonText, ActivePokemonDescriptionText
+	glossary_entry 5, AboutBenchPokemonText, BenchPokemonDescriptionText
 	glossary_entry 7, AboutPrizesText, PrizesDescriptionText
-	glossary_entry 6, AboutTheDeckText, TheDeckDescriptionText
-	glossary_entry 2, AboutTheDiscardPileText, TheDiscardPileDescriptionText
-	glossary_entry 6, AboutTheHandText, TheHandDescriptionText
-	glossary_entry 3, AboutBasicPokemonText, BasicPokemonDescriptionText
-	glossary_entry 3, AboutEvolutionCardsText, EvolutionCardsDescriptionText
-	glossary_entry 3, AboutTrainerCardsText, TrainerCardsDescriptionText
-	glossary_entry 4, AboutEnergyCardsText, EnergyCardsDescriptionText
+	glossary_entry 5, AboutDamageCountersText, DamageCountersDescriptionText
 
 GlossaryData2:
-	glossary_entry 5, AboutAttackingText, AttackingDescriptionText
-	glossary_entry 2, AboutDamageCountersText, DamageCountersDescriptionText
-	glossary_entry 6, AboutEvolvingText, EvolvingDescriptionText
-	glossary_entry 3, AboutPokemonPowersText, PokemonPowersDescriptionText
-	glossary_entry 5, AboutRetreatingText, RetreatingDescriptionText
+	glossary_entry 5, AboutEnergyCardsText, EnergyCardsDescriptionText
+	glossary_entry 5, AboutTrainerCardsText, TrainerCardsDescriptionText
+	glossary_entry 5, AboutBasicPokemonText, BasicPokemonDescriptionText
+	glossary_entry 5, AboutEvolutionCardsText, EvolutionCardsDescriptionText
+	glossary_entry 6, AboutAttackingText, AttackingDescriptionText
+	glossary_entry 5, AboutPokemonPowerText, PokemonPowerDescriptionText
 	glossary_entry 6, AboutWeaknessText, WeaknessDescriptionText
-	glossary_entry 5, AboutResistanceText, ResistanceDescriptionText
-	glossary_entry 1, AboutSpecialConditions1Text, SpecialConditions1DescriptionText
-	glossary_entry 1, AboutSpecialConditions2Text, SpecialConditions2DescriptionText
+	glossary_entry 6, AboutResistanceText, ResistanceDescriptionText
+	glossary_entry 6, AboutRetreatingText, RetreatingDescriptionText

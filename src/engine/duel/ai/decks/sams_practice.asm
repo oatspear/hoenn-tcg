@@ -12,37 +12,29 @@ AIActionTable_SamPractice:
 	call IsAIPracticeScriptedTurn
 	jr nc, .scripted_1
 ; not scripted, use AI main turn logic
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 .scripted_1 ; use scripted actions instead
-	call AIPerformScriptedTurn
-	ret
+	jp AIPerformScriptedTurn
 
 .start_duel
-	call SetSamsStartingPlayArea
-	ret
+	jp SetSamsStartingPlayArea
 
 .forced_switch
 	call IsAIPracticeScriptedTurn
 	jr nc, .scripted_2
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 .scripted_2
-	call PickRandomBenchPokemon
-	ret
+	jp PickRandomBenchPokemon
 
 .ko_switch:
 	call IsAIPracticeScriptedTurn
 	jr nc, .scripted_3
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 .scripted_3
-	call GetPlayAreaLocationOfRaticateOrRattata
-	ret
+	jp GetPlayAreaLocationOfRaticateOrRattata
 
 .take_prize:
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 ; returns carry if number of turns
 ; the AI has taken >= 7.
@@ -66,7 +58,11 @@ SetSamsStartingPlayArea:
 	cp $ff
 	ret z
 	call LoadCardDataToBuffer1_FromDeckIndex
-	cp MACHOP
+	ld a, [wLoadedCard1ID + 0]
+	ld e, a
+	ld a, [wLoadedCard1ID + 1]
+	ld d, a
+	cp16 MACHOP
 	jr nz, .loop_hand
 	ldh a, [hTempCardIndex_ff98]
 	call PutHandPokemonCardInPlayArea
@@ -77,12 +73,12 @@ SetSamsStartingPlayArea:
 ; outputs in a Play Area location of Raticate or Rattata
 ; in the Bench. If neither is found, just output PLAY_AREA_BENCH_1.
 GetPlayAreaLocationOfRaticateOrRattata:
-	ld a, GOLBAT
+	ld de, RATICATE
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	cp $ff
 	jr nz, .found
-	ld a, ZUBAT
+	ld de, RATTATA
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	cp $ff
@@ -102,12 +98,11 @@ AIPerformScriptedTurn:
 ; always attack with Arena card's first attack.
 ; if it's unusable end turn without attacking.
 	xor a
-	ldh [hTempPlayAreaLocation_ff9d], a
-	ld [wSelectedAttack], a
+	ldh [hTempPlayAreaLocation_ff9d], a ; PLAY_AREA_ARENA
+	ld [wSelectedAttack], a ; FIRST_ATTACK_OR_PKMN_POWER
 	call CheckIfSelectedAttackIsUnusable
 	jr c, .unusable
-	call AITryUseAttack
-	ret
+	jp AITryUseAttack
 
 .unusable
 	ld a, OPPACTION_FINISH_NO_ATTACK
@@ -124,74 +119,66 @@ AIPerformScriptedTurn:
 	dw .turn_7
 
 .turn_1
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
+	ld bc, MACHOP
+	ld de, FIGHTING_ENERGY
 	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_2
-	ld a, ZUBAT
+	ld de, RATTATA
 	call LookForCardIDInHandList_Bank5
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_PLAY_BASIC_PKMN
 	bank1call AIMakeDecision
-	ld d, ZUBAT
-	ld e, FIGHTING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	ld bc, RATTATA
+	ld de, FIGHTING_ENERGY
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_3
-	ld a, ZUBAT
+	ld de, RATTATA
 	ld b, PLAY_AREA_ARENA
 	call LookForCardIDInPlayArea_Bank5
 	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, GOLBAT
+	ld de, RATICATE
 	call LookForCardIDInHandList_Bank5
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_EVOLVE_PKMN
 	bank1call AIMakeDecision
-	ld d, GOLBAT
-	ld e, LIGHTNING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	ld bc, RATICATE
+	ld de, LIGHTNING_ENERGY
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_4
-	ld d, GOLBAT
-	ld e, LIGHTNING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	ld bc, RATICATE
+	ld de, LIGHTNING_ENERGY
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_5
-	ld a, MACHOP
+	ld de, MACHOP
 	call LookForCardIDInHandList_Bank5
 	ldh [hTemp_ffa0], a
 	ld a, OPPACTION_PLAY_BASIC_PKMN
 	bank1call AIMakeDecision
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
+	ld bc, MACHOP
+	ld de, FIGHTING_ENERGY
 	call AIAttachEnergyInHandToCardInBench
 
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
-	call GetCardIDFromDeckIndex
-	ld a, e
-	cp MACHOP
+	cp16 MACHOP ; wrong
 	ld a, PLAY_AREA_BENCH_1
 	jr nz, .retreat
 	inc a ; PLAY_AREA_BENCH_2
 
 .retreat
-	call AITryToRetreat
-	ret
+	jp AITryToRetreat
 
 .turn_6
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	ld bc, MACHOP
+	ld de, FIGHTING_ENERGY
+	jp AIAttachEnergyInHandToCardInPlayArea
 
 .turn_7
-	ld d, MACHOP
-	ld e, FIGHTING_ENERGY
-	call AIAttachEnergyInHandToCardInPlayArea
-	ret
+	ld bc, MACHOP
+	ld de, FIGHTING_ENERGY
+	jp AIAttachEnergyInHandToCardInPlayArea

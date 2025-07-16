@@ -1,9 +1,8 @@
-; initializes parameters for a card list (e.g. hand cards in a duel or cards from a booster pack)
-; preserves bc and de
+; initializes parameters for a card list (e.g. list of hand cards in a duel, or booster pack cards)
 ; input:
-;	a = number of cards in the list
-;	de = initial page scroll offset, initial item (in the visible page)
-;	hl = 9 bytes with the rest of the parameters
+   ; a = list length
+   ; de = initial page scroll offset, initial item (in the visible page)
+   ; hl: 9 bytes with the rest of the parameters
 InitializeCardListParameters::
 	ld [wNumListItems], a
 	ld a, d
@@ -36,34 +35,26 @@ InitializeCardListParameters::
 	ld [wMenuYSeparation], a
 	ret
 
-
-; used for card list screens like the Hand or Discard Pile
-; similar to HandleMenuInput, but conveniently returns parameters
-; related to the state of the list in a, d, and e if A or B were pressed.
-; output:
-;	d = [wListScrollOffset]
-;	e = [wCurMenuItem]
-;	a = [hCurMenuItem] ($ff if the B button was pressed)
-;	carry = set:  if either the A or the B button were pressed
+; similar to HandleMenuInput, but conveniently returns parameters related to the
+; state of the list in a, d, and e if A or B were pressed. also returns carry
+; if A or B were pressed, nc otherwise. returns -1 in a if B was pressed.
+; used for example in the Hand card list and Discard Pile card list screens.
 HandleCardListInput::
 	call HandleMenuInput
 	ret nc
 	ld a, [wListScrollOffset]
 	ld d, a
-;	ld a, [wCurMenuItem]
-;	ld e, a ; already set by HandleMenuInput
+	ld a, [wCurMenuItem]
+	ld e, a
 	ldh a, [hCurMenuItem]
+	scf
 	ret
-
 
 ; initializes parameters for a menu, given the 8 bytes starting at hl,
 ; which are loaded to the following addresses:
 ;	wMenuCursorXOffset, wMenuCursorYOffset, wMenuYSeparation, wNumMenuItems,
 ;	wMenuVisibleCursorTile, wMenuInvisibleCursorTile, wMenuUpdateFunc.
 ; also sets the current menu item (wCurMenuItem) to the one specified in register a.
-; input:
-;	a = current menu item
-;	hl = menu parameter data to use
 InitializeMenuParameters::
 	ld [wCurMenuItem], a
 	ldh [hCurMenuItem], a
@@ -79,12 +70,9 @@ InitializeMenuParameters::
 	ld [wCursorBlinkCounter], a
 	ret
 
-
-; note: output values still subject to those of the function at [wMenuUpdateFunc], if any
-; output:
-;	a =  0:  if the A button was pressed
-;	a = -1:  if the B button was pressed
-;	carry = set:  if either the A or the B button were pressed
+; returns with the carry flag set if A or B were pressed
+; returns a = 0 if A was pressed, a = -1 if B was pressed
+; note: return values still subject to those of the function at [wMenuUpdateFunc] if any
 HandleMenuInput::
 	xor a
 	ld [wRefreshMenuCursorSFX], a
@@ -156,10 +144,8 @@ HandleMenuInput::
 	scf
 	ret
 
-
 ; plays an "open screen" sound (SFX_CONFIRM) if [hCurMenuItem] != 0xff
 ; plays an "exit screen" sound (SFX_CANCEL) if [hCurMenuItem] == 0xff
-; preserves all registers
 PlayOpenOrExitScreenSFX::
 	push af
 	ldh a, [hCurMenuItem]
@@ -174,10 +160,9 @@ PlayOpenOrExitScreenSFX::
 	pop af
 	ret
 
-
 ; called once per frame when a menu is open
-; plays the sound effect at wRefreshMenuCursorSFX (if non-0)
-; and blinks the cursor when wCursorBlinkCounter hits 16 (i.e. every 16 frames)
+; play the sound effect at wRefreshMenuCursorSFX if non-0 and blink the
+; cursor when wCursorBlinkCounter hits 16 (i.e. every 16 frames)
 RefreshMenuCursor_CheckPlaySFX::
 	ld a, [wRefreshMenuCursorSFX]
 	or a
@@ -197,14 +182,12 @@ RefreshMenuCursor::
 	jr z, DrawCursor
 ;	fallthrough
 
-; sets the tile at [wMenuCursorXOffset],[wMenuCursorYOffset] to [wMenuInvisibleCursorTile]
+; set the tile at [wMenuCursorXOffset],[wMenuCursorYOffset] to [wMenuInvisibleCursorTile]
 EraseCursor::
 	ld a, [wMenuInvisibleCursorTile]
 ;	fallthrough
 
-; sets the tile at [wMenuCursorXOffset],[wMenuCursorYOffset] to a
-; input:
-;	a = which sprite to draw
+; set the tile at [wMenuCursorXOffset],[wMenuCursorYOffset] to a
 DrawCursor::
 	ld c, a
 	ld a, [wMenuYSeparation]
@@ -226,16 +209,12 @@ DrawCursor::
 	or a
 	ret
 
-; sets the tile at [wMenuCursorXOffset],[wMenuCursorYOffset] to [wMenuVisibleCursorTile]
+; set the tile at [wMenuCursorXOffset],[wMenuCursorYOffset] to [wMenuVisibleCursorTile]
 DrawCursor2::
 	ld a, [wMenuVisibleCursorTile]
 	jr DrawCursor
 
-
-; sets wCurMenuItem and hCurMenuItem to a and clears wCursorBlinkCounter
-; preserves all registers except af
-; input:
-;	a = new menu item
+; set wCurMenuItem, and hCurMenuItem to a, and zero wCursorBlinkCounter
 SetMenuItem::
 	ld [wCurMenuItem], a
 	ldh [hCurMenuItem], a
@@ -243,11 +222,10 @@ SetMenuItem::
 	ld [wCursorBlinkCounter], a
 	ret
 
-
-; handles input for the 2-row 3-column duel menu.
+; handle input for the 2-row 3-column duel menu.
 ; only handles input not involving the B, START, or SELECT buttons, that is,
 ; navigating through the menu or selecting an item with the A button.
-; other input is handled by PrintDuelMenuAndHandleInput.handle_input
+; other input in handled by PrintDuelMenuAndHandleInput.handle_input
 HandleDuelMenuInput::
 	ldh a, [hDPadHeld]
 	or a
@@ -323,7 +301,6 @@ HandleDuelMenuInput::
 	or a
 	ret
 
-
 DuelMenuCursorCoords::
 	db  2, 14 ; Hand
 	db  2, 16 ; Attack
@@ -332,14 +309,12 @@ DuelMenuCursorCoords::
 	db 14, 14 ; Retreat
 	db 14, 16 ; Done
 
-
-; prints the items of a list of cards (e.g. hand cards in a duel or cards from a booster pack)
-; and initializes the parameters of the list given
-; input:
-;	wDuelTempList = card list source
-;	a = number of cards in the list
-;	de = initial page scroll offset, initial item (in the visible page)
-;	hl = 9 bytes with the rest of the parameters
+; print the items of a list of cards (hand cards in a duel, cards from a booster pack...)
+; and initialize the parameters of the list given:
+  ; wDuelTempList = card list source
+  ; a = list length
+  ; de = initial page scroll offset, initial item (in the visible page)
+  ; hl: 9 bytes with the rest of the parameters
 PrintCardListItems::
 	call InitializeCardListParameters
 	ld hl, wMenuUpdateFunc
@@ -399,8 +374,10 @@ ReloadCardListItems::
 .next_card
 	ld a, [hl]
 	cp $ff
-	ret z ; done
+	jr z, .done
 	push hl
+	push bc
+	push de
 	call LoadCardDataToBuffer1_FromDeckIndex
 	call DrawCardSymbol
 	call InitTextPrinting
@@ -408,19 +385,21 @@ ReloadCardListItems::
 	call CopyCardNameAndLevel
 	ld hl, wDefaultText
 	call ProcessText
+	pop de
+	pop bc
 	pop hl
 	inc hl
 	ld a, [wNumListItems]
 	dec a
 	inc c
 	cp c
-	ret c ; done
+	jr c, .done
 	inc e
 	inc e
 	dec b
 	jr nz, .next_card
+.done
 	ret
-
 
 ; this function is always loaded to wMenuUpdateFunc by PrintCardListItems
 ; takes care of things like handling page scrolling and calling the function at wListFunctionPointer
@@ -552,30 +531,19 @@ CardListMenuFunction::
 	cp $ff
 	jr z, .skip_printing_indicator
 	; print <sel_item>/<num_items>
-	; adjusts printing to account for single digit numbers
 	ld c, a
-	ld b, 16
-	ld a, [wNumListItems]
-	call TwoDigitNumberToTxSymbol
-	ld a, [hl]
-	cp SYM_0
-	jr nz, .two_digits
-	ld [hl], SYM_SLASH
-	ld a, 2
-	call CopyDataToBGMap0
-	jr .current_item_number
-.two_digits
-	ld a, 2
-	call CopyDataToBGMap0
-	dec b
-	ld a, SYM_SLASH
-	call WriteByteToBGMap0
-.current_item_number
-	dec b
-	dec b
 	ldh a, [hCurMenuItem]
 	inc a
-	call TwoDigitNumberToTxSymbol_TrimLeadingZero
+	call OneByteNumberToTxSymbol_TrimLeadingZeros
+	ld b, 13
+	ld a, 2
+	call CopyDataToBGMap0
+	ld b, 15
+	ld a, SYM_SLASH
+	call WriteByteToBGMap0
+	ld a, [wNumListItems]
+	call OneByteNumberToTxSymbol_TrimLeadingZeros
+	ld b, 16
 	ld a, 2
 	call CopyDataToBGMap0
 .skip_printing_indicator
@@ -602,35 +570,56 @@ CardListMenuFunction::
 	scf
 	ret
 
+; convert the number at a to TX_SYMBOL text format and write it to wDefaultText
+; replace leading zeros with SYM_SPACE
+OneByteNumberToTxSymbol_TrimLeadingZeros::
+	call OneByteNumberToTxSymbol
+	ld a, [hl]
+	cp SYM_0
+	ret nz
+	ld [hl], SYM_SPACE
+	ret
 
-; translates the TYPE_* constant in wLoadedCard1Type to an index for CardSymbolTable
-; preserves all registers except af
+; convert the number at a to TX_SYMBOL text format and write it to wDefaultText
+OneByteNumberToTxSymbol::
+	ld hl, wDefaultText
+	push hl
+	ld e, SYM_0 - 1
+.first_digit_loop
+	inc e
+	sub 10
+	jr nc, .first_digit_loop
+	ld [hl], e ; first digit
+	inc hl
+	add SYM_0 + 10
+	ld [hli], a ; second digit
+	ld [hl], SYM_SPACE
+	pop hl
+	ret
+
+; translate the TYPE_* constant in wLoadedCard1Type to an index for CardSymbolTable
 CardTypeToSymbolID::
 	ld a, [wLoadedCard1Type]
 	cp TYPE_TRAINER
 	jr nc, .trainer_card
 	cp TYPE_ENERGY
 	jr c, .pokemon_card
-	; Energy card
-	and 7 ; match TYPE_ENERGY_* with the appropriate Energy icon
+	; energy card
+	and 7 ; convert energy constant to type constant
 	ret
 .trainer_card
-	ld a, 11 ; use the T icon
+	ld a, 11
 	ret
 .pokemon_card
-	ld a, [wLoadedCard1Stage] ; different symbol for each stage of evolution
+	ld a, [wLoadedCard1Stage] ; different symbol for each evolution stage
 	add 8
 	ret
 
-
-; uses the TYPE_* constant in wLoadedCard1Type to find the relevant entry in CardSymbolTable
-; preserves de
-; output:
-;	hl = pointing to an entry from CardSymbolTable
-;	a = starting tile number of the symbol being drawn (ICON_TILE_* constant)
+; return the entry in CardSymbolTable of the TYPE_* constant in wLoadedCard1Type
+; also return the first byte of said entry (starting tile number) in a
 GetCardSymbolData::
 	call CardTypeToSymbolID
-	add a ; double number to account for palette data
+	add a
 	ld c, a
 	ld b, 0
 	ld hl, CardSymbolTable
@@ -638,12 +627,7 @@ GetCardSymbolData::
 	ld a, [hl]
 	ret
 
-
-; draws, at de, the 2x2 tile card symbol associated to the TYPE_* constant in wLoadedCard1Type
-; preserves all registers except af
-; input:
-;	de = coordinates at which to begin drawing the symbol
-;	hl = pointing to an entry from CardSymbolTable
+; draw, at de, the 2x2 tile card symbol associated to the TYPE_* constant in wLoadedCard1Type
 DrawCardSymbol::
 	push hl
 	push de
@@ -652,10 +636,6 @@ DrawCardSymbol::
 	dec d
 	dec d
 	dec e
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .tiles
-	; CGB-only attrs (palette)
 	push hl
 	inc hl
 	ld a, [hl]
@@ -665,7 +645,6 @@ DrawCardSymbol::
 	call FillRectangle
 	call BankswitchVRAM0
 	pop hl
-.tiles
 	ld a, [hl]
 	lb hl, 1, 2
 	lb bc, 2, 2
@@ -675,45 +654,37 @@ DrawCardSymbol::
 	pop hl
 	ret
 
-
 CardSymbolTable::
 ; starting tile number, cgb palette (grey, yellow/red, green/blue, pink/orange)
-	db ICON_TILE_FIRE,            $01 ; TYPE_ENERGY_FIRE
-	db ICON_TILE_GRASS,           $02 ; TYPE_ENERGY_GRASS
-	db ICON_TILE_LIGHTNING,       $01 ; TYPE_ENERGY_LIGHTNING
-	db ICON_TILE_WATER,           $02 ; TYPE_ENERGY_WATER
-	db ICON_TILE_FIGHTING,        $03 ; TYPE_ENERGY_PSYCHIC
-	db ICON_TILE_PSYCHIC,         $03 ; TYPE_ENERGY_FIGHTING
-	db ICON_TILE_COLORLESS,       $00 ; TYPE_ENERGY_DOUBLE_COLORLESS
-	db ICON_TILE_ENERGY,          $02 ; TYPE_ENERGY_UNUSED
-	db ICON_TILE_BASIC_POKEMON,   $02 ; TYPE_PKMN_*, Basic
-	db ICON_TILE_STAGE_1_POKEMON, $02 ; TYPE_PKMN_*, Stage 1
-	db ICON_TILE_STAGE_2_POKEMON, $01 ; TYPE_PKMN_*, Stage 2
-	db ICON_TILE_TRAINER,         $02 ; TYPE_TRAINER
+	db $e0, $2 ; TYPE_ENERGY_FIRE
+	db $e4, $3 ; TYPE_ENERGY_GRASS
+	db $e8, $2 ; TYPE_ENERGY_LIGHTNING
+	db $ec, $3 ; TYPE_ENERGY_WATER
+	db $f0, $4 ; TYPE_ENERGY_PSYCHIC
+	db $f4, $4 ; TYPE_ENERGY_FIGHTING
+	db $f8, $0 ; TYPE_ENERGY_DOUBLE_COLORLESS
+	db $fc, $3 ; TYPE_ENERGY_UNUSED
+	db $d0, $3 ; TYPE_PKMN_*, Basic
+	db $d4, $3 ; TYPE_PKMN_*, Stage 1
+	db $d8, $2 ; TYPE_PKMN_*, Stage 2
+	db $dc, $3 ; TYPE_TRAINER
 
-
-; copies the name and level of the card at wLoadedCard1 to wDefaultText
-; preserves bc and de
-; input:
-;	a = length in number of tiles (the resulting string will be padded with spaces to match it)
+; copy the name and level of the card at wLoadedCard1 to wDefaultText
+; a = length in number of tiles (the resulting string will be padded with spaces to match it)
 CopyCardNameAndLevel::
 	farcall _CopyCardNameAndLevel
 	ret
 
-
 ; sets cursor parameters for navigating in a text box, but using
 ; default values for the cursor tile (SYM_CURSOR_R) and the tile behind it (SYM_SPACE).
-; input:
-;	de = coordinates of the cursor
+; d,e: coordinates of the cursor
 SetCursorParametersForTextBox_Default::
 	lb bc, SYM_CURSOR_R, SYM_SPACE ; cursor tile, tile behind cursor
 	call SetCursorParametersForTextBox
 ;	fallthrough
 
-; waits for the player to press either the A or the B button
-; output:
-;	carry = set:      if the A button was pressed
-;	carry = not set:  if the B button was pressed
+; wait until A or B is pressed.
+; return carry if A is pressed, nc if B is pressed. erase the cursor either way
 WaitForButtonAorB::
 	call DoFrame
 	call RefreshMenuCursor
@@ -730,12 +701,9 @@ WaitForButtonAorB::
 	or a
 	ret
 
-
 ; sets cursor parameters for navigating in a text box
-; preserves bc and de
-; input:
-;	bc = tile numbers of the cursor and of the tile behind it
-;	de = coordinates of the cursor
+; d,e: coordinates of the cursor
+; b,c: tile numbers of the cursor and of the tile behind it
 SetCursorParametersForTextBox::
 	xor a
 	ld hl, wCurMenuItem
@@ -754,31 +722,16 @@ SetCursorParametersForTextBox::
 	ld [wCursorBlinkCounter], a
 	ret
 
-
-; draws a 20x6 text box aligned to the bottom of the screen,
-; prints the text at hl without letter delay, and waits for A or B to be pressed
-; input:
-;	hl = text to print
-DrawWideTextBox_PrintTextNoDelay_Wait::
-	call DrawWideTextBox_PrintTextNoDelay
-	jr WaitForWideTextBoxInput
-
-
-; draws a 20x6 text box aligned to the bottom of the screen
-; and prints the text at hl without letter delay
-; input:
-;	hl = text to print
+; draw a 20x6 text box aligned to the bottom of the screen
+; and print the text at hl without letter delay
 DrawWideTextBox_PrintTextNoDelay::
 	push hl
 	call DrawWideTextBox
 	ld a, 19
 	jr DrawTextBox_PrintTextNoDelay
 
-
-; draws a 12x6 text box aligned to the bottom left of the screen
-; and prints the text at hl without letter delay
-; input:
-;	hl = text to print
+; draw a 12x6 text box aligned to the bottom left of the screen
+; and print the text at hl without letter delay
 DrawNarrowTextBox_PrintTextNoDelay::
 	push hl
 	call DrawNarrowTextBox
@@ -796,11 +749,8 @@ DrawTextBox_PrintTextNoDelay::
 	ld hl, wDefaultText
 	jp ProcessText
 
-
-; draws a 20x6 text box aligned to the bottom of the screen
-; and prints the text at hl with letter delay
-; input:
-;	hl = text to print
+; draw a 20x6 text box aligned to the bottom of the screen
+; and print the text at hl with letter delay
 DrawWideTextBox_PrintText::
 	push hl
 	call DrawWideTextBox
@@ -812,15 +762,30 @@ DrawWideTextBox_PrintText::
 	pop hl
 	jp PrintText
 
+; draw a 12x6 text box aligned to the bottom left of the screen
+DrawNarrowTextBox::
+	lb de, 0, 12
+	lb bc, 12, 6
+	call AdjustCoordinatesForBGScroll
+	jp DrawRegularTextBox
 
-; draws a 12x6 text box aligned to the bottom left of the screen,
-; prints the text at hl without letter delay, and waits for A or B to be pressed
-; input:
-;	hl = text to print
-DrawNarrowTextBox_WaitForInput::
-	call DrawNarrowTextBox_PrintTextNoDelay
+; draw a 20x6 text box aligned to the bottom of the screen
+DrawWideTextBox::
+	lb de, 0, 12
+	lb bc, 20, 6
+	call AdjustCoordinatesForBGScroll
+	jp DrawRegularTextBox
+
+; draw a 20x6 text box aligned to the bottom of the screen,
+; print the text at hl with letter delay, and wait for A or B pressed
+DrawWideTextBox_WaitForInput::
+	call DrawWideTextBox_PrintText
+;	fallthrough
+
+; wait for A or B to be pressed on a wide (20x6) text box
+WaitForWideTextBoxInput::
 	xor a
-	ld hl, NarrowTextBoxMenuParameters
+	ld hl, WideTextBoxMenuParameters
 	call InitializeMenuParameters
 	call EnableLCD
 .wait_A_or_B_loop
@@ -829,35 +794,7 @@ DrawNarrowTextBox_WaitForInput::
 	ldh a, [hKeysPressed]
 	and A_BUTTON | B_BUTTON
 	jr z, .wait_A_or_B_loop
-	ret
-
-
-NarrowTextBoxMenuParameters::
-	db 10, 17 ; cursor x, cursor y
-	db 1 ; y displacement between items
-	db 1 ; number of items
-	db SYM_CURSOR_D ; cursor tile number
-	db SYM_BOX_BOTTOM ; tile behind cursor
-	dw NULL ; function pointer if non-0
-
-
-; draws a 20x6 text box aligned to the bottom of the screen,
-; prints the text at hl with letter delay, and waits for A or B to be pressed
-; input:
-;	hl = text to print
-DrawWideTextBox_WaitForInput::
-	call DrawWideTextBox_PrintText
-;	fallthrough
-
-; waits for A or B to be pressed on a wide (20x6) text box
-WaitForWideTextBoxInput::
-	xor a
-	ld hl, WideTextBoxMenuParameters
-	call InitializeMenuParameters
-	call EnableLCD
-	call DrawNarrowTextBox_WaitForInput.wait_A_or_B_loop
 	jp EraseCursor
-
 
 WideTextBoxMenuParameters::
 	db 18, 17 ; cursor x, cursor y
@@ -867,28 +804,33 @@ WideTextBoxMenuParameters::
 	db SYM_BOX_BOTTOM ; tile behind cursor
 	dw NULL ; function pointer if non-0
 
+; display a two-item horizontal menu with custom text provided in hl and handle input
+TwoItemHorizontalMenu::
+	call DrawWideTextBox_PrintText
+	lb de, 6, 16 ; x, y
+	ld a, d
+	ld [wLeftmostItemCursorX], a
+	lb bc, SYM_CURSOR_R, SYM_SPACE ; cursor tile, tile behind cursor
+	call SetCursorParametersForTextBox
+	ld a, 1
+	ld [wCurMenuItem], a
+	call EnableLCD
+	jp HandleYesOrNoMenu.refresh_menu
 
-; same as function below except the default selection is set to "Yes"
 YesOrNoMenuWithText_SetCursorToYes::
 	ld a, $01
 	ld [wDefaultYesOrNo], a
 ;	fallthrough
 
-; displays a YES / NO menu in a 20x6 textbox with custom text and handles input
-; input:
-;	hl = text to print
-;	wDefaultYesOrNo = 1:  the default selection will be "Yes"
-;	wDefaultYesOrNo = 0:  the default selection will be "No"
-; output:
-;	carry = set:  if "No" was selected
+; display a yes / no menu in a 20x8 textbox with custom text provided in hl and handle input
+; wDefaultYesOrNo determines whether the cursor initially points to YES or to NO
+; returns carry if "no" selected
 YesOrNoMenuWithText::
 	call DrawWideTextBox_PrintText
 ;	fallthrough
 
 ; prints the YES / NO menu items at coordinates x,y = 7,16 and handles input
-; wDefaultYesOrNo determines whether the cursor initially points to YES or to NO
-; output:
-;	carry = set:  if "No" was selected
+; input: wDefaultYesOrNo. returns carry if "no" selected
 YesOrNoMenu::
 	lb de, 7, 16 ; x, y
 	call PrintYesOrNoItems
@@ -896,9 +838,7 @@ YesOrNoMenu::
 	jr HandleYesOrNoMenu
 
 ; prints the YES / NO menu items at coordinates x,y = 3,16 and handles input
-; wDefaultYesOrNo determines whether the cursor initially points to YES or to NO
-; output:
-;	carry = set:  if "No" was selected
+; input: wDefaultYesOrNo. returns carry if "no" selected
 YesOrNoMenuWithText_LeftAligned::
 	call DrawNarrowTextBox_PrintTextNoDelay
 	lb de, 3, 16 ; x, y
@@ -960,89 +900,8 @@ HandleYesOrNoMenu::
 	scf
 	ret
 
-
-; displays a two-item horizontal menu with custom text provided in hl and handles input
-; input:
-;	hl = text to print
-TwoItemHorizontalMenu::
-	call DrawWideTextBox_PrintText
-	lb de, 6, 16 ; x, y
-	ld a, d
-	ld [wLeftmostItemCursorX], a
-	lb bc, SYM_CURSOR_R, SYM_SPACE ; cursor tile, tile behind cursor
-	call SetCursorParametersForTextBox
-	ld a, 1
-	ld [wCurMenuItem], a
-	call EnableLCD
-	jr HandleYesOrNoMenu.refresh_menu
-
-
 ; prints "YES NO" at de
-; preserves bc
-; input:
-;	de = coordinates at which to begin printing the text
 PrintYesOrNoItems::
 	call AdjustCoordinatesForBGScroll
 	ldtx hl, YesOrNoText
 	jp InitTextPrinting_ProcessTextFromID
-
-
-; preserves all registers except af
-; input:
-;	de = text id for text box header
-;	hl = text id for text box contents
-SetCardListHeaderText::
-	ld a, e
-	ld [wCardListHeaderText], a
-	ld a, d
-	ld [wCardListHeaderText + 1], a
-;	fallthrough
-
-; preserves all registers except af
-; input:
-;	hl = text id for text box contents
-SetCardListInfoBoxText::
-	ld a, l
-	ld [wCardListInfoBoxText], a
-	ld a, h
-	ld [wCardListInfoBoxText + 1], a
-	ret
-
-
-; draws the same tile across an entire line in BG Map
-; if CGB, also fills the line with background palette 4 in VRAM1
-; input:
-;	a = TX_SYMBOL (SYM_* constant)
-;	bc = coordinates to print line
-FillBGMapLineWithA::
-	call BCCoordToBGMap0Address
-	ld b, SCREEN_WIDTH
-	call FillDEWithA
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ret nz ; return if not CGB
-	ld a, $04
-	ld b, SCREEN_WIDTH
-	call BankswitchVRAM1
-	call FillDEWithA
-	jp BankswitchVRAM0
-
-
-;----------------------------------------
-;        UNREFERENCED FUNCTIONS
-;----------------------------------------
-;
-;ContinueDuel::
-;	ld a, BANK(_ContinueDuel)
-;	call BankswitchROM
-;	jp _ContinueDuel
-;
-;
-; reloads a list of cards, except don't print their names
-;Func_2827::
-;	ld a, $01
-;	ldh [hffb0], a
-;	call ReloadCardListItems
-;	xor a
-;	ldh [hffb0], a
-;	ret

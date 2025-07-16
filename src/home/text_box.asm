@@ -1,7 +1,39 @@
-; Applies SCX and SCY correction to xy coordinates at de
-; preserves af, bc, and hl
-; input:
-;	de = screen coordinates to adjust
+
+; copy c bytes of data from de to hl
+; if LCD on, copy during h-blank only
+SafeCopyDataDEtoHL::
+	ld a, [wLCDC]        ;
+	bit LCDC_ENABLE_F, a ;
+	jr nz, .lcd_on       ; assert that LCD is on
+.lcd_off_loop
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .lcd_off_loop
+	ret
+.lcd_on
+	jp HblankCopyDataDEtoHL
+
+; returns v*BGMap0 + BG_MAP_WIDTH * e + d in hl.
+; used to map coordinates at de to a BGMap0 address.
+DECoordToBGMap0Address::
+	ld l, e
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld a, l
+	add d
+	ld l, a
+	ld a, h
+	adc HIGH(v0BGMap0)
+	ld h, a
+	ret
+
+; Apply SCX and SCY correction to xy coordinates at de
 AdjustCoordinatesForBGScroll::
 	push af
 	ldh a, [hSCX]
@@ -21,31 +53,10 @@ AdjustCoordinatesForBGScroll::
 	pop af
 	ret
 
-
 ; Draws a bxc text box at de printing a name in the left side of the top border.
-; The name's text ID must be at hl when this function is called.
+; The name's text id must be at hl when this function is called.
 ; Mostly used to print text boxes for talked-to NPCs, but occasionally used in duels as well.
-; input:
-;	bc = width and height of the text box being drawn
-;	de = screen coordinates at which to start drawing the text box
-;	hl = text ID of header name to print
 DrawLabeledTextBox::
-	ld a, [wConsole]
-	cp CONSOLE_SGB
-	jr nz, .draw_textbox
-	ld a, [wTextBoxFrameType]
-	or a
-	jr z, .draw_textbox
-; Console is SGB and frame type is != 0.
-; The text box will be colorized so a SGB command needs to be sent as well
-	push de
-	push bc
-	call .draw_textbox
-	pop bc
-	pop de
-	jp ColorizeTextBoxSGB
-
-.draw_textbox
 	push de
 	push bc
 	push hl
@@ -105,11 +116,11 @@ DrawLabeledTextBox::
 	ld a, [wConsole]
 	cp CONSOLE_CGB
 	jr z, .cgb
-; DMG or SGB
+; DMG
 	inc e
 	call DECoordToBGMap0Address
 	; top border done, draw the rest of the text box
-	jr ContinueDrawingTextBoxDMGorSGB
+	jr ContinueDrawingTextBoxDMG
 
 .cgb
 	call DECoordToBGMap0Address
@@ -118,38 +129,15 @@ DrawLabeledTextBox::
 	pop de
 	inc e
 	; top border done, draw the rest of the text box
-	jr ContinueDrawingTextBoxCGB
-
-
-; draws a 12x6 text box aligned to the bottom left of the screen
-DrawNarrowTextBox::
-	lb de, 0, 12
-	lb bc, 12, 6
-	call AdjustCoordinatesForBGScroll
-	jr DrawRegularTextBox
-
-; draws a 20x6 text box aligned to the bottom of the screen
-DrawWideTextBox::
-	lb de, 0, 12
-	lb bc, 20, 6
-	call AdjustCoordinatesForBGScroll
-;	fallthrough
+	jp ContinueDrawingTextBoxCGB
 
 ; Draws a bxc text box at de to print menu data in the overworld.
 ; Also used to print a text box during a duel.
 ; When talking to NPCs, DrawLabeledTextBox is used instead.
-; input:
-;	bc = width and height of the text box being drawn
-;	de = screen coordinates at which to start drawing the text box
 DrawRegularTextBox::
 	ld a, [wConsole]
 	cp CONSOLE_CGB
 	jr z, DrawRegularTextBoxCGB
-	cp CONSOLE_SGB
-	jp z, DrawRegularTextBoxSGB
-;	fallthrough
-
-DrawRegularTextBoxDMG::
 	call DECoordToBGMap0Address
 	; top line (border) of the text box
 	ld a, SYM_BOX_TOP
@@ -157,9 +145,9 @@ DrawRegularTextBoxDMG::
 	call CopyLine
 ;	fallthrough
 
-; continues drawing a labeled or regular textbox on DMG or SGB:
+; continue drawing a labeled or regular textbox on DMG:
 ; body and bottom line of either type of textbox
-ContinueDrawingTextBoxDMGorSGB::
+ContinueDrawingTextBoxDMG::
 	dec c
 	dec c
 .draw_text_box_body_loop
@@ -174,12 +162,10 @@ ContinueDrawingTextBoxDMGorSGB::
 ;	fallthrough
 
 ; copies b bytes of data to sp-$1f and to hl, and returns hl += BG_MAP_WIDTH
+; d = value of byte 0
+; e = value of byte b
+; a = value of bytes [1, b-1]
 ; b is supposed to be BG_MAP_WIDTH or smaller, else the stack would get corrupted
-; preserves bc
-; input:
-;	d = ID of leftmost tile in the line
-;	e = ID of rightmost tile in the line
-;	a = ID of every other tile in the line
 CopyLine::
 	add sp, -BG_MAP_WIDTH
 	push hl
@@ -211,7 +197,6 @@ CopyLine::
 	add sp, BG_MAP_WIDTH
 	ret
 
-
 ; DrawRegularTextBox branches here on CGB console
 DrawRegularTextBoxCGB::
 	call DECoordToBGMap0Address
@@ -221,7 +206,7 @@ DrawRegularTextBoxCGB::
 	call CopyCurrentLineTilesAndAttrCGB
 ;	fallthrough
 
-; continues drawing a labeled or regular textbox on CGB:
+; continue drawing a labeled or regular textbox on CGB:
 ; body and bottom line of either type of textbox
 ContinueDrawingTextBoxCGB::
 	dec c
@@ -244,108 +229,19 @@ ContinueDrawingTextBoxCGB::
 	; bottom line (border) of the text box
 	ld a, SYM_BOX_BOTTOM
 	lb de, SYM_BOX_BTM_L, SYM_BOX_BTM_R
-;	fallthrough
+	jp CopyCurrentLineTilesAndAttrCGB
 
+; d = id of top left tile
+; e = id of top right tile
+; a = id of rest of tiles
 ; Assumes b = SCREEN_WIDTH and that VRAM bank 0 is loaded
-; preserves bc
-; input:
-;	d = ID of top left tile
-;	e = ID of top right tile
-;	a = ID of every other tile
 CopyCurrentLineTilesAndAttrCGB::
 	push hl
 	call CopyLine
 	pop hl
 ;	fallthrough
 
-; preserves bc
 CopyCurrentLineAttrCGB::
-	call BankswitchVRAM1
-	ld a, [wTextBoxFrameType] ; on CGB, wTextBoxFrameType determines the palette and the other attributes
-	ld e, a
-	ld d, a
-	call CopyLine
-	jp BankswitchVRAM0
-
-
-; DrawRegularTextBox branches here on SGB console
-DrawRegularTextBoxSGB::
-	push bc
-	push de
-	call DrawRegularTextBoxDMG
-	pop de
-	pop bc
-	ld a, [wTextBoxFrameType]
-	or a
-	ret z
-;	fallthrough
-
-ColorizeTextBoxSGB::
-	push bc
-	push de
-	ld hl, wTempSGBPacket
-	ld de, AttrBlkPacket_TextBox
-	ld c, SGB_PACKET_SIZE
-.copy_sgb_command_loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .copy_sgb_command_loop
-	pop de
-	pop bc
-	ld hl, wTempSGBPacket + 4
-	; set X1, Y1 to d, e
-	ld [hl], d
-	inc hl
-	ld [hl], e
-	inc hl
-	; set X2, Y2 to d+b-1, e+c-1
-	ld a, d
-	add b
-	dec a
-	ld [hli], a
-	ld a, e
-	add c
-	dec a
-	ld [hli], a
-	ld a, [wTextBoxFrameType]
-	and $80
-	jr z, .send_packet
-	; reset ATTR_BLK_CTRL_INSIDE if bit 7 of wTextBoxFrameType is set.
-	; appears to be irrelevant, as the inside of a textbox uses the white color,
-	; which is the same in all four SGB palettes.
-	ld a, ATTR_BLK_CTRL_LINE
-	ld [wTempSGBPacket + 2], a
-.send_packet
-	ld hl, wTempSGBPacket
-	jp SendSGB
-
-AttrBlkPacket_TextBox::
-	sgb ATTR_BLK, 1 ; sgb_command, length
-	db 1 ; number of data sets
-	; Control Code, Color Palette Designation, X1, Y1, X2, Y2
-	db ATTR_BLK_CTRL_INSIDE + ATTR_BLK_CTRL_LINE, 0 << 0 + 1 << 2, 0, 0, 0, 0 ; data set 1
-	ds 6 ; data set 2
-	ds 2 ; data set 3
-
-
-; creates a subsection within a textbox (useful for making a header)
-; by drawing a second bottom row at the specified coordinates
-; preserves bc
-; input:
-;	b = length of the row in tiles (usually SCREEN_WIDTH, i.e. 20)
-;	de = coordinates to print line
-DrawTextBoxSeparator::
-	call DECoordToBGMap0Address
-	ld a, SYM_BOX_BOTTOM
-	lb de, SYM_BOX_HEADER_L, SYM_BOX_HEADER_R
-	push hl
-	call CopyLine
-	pop hl
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ret nz ; return if not CGB
 	call BankswitchVRAM1
 	ld a, [wTextBoxFrameType] ; on CGB, wTextBoxFrameType determines the palette and the other attributes
 	ld e, a

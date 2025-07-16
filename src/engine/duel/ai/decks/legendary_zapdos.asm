@@ -7,8 +7,7 @@ AIActionTable_LegendaryZapdos:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryZapdos
-	ret
+	jp AIDoTurn_LegendaryZapdos
 
 .start_duel
 	call InitAIDuelVars
@@ -16,73 +15,69 @@ AIActionTable_LegendaryZapdos:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db NOSEPASS
-	db VOLTORB
-	db LINOONE
-	db TRAPINCH
-	db VIBRAVA
-	db FLYGON
-	db $00
+	dw ELECTABUZZ_LV35
+	dw VOLTORB
+	dw EEVEE
+	dw ZAPDOS_LV40
+	dw ZAPDOS_LV64
+	dw ZAPDOS_LV68
+	dw NULL
 
 .list_bench
-	db VIBRAVA
-	db TRAPINCH
-	db LINOONE
-	db VOLTORB
-	db NOSEPASS
-	db $00
+	dw ZAPDOS_LV64
+	dw ZAPDOS_LV40
+	dw EEVEE
+	dw VOLTORB
+	dw ELECTABUZZ_LV35
+	dw NULL
 
 .list_retreat
-	ai_retreat LINOONE,           -5
+	ai_retreat EEVEE,           -5
 	ai_retreat VOLTORB,         -5
-	ai_retreat NOSEPASS, -5
-	db $00
+	ai_retreat ELECTABUZZ_LV35, -5
+	dw NULL
 
 .list_energy
 	ai_energy VOLTORB,         1, -1
-	ai_energy ELECTRODE,  3, +0
-	ai_energy NOSEPASS, 2, -1
-	ai_energy MEDICHAM,    3, +1
-	ai_energy TRAPINCH,     4, +2
-	ai_energy VIBRAVA,     4, +2
-	ai_energy FLYGON,     3, +1
-	ai_energy LINOONE,           3, +0
-	db $00
+	ai_energy ELECTRODE_LV35,  3, +0
+	ai_energy ELECTABUZZ_LV35, 2, -1
+	ai_energy JOLTEON_LV29,    3, +1
+	ai_energy ZAPDOS_LV40,     4, +2
+	ai_energy ZAPDOS_LV64,     4, +2
+	ai_energy ZAPDOS_LV68,     3, +1
+	ai_energy EEVEE,           3, +0
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db FLYGON
-	db $00
+	dw GAMBLER
+	dw ZAPDOS_LV68
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_bench
-	store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
 AIDoTurn_LegendaryZapdos:
 ; initialize variables
 	call InitAITurnVars
-	call HandleAIAntiMewtwoDeckStrategy
+	farcall HandleAIAntiMewtwoDeckStrategy
 	jp nc, .try_attack
 ; process Trainer cards
 	ld a, AI_TRAINER_CARD_PHASE_01
@@ -98,8 +93,8 @@ AIDoTurn_LegendaryZapdos:
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
 ; play Energy card if possible.
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
+	ld a, [wAlreadyPlayedEnergy]
+	or a
 	jr nz, .skip_energy_attach
 
 ; if Arena card is Voltorb and there's ElectrodeLv35 in hand,
@@ -110,16 +105,14 @@ AIDoTurn_LegendaryZapdos:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, VOLTORB
-	cp e
+	cp16 VOLTORB
 	jr nz, .check_electabuzz
-	ld a, ELECTRODE
+	ld de, ELECTRODE_LV35
 	call LookForCardIDInHandList_Bank5
 	jr nc, .attach_normally
 	jr .voltorb_or_electabuzz
 .check_electabuzz
-	ld a, NOSEPASS
-	cp e
+	cp16 ELECTABUZZ_LV35
 	jr nz, .attach_normally
 
 .voltorb_or_electabuzz

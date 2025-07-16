@@ -1,4 +1,3 @@
-; preserves all registers except af
 SetCreditsSequenceCmdPtr:
 	ld a, LOW(CreditsSequence)
 	ld [wSequenceCmdPtr + 0], a
@@ -7,7 +6,6 @@ SetCreditsSequenceCmdPtr:
 	xor a
 	ld [wSequenceDelay], a
 	ret
-
 
 ExecuteCreditsSequenceCmd:
 	ld a, [wSequenceDelay]
@@ -39,37 +37,31 @@ ExecuteCreditsSequenceCmd:
 	ld a, [hli]
 	ld d, a
 	pop hl
-	call CallHL
+	call CallHL2
 	jr ExecuteCreditsSequenceCmd
 
+	ret ; stray ret
 
-; preserves all registers except af
 AdvanceCreditsSequenceCmdPtrBy2:
 	ld a, 2
 	jr AdvanceCreditsSequenceCmdPtr
 
-; preserves all registers except af
 AdvanceCreditsSequenceCmdPtrBy3:
 	ld a, 3
 	jr AdvanceCreditsSequenceCmdPtr
 
-; preserves all registers except af
 AdvanceCreditsSequenceCmdPtrBy5:
 	ld a, 5
 	jr AdvanceCreditsSequenceCmdPtr
 
-; preserves all registers except af
 AdvanceCreditsSequenceCmdPtrBy6:
 	ld a, 6
 	jr AdvanceCreditsSequenceCmdPtr
 
-; preserves all registers except af
 AdvanceCreditsSequenceCmdPtrBy4:
 	ld a, 4
 ;	fallthrough
 
-; input:
-;	a = how much to add to wSequenceCmdPtr
 AdvanceCreditsSequenceCmdPtr:
 	push hl
 	ld hl, wSequenceCmdPtr
@@ -81,27 +73,17 @@ AdvanceCreditsSequenceCmdPtr:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	c = new sequence delay
 CreditsSequenceCmd_Wait:
 	ld a, c
 	ld [wSequenceDelay], a
-	jr AdvanceCreditsSequenceCmdPtrBy3
+	jp AdvanceCreditsSequenceCmdPtrBy3
 
-
-; preserves de
-; input:
-;	e = scene ID (SCENE_* constant)
-;	c = base X position of scene in tiles
-;	b = base Y position of scene in tiles
 CreditsSequenceCmd_LoadScene:
 	push bc
 	push de
+	farcall ClearNumLoadedFramesetSubgroups
 	call EmptyScreen
 	xor a
-	ld [wNumLoadedFramesetSubgroups], a
 	ldh [hSCX], a
 	ldh [hSCY], a
 	farcall SetDefaultPalettes
@@ -112,20 +94,14 @@ CreditsSequenceCmd_LoadScene:
 	ld b, a
 	ld a, e
 	call LoadScene
-	jr AdvanceCreditsSequenceCmdPtrBy5
+	jp AdvanceCreditsSequenceCmdPtrBy5
 
-
-; preserves de
-; input:
-;	e = scene ID (SCENE_* constant)
-;	c = base X position of scene in tiles
-;	b = base Y position of scene in tiles
 CreditsSequenceCmd_LoadBooster:
 	push bc
 	push de
+	farcall ClearNumLoadedFramesetSubgroups
 	call EmptyScreen
 	xor a
-	ld [wNumLoadedFramesetSubgroups], a
 	ldh [hSCX], a
 	ldh [hSCY], a
 	farcall SetDefaultPalettes
@@ -136,11 +112,8 @@ CreditsSequenceCmd_LoadBooster:
 	ld b, a
 	ld a, e
 	farcall LoadBoosterGfx
-	jr AdvanceCreditsSequenceCmdPtrBy5
+	jp AdvanceCreditsSequenceCmdPtrBy5
 
-
-; input:
-;	c = offset for wMastersBeatenList
 CreditsSequenceCmd_LoadClubMap:
 	ld b, $00
 	ld hl, wMastersBeatenList
@@ -158,9 +131,9 @@ CreditsSequenceCmd_LoadClubMap:
 	ld c, a
 	ld hl, .CreditsOWClubMaps
 	add hl, bc
-	ld a, [hli] ; map x coordinate
+	ld a, [hli] ; map x coord
 	ld c, a
-	ld a, [hli] ; map y coordinate
+	ld a, [hli] ; map y coord
 	ld b, a
 	ld a, [hli] ; map ID
 	ld e, a
@@ -171,17 +144,16 @@ CreditsSequenceCmd_LoadClubMap:
 	ld h, [hl]
 	ld l, a
 	or h
-	jp z, AdvanceCreditsSequenceCmdPtrBy3 ; done
-
+	jr z, .done
 
 .loop_npcs
 	ld a, [hli] ; NPC ID
 	or a
-	jp z, AdvanceCreditsSequenceCmdPtrBy3 ; done
+	jr z, .done
 	ld d, a
-	ld a, [hli] ; NPC x coordinate
+	ld a, [hli] ; NPC x coord
 	ld c, a
-	ld a, [hli] ; NPC y coordinate
+	ld a, [hli] ; NPC y coord
 	ld b, a
 	ld a, [hli] ; NPC direction
 	ld e, a
@@ -190,6 +162,8 @@ CreditsSequenceCmd_LoadClubMap:
 	pop hl
 	jr .loop_npcs
 
+.done
+	jp AdvanceCreditsSequenceCmdPtrBy3
 
 MACRO credits_club_map
 	db \1 ; x
@@ -288,10 +262,8 @@ ENDM
 	db NPC_PLAYER_CREDITS, 14, 10, NORTH
 	db $00
 
-
-; input:
-;	bc = coordinates
-;	e = OW map
+; bc = coordinates
+; e = OW map
 LoadOWMapForCreditsSequence:
 	push bc
 	push de
@@ -318,27 +290,19 @@ LoadOWMapForCreditsSequence:
 	farcall LoadPaletteData
 	ret
 
-
-; input:
-;	bc = coordinates
-;	e = OW map
 CreditsSequenceCmd_LoadOWMap:
 	call LoadOWMapForCreditsSequence
 	jp AdvanceCreditsSequenceCmdPtrBy5
 
-
-; preserves all registers except af
 CreditsSequenceCmd_DisableLCD:
 	call DisableLCD
 	jp AdvanceCreditsSequenceCmdPtrBy2
-
 
 CreditsSequenceCmd_FadeIn:
 	call DisableLCD
 	call SetWindowOn
 	farcall FadeScreenFromWhite
 	jp AdvanceCreditsSequenceCmdPtrBy2
-
 
 CreditsSequenceCmd_FadeOut:
 	farcall FadeScreenToWhite
@@ -349,47 +313,33 @@ CreditsSequenceCmd_FadeOut:
 	call SetWindowOff
 	jp AdvanceCreditsSequenceCmdPtrBy2
 
-
-; input:
-;	b = height of the image being drawn by FillRectangle
-;	c = used to find the y coordinate for FillRectangle
 CreditsSequenceCmd_DrawRectangle:
 	ld a, c
 	or $20
-	ld e, a   ; y coordinate
-	ld d, $00 ; x coordinate
-	ld c, b   ; height of image
-	ld b, 20  ; width of image
-	xor a     ; starting tile number
+	ld e, a
+	ld d, $00
+	ld c, b
+	ld b, 20
+	xor a
 	lb hl, 0, 0
 	call FillRectangle
 	jp AdvanceCreditsSequenceCmdPtrBy4
 
-
-; input:
-;	de = ID of text to print
-;	c = x coordinate at which to begin printing the text
-;	b = used to find the y coordinate for printing the text
 CreditsSequenceCmd_PrintText:
-	ld a, $01
+	ld a, SINGLE_SPACED
 	ld [wLineSeparation], a
 	push de
-	ld d, c ; x coordinate for the text
+	ld d, c
 	ld a, b
 	or $20
-	ld e, a ; y coordinate for the text
+	ld e, a
 	call InitTextPrinting
 	pop hl
 	call PrintTextNoDelay
 	jp AdvanceCreditsSequenceCmdPtrBy6
 
-
-; input:
-;	de = ID of text to print
-;	c = x coordinate at which to begin printing the text
-;	b = y coordinate at which to begin printing the text
 CreditsSequenceCmd_PrintTextBox:
-	ld a, $01
+	ld a, SINGLE_SPACED
 	ld [wLineSeparation], a
 	push de
 	ld d, c
@@ -399,13 +349,6 @@ CreditsSequenceCmd_PrintTextBox:
 	call PrintTextNoDelay
 	jp AdvanceCreditsSequenceCmdPtrBy6
 
-
-; preserves all registers except af
-; input:
-;	c = stored in wd647 to be used by future functions
-;	b = stored in wd648 to be used by future functions
-;	e = stored in wd649 to be used by future functions
-;	d = stored in wd64a to be used by future functions
 CreditsSequenceCmd_InitOverlay:
 	ld a, c
 	ld [wd647], a
@@ -418,22 +361,13 @@ CreditsSequenceCmd_InitOverlay:
 	call Func_1d765
 	jp AdvanceCreditsSequenceCmdPtrBy6
 
-
-; preserves de
-; input:
-;	bc = coordinates at which to draw the NPC
-;	e = direction for the NPC to face
-;	d = NPC ID (NPC_* constant)
 CreditsSequenceCmd_LoadNPC:
 	call LoadNPCForCreditsSequence
 	jp AdvanceCreditsSequenceCmdPtrBy6
 
-
-; preserves de
-; input:
-;	bc = coordinates at which to draw the NPC
-;	e = direction for the NPC to face
-;	d = NPC ID (NPC_* constant)
+; bc = coordinates
+; e = direction
+; d = NPC ID
 LoadNPCForCreditsSequence:
 	ld a, c
 	ld [wLoadNPCXPos], a
@@ -474,16 +408,13 @@ LoadNPCForCreditsSequence:
 	farcall StartNewSpriteAnimation
 	ret
 
-
-; preserves de
 CreditsSequenceCmd_InitVolcanoSprite:
 	farcall OverworldMap_InitVolcanoSprite
 	jp AdvanceCreditsSequenceCmdPtrBy2
 
-
-; preserves de
 CreditsSequenceCmd_TransformOverlay:
-; either stretches or shrinks overlay to the input configurations
+; either stretches or shrinks overlay
+; to the input configurations
 	ld l, 0
 	ld a, [wd647]
 	call .Func_1dade
@@ -517,16 +448,17 @@ CreditsSequenceCmd_TransformOverlay:
 ; if it's equal or $ff: do nothing
 .Func_1dade
 	cp $ff
-	ret z
+	jr z, .done
 	cp c
-	ret z
+	jr z, .done
 	inc l
 	jr c, .incr_a
 ; decr a
 	dec a
 	dec a
-	ret
+	jr .done
 .incr_a
 	inc a
 	inc a
+.done
 	ret

@@ -39,8 +39,8 @@ SECTION "timer", ROM0
 	jp TimerHandler
 	ds 5
 SECTION "serial", ROM0
-	jp SerialHandler
-	ds 5
+	reti
+	ds 7
 SECTION "joypad", ROM0
 	reti
 	ds $9f
@@ -75,10 +75,9 @@ INCLUDE "home/random.asm"
 INCLUDE "home/decompress.asm"
 INCLUDE "home/objects.asm"
 INCLUDE "home/farcall.asm"
-INCLUDE "home/sgb.asm"
+INCLUDE "home/hblank.asm"
 INCLUDE "home/math.asm"
 INCLUDE "home/list.asm"
-INCLUDE "home/serial.asm"
 INCLUDE "home/duel.asm"
 INCLUDE "home/card_collection.asm"
 INCLUDE "home/text_box.asm"
@@ -90,9 +89,9 @@ INCLUDE "home/print_text.asm"
 INCLUDE "home/card_data.asm"
 INCLUDE "home/effect_commands.asm"
 INCLUDE "home/load_deck.asm"
+INCLUDE "home/damage.asm"
 INCLUDE "home/coin_toss.asm"
 INCLUDE "home/duel_menus.asm"
-INCLUDE "home/printer.asm"
 INCLUDE "home/substatus.asm"
 INCLUDE "home/card_color.asm"
 INCLUDE "home/sound.asm"
@@ -102,6 +101,9 @@ INCLUDE "home/script.asm"
 INCLUDE "home/play_animation.asm"
 INCLUDE "home/memory.asm"
 INCLUDE "home/call_regs.asm"
+INCLUDE "home/lcd_enable_frame.asm"
+INCLUDE "home/division.asm"
+INCLUDE "home/play_song.asm"
 INCLUDE "home/load_animation.asm"
 INCLUDE "home/scroll.asm"
 INCLUDE "home/audio_callback.asm"

@@ -18,7 +18,9 @@ InitMenuScreen:
 	ldh [rSCY], a
 .skip_clear_scroll
 	call SetDefaultPalettes
-	call ZeroObjectPositionsAndToggleOAMCopy
+	call ZeroObjectPositions
+	ld a, $1
+	ld [wVBlankOAMCopyToggle], a
 	ret
 
 ; saves all pals to SRAM, then fills them with white.

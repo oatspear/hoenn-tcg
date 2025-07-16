@@ -1,5 +1,5 @@
 ; this function is called when the player is shown the "In Play Area" screen.
-; it can be called with either the SELECT button (DuelMenuShortcut_BothActivePokemon),
+; it can be called with either the select button (DuelMenuShortcut_BothActivePokemon),
 ; or via the "In Play Area" item of the Check menu (DuelCheckMenu_InPlayArea)
 OpenInPlayAreaScreen::
 	ld a, INPLAYAREA_PLAYER_ACTIVE
@@ -33,8 +33,8 @@ OpenInPlayAreaScreen::
 	and START
 	jr nz, .selection
 
-	; if this function was called from the SELECT button,
-	; then wInPlayAreaFromSelectButton is on.
+	; if this function's been called from 'select' button,
+	; wInPlayAreaFromSelectButton is on.
 	ld a, [wInPlayAreaFromSelectButton]
 	or a
 	jr z, .handle_input ; if it's from the Check menu, jump.
@@ -51,60 +51,37 @@ OpenInPlayAreaScreen::
 
 	ld a, [wInPlayAreaCurPosition]
 	cp INPLAYAREA_PLAYER_PLAY_AREA
-	jr z, .show_turn_holder_play_area
+	jp z, .show_turn_holder_play_area
 	cp INPLAYAREA_OPP_PLAY_AREA
-	jr z, .show_non_turn_holder_play_area
+	jp z, .show_non_turn_holder_play_area
 
-	; check if the cursor moved
+	; check if the cursor moved.
 	ld hl, wInPlayAreaTemporaryPosition
 	cp [hl]
 	call nz, .print_associated_text
+
 	jr .on_frame
-
-.show_turn_holder_play_area
-	lb de, $38, $9f
-	call SetupText
-	ldh a, [hWhoseTurn]
-	push af
-	bank1call OpenTurnHolderPlayAreaScreen
-	pop af
-	ldh [hWhoseTurn], a
-	ld a, [wInPlayAreaPreservedPosition]
-	ld [wInPlayAreaCurPosition], a
-	jr .start
-
-.show_non_turn_holder_play_area
-	lb de, $38, $9f
-	call SetupText
-	ldh a, [hWhoseTurn]
-	push af
-	bank1call OpenNonTurnHolderPlayAreaScreen
-	pop af
-	ldh [hWhoseTurn], a
-	ld a, [wInPlayAreaPreservedPosition]
-	ld [wInPlayAreaCurPosition], a
-	jp .start
 
 .pressed
 	cp -1
-	jr nz, .selection ; either the A button or the START button was pressed
+	jr nz, .selection
 
-	; the B button was pressed
-	call ZeroObjectPositionsAndToggleOAMCopy
+	; pressed b button.
+	call ZeroObjectPositionsAndToggleOAMCopy_Bank6
 	lb de, $38, $9f
 	call SetupText
 	scf
 	ret
 
 .skip_input
-	call ZeroObjectPositionsAndToggleOAMCopy
+	call ZeroObjectPositionsAndToggleOAMCopy_Bank6
 	lb de, $38, $9f
 	call SetupText
 	or a
 	ret
 
-.selection
-	call ZeroObjectPositionsAndToggleOAMCopy
+.selection ; pressed a button or start button.
+	call ZeroObjectPositionsAndToggleOAMCopy_Bank6
 	lb de, $38, $9f
 	call SetupText
 	ld a, [wInPlayAreaCurPosition]
@@ -113,6 +90,7 @@ OpenInPlayAreaScreen::
 	call JumpToFunctionInTable
 	ld a, [wInPlayAreaPreservedPosition]
 	ld [wInPlayAreaCurPosition], a
+
 	jp .start
 
 .print_associated_text
@@ -126,7 +104,7 @@ OpenInPlayAreaScreen::
 
 	ld hl, hffb0
 	ld [hl], $01
-	ldtx hl, HandText
+	ldtx hl, HandText_2
 	call ProcessTextFromID
 
 	ld hl, hffb0
@@ -146,7 +124,7 @@ OpenInPlayAreaScreen::
 	ld l, a
 	ld a, h
 
-	; jump ahead if entry does not contain null text (it's not the Active Pokemon)
+	; jump ahead if entry does not contain null text (it's not active pokemon)
 	or a
 	jr nz, .print_hand_or_discard_pile
 
@@ -194,14 +172,41 @@ OpenInPlayAreaScreen::
 
 .print_hand_or_discard_pile
 ; if we make it here, cursor position is to Hand or Discard Pile
-; so DuelistHandText or DuelistDiscardPileText will be printed
+; so DuelistHandText_2 or DuelistDiscardPileText will be printed
+
 	ld a, [wInPlayAreaCurPosition]
 	cp INPLAYAREA_OPP_ACTIVE
-	jp c, PrintTextNoDelay ; print on player's side
-	; print on opponent's side
+	jr nc, .opp_side_print_hand_or_discard_pile
+	jp PrintTextNoDelay
+
+.opp_side_print_hand_or_discard_pile
 	call SwapTurn
 	call PrintTextNoDelay
 	jp SwapTurn
+
+.show_turn_holder_play_area
+	lb de, $38, $9f
+	call SetupText
+	ldh a, [hWhoseTurn]
+	push af
+	bank1call OpenTurnHolderPlayAreaScreen
+	pop af
+	ldh [hWhoseTurn], a
+	ld a, [wInPlayAreaPreservedPosition]
+	ld [wInPlayAreaCurPosition], a
+	jp .start
+
+.show_non_turn_holder_play_area
+	lb de, $38, $9f
+	call SetupText
+	ldh a, [hWhoseTurn]
+	push af
+	bank1call OpenNonTurnHolderPlayAreaScreen
+	pop af
+	ldh [hWhoseTurn], a
+	ld a, [wInPlayAreaPreservedPosition]
+	ld [wInPlayAreaCurPosition], a
+	jp .start
 
 .PositionsJumpTable
 	table_width 2, OpenInPlayAreaScreen.PositionsJumpTable
@@ -223,10 +228,9 @@ OpenInPlayAreaScreen::
 	dw OpenInPlayAreaScreen_NonTurnHolderPlayArea    ; 0x0f: INPLAYAREA_OPP_BENCH_5
 	assert_table_length NUM_INPLAYAREA_POSITIONS
 
-
 OpenInPlayAreaScreen_TurnHolderPlayArea:
 	; wInPlayAreaCurPosition constants conveniently map to (PLAY_AREA_* constants - 1)
-	; for Bench locations. this mapping is taken for granted in the following code.
+	; for bench locations. this mapping is taken for granted in the following code.
 	ld a, [wInPlayAreaCurPosition]
 	inc a
 	cp INPLAYAREA_PLAYER_ACTIVE + $01
@@ -244,7 +248,6 @@ OpenInPlayAreaScreen_TurnHolderPlayArea:
 	ld [wCurPlayAreaY], a
 	bank1call OpenCardPage_FromCheckPlayArea
 	ret
-
 
 OpenInPlayAreaScreen_NonTurnHolderPlayArea:
 	ld a, [wInPlayAreaCurPosition]
@@ -267,7 +270,6 @@ OpenInPlayAreaScreen_NonTurnHolderPlayArea:
 	bank1call OpenCardPage_FromCheckPlayArea
 	jp SwapTurn
 
-
 OpenInPlayAreaScreen_TurnHolderHand:
 	ldh a, [hWhoseTurn]
 	push af
@@ -275,7 +277,6 @@ OpenInPlayAreaScreen_TurnHolderHand:
 	pop af
 	ldh [hWhoseTurn], a
 	ret
-
 
 OpenInPlayAreaScreen_NonTurnHolderHand:
 	ldh a, [hWhoseTurn]
@@ -285,7 +286,6 @@ OpenInPlayAreaScreen_NonTurnHolderHand:
 	ldh [hWhoseTurn], a
 	ret
 
-
 OpenInPlayAreaScreen_TurnHolderDiscardPile:
 	ldh a, [hWhoseTurn]
 	push af
@@ -293,7 +293,6 @@ OpenInPlayAreaScreen_TurnHolderDiscardPile:
 	pop af
 	ldh [hWhoseTurn], a
 	ret
-
 
 OpenInPlayAreaScreen_NonTurnHolderDiscardPile:
 	ldh a, [hWhoseTurn]
@@ -303,9 +302,8 @@ OpenInPlayAreaScreen_NonTurnHolderDiscardPile:
 	ldh [hWhoseTurn], a
 	ret
 
-
 OpenInPlayAreaScreen_TextTable:
-; note that for Bench slots, the entries are
+; note that for bench slots, the entries are
 ; PLAY_AREA_BENCH_* constants in practice
 	tx HandText               ; INPLAYAREA_PLAYER_BENCH_1
 	tx CheckText              ; INPLAYAREA_PLAYER_BENCH_2
@@ -313,17 +311,16 @@ OpenInPlayAreaScreen_TextTable:
 	tx PKMNPowerText          ; INPLAYAREA_PLAYER_BENCH_4
 	tx DoneText               ; INPLAYAREA_PLAYER_BENCH_5
 	dw NULL                   ; INPLAYAREA_PLAYER_ACTIVE
-	tx DuelistHandText        ; INPLAYAREA_PLAYER_HAND
+	tx DuelistHandText_2      ; INPLAYAREA_PLAYER_HAND
 	tx DuelistDiscardPileText ; INPLAYAREA_PLAYER_DISCARD_PILE
 	dw NULL                   ; INPLAYAREA_OPP_ACTIVE
-	tx DuelistHandText        ; INPLAYAREA_OPP_HAND
+	tx DuelistHandText_2      ; INPLAYAREA_OPP_HAND
 	tx DuelistDiscardPileText ; INPLAYAREA_OPP_DISCARD_PILE
 	tx HandText               ; INPLAYAREA_OPP_BENCH_1
 	tx CheckText              ; INPLAYAREA_OPP_BENCH_2
 	tx AttackText             ; INPLAYAREA_OPP_BENCH_3
 	tx PKMNPowerText          ; INPLAYAREA_OPP_BENCH_4
 	tx DoneText               ; INPLAYAREA_OPP_BENCH_5
-
 
 MACRO in_play_area_cursor_transition
 	cursor_transition \1, \2, \3, INPLAYAREA_\4, INPLAYAREA_\5, INPLAYAREA_\6, INPLAYAREA_\7
@@ -332,7 +329,6 @@ ENDM
 ; it's related to wMenuInputTablePointer.
 ; with this table, the cursor moves into the proper location by the input.
 ; note that the unit of the position is not a 8x8 tile.
-; x coordinate, y coordinate, , D-pad up, D-pad down, D-pad right, D-pad left
 OpenInPlayAreaScreen_TransitionTable1:
 	table_width 7, OpenInPlayAreaScreen_TransitionTable1
 	in_play_area_cursor_transition $18, $8c, $00,             PLAYER_ACTIVE, PLAYER_PLAY_AREA, PLAYER_BENCH_2, PLAYER_BENCH_5
@@ -372,7 +368,6 @@ OpenInPlayAreaScreen_TransitionTable2:
 	in_play_area_cursor_transition $48, $14, 1 << OAM_X_FLIP, OPP_PLAY_AREA, OPP_ACTIVE, OPP_BENCH_3, OPP_BENCH_5
 	in_play_area_cursor_transition $30, $14, 1 << OAM_X_FLIP, OPP_PLAY_AREA, OPP_ACTIVE, OPP_BENCH_4, OPP_BENCH_1
 	assert_table_length NUM_INPLAYAREA_POSITIONS
-
 
 OpenInPlayAreaScreen_HandleInput:
 	xor a
@@ -450,8 +445,8 @@ OpenInPlayAreaScreen_HandleInput:
 	dec a
 	jr nz, .bench_pokemon_exists
 
-	; player doesn't have any Benched Pokemon,
-	; so move to the player's Play Area/in-play Pokemon screen
+	; no pokemon in player's bench.
+	; then move to player's play area.
 	ld a, INPLAYAREA_PLAYER_PLAY_AREA
 	ld [wInPlayAreaCurPosition], a
 	jr .next
@@ -519,16 +514,16 @@ OpenInPlayAreaScreen_HandleInput:
 	and A_BUTTON
 	jr nz, .a_button
 
-	; the B button was pressed
+	; pressed b button
 	ld a, -1
-	call PlaySFXConfirmOrCancel_Bank6
+	farcall PlaySFXConfirmOrCancel
 	scf
 	ret
 
 .a_button
 	call .draw_cursor
-	ld a, $1
-	call PlaySFXConfirmOrCancel_Bank6
+	ld a, $01
+	farcall PlaySFXConfirmOrCancel
 	ld a, [wInPlayAreaCurPosition]
 	scf
 	ret
@@ -536,8 +531,7 @@ OpenInPlayAreaScreen_HandleInput:
 .return
 	ld a, [wMenuInputSFX]
 	or a
-	jr z, .skip_sfx
-	call PlaySFX
+	call nz, PlaySFX
 .skip_sfx
 	ld hl, wCheckMenuCursorBlinkCounter
 	ld a, [hl]
@@ -546,7 +540,7 @@ OpenInPlayAreaScreen_HandleInput:
 	ret nz
 
 	bit 4, [hl] ; = and $10
-	jp nz, ZeroObjectPositionsAndToggleOAMCopy
+	jr nz, ZeroObjectPositionsAndToggleOAMCopy_Bank6
 
 .draw_cursor
 	call ZeroObjectPositions
@@ -568,4 +562,10 @@ OpenInPlayAreaScreen_HandleInput:
 	ld c, $00
 	call SetOneObjectAttributes
 	or a
+	ret
+
+ZeroObjectPositionsAndToggleOAMCopy_Bank6:
+	call ZeroObjectPositions
+	ld a, $01
+	ld [wVBlankOAMCopyToggle], a
 	ret

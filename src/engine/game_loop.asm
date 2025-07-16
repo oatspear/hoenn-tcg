@@ -3,7 +3,6 @@
 GameLoop::
 	di
 	ld sp, $e000
-	call ResetSerial
 	call EnableInt_VBlank
 	call EnableInt_Timer
 	call EnableSRAM
@@ -12,11 +11,15 @@ GameLoop::
 	ld a, [sSkipDelayAllowed]
 	ld [wSkipDelayAllowed], a
 	call DisableSRAM
-	; only use uppercase font characters
-;	ld a, 1
-;	ld [wUppercaseHalfWidthLetters], a
+	ld a, 1
+	ld [wUppercaseHalfWidthLetters], a
 	ei
-;	farcall StubbedUnusedSaveDataValidation
+	
+	; disclaimer for GB
+	ld a, [wConsole]
+	cp CONSOLE_CGB
+	jp nz, CGBDisclaimer
+
 	ldh a, [hKeysHeld]
 	cp A_BUTTON | B_BUTTON
 	jr z, .ask_erase_backup_ram
@@ -38,9 +41,8 @@ GameLoop::
 
 InitSaveDataAndSetUppercase::
 	farcall InitSaveData
-	; only use uppercase font characters
-;	ld a, 1
-;	ld [wUppercaseHalfWidthLetters], a
+	ld a, 1
+	ld [wUppercaseHalfWidthLetters], a
 	ret
 
 ; basic setup to be able to print the ResetBackUpRamText in an empty screen
@@ -51,5 +53,22 @@ SetupResetBackUpRamScreen:
 	call LoadSymbolsFont
 	call SetDefaultConsolePalettes
 	lb de, $38, $7f
-	call SetupText
-	ret
+	jp SetupText
+
+; shows disclaimer in case player is not playing in CGB
+; return carry if disclaimer was shown
+CGBDisclaimer:
+	call SetupResetBackUpRamScreen
+	call EmptyScreen
+
+	lb de, 0, 11
+	lb bc, 20, 7
+	call DrawRegularTextBox
+	lb de, 4, 13
+	call InitTextPrinting
+	ldtx hl, ExclusiveToGameBoyColorsText
+	call PrintTextNoDelay
+	call EnableLCD
+.loop
+	call DoFrame
+	jr .loop

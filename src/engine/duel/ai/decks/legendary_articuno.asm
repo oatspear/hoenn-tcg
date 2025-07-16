@@ -7,8 +7,7 @@ AIActionTable_LegendaryArticuno:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryArticuno
-	ret
+	jp AIDoTurn_LegendaryArticuno
 
 .start_duel
 	call InitAIDuelVars
@@ -16,64 +15,60 @@ AIActionTable_LegendaryArticuno:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db SEVIPER
-	db AGGRON
-	db ZIGZAGOON
-	db GOREBYSS
-	db SKARMORY
-	db PICHU
-	db $00
+	dw CHANSEY
+	dw LAPRAS
+	dw DITTO
+	dw SEEL
+	dw ARTICUNO_LV35
+	dw ARTICUNO_LV37
+	dw NULL
 
 .list_bench
-	db SKARMORY
-	db GOREBYSS
-	db AGGRON
-	db SEVIPER
-	db ZIGZAGOON
-	db $00
+	dw ARTICUNO_LV35
+	dw SEEL
+	dw LAPRAS
+	dw CHANSEY
+	dw DITTO
+	dw NULL
 
 .list_retreat
-	ai_retreat GOREBYSS,  -3
-	ai_retreat ZIGZAGOON, -3
-	db $00
+	ai_retreat SEEL,  -3
+	ai_retreat DITTO, -3
+	dw NULL
 
 .list_energy
-	ai_energy GOREBYSS,          3, +1
-	ai_energy CORSOLA,       4, +0
-	ai_energy AGGRON,        3, +0
-	ai_energy SKARMORY, 4, +1
-	ai_energy PICHU, 3, +0
-	ai_energy SEVIPER,       0, -8
-	ai_energy ZIGZAGOON,         3, +0
-	db $00
+	ai_energy SEEL,          3, +1
+	ai_energy DEWGONG,       4, +0
+	ai_energy LAPRAS,        3, +0
+	ai_energy ARTICUNO_LV35, 4, +1
+	ai_energy ARTICUNO_LV37, 3, +0
+	ai_energy CHANSEY,       0, -8
+	ai_energy DITTO,         3, +0
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db PICHU
-	db $00
+	dw GAMBLER
+	dw ARTICUNO_LV37
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_bench
-	store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
@@ -95,13 +90,13 @@ ScoreLegendaryArticunoCards:
 ; otherwise, check if Articuno or Dewgong
 ; have more than half HP and can use second attack
 ; and if so, the next Pokémon to check is Lapras
-	ld a, AGGRON
+	ld de, LAPRAS
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .articuno
-	ld a, SKARMORY
+	ld de, ARTICUNO_LV35
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
-	ld a, CORSOLA
+	ld de, DEWGONG
 	call CheckForBenchIDAtHalfHPAndCanUseSecondAttack
 	jr c, .lapras
 	jr .articuno
@@ -112,7 +107,7 @@ ScoreLegendaryArticunoCards:
 ; attached energy count, which skips calling the routine
 ; if this count is >= 3
 .lapras
-	ld a, AGGRON
+	ld de, LAPRAS
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .articuno
@@ -120,43 +115,39 @@ ScoreLegendaryArticunoCards:
 	call CountNumberOfEnergyCardsAttached
 	cp 3
 	jr nc, .articuno
-	ld a, AGGRON
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	ld bc, LAPRAS
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .articuno
-	ld a, SKARMORY
+	ld de, ARTICUNO_LV35
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .dewgong
-	ld a, SKARMORY
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	ld bc, ARTICUNO_LV35
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .dewgong
-	ld a, CORSOLA
+	ld de, DEWGONG
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	jr nc, .seel
-	ld a, CORSOLA
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	ld bc, DEWGONG
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 .seel
-	ld a, GOREBYSS
+	ld de, SEEL
 	ld b, PLAY_AREA_BENCH_1
 	call LookForCardIDInPlayArea_Bank5
 	ret nc
-	ld a, GOREBYSS
-	call RaiseAIScoreToAllMatchingIDsInBench
-	ret
+	ld bc, SEEL
+	jp RaiseAIScoreToAllMatchingIDsInBench
 
 AIDoTurn_LegendaryArticuno:
 ; initialize variables
 	call InitAITurnVars
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards
-	call HandleAIAntiMewtwoDeckStrategy
+	farcall HandleAIAntiMewtwoDeckStrategy
 	jp nc, .try_attack
 ; process Trainer cards
 	ld a, AI_TRAINER_CARD_PHASE_02
@@ -168,10 +159,9 @@ AIDoTurn_LegendaryArticuno:
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
-	jr nz, .skip_energy_attach_1
-	call AIProcessAndTryToPlayEnergy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	call z, AIProcessAndTryToPlayEnergy
 .skip_energy_attach_1
 ; play Pokemon from hand again
 	call AIDecidePlayPokemonCard
@@ -182,7 +172,7 @@ AIDoTurn_LegendaryArticuno:
 	call AIProcessHandTrainerCards
 ; if used Professor Oak, process new hand
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_BIRCH
+	and AI_FLAG_USED_PROFESSOR_OAK
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards
@@ -193,10 +183,9 @@ AIDoTurn_LegendaryArticuno:
 	call AIProcessRetreat
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
-	jr nz, .skip_energy_attach_2
-	call AIProcessAndTryToPlayEnergy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	call z, AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2
 	call AIDecidePlayPokemonCard
 .try_attack

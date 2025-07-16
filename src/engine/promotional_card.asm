@@ -1,43 +1,42 @@
 ; shows screen with the promotional card and received text
-; depending on input a
-; if $0 = Legendary Molters, Articuno, Zapdos and Slaking cards
+; depending on input de
+; if NULL = Legendary Molters, Articuno, Zapdos and Dragonite cards
 ; otherwise, a card ID
 _ShowPromotionalCardScreen:
-	push af
+	push de
 	lb de, $38, $9f
 	call SetupText
-	pop af
-	or a
+	pop de
+	ld a, d
+	or e
 	jr nz, .else
-	ld a, WAILORD
+	ld de, MOLTRES_LV37
 	call .legendary_card_text
-	ld a, PICHU
+	ld de, ARTICUNO_LV37
 	call .legendary_card_text
-	ld a, FLYGON
+	ld de, ZAPDOS_LV68
 	call .legendary_card_text
-	ld a, SLAKING
+	ld de, DRAGONITE_LV41
 .legendary_card_text
 	ldtx hl, ReceivedLegendaryCardText
 	jr .print_text
 .else
 	ldtx hl, ReceivedCardText
-	cp CACNEA
+	cp16 VILEPLUME
 	jr z, .print_text
-	cp CORPHISH
+	cp16 BLASTOISE
 	jr z, .print_text
 	ldtx hl, ReceivedPromotionalFlyingPikachuText
-	cp CHINCHOU
+	cp16 FLYING_PIKACHU
 	jr z, .print_text
 	ldtx hl, ReceivedPromotionalSurfingPikachuText
-	cp LANTURN
+	cp16 SURFING_PIKACHU_LV13
 	jr z, .print_text
-	cp BELDUM
+	cp16 SURFING_PIKACHU_ALT_LV13
 	jr z, .print_text
 	ldtx hl, ReceivedPromotionalCardText
 .print_text
 	push hl
-	ld e, a
-	ld d, $0
 	call LoadCardDataToBuffer1_FromCardID
 	call PauseSong
 	ld a, MUSIC_MEDAL
@@ -46,7 +45,7 @@ _ShowPromotionalCardScreen:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call LoadTxRam2
+	bank1call LoadTxRam2 ; switch to bank 1, but call a home func
 	ld a, PLAYER_TURN
 	ldh [hWhoseTurn], a
 	pop hl

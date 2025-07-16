@@ -1,7 +1,6 @@
 FightingClubAfterDuel:
 	ld hl, .after_duel_table
-	call FindEndOfDuelScript
-	ret
+	jp FindEndOfDuelScript
 
 .after_duel_table
 	db NPC_CHRIS
@@ -106,7 +105,7 @@ Script_de4b:
 	test_if_event_equal EVENT_PUPIL_CHRIS_STATE, PUPIL_DEFEATED
 	print_variable_npc_text ChrisFightingClubWantsToDuelInitialText, ChrisFightingClubWantsToDuelRepeatText
 	set_event EVENT_PUPIL_CHRIS_STATE, PUPIL_REVISITED
-	ask_question_jump ChrisWouldYouLikeToDuelText, .ows_de61
+	ask_question_jump ChrisFightingClubWouldYouLikeToDuelText, .ows_de61
 	print_npc_text ChrisFightingClubDeclinedDuelText
 	quit_script_fully
 
@@ -134,7 +133,7 @@ Preload_MichaelInFightingClub:
 
 Script_MichaelRematch:
 	print_npc_text MichaelFightingClubWantsToDuelText
-	ask_question_jump MichaelWouldYouLikeToDuelText, .ows_de8d
+	ask_question_jump MichaelFightingClubWouldYouLikeToDuelText, .ows_de8d
 	print_npc_text MichaelFightingClubDeclinedDuelText
 	quit_script_fully
 
@@ -162,7 +161,7 @@ Preload_JessicaInFightingClub:
 
 Script_dead:
 	print_npc_text JessicaFightingClubWantsToDuelText
-	ask_question_jump JessicaWouldYouLikeToDuelText, .ows_deb9
+	ask_question_jump JessicaFightingClubWouldYouLikeToDuelText, .ows_deb9
 	print_npc_text JessicaFightingClubDeclinedDuelText
 	quit_script_fully
 

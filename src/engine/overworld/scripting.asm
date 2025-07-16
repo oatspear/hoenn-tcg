@@ -1,16 +1,12 @@
-; preserves all registers except af
-; input:
-;	[wTempNPC] = ID of the NPC to set (NPC_* constant)
 SetNextNPCAndScript:
 	push bc
 	call FindLoadedNPC
-;	ld a, [wLoadedNPCTempIndex] ; unnecessary?
+	ld a, [wLoadedNPCTempIndex]
 	ld [wScriptNPC], a
 	farcall SetNewScriptNPC
 	pop bc
 ;	fallthrough
 
-; preserves all registers except af
 SetNextScript:
 	push hl
 	ld hl, wNextScript
@@ -22,8 +18,6 @@ SetNextScript:
 	pop hl
 	ret
 
-
-; preserves all registers except af
 Func_c943:
 	push hl
 	push bc
@@ -51,7 +45,7 @@ Func_c943:
 	ld h, a
 	or l
 	jr z, .no_script
-	call CallHL
+	call CallHL2
 	jr nc, .next_npc
 .no_script
 	ld a, [wTempNPC]
@@ -71,10 +65,6 @@ Func_c943:
 	pop hl
 	ret
 
-
-; preserves de and hl
-; input:
-;	[wTempNPC] = ID of the NPC to animate (NPC_* constant)
 Func_c998:
 	ld a, [wTempNPC]
 	cp NPC_AMY
@@ -82,18 +72,11 @@ Func_c998:
 	ld a, [wd3d0]
 	or a
 	ret z
-	ld b, $4
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	ld b, $e
-.not_cgb
-	ld a, b
+	ld a, SPRITE_ANIM_BLUE_NPC_UP
 	ld [wNPCAnim], a
 	ld a, $0
 	ld [wNPCAnimFlags], a
 	ret
-
 
 Func_c9b8:
 	ld l, MAP_SCRIPT_LOAD_MAP
@@ -105,7 +88,6 @@ Func_c9bc:
 
 Func_c9c0:
 	ld l, MAP_SCRIPT_MOVED_PLAYER
-;	fallthrough
 
 CallMapScriptPointerIfExists::
 	call GetMapScriptPointer
@@ -116,8 +98,6 @@ Func_c9c7:
 	ld l, MAP_SCRIPT_CLOSE_TEXTBOX
 	jr CallMapScriptPointerIfExists
 
-
-; preserves all registers except af
 ClearEvents:
 	push hl
 	push bc
@@ -134,66 +114,15 @@ ClearEvents:
 	pop hl
 	ret
 
-
-; clears temporary event variables before determining which room Imakuni is in
-; preserves de
+; Clears temporary event vars before determining Imakuni Room
 DetermineImakuniAndChallengeHall:
 	xor a
 	ld [wEventVars + EVENT_VAR_BYTES - 1], a
 	call DetermineImakuniRoom
-;	fallthrough
+	jp DetermineChallengeHallEvent
 
-; preserves de and hl
-DetermineChallengeHallEvent:
-	ld a, [wOverworldMapSelection]
-	cp OWMAP_CHALLENGE_HALL
-	ret z
-	get_event_value EVENT_RECEIVED_LEGENDARY_CARDS
-	or a
-	jr nz, .challenge_cup_three
-; challenge cup two
-	get_event_value EVENT_CHALLENGE_CUP_2_STATE
-	cp CHALLENGE_CUP_OVER
-	ret z
-	or a ; cp CHALLENGE_CUP_NOT_STARTED
-	jr z, .challenge_cup_one
-	cp CHALLENGE_CUP_WON
-	jr z, .close_challenge_cup_one
-	ld c, CHALLENGE_CUP_READY_TO_START
-	set_event_value EVENT_CHALLENGE_CUP_2_STATE
-	jr .close_challenge_cup_one
-.challenge_cup_one
-	get_event_value EVENT_CHALLENGE_CUP_1_STATE
-	cp CHALLENGE_CUP_OVER
-	ret z
-	or a ; cp CHALLENGE_CUP_NOT_STARTED
-	ret z
-	cp CHALLENGE_CUP_WON
-	ret z
-	ld c, CHALLENGE_CUP_READY_TO_START
-	set_event_value EVENT_CHALLENGE_CUP_1_STATE
-	ret
-.challenge_cup_three
-	call UpdateRNGSources
-	ld c, CHALLENGE_CUP_READY_TO_START
-	and %11
-	or a
-	jr z, .start_challenge_cup_three
-	ld c, CHALLENGE_CUP_NOT_STARTED
-.start_challenge_cup_three
-	set_event_value EVENT_CHALLENGE_CUP_3_STATE
-; close challenge cup two
-	ld c, CHALLENGE_CUP_OVER
-	set_event_value EVENT_CHALLENGE_CUP_2_STATE
-.close_challenge_cup_one
-	ld c, CHALLENGE_CUP_OVER
-	set_event_value EVENT_CHALLENGE_CUP_1_STATE
-	ret
-
-
-; determines what room Imakuni is in when you reset.
-; skips current room and does not occur if you haven't talked to Imakuni.
-; preserves de
+; Determines what room Imakuni is in when you reset
+; Skips current room and does not occur if you haven't talked to Imakuni
 DetermineImakuniRoom:
 	ld c, IMAKUNI_FIGHTING_CLUB
 	get_event_value EVENT_IMAKUNI_STATE
@@ -220,17 +149,60 @@ ImakuniPossibleRooms:
 	db LIGHTNING_CLUB_LOBBY
 	db WATER_CLUB_LOBBY
 
+DetermineChallengeHallEvent:
+	ld a, [wOverworldMapSelection]
+	cp OWMAP_CHALLENGE_HALL
+	jr z, .done
+	get_event_value EVENT_RECEIVED_LEGENDARY_CARDS
+	or a
+	jr nz, .challenge_cup_three
+; challenge cup two
+	get_event_value EVENT_CHALLENGE_CUP_2_STATE
+	cp CHALLENGE_CUP_OVER
+	jr z, .done
+	or a ; cp CHALLENGE_CUP_NOT_STARTED
+	jr z, .challenge_cup_one
+	cp CHALLENGE_CUP_WON
+	jr z, .close_challenge_cup_one
+	ld c, CHALLENGE_CUP_READY_TO_START
+	set_event_value EVENT_CHALLENGE_CUP_2_STATE
+	jr .close_challenge_cup_one
+.challenge_cup_one
+	get_event_value EVENT_CHALLENGE_CUP_1_STATE
+	cp CHALLENGE_CUP_OVER
+	jr z, .done
+	or a ; cp CHALLENGE_CUP_NOT_STARTED
+	jr z, .done
+	cp CHALLENGE_CUP_WON
+	jr z, .done
+	ld c, CHALLENGE_CUP_READY_TO_START
+	set_event_value EVENT_CHALLENGE_CUP_1_STATE
+	jr .done
+.challenge_cup_three
+	call UpdateRNGSources
+	ld c, CHALLENGE_CUP_READY_TO_START
+	and %11
+	or a
+	jr z, .start_challenge_cup_three
+	ld c, CHALLENGE_CUP_NOT_STARTED
+.start_challenge_cup_three
+	set_event_value EVENT_CHALLENGE_CUP_3_STATE
+	jr .close_challenge_cup_two
+.close_challenge_cup_two
+	ld c, CHALLENGE_CUP_OVER
+	set_event_value EVENT_CHALLENGE_CUP_2_STATE
+.close_challenge_cup_one
+	ld c, CHALLENGE_CUP_OVER
+	set_event_value EVENT_CHALLENGE_CUP_1_STATE
+.done
+	ret
 
-; preserves all registers except af
 GetStackEventValue:
 	call GetByteAfterCall
 ;	fallthrough
 
-; preserves all registers except af
-; input:
-;	a = event ID
-; output:
-;	a = value for the event variable
+; returns the event var's value in a
+; also ors it with itself before returning
 GetEventValue::
 	push hl
 	push bc
@@ -250,21 +222,6 @@ GetEventValue::
 	or a
 	ret
 
-; Gets event value at c (Script defaults)
-; c takes on the value of b as a side effect
-; preserves de and hl
-; input:
-;	b = value for an event variable
-;	c = event ID
-; output:
-;	c = input from register b
-GetEventValueBC:
-	ld a, c
-	ld c, b
-	jr GetEventValue
-
-
-; preserves all registers except af
 SetStackEventZero:
 	call GetByteAfterCall
 	push bc
@@ -273,18 +230,14 @@ SetStackEventZero:
 	pop bc
 	ret
 
-
-; Uses macro set_event_value. The byte db'd after this function is called
-; is used as the event value argument for SetEventValue.
-; preserves all registers except af
+; Use macro set_event_value. The byte db'd after this func is called
+; is used as the event value argument for SetEventValue
 SetStackEventValue:
 	call GetByteAfterCall
 ;	fallthrough
 
-; preserves all registers except af
-; input:
-;	a = event ID
-;	c = value (truncated to fit only the event variable's bounds)
+; a - event
+; c - value - truncated to fit only the event var's bounds
 SetEventValue:
 	push hl
 	push bc
@@ -309,10 +262,7 @@ SetEventValue:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; output:
-;	a = the byte db'd after the call to a function that calls this
+; returns in a the byte db'd after the call to a function that calls this
 GetByteAfterCall:
 	push hl
 	ld hl, sp+4
@@ -329,15 +279,10 @@ GetByteAfterCall:
 	pop hl
 	ret
 
-
-; preserves all registers except af
 MaxStackEventValue:
 	call GetByteAfterCall
 ;	fallthrough
 
-; preserves all registers except af
-; input:
-;	a = event ID
 MaxOutEventValue:
 	push bc
 	ld c, $ff
@@ -345,15 +290,10 @@ MaxOutEventValue:
 	pop bc
 	ret
 
-
-; preserves all registers except af
 SetStackEventFalse:
 	call GetByteAfterCall
 ;	fallthrough
 
-; preserves all registers except af
-; input:
-;	a = event ID
 ZeroOutEventValue:
 	push bc
 	ld c, 0
@@ -361,8 +301,6 @@ ZeroOutEventValue:
 	pop bc
 	ret
 
-
-; preserves all registers except af
 TryGiveMedalPCPacks:
 	push hl
 	push bc
@@ -417,13 +355,7 @@ MedalEvents:
 	db EVENT_BEAT_GENE
 	db EVENT_BEAT_MITCH
 
-
-; preserves bc and de
-; input:
-;	a = event ID
-; output:
-;	hl = wEventVars byte
-;	[wLoadedEventBits] = related bits
+; returns wEventVars byte in hl, related bits in wLoadedEventBits
 GetEventVar:
 	push bc
 	ld c, a
@@ -491,7 +423,8 @@ EventVarMasks:
 	event_def $07, %00000100 ; EVENT_ISAAC_TALKED
 	event_def $07, %00000010 ; EVENT_MAN1_TALKED
 	event_def $07, %00000001 ; EVENT_MAN1_WAITING_FOR_CARD
-	event_def $08, %11111111 ; EVENT_MAN1_REQUESTED_CARD_ID
+	event_def $08, %11111111 ; EVENT_MAN1_REQUESTED_CARD_ID_LO
+	event_def $0d, %00000001 ; EVENT_MAN1_REQUESTED_CARD_ID_HI
 	event_def $09, %11100000 ; EVENT_MAN1_GIFT_SEQUENCE_STATE
 	event_def $09, %00011111 ; EVENT_MAN1_GIFTED_CARD_FLAGS
 	event_def $0a, %11110000 ; EVENT_MEDAL_COUNT
@@ -560,15 +493,12 @@ EventVarMasks:
 	event_def $19, %00100000 ; EVENT_RECEIVED_ZAPDOS
 	event_def $19, %00010000 ; EVENT_RECEIVED_MOLTRES
 	event_def $19, %00001000 ; EVENT_RECEIVED_ARTICUNO
-	event_def $19, %00000100 ; EVENT_RECEIVED_SLAKING
+	event_def $19, %00000100 ; EVENT_RECEIVED_DRAGONITE
 	event_def $19, %00111100 ; EVENT_LEGENDARY_CARDS_RECEIVED_FLAGS
-	event_def $1a, %11111100 ; EVENT_GIFT_CENTER_MENU_CHOICE
 	event_def $1a, %00000011 ; EVENT_AARON_BOOSTER_REWARD
-	event_def $1b, %11111111 ; EVENT_CONSOLE
-	event_def $1c, %11110000 ; EVENT_SAM_MENU_CHOICE
-	event_def $1c, %00001111 ; EVENT_AARON_DECK_MENU_CHOICE
+	event_def $1b, %11110000 ; EVENT_SAM_MENU_CHOICE
+	event_def $1b, %00001111 ; EVENT_AARON_DECK_MENU_CHOICE
 	assert_table_length NUM_EVENT_FLAGS
-
 
 ; Used for basic level objects that just print text and quit
 PrintInteractableObjectText:
@@ -577,30 +507,8 @@ PrintInteractableObjectText:
 	ld h, [hl]
 	ld l, a
 	call Func_cc32
-;	fallthrough
+	jp CloseAdvancedDialogueBox
 
-; closes dialogue window. seems to be for other things as well.
-; preserves hl
-CloseAdvancedDialogueBox:
-	ld a, [wOverworldNPCFlags]
-	bit AUTO_CLOSE_TEXTBOX, a
-	call nz, CloseTextBox
-	ld a, [wOverworldNPCFlags]
-	bit RESTORE_FACING_DIRECTION, a
-	jr z, .skip
-	ld a, [wScriptNPC]
-	ld [wLoadedNPCTempIndex], a
-	farcall Func_1c5e9
-.skip
-	xor a
-	ld [wOverworldNPCFlags], a
-	ld a, [wOverworldModeBackup]
-	ld [wOverworldMode], a
-	ret
-
-
-; input:
-;	hl = ID of the text to print
 Func_cc32:
 	push hl
 	ld hl, wCurrentNPCNameTx
@@ -608,44 +516,10 @@ Func_cc32:
 	inc hl
 	ld d, [hl]
 	pop hl
-;	fallthrough
-
-Func_c8ba:
-	ld a, e
-	or d
-	jp z, Func_c891
-	push hl
-	ld a, [wOverworldNPCFlags]
-	bit AUTO_CLOSE_TEXTBOX, a
-	jr z, .asm_c8d4
-	ld hl, wd3b9
-	ld a, [hli]
-	cp e
-	jr nz, .asm_c8d1
-	ld a, [hl]
-	cp d
-	jr z, .asm_c8d4
-
-.asm_c8d1
-	call CloseTextBox
-
-.asm_c8d4
-	ld hl, wd3b9
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	pop hl
-	ld a, 1 << AUTO_CLOSE_TEXTBOX
-	call SetOverworldNPCFlags
-	call Func_c241
-	call Func_c915
-	call DoFrameIfLCDEnabled
-	jp PrintScrollableText_WithTextBoxLabel
-
+	jp Func_c8ba
 
 ; Used for things that are represented as NPCs but don't have a Script
 ; EX: Clerks and legendary cards that interact through Level Objects
-; preserves hl
 Script_Clerk10:
 Script_GiftCenterClerk:
 Script_Woman2:
@@ -656,8 +530,7 @@ Script_LegendaryCardLeftSpark:
 Script_LegendaryCardBottomLeft:
 Script_LegendaryCardBottomRight:
 Script_LegendaryCardRightSpark:
-	jr CloseAdvancedDialogueBox
-
+	jp CloseAdvancedDialogueBox
 
 ; Enters into the script loop, continuing until wBreakScriptLoop > 0
 ; When the loop is broken, it resumes normal code execution where script ended
@@ -681,8 +554,6 @@ RST20::
 	ld b, [hl]
 	retbc
 
-
-; preserves de and hl (also true for the following 6 functions)
 IncreaseScriptPointerBy1:
 	ld a, 1
 	jr IncreaseScriptPointer
@@ -709,11 +580,6 @@ IncreaseScriptPointerBy7:
 
 IncreaseScriptPointerBy3:
 	ld a, 3
-;	fallthrough
-
-; preserves de and hl
-; input:
-;	a = how much to increase the script pointer
 IncreaseScriptPointer:
 	ld c, a
 	ld a, [wScriptPointer]
@@ -724,22 +590,12 @@ IncreaseScriptPointer:
 	ld [wScriptPointer + 1], a
 	ret
 
-
-; preserves bc and de
-; input:
-;	bc = new script pointer
 SetScriptPointer:
 	ld hl, wScriptPointer
 	ld [hl], c
 	inc hl
 	ld [hl], b
 	ret
-
-
-; preserves de and hl (also true for the following 3 functions)
-GetScriptArgs5AfterPointer:
-	ld a, 5
-	jr GetScriptArgsAfterPointer
 
 GetScriptArgs1AfterPointer:
 	ld a, 1
@@ -751,13 +607,6 @@ GetScriptArgs2AfterPointer:
 
 GetScriptArgs3AfterPointer:
 	ld a, 3
-;	fallthrough
-
-; preserves de and hl
-; input:
-;	a = used to adjust the script pointer
-; output:
-;	bc = new arguments
 GetScriptArgsAfterPointer:
 	push hl
 	ld l, a
@@ -774,20 +623,25 @@ GetScriptArgsAfterPointer:
 	or b
 	ret
 
+SetScriptControlBytePass:
+	ld a, $ff
+	ld [wScriptControlByte], a
+	ret
+
+SetScriptControlByteFail:
+	xor a
+	ld [wScriptControlByte], a
+	ret
 
 ; Exits Script mode and runs the next instruction like normal
-; preserves de and hl
 ScriptCommand_EndScript:
 	ld a, TRUE
 	ld [wBreakScriptLoop], a
-	jr IncreaseScriptPointerBy1
+	jp IncreaseScriptPointerBy1
 
-
-; preserves hl
 ScriptCommand_CloseAdvancedTextBox:
 	call CloseAdvancedDialogueBox
-	jr IncreaseScriptPointerBy1
-
+	jp IncreaseScriptPointerBy1
 
 ScriptCommand_QuitScriptFully:
 	call ScriptCommand_CloseAdvancedTextBox
@@ -795,24 +649,18 @@ ScriptCommand_QuitScriptFully:
 	pop hl
 	ret
 
-
-; input:
-;	bc = ID of the text to print
+; args: 2-Text String Index
 ScriptCommand_PrintNPCText:
 	ld l, c
 	ld h, b
 	call Func_cc32
-	jr IncreaseScriptPointerBy3
+	jp IncreaseScriptPointerBy3
 
-
-; input:
-;	bc = ID of the text to print
 ScriptCommand_PrintText:
 	ld l, c
 	ld h, b
 	call Func_c891
-	jr IncreaseScriptPointerBy3
-
+	jp IncreaseScriptPointerBy3
 
 ScriptCommand_AskQuestionJumpDefaultYes:
 	ld a, TRUE
@@ -821,27 +669,22 @@ ScriptCommand_AskQuestionJumpDefaultYes:
 
 ; Asks the player a question then jumps if they answer yes. Seem to be able to
 ; take a text of 0000 (NULL) to overwrite last with (yes no) prompt at the bottom
-; preserves de
-; input:
-;	bc = ID of the text to print before yes/no
 ScriptCommand_AskQuestionJump:
 	ld l, c
 	ld h, b
 	call Func_c8ed
 	ldh a, [hCurMenuItem]
 	ld [wScriptControlByte], a
-	jr c, IncreaseScriptPointerBy5 ; no jump
+	jr c, .no_jump
 	call GetScriptArgs3AfterPointer
-	jr z, IncreaseScriptPointerBy5 ; no jump
-	jr SetScriptPointer
+	jr z, .no_jump
+	jp SetScriptPointer
 
+.no_jump
+	jp IncreaseScriptPointerBy5
 
-; arguments: Prize cards, deck ID, duel theme index
+; args - prize cards, deck id, duel theme index
 ; sets a duel up, doesn't start until we break out of the script system.
-; preserves de
-; input:
-;	c = number of Prizes to use
-;	b = opponent's deck ID (*_DECK constant)
 ScriptCommand_StartDuel:
 	call SetNPCDuelParams
 	ld a, [wScriptNPC]
@@ -878,10 +721,6 @@ ScriptCommand_StartDuel:
 	set 6, [hl]
 	jp IncreaseScriptPointerBy4
 
-; preserves de
-; input:
-;	c = number of Prizes to use
-;	b = opponent's deck ID (*_DECK constant)
 ScriptCommand_StartChallengeHallDuel:
 	call SetNPCDuelParams
 	ld a, [wChallengeHallNPC]
@@ -896,11 +735,6 @@ AaronDeckIDs:
 	db WATER_AND_FIGHTING_DECK_ID
 	db GRASS_AND_PSYCHIC_DECK_ID
 
-
-; preserves de and hl
-; input:
-;	c = number of Prizes to use
-;	b = NPC's deck ID (*_DECK constant)
 SetNPCDuelParams:
 	ld a, c
 	ld [wNPCDuelPrizes], a
@@ -911,30 +745,16 @@ SetNPCDuelParams:
 	ld [wDuelTheme], a
 	ret
 
-
-; preserves de
-ScriptCommand_BattleCenter:
-	ld a, GAME_EVENT_BATTLE_CENTER
-	ld [wGameEvent], a
-	ld hl, wOverworldTransition
-	set 6, [hl]
-	jp IncreaseScriptPointerBy1
-
-
-; prints text, 1 of 2 arguments depending on wScriptControlByte.
-; input:
-;	bc = ID of the text to print (if [wScriptControlByte] != 0)
+; prints text arg 1 or arg 2 depending on wScriptControlByte.
 ScriptCommand_PrintVariableNPCText:
 	ld a, [wScriptControlByte]
 	or a
-	jr nz, .print_text
-	call GetScriptArgs3AfterPointer
+	call z, GetScriptArgs3AfterPointer
 .print_text
 	ld l, c
 	ld h, b
 	call Func_cc32
 	jp IncreaseScriptPointerBy5
-
 
 ScriptCommand_PrintTextForChallengeCup:
 	get_event_value EVENT_CHALLENGE_CUP_NUMBER
@@ -948,22 +768,17 @@ ScriptCommand_PrintTextForChallengeCup:
 	call Func_cc32
 	jp IncreaseScriptPointerBy7
 
-
 ScriptCommand_PrintVariableText:
 	ld a, [wScriptControlByte]
 	or a
-	jr nz, .print_text
-	call GetScriptArgs3AfterPointer
+	call z, GetScriptArgs3AfterPointer
 .print_text
 	ld l, c
 	ld h, b
 	call Func_c891
 	jp IncreaseScriptPointerBy5
 
-
 ; Does not return to RST20 - pops an extra time to skip that.
-; input:
-;	bc = ID of the text to print
 ScriptCommand_PrintTextQuitFully:
 	ld l, c
 	ld h, b
@@ -975,8 +790,6 @@ ScriptCommand_PrintTextQuitFully:
 	pop hl
 	ret
 
-
-; preserves de and hl
 ScriptCommand_UnloadActiveNPC:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
@@ -984,8 +797,6 @@ Func_cdd1:
 	farcall UnloadNPC
 	jp IncreaseScriptPointerBy1
 
-
-; preserves de and hl
 ScriptCommand_UnloadChallengeHallNPC:
 	ld a, [wLoadedNPCTempIndex]
 	push af
@@ -1001,11 +812,6 @@ ScriptCommand_UnloadChallengeHallNPC:
 	ld [wLoadedNPCTempIndex], a
 	ret
 
-
-; preserves de and hl
-; input:
-;	c = NPC's x coordinate
-;	b = NPC's y coordinate
 ScriptCommand_SetChallengeHallNPCCoords:
 	ld a, [wLoadedNPCTempIndex]
 	push af
@@ -1028,12 +834,8 @@ ScriptCommand_SetChallengeHallNPCCoords:
 	ld [wLoadedNPCTempIndex], a
 	jp IncreaseScriptPointerBy3
 
-
 ; Finds and executes an NPCMovement script in the table provided in bc
 ; based on the active NPC's current direction
-; preserves de
-; input:
-;	 bc = used to figure out NPC's movement
 ScriptCommand_MoveActiveNPCByDirection:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
@@ -1051,34 +853,23 @@ ScriptCommand_MoveActiveNPCByDirection:
 
 ; Moves an NPC given the list of directions pointed to by bc
 ; set bit 7 to only rotate the NPC
-; preserves de and hl
-; input:
-;	bc = address of next NPC movement byte
 ExecuteNPCMovement::
 	farcall StartNPCMovement
 .loop
 	call DoFrameIfLCDEnabled
-	ld a, [wIsAnNPCMoving]
-	and NPC_FLAG_MOVING
-	jr nz, .loop ; is moving
+	farcall CheckIsAnNPCMoving
+	jr nz, .loop
 	jp IncreaseScriptPointerBy3
 
 ; Begin a series of NPC movements on the currently talking NPC
 ; based on the series of directions pointed to by bc
-; preserves de and hl
-; input:
-;	bc = address of next NPC movement byte
 ScriptCommand_MoveActiveNPC:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
 	jr ExecuteNPCMovement
 
-
-; Begins a series of NPC movements on the Challenge Hall opponent NPC
+; Begin a series of NPC movements on the Challenge Hall opponent NPC
 ; based on the series of directions pointed to by bc
-; preserves de
-; input:
-;	bc = address of next NPC movement byte
 ScriptCommand_MoveChallengeHallNPC:
 	ld a, [wLoadedNPCTempIndex]
 	push af
@@ -1099,9 +890,6 @@ ExecuteArbitraryNPCMovementFromStack:
 	ld [wLoadedNPCTempIndex], a
 	ret
 
-; preserves de and hl
-; input:
-;	c = ID of the arbitrary NPC (NPC_* constant)
 ScriptCommand_MoveArbitraryNPC:
 	ld a, [wLoadedNPCTempIndex]
 	push af
@@ -1116,21 +904,17 @@ ScriptCommand_MoveArbitraryNPC:
 	pop af
 	jr ExecuteArbitraryNPCMovementFromStack
 
-
-; preserves hl
 ScriptCommand_CloseTextBox:
 	call CloseTextBox
 	jp IncreaseScriptPointerBy1
 
-
-; arguments: booster pack index, booster pack index, booster pack index
-; input:
-;	c = ID for 1st booster pack (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
-;	b = ID for 2nd booster pack
+; args: booster pack index, booster pack index, booster pack index
 ScriptCommand_GiveBoosterPacks:
 	xor a
 	ld [wAnotherBoosterPack], a
+	push bc
 	call Func_c2a3
+	pop bc
 	push bc
 	ld a, c
 	farcall GiveBoosterPack
@@ -1150,8 +934,6 @@ ScriptCommand_GiveBoosterPacks:
 	call ReturnToOverworldNoCallback
 	jp IncreaseScriptPointerBy4
 
-
-; used after the player defeats Imakuni
 ScriptCommand_GiveOneOfEachTrainerBooster:
 	xor a
 	ld [wAnotherBoosterPack], a
@@ -1179,50 +961,50 @@ ScriptCommand_GiveOneOfEachTrainerBooster:
 	db BOOSTER_LABORATORY_TRAINER
 	db NO_BOOSTER ; $ff
 
-
 ; Shows the card received screen for a given promotional card
-; input:
-;	c = ID of the received card (unless c is $00 or $ff)
-;	c = $00:  use card ID in [wCardReceived]
-;	c = $ff:  use one of the 4 Legendary cards
+; arg can either be the card, $00 for a wram card, or $ff for the 4 legendary cards
 ScriptCommand_ShowCardReceivedScreen:
 	call Func_c2a3
 	ld a, c
+	and b
 	cp $ff
 	jr z, .legendary_card
-	or a
-	jr nz, .show_card
-	ld a, [wCardReceived]
+	ld a, c
+	or b
+	jr z, .card_received
+	ld e, c
+	ld d, b
+	jr .show_card
+.card_received
+	ld a, [wCardReceived + 0]
+	ld e, a
+	ld a, [wCardReceived + 1]
+	ld d, a
 
 .show_card
-	push af
+	push de
 	farcall InitMenuScreen
 	farcall FlashWhiteScreen
-	pop af
+	pop de
 	bank1call ShowPromotionalCardScreen
 	call WhiteOutDMGPals
 	call DoFrameIfLCDEnabled
 	call ReturnToOverworldNoCallback
-	jp IncreaseScriptPointerBy2
+	jp IncreaseScriptPointerBy3
 
 .legendary_card
-	xor a
+	ld de, NULL
 	jr .show_card
 
-
-; preserves de
-; input:
-;	c = card ID to check
 ScriptCommand_JumpIfCardOwned:
-	ld a, c
+	ld e, c
+	ld d, b
 	call GetCardCountInCollectionAndDecks
 	jr ScriptCommand_JumpIfCardInCollection.count_check
 
-; preserves de
-; input:
-;	c = card ID to check
 ScriptCommand_JumpIfCardInCollection:
-	ld a, c
+	ld d, b
+	ld e, c
 	call GetCardCountInCollection
 
 .count_check
@@ -1230,25 +1012,19 @@ ScriptCommand_JumpIfCardInCollection:
 	jr nz, .pass_try_jump
 
 .fail
-	xor a ; fail
-	ld [wScriptControlByte], a
-	jp IncreaseScriptPointerBy4
+	call SetScriptControlByteFail
+	jp IncreaseScriptPointerBy5
 
 .pass_try_jump
-	ld a, $ff ; pass
-	ld [wScriptControlByte], a
-	call GetScriptArgs2AfterPointer
-	jp z, IncreaseScriptPointerBy4 ; no jump
+	call SetScriptControlBytePass
+	call GetScriptArgs3AfterPointer
+	jr z, .no_jump
 	jp SetScriptPointer
 
+.no_jump
+	jp IncreaseScriptPointerBy5
 
-; preserves de
-; input:
-;	bc = number of cards needed
 ScriptCommand_JumpIfEnoughCardsOwned:
-	push bc
-	call IncreaseScriptPointerBy1
-	pop bc
 	call GetAmountOfCardsOwned
 	ld a, h
 	cp b
@@ -1260,86 +1036,72 @@ ScriptCommand_JumpIfEnoughCardsOwned:
 	jr nc, ScriptCommand_JumpIfCardInCollection.pass_try_jump
 	jr ScriptCommand_JumpIfCardInCollection.fail
 
-
-; preserves de and hl
-; input:
-;	c = ID of the received card (unless c = $00)
-;	c = $00:  use card ID in [wCardReceived]
+; Gives the first arg as a card. If that's 0 pulls from wCardReceived
 ScriptCommand_GiveCard:
-	ld a, c
-	or a
+	ld e, c
+	ld d, b
+	ld a, d
+	or e
 	jr nz, .give_card
-	ld a, [wCardReceived]
+	ld a, [wCardReceived + 0]
+	ld e, a
+	ld a, [wCardReceived + 1]
+	ld d, a
 
 .give_card
 	call AddCardToCollection
-	jp IncreaseScriptPointerBy2
+	jp IncreaseScriptPointerBy3
 
-
-; preserves de and hl
-; input:
-;	c = ID of the card being lost
 ScriptCommand_TakeCard:
-	ld a, c
+	ld d, b
+	ld e, c
 	call RemoveCardFromCollection
-	jp IncreaseScriptPointerBy2
+	jp IncreaseScriptPointerBy3
 
-
-; preserves de
 ScriptCommand_JumpIfAnyEnergyCardsInCollection:
-	ld c, GRASS_ENERGY
+	ld de, GRASS_ENERGY
 	ld b, 0
 .loop
-	ld a, c
 	call GetCardCountInCollection
 	add b
 	ld b, a
-	inc c
-	ld a, c
-	cp DOUBLE_COLORLESS_ENERGY + 1
+	inc de
+	cp16 DOUBLE_COLORLESS_ENERGY + 1
 	jr c, .loop
 	ld a, b
 	or a
 	jr nz, .pass_try_jump
 
 .fail
-	xor a ; fail
-	ld [wScriptControlByte], a
+	call SetScriptControlByteFail
 	jp IncreaseScriptPointerBy3
 
 .pass_try_jump
-	ld a, $ff ; pass
-	ld [wScriptControlByte], a
+	call SetScriptControlBytePass
 	call GetScriptArgs1AfterPointer
-	jp z, IncreaseScriptPointerBy3 ; no jump
+	jr z, .no_jump
 	jp SetScriptPointer
 
+.no_jump
+	jp IncreaseScriptPointerBy3
 
-; preserves de and hl
 ScriptCommand_RemoveAllEnergyCardsFromCollection:
-	ld c, GRASS_ENERGY
+	ld de, GRASS_ENERGY
 .next_energy
-	push bc
-	ld a, c
 	call GetCardCountInCollection
 	jr c, .no_energy
 	ld b, a
 .remove_loop
-	ld a, c
 	call RemoveCardFromCollection
 	dec b
 	jr nz, .remove_loop
 
 .no_energy
-	pop bc
-	inc c
-	ld a, c
-	cp DOUBLE_COLORLESS_ENERGY + 1
+	inc de
+	cp16 DOUBLE_COLORLESS_ENERGY + 1
 	jr c, .next_energy
 	jp IncreaseScriptPointerBy1
 
-
-; preserves de
 ScriptCommand_JumpBasedOnFightingClubPupilStatus:
 	ld c, 0
 	get_event_value EVENT_PUPIL_MICHAEL_STATE
@@ -1369,10 +1131,6 @@ ScriptCommand_JumpBasedOnFightingClubPupilStatus:
 	call GetScriptArgs1AfterPointer
 	jp SetScriptPointer
 
-
-; preserves de and hl
-; input:
-;	c = new direction for LOADED_NPC_DIRECTION_BACKUP
 ScriptCommand_SetActiveNPCDirection:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
@@ -1380,12 +1138,11 @@ ScriptCommand_SetActiveNPCDirection:
 	farcall Func_1c52e
 	jp IncreaseScriptPointerBy2
 
-
 ScriptCommand_PickNextMan1RequestedCard:
 	get_event_value EVENT_MAN1_GIFTED_CARD_FLAGS
 	ld b, a
 .choose_again
-	ld a, Man1RequestedCardsList.end - Man1RequestedCardsList
+	ld a, (Man1RequestedCardsList.end - Man1RequestedCardsList) / 2
 	call Random
 	ld e, 1
 	ld c, a
@@ -1409,31 +1166,33 @@ ScriptCommand_PickNextMan1RequestedCard:
 	pop bc
 	ld b, 0
 	ld hl, Man1RequestedCardsList
+	sla c
 	add hl, bc
 	ld c, [hl]
-	set_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	set_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	inc hl
+	ld c, [hl]
+	set_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
 	jp IncreaseScriptPointerBy1
 
 Man1RequestedCardsList:
-	db GRAVELER
-	db MINUN
-	db LILEEP
-	db RAPIDASH
-	db ALTARIA
+	dw GRAVELER
+	dw OMASTAR
+	dw PARASECT
+	dw RAPIDASH
+	dw WEEZING
 .end
 
-
-; input:
-;	c = offset for wTxRam2
 ScriptCommand_LoadMan1RequestedCardIntoTxRamSlot:
 	sla c
 	ld b, 0
 	ld hl, wTxRam2
 	add hl, bc
 	push hl
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
-	ld e, a ; e = ID of the requested card
-	ld d, 0
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	ld e, a
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call GetCardName
 	pop hl
 	ld [hl], e
@@ -1441,55 +1200,47 @@ ScriptCommand_LoadMan1RequestedCardIntoTxRamSlot:
 	ld [hl], d
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de
 ScriptCommand_JumpIfMan1RequestedCardOwned:
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	ld e, a
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call GetCardCountInCollectionAndDecks
 	jp c, ScriptCommand_JumpIfAnyEnergyCardsInCollection.fail
 	jp ScriptCommand_JumpIfAnyEnergyCardsInCollection.pass_try_jump
 
-
-; preserves de
 ScriptCommand_JumpIfMan1RequestedCardInCollection:
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	ld e, a
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call GetCardCountInCollection
 	jp c, ScriptCommand_JumpIfAnyEnergyCardsInCollection.fail
 	jp ScriptCommand_JumpIfAnyEnergyCardsInCollection.pass_try_jump
 
-
-; preserves de and hl
 ScriptCommand_RemoveMan1RequestedCardFromCollection:
-	get_event_value EVENT_MAN1_REQUESTED_CARD_ID
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_LO
+	ld e, a
+	get_event_value EVENT_MAN1_REQUESTED_CARD_ID_HI
+	ld d, a
 	call RemoveCardFromCollection
 	jp IncreaseScriptPointerBy1
 
-
-; preserves de
 ScriptCommand_Jump:
 	call GetScriptArgs1AfterPointer
 	jp SetScriptPointer
 
-
-; preserves de and hl
 ScriptCommand_TryGiveMedalPCPacks:
 	call TryGiveMedalPCPacks
 	jp IncreaseScriptPointerBy1
 
-
-; preserves de and hl
-; input:
-;	c = direction to set
 ScriptCommand_SetPlayerDirection:
 	ld a, c
 	call UpdatePlayerDirection
 	jp IncreaseScriptPointerBy2
 
-
-; preserves hl
-; input:
-;	c = player's direction (index in PlayerMovementOffsetTable_Tiles)
-;	b = Tiles Moves (Speed)
+; arg1 - Direction (index in PlayerMovementOffsetTable_Tiles)
+; arg2 - Tiles Moves (Speed)
 ScriptCommand_MovePlayer:
 	ld a, c
 	ld [wd339], a
@@ -1507,19 +1258,11 @@ ScriptCommand_MovePlayer:
 	call SetScreenScroll
 	jp IncreaseScriptPointerBy3
 
-
-; preserves de and hl
-; input:
-;	c = ID of the NPC that's talking (NPC_* constant)
 ScriptCommand_SetDialogNPC:
 	ld a, c
 	farcall SetNPCDialogName
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de and hl
-; input:
-;	c = ID of the NPC to set (NPC_* constant)
 ScriptCommand_SetNextNPCAndScript:
 	ld a, c
 	ld [wTempNPC], a
@@ -1527,38 +1270,19 @@ ScriptCommand_SetNextNPCAndScript:
 	call SetNextNPCAndScript
 	jp IncreaseScriptPointerBy4
 
-
-; input:
-;	b = NPC animation for CGB
-;	c = NPC animation for DMG/SGB
 ScriptCommand_SetSpriteAttributes:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
-	push bc
-	call GetScriptArgs3AfterPointer
-	ld a, [wScriptNPC]
 	ld l, LOADED_NPC_FLAGS
 	call GetItemInLoadedNPCIndex
 	res NPC_FLAG_DIRECTIONLESS_F, [hl]
 	ld a, [hl]
-	or c
+	or b
 	ld [hl], a
-	pop bc
-	ld e, c
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	ld e, b
-.not_cgb
-	ld a, e
+	ld a, c
 	farcall SetNPCAnimation
-	jp IncreaseScriptPointerBy4
+	jp IncreaseScriptPointerBy3
 
-
-; preserves de and hl
-; input:
-;	c = NPC's new x coordinate
-;	b = NPC's new y coordinate
 ScriptCommand_SetActiveNPCCoords:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
@@ -1568,20 +1292,14 @@ ScriptCommand_SetActiveNPCCoords:
 	farcall SetNPCPosition
 	jp IncreaseScriptPointerBy3
 
-
-; preserves de and hl
-; input:
-;	c = number of times to call DoFrameIfLCDEnabled
 ScriptCommand_DoFrames:
+	push bc
 	call DoFrameIfLCDEnabled
+	pop bc
 	dec c
 	jr nz, ScriptCommand_DoFrames
 	jp IncreaseScriptPointerBy2
 
-
-; input:
-;	c = x coordinate to check
-;	b = y coordinate to check
 ScriptCommand_JumpIfActiveNPCCoordsMatch:
 	ld a, [wScriptNPC]
 	ld [wLoadedNPCTempIndex], a
@@ -1596,11 +1314,6 @@ ScriptCommand_JumpIfActiveNPCCoordsMatch:
 	jp nz, ScriptCommand_JumpIfEventEqual.fail
 	jp ScriptCommand_JumpIfEventEqual.pass_try_jump
 
-
-; preserves de
-; input:
-;	c = x coordinate to check
-;	b = y coordinate to check
 ScriptCommand_JumpIfPlayerCoordsMatch:
 	ld a, [wPlayerXCoord]
 	cp c
@@ -1610,10 +1323,6 @@ ScriptCommand_JumpIfPlayerCoordsMatch:
 	jp nz, ScriptCommand_JumpIfEventEqual.fail
 	jp ScriptCommand_JumpIfEventEqual.pass_try_jump
 
-
-; preserves de
-; input:
-;	c = ID of the NPC to check (NPC_* constant)
 ScriptCommand_JumpIfNPCLoaded:
 	ld a, [wLoadedNPCTempIndex]
 	push af
@@ -1636,19 +1345,15 @@ ScriptCommand_JumpIfNPCLoaded:
 	ld [wLoadedNPCTempIndex], a
 	ret
 
-
-; input:
-;	c = which medal to show
 ScriptCommand_ShowMedalReceivedScreen:
-	call Func_c2a3
 	ld a, c
+	push af
+	call Func_c2a3
+	pop af
 	farcall ShowMedalReceivedScreen
 	call ReturnToOverworldNoCallback
 	jp IncreaseScriptPointerBy2
 
-
-; input:
-;	c = used to create the offset for wTxRam2
 ScriptCommand_LoadCurrentMapNameIntoTxRamSlot:
 	sla c
 	ld b, 0
@@ -1684,9 +1389,6 @@ MapNames:
 	tx ChallengeHallMapName
 	tx PokemonDomeMapName
 
-
-; input:
-;	c = used to create the offset for wTxRam2
 ScriptCommand_LoadChallengeHallNPCIntoTxRamSlot:
 	ld hl, wCurrentNPCNameTx
 	ld e, [hl]
@@ -1712,7 +1414,6 @@ ScriptCommand_LoadChallengeHallNPCIntoTxRamSlot:
 	ld [hl], d
 	jp IncreaseScriptPointerBy2
 
-
 ScriptCommand_PickChallengeHallOpponent:
 	ld a, [wTempNPC]
 	push af
@@ -1725,31 +1426,30 @@ ScriptCommand_PickChallengeHallOpponent:
 	ld [wTempNPC], a
 	jp IncreaseScriptPointerBy1
 
-
 ScriptCommand_OpenMenu:
 	call PauseMenu
 	jp IncreaseScriptPointerBy1
-
 
 ScriptCommand_PickChallengeCupPrizeCard:
 	get_event_value EVENT_CHALLENGE_CUP_NUMBER
 	dec a
 	cp 2
 	jr c, .first_or_second_cup
-	ld a, (ChallengeCupPrizeCards.end - ChallengeCupPrizeCards) / 3 - 2
+	ld a, (ChallengeCupPrizeCards.end - ChallengeCupPrizeCards) / 4 - 2
 	call Random
 	add 2
 .first_or_second_cup
 	ld hl, ChallengeCupPrizeCards
 .get_card_from_list
-	ld e, a
 	add a
-	add e
+	add a
 	ld e, a
 	ld d, 0
 	add hl, de
 	ld a, [hli]
-	ld [wCardReceived], a
+	ld [wCardReceived + 0], a
+	ld a, [hli]
+	ld [wCardReceived + 1], a
 	ld a, [hli]
 	ld [wTxRam2], a
 	ld a, [hl]
@@ -1757,52 +1457,51 @@ ScriptCommand_PickChallengeCupPrizeCard:
 	jp IncreaseScriptPointerBy1
 
 ChallengeCupPrizeCards:
-	db NATU
+	dw MEWTWO_LV60
 	tx MewtwoTradeCardName
 
-	db JIRACHI
+	dw MEW_LV8
 	tx MewTradeCardName
 
-	db MUDKIP
+	dw ARCANINE_LV34
 	tx ArcanineTradeCardName
 
-	db PSYDUCK
+	dw PIKACHU_LV16
 	tx PikachuTradeCardName
 
-	db GOLDUCK
+	dw PIKACHU_ALT_LV16
 	tx PikachuTradeCardName
 
-	db LANTURN
+	dw SURFING_PIKACHU_LV13
 	tx SurfingPikachuTradeCardName
 
-	db BELDUM
+	dw SURFING_PIKACHU_ALT_LV13
 	tx SurfingPikachuTradeCardName
 
-	db HARIYAMA
+	dw ELECTABUZZ_LV20
 	tx ElectabuzzTradeCardName
 
-	db GRUMPIG
+	dw SLOWPOKE_LV9
 	tx SlowpokeTradeCardName
 
-	db XATU
+	dw MEWTWO_ALT_LV60
 	tx MewtwoTradeCardName
 
-	db NATU
+	dw MEWTWO_LV60
 	tx MewtwoTradeCardName
 
-	db JIRACHI
+	dw MEW_LV8
 	tx MewTradeCardName
 
-	db ODDISH
+	dw JIGGLYPUFF_LV12
 	tx JigglypuffTradeCardName
 
-	db LANETTES_NET_SEARCH
+	dw SUPER_ENERGY_RETRIEVAL
 	tx SuperEnergyRetrievalTradeCardName
 
-	db CHINCHOU
+	dw FLYING_PIKACHU
 	tx FlyingPikachuTradeCardName
 .end
-
 
 ScriptCommand_PickLegendaryCard:
 	get_event_value EVENT_LEGENDARY_CARDS_RECEIVED_FLAGS
@@ -1834,33 +1533,28 @@ ScriptCommand_PickLegendaryCard:
 	jr ScriptCommand_PickChallengeCupPrizeCard.get_card_from_list
 
 LegendaryCards:
-	db FLYGON
+	dw ZAPDOS_LV68
 	tx ZapdosLegendaryCardName
 
-	db WAILORD
+	dw MOLTRES_LV37
 	tx MoltresLegendaryCardName
 
-	db PICHU
+	dw ARTICUNO_LV37
 	tx ArticunoLegendaryCardName
 
-	db SLAKING
-	tx SlakingLegendaryCardName
+	dw DRAGONITE_LV41
+	tx DragoniteLegendaryCardName
 
 LegendaryCardEvents:
 	db EVENT_RECEIVED_ZAPDOS
 	db EVENT_RECEIVED_MOLTRES
 	db EVENT_RECEIVED_ARTICUNO
-	db EVENT_RECEIVED_SLAKING
+	db EVENT_RECEIVED_DRAGONITE
 
-
-; preserves de and hl
-; input:
-;	c = offset for wOWMapEvents
 ScriptCommand_ReplaceMapBlocks:
 	ld a, c
 	farcall Func_80ba4
 	jp IncreaseScriptPointerBy2
-
 
 ScriptCommand_ChooseDeckToDuelAgainstMultichoice:
 	ld hl, .multichoice_menu_args
@@ -1886,7 +1580,6 @@ ScriptCommand_ChooseDeckToDuelAgainstMultichoice:
 
 	dw NULL
 
-
 ScriptCommand_ChooseStarterDeckMultichoice:
 	ld hl, .multichoice_menu_args
 	xor a
@@ -1904,27 +1597,24 @@ ScriptCommand_ChooseStarterDeckMultichoice:
 .text_entries
 	tx CharmanderAndFriendsDeckChoiceText
 	tx SquirtleAndFriendsDeckChoiceText
-	tx TreeckoAndFriendsDeckChoiceText
-
+	tx BulbasaurAndFriendsDeckChoiceText
 
 ; displays a textbox with multiple choices and a cursor.
 ; takes as an argument in h1 a pointer to a table
-;	dw text ID for the NPC's title (for header of textbox below menu)
-;	dw text ID for the textbox below the menu
-;	dw location of the table configuration in bank $04
-;	db the value to return when the B button is pressed
-;	dw ram location to output the result
-;	dw location of the table containing the text entries (optional)
-; input:
-;	a = current menu item
-;	hl = multichoice menu parameters
+;	dw text id for NPC title for textbox under menu
+;	dw text id for textbox under menu
+;	dw location of table configuration in bank 4
+;	db the value to return when b is pressed
+;	dw ram location to return result into
+;	dw location of table containing text entries (optional)
+
 ShowMultichoiceTextbox:
 	ld [wd416], a
-;	push hl ; unnecessary?
+	push hl
 	call Func_c241
 	call Func_c915
 	call DoFrameIfLCDEnabled
-;	pop hl ; unnecessary?
+	pop hl
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -1934,8 +1624,7 @@ ShowMultichoiceTextbox:
 	ld h, [hl]
 	ld l, a
 	or h
-	jr z, .no_text
-	call Func_c8ba
+	call nz, Func_c8ba
 .no_text
 	ld a, 1 << AUTO_CLOSE_TEXTBOX
 	call SetOverworldNPCFlags
@@ -1983,14 +1672,14 @@ ShowMultichoiceTextbox:
 	ld h, [hl]
 	ld l, a
 	or h
-	ret z ; no text
+	jr z, .no_text_2
 	add hl, bc
 	ld a, [hli]
 	ld [wTxRam2], a
 	ld a, [hl]
 	ld [wTxRam2 + 1], a
+.no_text_2
 	ret
-
 
 ScriptCommand_ShowSamNormalMultichoice:
 	ld hl, .multichoice_menu_args
@@ -2011,7 +1700,6 @@ ScriptCommand_ShowSamNormalMultichoice:
 	dw wMultichoiceTextboxResult_Sam ; ram location to return result into
 	dw NULL ; location of table containing text entries
 
-
 ScriptCommand_ShowSamRulesMultichoice:
 	ld hl, .multichoice_menu_args
 	ld a, [wMultichoiceTextboxResult_Sam]
@@ -2028,7 +1716,6 @@ ScriptCommand_ShowSamRulesMultichoice:
 	db SAM_MENU_NOTHING_TO_ASK ; the value to return when b is pressed
 	dw wMultichoiceTextboxResult_Sam ; ram location to return result into
 	dw NULL ; location of table containing text entries
-
 
 ScriptCommand_OpenDeckMachine:
 	push bc
@@ -2057,9 +1744,7 @@ ScriptCommand_OpenDeckMachine:
 	call ReturnToOverworldNoCallback
 	jp IncreaseScriptPointerBy2
 
-
-; arguments: unused, room, new player x, new player y, new player direction
-; preserves de
+; args: unused, room, new player x, new player y, new player direction
 ScriptCommand_EnterMap:
 	ld a, [wScriptPointer]
 	ld l, a
@@ -2079,42 +1764,14 @@ ScriptCommand_EnterMap:
 	set 4, [hl]
 	jp IncreaseScriptPointerBy6
 
-
 ScriptCommand_FlashScreen:
 	farcall FlashScreenToWhite
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de
-; input:
-;	c = 0: save the player at their current position
-;	c > 0: save the player in Mason's lab
 ScriptCommand_SaveGame:
 	farcall _SaveGame
 	jp IncreaseScriptPointerBy2
 
-
-; input:
-;	c = Gift Center selection (might be stored in [wGiftCenterChoice])
-ScriptCommand_GiftCenter:
-	ld a, c
-	or a
-	jr nz, .load_gift_center
-	; show menu
-	farcall GiftCenterMenu
-	ld c, a
-	set_event_value EVENT_GIFT_CENTER_MENU_CHOICE
-	jp IncreaseScriptPointerBy2
-
-.load_gift_center
-	ld a, GAME_EVENT_GIFT_CENTER
-	ld [wGameEvent], a
-	ld hl, wOverworldTransition
-	set 6, [hl]
-	jp IncreaseScriptPointerBy2
-
-
-; preserves de
 ScriptCommand_PlayCredits:
 	call GetReceivedLegendaryCards
 	ld a, GAME_EVENT_CREDITS
@@ -2123,25 +1780,18 @@ ScriptCommand_PlayCredits:
 	set 6, [hl]
 	jp IncreaseScriptPointerBy1
 
-
-; input:
-;	c = booster type (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
 ScriptCommand_TryGivePCPack:
 	ld a, c
 	farcall TryGivePCPack
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de and hl
 ScriptCommand_nop:
 	jp IncreaseScriptPointerBy1
-
 
 ScriptCommand_GiveStarterDeck:
 	ld a, [wStarterDeckChoice]
 	bank1call AddStarterDeck
 	jp IncreaseScriptPointerBy1
-
 
 ScriptCommand_WalkPlayerToMasonLaboratory:
 	ld a, OWMAP_MASON_LABORATORY
@@ -2156,76 +1806,48 @@ ScriptCommand_WalkPlayerToMasonLaboratory:
 	farcall OverworldMap_PrintMapName
 	jp IncreaseScriptPointerBy1
 
-
-; preserves de and hl
-; input:
-;	c = ID of the song to play (MUSIC_* constant)
 ScriptCommand_OverrideSong:
 	ld a, c
 	ld [wSongOverride], a
 	call PlaySong
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de and hl
-; input:
-;	c = ID of the song to set as the default (MUSIC_* constant)
 ScriptCommand_SetDefaultSong:
 	ld a, c
 	ld [wDefaultSong], a
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de and hl
-; input:
-;	c = ID of the song to play (MUSIC_* constant)
 ScriptCommand_PlaySong:
 	ld a, c
-	call PlaySong
+	call ScriptPlaySong
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de and hl
-; input:
-;	c = ID of the sound effect to play (SFX_* constant)
 ScriptCommand_PlaySFX:
 	ld a, c
 	call PlaySFX
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de and hl
 ScriptCommand_PlayDefaultSong:
 	call PlayDefaultSong
 	jp IncreaseScriptPointerBy1
-
 
 ScriptCommand_PauseSong:
 	call PauseSong
 	jp IncreaseScriptPointerBy1
 
-
 ScriptCommand_ResumeSong:
 	call ResumeSong
 	jp IncreaseScriptPointerBy1
 
-
-; preserves de and hl
 ScriptCommand_WaitForSongToFinish:
 	call WaitForSongToFinish
 	jp IncreaseScriptPointerBy1
 
-
-; preserves de and hl
-; input:
-;	c = master to add to wMastersBeatenList
 ScriptCommand_RecordMasterWin:
 	ld a, c
 	farcall AddMasterBeatenToList
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de
 ScriptCommand_ChallengeMachine:
 	ld a, GAME_EVENT_CHALLENGE_MACHINE
 	ld [wGameEvent], a
@@ -2233,22 +1855,13 @@ ScriptCommand_ChallengeMachine:
 	set 6, [hl]
 	jp IncreaseScriptPointerBy1
 
-
-; sets the event variable in argument 1 to the value in argument 2
-; preserves de and hl
-; input:
-;	c = event ID
-;	b = value (truncated to fit only the event variable's bounds)
+; sets the event var in arg 1 to the value in arg 2
 ScriptCommand_SetEventValue:
 	ld a, c
 	ld c, b
 	call SetEventValue
 	jp IncreaseScriptPointerBy3
 
-
-; preserves de and hl
-; input:
-;	c = event ID
 ScriptCommand_IncrementEventValue:
 	ld a, c
 	push af
@@ -2259,10 +1872,6 @@ ScriptCommand_IncrementEventValue:
 	call SetEventValue
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de
-; input:
-;	c = event ID
 ScriptCommand_JumpIfEventZero:
 	ld a, c
 	call GetEventValue
@@ -2270,21 +1879,18 @@ ScriptCommand_JumpIfEventZero:
 	jr z, .pass_try_jump
 
 .fail
-	xor a ; fail
-	ld [wScriptControlByte], a
+	call SetScriptControlByteFail
 	jp IncreaseScriptPointerBy4
 
 .pass_try_jump
-	ld a, $ff ; pass
-	ld [wScriptControlByte], a
+	call SetScriptControlBytePass
 	call GetScriptArgs2AfterPointer
-	jp z, IncreaseScriptPointerBy4 ; no jump
+	jr z, .no_jump
 	jp SetScriptPointer
 
+.no_jump
+	jp IncreaseScriptPointerBy4
 
-; preserves de
-; input:
-;	c = event ID
 ScriptCommand_JumpIfEventNonzero:
 	ld a, c
 	call GetEventValue
@@ -2292,84 +1898,60 @@ ScriptCommand_JumpIfEventNonzero:
 	jr nz, ScriptCommand_JumpIfEventZero.pass_try_jump
 	jr ScriptCommand_JumpIfEventZero.fail
 
-
-; arguments: event variable, value, jump address
-; preserves de
-; input:
-;	c = event ID
-;	b = event variable value to compare
+; args - event var, value, jump address
 ScriptCommand_JumpIfEventEqual:
 	call GetEventValueBC
-	cp c ; input from register b
+	cp c
 	jr z, .pass_try_jump
 
 .fail
-	xor a ; fail
-	ld [wScriptControlByte], a
+	call SetScriptControlByteFail
 	jp IncreaseScriptPointerBy5
 
 .pass_try_jump
-	ld a, $ff ; pass
-	ld [wScriptControlByte], a
+	call SetScriptControlBytePass
 	call GetScriptArgs3AfterPointer
-	jp z, IncreaseScriptPointerBy5 ; no jump
+	jr z, .no_jump
 	jp SetScriptPointer
 
+.no_jump
+	jp IncreaseScriptPointerBy5
 
-; preserves de
-; input:
-;	c = event ID
-;	b = event variable value to compare
 ScriptCommand_JumpIfEventNotEqual:
 	call GetEventValueBC
-	cp c ; input from register b
+	cp c
 	jr nz, ScriptCommand_JumpIfEventEqual.pass_try_jump
 	jr ScriptCommand_JumpIfEventEqual.fail
 
-
-; preserves de
-; input:
-;	c = event ID
-;	b = event variable value to compare
 ScriptCommand_JumpIfEventGreaterOrEqual:
 	call GetEventValueBC
-	cp c ; input from register b
+	cp c
 	jr nc, ScriptCommand_JumpIfEventEqual.pass_try_jump
 	jr ScriptCommand_JumpIfEventEqual.fail
 
-
-; preserves de
-; input:
-;	c = event ID
-;	b = event variable value to compare
 ScriptCommand_JumpIfEventLessThan:
 	call GetEventValueBC
-	cp c ; input from register b
+	cp c
 	jr c, ScriptCommand_JumpIfEventEqual.pass_try_jump
 	jr ScriptCommand_JumpIfEventEqual.fail
 
+; Gets event value at c (Script defaults)
+; c takes on the value of b as a side effect
+GetEventValueBC:
+	ld a, c
+	ld c, b
+	jp GetEventValue
 
-; preserves de and hl
-; input:
-;	c = event ID
 ScriptCommand_MaxOutEventValue:
 	ld a, c
 	call MaxOutEventValue
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de and hl
-; input:
-;	c = event ID
 ScriptCommand_ZeroOutEventValue:
 	ld a, c
 	call ZeroOutEventValue
 	jp IncreaseScriptPointerBy2
 
-
-; preserves de
-; input:
-;	c = event ID
 ScriptCommand_JumpIfEventTrue:
 	ld a, c
 	call GetEventValue
@@ -2377,16 +1959,14 @@ ScriptCommand_JumpIfEventTrue:
 	jr z, ScriptCommand_JumpIfEventFalse.fail
 
 .pass_try_jump
-	ld a, $ff ; pass
-	ld [wScriptControlByte], a
+	call SetScriptControlBytePass
 	call GetScriptArgs2AfterPointer
-	jp z, IncreaseScriptPointerBy4 ; no jump
+	jr z, .no_jump
 	jp SetScriptPointer
 
+.no_jump
+	jp IncreaseScriptPointerBy4
 
-; preserves de
-; input:
-;	c = event ID
 ScriptCommand_JumpIfEventFalse:
 	ld a, c
 	call GetEventValue
@@ -2394,12 +1974,9 @@ ScriptCommand_JumpIfEventFalse:
 	jr z, ScriptCommand_JumpIfEventTrue.pass_try_jump
 
 .fail
-	xor a ; fail
-	ld [wScriptControlByte], a
+	call SetScriptControlByteFail
 	jp IncreaseScriptPointerBy4
 
-
-; preserves de and hl
 LoadOverworld:
 	call Func_d4fb
 	get_event_value EVENT_MASON_LAB_STATE
@@ -2408,8 +1985,6 @@ LoadOverworld:
 	ld bc, Script_BeginGame
 	jp SetNextScript
 
-
-; preserves all registers except af
 Func_d4fb:
 	set_event_false EVENT_PLAYER_ENTERED_CHALLENGE_CUP
 	call Func_f602
@@ -2434,7 +2009,6 @@ Func_d4fb:
 	ld c, CHALLENGE_CUP_OVER
 	set_event_value EVENT_CHALLENGE_CUP_1_STATE
 	ret
-
 
 INCLUDE "scripts/mason_laboratory.asm"
 INCLUDE "scripts/deck_machine_room.asm"
@@ -2481,5 +2055,4 @@ INCLUDE "scripts/pokemon_dome_entrance.asm"
 INCLUDE "scripts/pokemon_dome.asm"
 INCLUDE "scripts/hall_of_honor.asm"
 
-INCLUDE "scripts/battle_center.asm"
 INCLUDE "scripts/gift_center.asm"

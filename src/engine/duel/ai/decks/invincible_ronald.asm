@@ -7,8 +7,7 @@ AIActionTable_InvincibleRonald:
 	dw .take_prize
 
 .do_turn
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 
 .start_duel
 	call InitAIDuelVars
@@ -16,63 +15,59 @@ AIActionTable_InvincibleRonald:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db CRAWDAUNT
-	db PELIPPER
-	db SEVIPER
-	db GEODUDE
-	db KINGDRA
-	db NUMEL
-	db $00
+	dw KANGASKHAN
+	dw MAGMAR_LV31
+	dw CHANSEY
+	dw GEODUDE
+	dw SCYTHER
+	dw GRIMER
+	dw NULL
 
 .list_bench
-	db NUMEL
-	db TAILLOW
-	db GEODUDE
-	db SEVIPER
-	db PELIPPER
-	db CRAWDAUNT
-	db $00
+	dw GRIMER
+	dw SCYTHER
+	dw GEODUDE
+	dw CHANSEY
+	dw MAGMAR_LV31
+	dw KANGASKHAN
+	dw NULL
 
 .list_retreat
-	ai_retreat NUMEL, -1
-	db $00
+	ai_retreat GRIMER, -1
+	dw NULL
 
 .list_energy
-	ai_energy NUMEL,         1, -1
-	ai_energy CAMERUPT,            3, -1
-	ai_energy TAILLOW,        4, +1
-	ai_energy PELIPPER,    2, +0
+	ai_energy GRIMER,         1, -1
+	ai_energy MUK,            3, -1
+	ai_energy SCYTHER,        4, +1
+	ai_energy MAGMAR_LV31,    2, +0
 	ai_energy GEODUDE,        2, +0
 	ai_energy GRAVELER,       3, +0
-	ai_energy SEVIPER,        4, +0
-	ai_energy CRAWDAUNT,     4, -1
-	db $00
+	ai_energy CHANSEY,        4, +0
+	ai_energy KANGASKHAN,     4, -1
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db $00
+	dw GAMBLER
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_bench
-	store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret

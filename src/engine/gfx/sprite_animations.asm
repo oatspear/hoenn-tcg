@@ -1,8 +1,5 @@
-; disables all sprite animations and clears memory related to sprites
-; preserves all registers except af
-; input:
-;	[wAllSpriteAnimationsDisabled] = 0:  clear all sprite animations
-;	[wAllSpriteAnimationsDisabled] > 0:  return before clearing any sprite animations
+; disables all sprite animations
+; and clears memory related to sprites
 _ClearSpriteAnimations::
 	push af
 	ld a, [wAllSpriteAnimationsDisabled]
@@ -38,11 +35,7 @@ _ClearSpriteAnimations::
 	pop bc
 	ret
 
-
 ; creates a new entry in SpriteAnimBuffer, else loads the sprite if need be
-; preserves all registers except af
-; input:
-;	a = sprite ID (SPRITE_* constant)
 CreateSpriteAndAnimBufferEntry:
 	push af
 	ld a, [wAllSpriteAnimationsDisabled]
@@ -76,14 +69,14 @@ CreateSpriteAndAnimBufferEntry:
 .foundEmptyAnimField
 	ld a, $1
 	ld [hl], a
-	call .FillNewSpriteAnimBufferEntry
+	call FillNewSpriteAnimBufferEntry
 	or a
 .quit
 	pop hl
 	pop bc
 	ret
 
-.FillNewSpriteAnimBufferEntry:
+FillNewSpriteAnimBufferEntry:
 	push hl
 	push bc
 	push hl
@@ -109,18 +102,12 @@ CreateSpriteAndAnimBufferEntry:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wWhichSprite] = sprite ID (SPRITE_* constant)
 DisableCurSpriteAnim:
 	ld a, [wWhichSprite]
-;	fallthrough
+	; fallthrough
 
-; sets SPRITE_ANIM_ENABLED to false for the sprite in register a
-; preserves all registers except af
-; input:
-;	a = sprite ID (SPRITE_* constant)
+; sets SPRITE_ANIM_ENABLED to false
+; of sprite in register a
 DisableSpriteAnim:
 	push af
 	ld a, [wAllSpriteAnimationsDisabled]
@@ -139,10 +126,6 @@ DisableSpriteAnim:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wWhichSprite] = sprite ID (SPRITE_* constant)
 GetSpriteAnimCounter:
 	ld a, [wWhichSprite]
 	push hl
@@ -154,8 +137,6 @@ GetSpriteAnimCounter:
 	pop hl
 	ret
 
-
-; preserves all registers
 _HandleAllSpriteAnimations::
 	push af
 	ld a, [wAllSpriteAnimationsDisabled] ; skip animating this frame if enabled
@@ -164,6 +145,8 @@ _HandleAllSpriteAnimations::
 	pop af
 	ret
 .continue
+	pop af
+	push af
 	push bc
 	push de
 	push hl
@@ -193,10 +176,6 @@ _HandleAllSpriteAnimations::
 	pop af
 	ret
 
-
-; preserves bc and hl
-; input:
-;	hl = pointing to the start of the current sprite in wSpriteAnimBuffer
 LoadSpriteDataForAnimationFrame:
 	push hl
 	push bc
@@ -229,12 +208,8 @@ LoadSpriteDataForAnimationFrame:
 	pop hl
 	ret
 
-
 ; decrements the given sprite's movement counter (2x if SPRITE_ANIM_FLAG_SPEED is set)
 ; moves to the next animation frame if necessary
-; preserves all registers except af
-; input:
-;	hl = pointing to the start of the current sprite in wSpriteAnimBuffer
 TryHandleSpriteAnimationFrame:
 	push hl
 	push bc
@@ -267,20 +242,6 @@ TryHandleSpriteAnimationFrame:
 	pop hl
 	ret
 
-
-; plays animation SPRITE_ANIM_SGB_OWMAP_CURSOR_FAST (non-cgb) or SPRITE_ANIM_CGB_OWMAP_CURSOR_FAST (cgb)
-; to make the cursor blink faster after a selection is made
-; preserves all registers except af
-OverworldMap_UpdateCursorAnimation:
-	ld a, [wOverworldMapCursorSprite]
-	ld [wWhichSprite], a
-	ld a, [wOverworldMapCursorAnimation]
-	inc a
-;	fallthrough
-
-; preserves all registers except af
-; input:
-;	a = sprite animation ID (SPRITE_ANIM_* constant)
 StartNewSpriteAnimation:
 	push hl
 	push af
@@ -290,11 +251,8 @@ StartNewSpriteAnimation:
 	cp [hl]
 	pop hl
 	ret z
-;	fallthrough
+	; fallthrough
 
-; preserves all registers except af
-; input:
-;	a = sprite animation ID (SPRITE_ANIM_* constant)
 StartSpriteAnimation:
 	push hl
 	call LoadSpriteAnimPointers
@@ -302,10 +260,8 @@ StartSpriteAnimation:
 	pop hl
 	ret
 
-; preserves all registers except af
-; input:
-;	a = sprite animation ID (SPRITE_ANIM_* constant)
-;	c = animation counter value
+; a = sprite animation
+; c = animation counter value
 Func_12ac9:
 	push bc
 	ld b, a
@@ -316,21 +272,18 @@ Func_12ac9:
 	jr z, StartSpriteAnimation
 
 	push hl
+	push bc
 	call LoadSpriteAnimPointers
 	ld a, $ff
 	call GetAnimFramePointerFromOffset
+	pop bc
 	ld a, c
 	call SetAnimationCounterAndLoop
 	pop hl
 	ret
 
-
 ; Given an animation ID, fills the current sprite's Animation Pointer and Frame Offset Pointer
-; preserves bc and de
-; input:
-;	a = sprite animation ID (SPRITE_ANIM_* constant)
-; output:
-;	hl = pointing to the start of the current sprite in wSpriteAnimBuffer
+; a - Animation ID for current sprite
 LoadSpriteAnimPointers:
 	push bc
 	push af
@@ -364,12 +317,9 @@ LoadSpriteAnimPointers:
 	pop bc
 	ret
 
-
+; hl - beginning of current sprite_anim_buffer
 ; Handles a full animation frame using all values in animation structure
 ; (frame data offset, anim counter, X Mov, Y Mov)
-; preserves all registers except af
-; input:
-;	hl = pointing to the start of the current sprite in wSpriteAnimBuffer
 HandleAnimationFrame:
 	push bc
 	push de
@@ -433,14 +383,13 @@ HandleAnimationFrame:
 	pop bc
 	ret
 
-
-; Calls GetAnimationFramePointer after setting up wTempPointerBank and wVRAMTileOffset
-; preserves all registers except af
-; input:
-;	a = frame offset from Animation Data
-;	hl = pointing to the start of the current sprite in wSpriteAnimBuffer
+; Calls GetAnimationFramePointer after setting up wTempPointerBank
+; and wVRAMTileOffset
+; a - frame offset from Animation Data
+; hl - beginning of Sprite Anim Buffer
 GetAnimFramePointerFromOffset:
 	ld [wVRAMTileOffset], a
+	push hl
 	push bc
 	push de
 	push hl
@@ -456,14 +405,11 @@ GetAnimFramePointerFromOffset:
 	call GetAnimationFramePointer ; calls with the original map data script pointer/bank
 	pop de
 	pop bc
+	pop hl
 	ret
 
-
 ; Sets the animation counter for the current sprite. If the value is zero, loop the animation
-; preserves all registers except af
-; input:
-;	a = new animation counter
-;	hl = pointing to the start of the current sprite in wSpriteAnimBuffer
+; a - new animation counter
 SetAnimationCounterAndLoop:
 	push hl
 	push bc
@@ -490,9 +436,6 @@ SetAnimationCounterAndLoop:
 	pop hl
 	ret
 
-
-; copies sprite data from WRAM into SRAM
-; preserves all registers except af
 Func_12ba7:
 	push hl
 	push bc
@@ -513,9 +456,6 @@ Func_12ba7:
 	pop hl
 	ret
 
-
-; copies sprite data back into WRAM from SRAM
-; preserves all registers except af
 Func_12bcd:
 	push hl
 	push bc
@@ -536,9 +476,7 @@ Func_12bcd:
 	pop hl
 	ret
 
-
 ; clears wSpriteVRAMBufferSize and wSpriteVRAMBuffer
-; preserves all registers except af
 ClearSpriteVRAMBuffer:
 	push hl
 	push bc
@@ -554,14 +492,8 @@ ClearSpriteVRAMBuffer:
 	pop hl
 	ret
 
-
 ; gets some value based on the sprite in a and wSpriteVRAMBuffer
-; loads the sprite's data if it doesn't already exist
-; preserves all registers except af
-; input:
-;	a = sprite ID (SPRITE_* constant)
-; output:
-;	a = tile ID of sprite from input
+; loads the sprites data if it doesn't already exist
 Func_12c05:
 	push hl
 	push bc
@@ -628,13 +560,11 @@ Func_12c05:
 	pop hl
 	ret
 
-
-; preserves bc and de
 ; input:
-;	a = sprite index within the data map
-;	d = tile offset in VRAM
+; a = sprite index within the data map
+; d = tile offset in VRAM
 ; output:
-;	a = number of tiles in sprite
+; a = number of tiles in sprite
 Func_12c4f:
 	push af
 	xor a
@@ -645,8 +575,6 @@ Func_12c4f:
 	farcall Func_8025b
 	ret
 
-
-; preserves all registers except af
 Func_12c5e:
 	push hl
 	push bc

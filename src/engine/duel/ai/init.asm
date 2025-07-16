@@ -39,8 +39,7 @@ InitAITurnVars:
 	call SwapTurn
 	call GetCardIDFromDeckIndex
 	call SwapTurn
-	ld a, e
-	cp WOBBUFFET
+	cp16 MEWTWO_LV53
 	jr nz, .check_flag
 	; Player used Barrier last turn
 
@@ -54,7 +53,7 @@ InitAITurnVars:
 	inc a
 	ld [wAIBarrierFlagCounter], a
 	cp 3
-	ret c
+	jr c, .done
 
 ; this means that the Player used Barrier
 ; at least 3 turns in a row.
@@ -65,27 +64,33 @@ InitAITurnVars:
 	call SwapTurn
 	call GetCardIDFromDeckIndex
 	call SwapTurn
-	ld a, e
-	cp WOBBUFFET
-	jr nz, .reset
+	cp16 MEWTWO_LV53
+	jr nz, .reset_1
 	farcall CheckIfPlayerHasPokemonOtherThanMewtwoLv53
 	jr nc, .set_flag
-.reset
+.reset_1
 ; reset wAIBarrierFlagCounter
 	xor a
 	ld [wAIBarrierFlagCounter], a
-	ret
+	jr .done
 
 .set_flag
 	ld a, AI_MEWTWO_MILL
 	ld [wAIBarrierFlagCounter], a
-	ret
+	jr .done
 
 .check_flag
 ; increase counter by 1 if flag is set
 	ld a, [wAIBarrierFlagCounter]
 	bit AI_MEWTWO_MILL_F, a
-	jr z, .reset
+	jr z, .reset_2
 	inc a
 	ld [wAIBarrierFlagCounter], a
+	jr .done
+
+.reset_2
+; reset wAIBarrierFlagCounter
+	xor a
+	ld [wAIBarrierFlagCounter], a
+.done
 	ret

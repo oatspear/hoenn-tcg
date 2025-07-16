@@ -7,8 +7,7 @@ AIActionTable_WondersOfScience:
 	dw .take_prize
 
 .do_turn
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 
 .start_duel
 	call InitAIDuelVars
@@ -16,62 +15,58 @@ AIActionTable_WondersOfScience:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db WOBBUFFET
-	db XATU
-	db NATU
-	db NUMEL
-	db TORKOAL
-	db TAILLOW
-	db $00
+	dw MEWTWO_LV53
+	dw MEWTWO_ALT_LV60
+	dw MEWTWO_LV60
+	dw GRIMER
+	dw KOFFING
+	dw PORYGON
+	dw NULL
 
 .list_bench
-	db NUMEL
-	db TORKOAL
-	db XATU
-	db NATU
-	db WOBBUFFET
-	db TAILLOW
-	db $00
+	dw GRIMER
+	dw KOFFING
+	dw MEWTWO_ALT_LV60
+	dw MEWTWO_LV60
+	dw MEWTWO_LV53
+	dw PORYGON
+	dw NULL
 
 .list_retreat
-	db $00
+	dw NULL
 
 .list_energy
-	ai_energy NUMEL,          3, +0
-	ai_energy CAMERUPT,             4, +0
-	ai_energy TORKOAL,         2, +0
-	ai_energy ALTARIA,         3, +0
-	ai_energy WOBBUFFET,     2, -1
-	ai_energy XATU, 2, -1
-	ai_energy NATU,     2, -1
-	ai_energy TAILLOW,         2, -1
-	db $00
+	ai_energy GRIMER,          3, +0
+	ai_energy MUK,             4, +0
+	ai_energy KOFFING,         2, +0
+	ai_energy WEEZING,         3, +0
+	ai_energy MEWTWO_LV53,     2, -1
+	ai_energy MEWTWO_ALT_LV60, 2, -1
+	ai_energy MEWTWO_LV60,     2, -1
+	ai_energy PORYGON,         2, -1
+	dw NULL
 
 .list_prize
-	db CAMERUPT
-	db $00
+	dw MUK
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_bench
-	store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret

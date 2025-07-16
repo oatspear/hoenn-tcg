@@ -3,7 +3,7 @@ Duel_Init:
 	push af
 	call DisableLCD
 	call InitMenuScreen
-	ld a, $4
+	ld a, $1
 	ld [wTextBoxFrameType], a
 	lb de,  0, 12
 	lb bc, 20,  6
@@ -67,13 +67,13 @@ OpponentDeckNameLabel:
 OpponentTitlesAndDeckNames:
 	table_width 4, OpponentTitlesAndDeckNames
 
-	tx TechNPCName
+	tx TechText
 	tx SamsPracticeDeckName
 
 	tx EmptyText
 	dw NULL
 
-	tx TechNPCName
+	tx TechText
 	tx SamsPracticeDeckName
 
 	tx EmptyText
@@ -94,13 +94,13 @@ OpponentTitlesAndDeckNames:
 	tx EmptyText
 	dw NULL
 
-	tx TechNPCName
+	tx TechText
 	tx LightningAndFireDeckName
 
-	tx TechNPCName
+	tx TechText
 	tx WaterAndFightingDeckName
 
-	tx TechNPCName
+	tx TechText
 	tx GrassAndPsychicDeckName
 
 	tx GrandMasterText
@@ -113,7 +113,7 @@ OpponentTitlesAndDeckNames:
 	tx LegendaryArticunoDeckName
 
 	tx GrandMasterText
-	tx LegendarySlakingDeckName
+	tx LegendaryDragoniteDeckName
 
 	tx FightingClubMasterText
 	tx FirstStrikeDeckName

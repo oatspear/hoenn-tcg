@@ -18,12 +18,12 @@ HandleAIEnergyTrans:
 	dec a
 	ret z ; return if no Bench cards
 
-	ld a, WURMPLE
-	call CountPokemonIDInPlayArea
-	ret nc ; return if no Wurmple found in own Play Area
+	ld de, VENUSAUR_LV67
+	call CountTurnDuelistPokemonWithActivePkmnPower
+	ret nc ; return if no VenusaurLv67 found in own Play Area
 
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	ret c ; return if Muk found in any Play Area
 
 	ld a, [wce06]
@@ -47,7 +47,7 @@ HandleAIEnergyTrans:
 .TransferEnergyToArena
 	ld [wAINumberOfEnergyTransCards], a
 
-; look for Wurmple in Play Area
+; look for VenusaurLv67 in Play Area
 ; so that its PKMN Power can be used.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -59,8 +59,7 @@ HandleAIEnergyTrans:
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp WURMPLE
+	cp16 VENUSAUR_LV67
 	jr z, .use_pkmn_power
 
 	ld a, b
@@ -101,20 +100,21 @@ HandleAIEnergyTrans:
 	ld a, e
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 GRASS_ENERGY
 	pop de
-	cp GRASS_ENERGY
 	jr nz, .next_card
 
 	; store the deck index of energy card
 	ld a, e
 	ldh [hAIEnergyTransEnergyCard], a
 
-	; 30 frame delay
-	ld a, 30
-	call DoAFrames
-
 	push de
+	ld d, 30
+.small_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .small_delay_loop
+
 	ld a, OPPACTION_6B15
 	bank1call AIMakeDecision
 	pop de
@@ -130,8 +130,11 @@ HandleAIEnergyTrans:
 ; transfer is done, perform delay
 ; and return to main scene.
 .done_transfer
-	ld a, 60
-	call DoAFrames
+	ld d, 60
+.big_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .big_delay_loop
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret
@@ -143,8 +146,7 @@ HandleAIEnergyTrans:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp MAGCARGO
+	cp16 EXEGGUTOR
 	jr z, .is_exeggutor
 
 	xor a ; PLAY_AREA_ARENA
@@ -164,10 +166,14 @@ HandleAIEnergyTrans:
 	ld a, b
 	or a
 	jr z, .attack_false
-	ld a, e
-	cp GRASS_ENERGY
+	cp16 GRASS_ENERGY
 	jr nz, .attack_false
 	ld c, b
+	jr .count_if_enough
+
+.attack_false
+	or a
+	ret
 
 .count_if_enough
 ; if there's enough Grass energy cards in Bench
@@ -181,12 +187,8 @@ HandleAIEnergyTrans:
 	scf
 	ret
 
-.attack_false
-	or a
-	ret
-
 .is_exeggutor
-; in case it's Magcargo in Arena, return carry
+; in case it's Exeggutor in Arena, return carry
 ; if there are any Grass energy cards in Bench.
 	call .CountGrassEnergyInBench
 	or a
@@ -211,9 +213,8 @@ HandleAIEnergyTrans:
 	ld a, e
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 GRASS_ENERGY
 	pop de
-	cp GRASS_ENERGY
 	jr nz, .count_next
 	inc d
 .count_next
@@ -283,7 +284,7 @@ AIEnergyTransTransferEnergyToBench:
 	ret nc
 
 ; AI decided that an energy card is needed
-; so look for Wurmple in Play Area
+; so look for VenusaurLv67 in Play Area
 ; so that its PKMN Power can be used.
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -294,10 +295,9 @@ AIEnergyTransTransferEnergyToBench:
 	add b
 	call GetTurnDuelistVariable
 	ldh [hTempCardIndex_ff9f], a
-	ld [wAIWurmpleDeckIndex], a
+	ld [wAIVenusaurLv67DeckIndex], a
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp WURMPLE
+	cp16 VENUSAUR_LV67
 	jr z, .use_pkmn_power
 
 	ld a, b
@@ -311,7 +311,7 @@ AIEnergyTransTransferEnergyToBench:
 .use_pkmn_power
 	ld a, b
 	ldh [hTemp_ffa0], a
-	ld [wAIWurmplePlayAreaLocation], a
+	ld [wAIVenusaurLv67PlayAreaLocation], a
 	ld a, OPPACTION_USE_PKMN_POWER
 	bank1call AIMakeDecision
 	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
@@ -321,7 +321,7 @@ AIEnergyTransTransferEnergyToBench:
 .loop_energy
 	xor a
 	ldh [hTempPlayAreaLocation_ffa1], a
-	ld a, [wAIWurmplePlayAreaLocation]
+	ld a, [wAIVenusaurLv67PlayAreaLocation]
 	ldh [hTemp_ffa0], a
 
 	; returns when Arena card has no Grass energy cards attached.
@@ -344,14 +344,21 @@ AIEnergyTransTransferEnergyToBench:
 	ld a, e
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 GRASS_ENERGY
 	pop de
-	cp GRASS_ENERGY
 	jr nz, .next_card
 
 	; store the deck index of energy card
 	ld a, e
 	ldh [hAIEnergyTransEnergyCard], a
+	jr .transfer
+
+.next_card
+	inc e
+	ld a, DECK_SIZE
+	cp e
+	jr nz, .loop_deck_locations
+	jr .done_transfer
 
 .transfer
 ; get the Bench card location to transfer Grass energy card to.
@@ -360,11 +367,13 @@ AIEnergyTransTransferEnergyToBench:
 	ldh a, [hTempPlayAreaLocation_ff9d]
 	ldh [hAIEnergyTransPlayAreaLocation], a
 
-	; 30 frame delay
-	ld a, 30
-	call DoAFrames
+	ld d, 30
+.small_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .small_delay_loop
 
-	ld a, [wAIWurmpleDeckIndex]
+	ld a, [wAIVenusaurLv67DeckIndex]
 	ldh [hTempCardIndex_ff9f], a
 	ld d, a
 	ld e, FIRST_ATTACK_OR_PKMN_POWER
@@ -373,17 +382,14 @@ AIEnergyTransTransferEnergyToBench:
 	bank1call AIMakeDecision
 	jr .loop_energy
 
-.next_card
-	inc e
-	ld a, DECK_SIZE
-	cp e
-	jr nz, .loop_deck_locations
-
 ; transfer is done, perform delay
 ; and return to main scene.
 .done_transfer
-	ld a, 60
-	call DoAFrames
+	ld d, 60
+.big_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .big_delay_loop
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret
@@ -397,8 +403,8 @@ AIEnergyTransTransferEnergyToBench:
 ;	- Curse.
 ; returns carry if turn ended.
 HandleAIPkmnPowers:
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	ccf
 	ret nc ; return no carry if Muk is in play
 
@@ -432,14 +438,11 @@ HandleAIPkmnPowers:
 	cp POKEMON_POWER
 	jr z, .execute_effect
 	pop bc
-
-.next_3
-	pop af
-	jr .next_2
+	jr .next_3
 
 .execute_effect
 	ld a, EFFECTCMDTYPE_INITIAL_EFFECT_2
-	call TryExecuteEffectCommandFunction
+	bank1call TryExecuteEffectCommandFunction
 	pop bc
 	jr c, .next_3
 
@@ -447,36 +450,34 @@ HandleAIPkmnPowers:
 ; so check what Pkmn Power this is through card's ID.
 	pop af
 	call GetCardIDFromDeckIndex
-	ld a, e
 	push bc
 
-; step in
-	cp WHISMUR
-	jr nz, .check_heal
-	call HandleAIStepIn
-	jr .next_1
-.check_heal
-	cp CACNEA
-	jr nz, .check_shift
+; heal
+	cp16 VILEPLUME
+	jr nz, .shift
 	call HandleAIHeal
 	jr .next_1
-.check_shift
-	cp TROPIUS
-	jr nz, .check_peek
+
+.shift
+	cp16 VENOMOTH
+	jr nz, .peek
 	call HandleAIShift
 	jr .next_1
-.check_peek
-	cp ARMALDO
-	jr nz, .check_strange_behavior
+
+.peek
+	cp16 MANKEY
+	jr nz, .strange_behavior
 	call HandleAIPeek
 	jr .next_1
-.check_strange_behavior
-	cp BALTOY
-	jr nz, .check_curse
+
+.strange_behavior
+	cp16 SLOWBRO
+	jr nz, .curse
 	call HandleAIStrangeBehavior
 	jr .next_1
-.check_curse
-	cp BANETTE
+
+.curse
+	cp16 GENGAR
 	jr nz, .next_1
 	call z, HandleAICurse
 	jr c, .done
@@ -490,37 +491,12 @@ HandleAIPkmnPowers:
 	jr nz, .loop_play_area
 	ret
 
+.next_3
+	pop af
+	jr .next_2
+
 .done
 	pop bc
-	ret
-
-; checks whether AI uses Step In.
-; Step In is only activated if the AI's Active Pokemon is about to be KO'd
-; the Benched Slaking must also have 4 Energy so that it can attack
-; input:
-;	c = Play Area location (PLAY_AREA_*) of Slaking.
-HandleAIStepIn:
-	ld a, c
-	ldh [hTemp_ffa0], a
-	xor a
-	ldh [hTempPlayAreaLocation_ff9d], a
-	call CheckIfDefendingPokemonCanKnockOut
-	ret nc ; Defending Pokemon cannot KO
-	ldh a, [hTemp_ffa0]
-	ld e, a
-	call GetPlayAreaCardAttachedEnergies
-	ld a, [wTotalAttachedEnergies]
-	cp 4
-	ccf
-	ret nc ; Slaking doesn't have enough Energy to attack
-	ld a, [wce08]
-	ldh [hTempCardIndex_ff9f], a
-	ld a, OPPACTION_USE_PKMN_POWER
-	bank1call AIMakeDecision
-	ld a, OPPACTION_EXECUTE_PKMN_POWER_EFFECT
-	bank1call AIMakeDecision
-	ld a, OPPACTION_DUEL_MAIN_SCENE
-	bank1call AIMakeDecision
 	ret
 
 ; checks whether AI uses Heal on Pokemon in Play Area.
@@ -630,11 +606,11 @@ HandleAIHeal:
 
 ; checks whether AI uses Shift.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Tropius
+;	c = Play Area location (PLAY_AREA_*) of Venomoth
 HandleAIShift:
 	ld a, c
 	or a
-	ret nz ; return if Tropius is not Arena card
+	ret nz ; return if Venomoth is not Arena card
 
 	ldh [hTemp_ffa0], a
 	call GetArenaCardColor
@@ -647,7 +623,7 @@ HandleAIShift:
 	or a
 	ret z ; return if Defending Pokemon has no weakness
 	and b
-	ret nz ; return if Tropius is already Defending card's weakness type
+	ret nz ; return if Venomoth is already Defending card's weakness type
 
 ; check whether there's a card in play with
 ; the same color as the Player's card weakness
@@ -691,21 +667,18 @@ HandleAIShift:
 	ld b, a
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
-	ld c, PLAY_AREA_ARENA
 .loop_play_area
 	ld a, [hli]
 	cp $ff
 	jr z, .false
 	push bc
-	ld a, c
-	call GetPlayAreaCardColor
+	call GetCardIDFromDeckIndex
+	call GetCardType ; bug, this could be a Trainer card
 	call TranslateColorToWR
 	pop bc
 	and b
-	jr nz, .true
-	inc c
-	jr .loop_play_area
-.true
+	jr z, .loop_play_area
+; true
 	scf
 	ret
 .false
@@ -836,13 +809,14 @@ HandleAIStrangeBehavior:
 	pop af
 
 ; loop counters chosen to transfer and use Pkmn Power
-	call ConvertHPToCounters
+	call ConvertHPToDamageCounters_Bank8
 	ld e, a
 .loop_counters
-	; 30 frame delay
-	ld a, 30
-	call DoAFrames
-
+	ld d, 30
+.small_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .small_delay_loop
 	push de
 	ld a, OPPACTION_6B15
 	bank1call AIMakeDecision
@@ -850,9 +824,12 @@ HandleAIStrangeBehavior:
 	dec e
 	jr nz, .loop_counters
 
-; return to main scene after a 60 frame delay
-	ld a, 60
-	call DoAFrames
+; return to main scene
+	ld d, 60
+.big_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .big_delay_loop
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret
@@ -962,8 +939,8 @@ HandleAICurse:
 
 ; handles AI logic for Cowardice
 HandleAICowardice:
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	ret c ; return if there's Muk in play
 
 	farcall AIChooseRandomlyNotToDoAction
@@ -986,9 +963,8 @@ HandleAICowardice:
 	call GetTurnDuelistVariable
 	ld [wce08], a
 	call GetCardIDFromDeckIndex
-	ld a, e
 	push bc
-	cp CLAMPERL
+	cp16 TENTACOOL
 	call z, .CheckWhetherToUseCowardice
 	pop bc
 	jr nc, .next
@@ -1010,15 +986,11 @@ HandleAICowardice:
 ; checks whether AI uses Cowardice.
 ; return carry if Pkmn Power was used.
 ; input:
-;	c = Play Area location (PLAY_AREA_*) of Clamperl.
-.CheckWhetherToUseCowardice
+;	c = Play Area location (PLAY_AREA_*) of Tentacool.
+.CheckWhetherToUseCowardice:
 	ld a, c
 	ldh [hTemp_ffa0], a
 	ld e, a
-	add DUELVARS_ARENA_CARD_FLAGS
-	call GetTurnDuelistVariable
-	and CAN_EVOLVE_THIS_TURN
-	ret z ; return if was played this turn
 	call GetCardDamageAndMaxHP
 .asm_22678
 	or a
@@ -1027,7 +999,12 @@ HandleAICowardice:
 	ldh a, [hTemp_ffa0]
 	or a
 	jr nz, .is_benched
+
+	; this part is buggy if AIDecideBenchPokemonToSwitchTo returns carry
+	; but since this was already checked beforehand, this never happens.
+	; so jr c, .asm_22678 can be safely removed.
 	farcall AIDecideBenchPokemonToSwitchTo
+	jr c, .asm_22678 ; bug, this jumps in the middle of damage checking
 	jr .use_cowardice
 .is_benched
 	ld a, $ff
@@ -1058,25 +1035,24 @@ HandleAIDamageSwap:
 	farcall AIChooseRandomlyNotToDoAction
 	ret c
 
-	ld a, ALAKAZAM
-	call CountPokemonIDInPlayArea
+	ld de, ALAKAZAM
+	call CountTurnDuelistPokemonWithActivePkmnPower
 	ret nc ; return if no Alakazam
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	ret c ; return if there's Muk in play
 
 ; only take damage off certain cards in Arena
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp ALAKAZAM
+	cp16 ALAKAZAM
 	jr z, .ok
-	cp KADABRA
+	cp16 KADABRA
 	jr z, .ok
-	cp ABRA
+	cp16 ABRA
 	jr z, .ok
-	cp CHIMECHO
+	cp16 MR_MIME
 	ret nz
 
 .ok
@@ -1085,15 +1061,15 @@ HandleAIDamageSwap:
 	or a
 	ret z ; return if no damage
 
-	call ConvertHPToCounters
+	call ConvertHPToDamageCounters_Bank8
 	ld [wce06], a
-	ld a, ALAKAZAM
+	ld de, ALAKAZAM
 	ld b, PLAY_AREA_BENCH_1
 	farcall LookForCardIDInPlayArea_Bank5
 	jr c, .is_in_bench
 
 ; Alakazam is Arena card
-	xor a
+	xor a ; PLAY_AREA_ARENA
 .is_in_bench
 	ld [wce08], a
 	call .CheckForDamageSwapTargetInBench
@@ -1114,9 +1090,11 @@ HandleAIDamageSwap:
 	ld a, [wce06]
 	ld e, a
 .loop_damage
-	; 30 frame delay
-	ld a, 30
-	call DoAFrames
+	ld d, 30
+.small_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .small_delay_loop
 
 	push de
 	call .CheckForDamageSwapTargetInBench
@@ -1132,9 +1110,12 @@ HandleAIDamageSwap:
 	jr nz, .loop_damage
 
 .done
-; return to main scene after a 60 frame delay
-	ld a, 60
-	call DoAFrames
+; return to main scene
+	ld d, 60
+.big_delay_loop
+	call DoFrame
+	dec d
+	jr nz, .big_delay_loop
 	ld a, OPPACTION_DUEL_MAIN_SCENE
 	bank1call AIMakeDecision
 	ret
@@ -1160,17 +1141,15 @@ HandleAIDamageSwap:
 	call GetTurnDuelistVariable
 	push de
 	call GetCardIDFromDeckIndex
-	ld a, e
+	cp16 CHANSEY
+	jr z, .found_candidate
+	cp16 KANGASKHAN
+	jr z, .found_candidate
+	cp16 SNORLAX
+	jr z, .found_candidate
+	cp16 MR_MIME
+	jr z, .found_candidate
 	pop de
-	cp SEVIPER
-	jr z, .found_candidate
-	cp CRAWDAUNT
-	jr z, .found_candidate
-	cp SWELLOW
-	jr z, .found_candidate
-	cp CHIMECHO
-	jr z, .found_candidate
-
 .next_play_area
 	inc c
 	ld a, c
@@ -1190,6 +1169,7 @@ HandleAIDamageSwap:
 
 .found_candidate
 ; found a potential candidate to receive damage counters
+	pop de
 	ld a, DUELVARS_ARENA_CARD_HP
 	add c
 	call GetTurnDuelistVariable
@@ -1198,8 +1178,10 @@ HandleAIDamageSwap:
 
 	ld d, c ; store damage
 	push de
+	push bc
 	ld e, c
 	farcall CountNumberOfEnergyCardsAttached
+	pop bc
 	pop de
 	or a
 	jr nz, .next_play_area ; ignore cards with attached energy
@@ -1217,11 +1199,11 @@ HandleAIGoGoRainDanceEnergy:
 	cp GO_GO_RAIN_DANCE_DECK_ID
 	ret nz ; return if not Go Go Rain Dance deck
 
-	ld a, CORPHISH
-	call CountPokemonIDInPlayArea
-	ret nc ; return if no Corphish
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, BLASTOISE
+	call CountTurnDuelistPokemonWithActivePkmnPower
+	ret nc ; return if no Blastoise
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	ret c ; return if there's Muk in play
 
 ; play all the energy cards that is needed.

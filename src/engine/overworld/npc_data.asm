@@ -1,8 +1,4 @@
-; preserves bc and de
-; input:
-;	a = NPC ID (NPC_* constant)
-; output:
-;	hl = pointer for NPCHeaderPointers
+; loads a pointer into hl found on NPCHeaderPointers
 GetNPCHeaderPointer:
 	rlca
 	add LOW(NPCHeaderPointers)
@@ -15,13 +11,8 @@ GetNPCHeaderPointer:
 	ld l, a
 	ret
 
-
-; preserves all registers except af
-; input:
-;	a = NPC ID (NPC_* constant)
 LoadNPCSpriteData:
 	push hl
-	push bc
 	call GetNPCHeaderPointer
 	ld a, [hli]
 	ld [wTempNPC], a
@@ -30,27 +21,11 @@ LoadNPCSpriteData:
 	ld a, [hli]
 	ld [wNPCAnim], a
 	ld a, [hli]
-	push af
-	ld a, [hli]
 	ld [wNPCAnimFlags], a
-	pop bc
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	jr nz, .not_cgb
-	ld a, b
-	ld [wNPCAnim], a
-.not_cgb
-	pop bc
 	pop hl
 	ret
 
-
-; preserves de and hl
-; input:
-;	a = NPC ID (NPC_* constant)
-; output:
-;	bc = pointer for the script
-;	[wCurrentNPCNameTx] = name of the NPC from input
+; Loads Name into wCurrentNPCNameTx and gets Script ptr into bc
 GetNPCNameAndScript:
 	push hl
 	call GetNPCHeaderPointer
@@ -67,11 +42,7 @@ GetNPCNameAndScript:
 	pop hl
 	ret
 
-
-; sets the text box header to the name of the NPC with ID in register a
-; preserves all registers except af
-; input:
-;	a = NPC ID (NPC_* constant)
+; Sets Dialog Box title to the name of the npc in 'a'
 SetNPCDialogName:
 	push hl
 	push bc
@@ -86,11 +57,7 @@ SetNPCDialogName:
 	pop hl
 	ret
 
-
-; sets the opponent's name and portrait for the NPC with ID in register a
-; preserves all registers except af
-; input:
-;	a = NPC ID (NPC_* constant)
+; set the opponent name and portrait for the NPC id in register a
 SetNPCOpponentNameAndPortrait:
 	push hl
 	push bc
@@ -107,11 +74,7 @@ SetNPCOpponentNameAndPortrait:
 	pop hl
 	ret
 
-
-; sets the deck ID and duel theme for the NPC with ID in register a
-; preserves all registers except af
-; input:
-;	a = NPC ID (NPC_* constant)
+; set the deck id and duel theme for the NPC id in register a
 SetNPCDeckIDAndDuelTheme:
 	push hl
 	push bc
@@ -126,11 +89,7 @@ SetNPCDeckIDAndDuelTheme:
 	pop hl
 	ret
 
-
-; sets the start theme for the NPC with ID in register a
-; preserves all registers except af
-; input:
-;	a = NPC ID (NPC_* constant)
+; set the start theme for the NPC id in register a
 SetNPCMatchStartTheme:
 	push hl
 	push bc
@@ -154,56 +113,8 @@ SetNPCMatchStartTheme:
 	pop hl
 	ret
 
-
 INCLUDE "data/npcs.asm"
 
-
-; loads some configurations for the duel against
-; the NPC whose deck ID is stored in wNPCDuelDeckID.
-; this includes NPC portrait, his/her name text ID, and the number of prize cards.
-; this was used in testing since these configurations
-; are stored in the script-related NPC data for normal gameplay.
-; preserves all registers except af
-; input:
-;	[wNPCDuelDeckID] = NPC's deck ID (*_DECK constant)
-; output:
-;	carry = set:  if a duel configuration was found for the given NPC deck ID
-_GetNPCDuelConfigurations::
-	push hl
-	push bc
-	push de
-	ld a, [wNPCDuelDeckID]
-	ld e, a
-	ld bc, 9 ; size of struct - 1
-	ld hl, DeckIDDuelConfigurations
-.loop_deck_ids
-	ld a, [hli]
-	cp -1 ; end of list?
-	jr z, .done
-	cp e
-	jr nz, .next_deck_id
-	ld a, [hli]
-	ld [wOpponentPortrait], a
-	ld a, [hli]
-	ld [wOpponentName], a
-	ld a, [hli]
-	ld [wOpponentName + 1], a
-	ld a, [hl]
-	ld [wNPCDuelPrizes], a
-	scf
-.done
-	pop de
-	pop bc
-	pop hl
-	ret
-.next_deck_id
-	add hl, bc
-	jr .loop_deck_ids
-
-
-; preserves bc and de
-; input:
-;	[wNPCDuelDeckID] = deck ID (*_DECK constant)
 _GetChallengeMachineDuelConfigurations:
 	push bc
 	push de
@@ -230,10 +141,11 @@ _GetChallengeMachineDuelConfigurations:
 	pop hl
 	dec hl
 	scf
+	jr .done
+.next_deck_id
+	add hl, bc
+	jr .loop_deck_ids
 .done
 	pop de
 	pop bc
 	ret
-.next_deck_id
-	add hl, bc
-	jr .loop_deck_ids

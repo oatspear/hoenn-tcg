@@ -4,7 +4,7 @@
 ; - a = starter deck chosen
 ;   $0 = Charmander
 ;   $1 = Squirtle
-;   $2 = Treecko
+;   $2 = Bulbasaur
 _AddStarterDeck:
 	add a
 	ld e, a
@@ -17,7 +17,7 @@ _AddStarterDeck:
 	add 2
 	push hl
 	ld hl, sDeck1
-	call CopyDeckNameAndCards
+	call StoreDeckIDInSRAM
 	pop hl
 	call SwapTurn
 	ld a, [hli] ; extra deck
@@ -28,63 +28,51 @@ _AddStarterDeck:
 ; wPlayerDeck = main starter deck
 ; wOpponentDeck = extra cards
 	call EnableSRAM
-	ld h, HIGH(sCardCollection)
+	ld hl, sCardCollection
 	ld de, wPlayerDeck
 	ld c, DECK_SIZE
 .loop_main_cards
+	push hl
 	ld a, [de]
 	inc de
+	add l
 	ld l, a
+	ld a, [de]
+	inc de
+	adc h
+	ld h, a
 	res CARD_NOT_OWNED_F, [hl]
+	pop hl
 	dec c
 	jr nz, .loop_main_cards
 
-	ld h, HIGH(sCardCollection)
+	ld hl, sCardCollection
 	ld de, wOpponentDeck
 	ld c, 30 ; number of extra cards
 .loop_extra_cards
+	push hl
 	ld a, [de]
 	inc de
+	add l
 	ld l, a
+	ld a, [de]
+	inc de
+	adc h
+	ld h, a
 	res CARD_NOT_OWNED_F, [hl]
 	inc [hl]
+	pop hl
 	dec c
 	jr nz, .loop_extra_cards
-
-; by Oats
-IF DEBUG_FULL_COLLECTION_AT_START
-; add all cards to the initial collection
-	ld c, NUM_CARDS
-.loop_debug_collection
-	ld a, c
-	ld l, a
-	res CARD_NOT_OWNED_F, [hl]
-	ld a, [hl]
-	add 16
-	ld [hl], a
-	dec c
-	jr nz, .loop_debug_collection
-; add a few extra energies
-	ld c, DOUBLE_COLORLESS_ENERGY - 1
-.loop_debug_energies
-	ld a, c
-	ld l, a
-	ld a, [hl]
-	add 30
-	ld [hl], a
-	dec c
-	jr nz, .loop_debug_energies
-ENDC
-
 	jp DisableSRAM
 
 .StarterCardIDs
 	; main deck, extra cards
-	db BAGON_AND_FRIENDS_DECK_ID, BAGON_EXTRA_DECK_ID
-	db BARBOACH_AND_FRIENDS_DECK_ID,   BARBOACH_EXTRA_DECK_ID
-	db TREECKO_AND_FRIENDS_DECK_ID,  TREECKO_EXTRA_DECK_ID
+	db CHARMANDER_AND_FRIENDS_DECK_ID, CHARMANDER_EXTRA_DECK_ID
+	db SQUIRTLE_AND_FRIENDS_DECK_ID,   SQUIRTLE_EXTRA_DECK_ID
+	db BULBASAUR_AND_FRIENDS_DECK_ID,  BULBASAUR_EXTRA_DECK_ID
 
-; clears saved data (card Collection/saved decks/Card Pop! data/etc)
+; clears saved data (card Collection/saved decks/etc)
 ; then adds the starter decks as saved decks
 ; marks all cards in Collection as not owned
 InitSaveData:
@@ -103,23 +91,26 @@ InitSaveData:
 	jr nz, .loop_clear
 
 ; add the starter decks
-	ld a, BAGON_AND_FRIENDS_DECK
+	ld a, CHARMANDER_AND_FRIENDS_DECK
 	ld hl, sSavedDeck1
-	call CopyDeckNameAndCards
-	ld a, BARBOACH_AND_FRIENDS_DECK
+	call StoreDeckIDInSRAM
+	ld a, SQUIRTLE_AND_FRIENDS_DECK
 	ld hl, sSavedDeck2
-	call CopyDeckNameAndCards
-	ld a, TREECKO_AND_FRIENDS_DECK
+	call StoreDeckIDInSRAM
+	ld a, BULBASAUR_AND_FRIENDS_DECK
 	ld hl, sSavedDeck3
-	call CopyDeckNameAndCards
+	call StoreDeckIDInSRAM
 
 ; marks all cards in Collection to not owned
 	call EnableSRAM
 	ld hl, sCardCollection
-	ld a, CARD_NOT_OWNED
+	ld bc, CARD_COLLECTION_SIZE
 .loop_collection
-	ld [hl], a
-	inc l
+	ld a, CARD_NOT_OWNED
+	ld [hli], a
+	dec bc
+	ld a, b
+	or c
 	jr nz, .loop_collection
 
 	ld hl, sCurrentDuel
@@ -128,21 +119,8 @@ InitSaveData:
 	ld [hli], a ; sCurrentDuelChecksum
 	ld [hl], a
 
-; clears Card Pop! names
-	ld hl, sCardPopNameList
-	ld c, CARDPOP_NAME_LIST_MAX_ELEMS
-.loop_card_pop_names
-	ld [hl], $0
-	ld de, NAME_BUFFER_LENGTH
-	add hl, de
-	dec c
-	jr nz, .loop_card_pop_names
-
 ; saved configuration options
-	ld a, 2
-	ld [sPrinterContrastLevel], a
-;	ld a, TEXT_SPEED_3 ; default text speed at start of game
-	ld a, TEXT_SPEED_5 ; default text speed at start of game
+	ld a, $2
 	ld [sTextSpeed], a
 	ld [wTextSpeed], a
 
@@ -151,7 +129,6 @@ InitSaveData:
 	ld [sAnimationsDisabled], a
 	ld [sSkipDelayAllowed], a
 	ld [s0a004], a
-	ld [sTotalCardPopsDone], a
 	ld [sReceivedLegendaryCards], a
 	farcall InitPromotionalCardAndDeckCounterSaveData
 	jp DisableSRAM
@@ -159,7 +136,7 @@ InitSaveData:
 ; input:
 ;    a = Deck ID
 ;    hl = destination to copy
-CopyDeckNameAndCards:
+StoreDeckIDInSRAM:
 	push de
 	push bc
 	push hl
@@ -182,13 +159,7 @@ CopyDeckNameAndCards:
 	ld de, DECK_NAME_SIZE
 	add hl, de
 	ld de, wPlayerDeck
-	ld c, DECK_SIZE
-.loop_write_cards
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .loop_write_cards
+	call CompressDeckToSRAM
 	call DisableSRAM
 	or a
 .done

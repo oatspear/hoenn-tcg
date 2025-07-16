@@ -50,7 +50,7 @@ AutoDeckMachineEntries:
 ; Psychic Auto Deck Machine
 	auto_deck PsychicPowerCardList,         PsychicPowerText,         PsychicPowerDescriptionText
 	auto_deck DreamEaterHaunterCardList,    DreamEaterHaunterText,    DreamEaterHaunterDescriptionText
-	auto_deck ScavengingBaltoyCardList,    ScavengingSlowbroText,    ScavengingSlowbroDescriptionText
+	auto_deck ScavengingSlowbroCardList,    ScavengingSlowbroText,    ScavengingSlowbroDescriptionText
 	auto_deck StrangePowerCardList,         StrangePowerText,         StrangePowerDescriptionText
 	auto_deck StrangePsyshockCardList,      StrangePsyshockText,      StrangePsyshockDescriptionText
 
@@ -71,7 +71,7 @@ AutoDeckMachineEntries:
 ; Auto Deck Machine
 	auto_deck CharmanderAndFriendsCardList, CharmanderAndFriendsText, CharmanderAndFriendsDescriptionText
 	auto_deck SquirtleAndFriendsCardList,   SquirtleAndFriendsText,   SquirtleAndFriendsDescriptionText
-	auto_deck TreeckoAndFriendsCardList,  TreeckoAndFriendsText,  TreeckoAndFriendsDescriptionText
+	auto_deck BulbasaurAndFriendsCardList,  BulbasaurAndFriendsText,  BulbasaurAndFriendsDescriptionText
 	auto_deck PsychicMachampCardList,       PsychicMachampText,       PsychicMachampDescriptionText
 	auto_deck WaterBeetleCardList,          WaterBeetleText,          WaterBeetleDescriptionText
 
@@ -79,7 +79,7 @@ AutoDeckMachineEntries:
 	auto_deck LegendaryMoltresCardList,     LegendaryMoltresText,     LegendaryMoltresDescriptionText
 	auto_deck LegendaryZapdosCardList,      LegendaryZapdosText,      LegendaryZapdosDescriptionText
 	auto_deck LegendaryArticunoCardList,    LegendaryArticunoText,    LegendaryArticunoDescriptionText
-	auto_deck LegendarySlakingCardList,   LegendarySlakingText,   LegendarySlakingDescriptionText
+	auto_deck LegendaryDragoniteCardList,   LegendaryDragoniteText,   LegendaryDragoniteDescriptionText
 	auto_deck MysteriousPokemonCardList,    MysteriousPokemonText,    MysteriousPokemonDescriptionText
 
 	assert_table_length NUM_DECK_MACHINE_SLOTS * NUM_DECK_MACHINES

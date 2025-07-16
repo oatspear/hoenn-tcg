@@ -8,25 +8,20 @@ AIActionTable_GeneralDecks:
 	dw .take_prize
 
 .do_turn
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 
 .start_duel
 	call InitAIDuelVars
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize:
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 ; handle AI routines for a whole turn
 AIMainTurnLogic:
@@ -34,7 +29,7 @@ AIMainTurnLogic:
 	call InitAITurnVars
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards
-	call HandleAIAntiMewtwoDeckStrategy
+	farcall HandleAIAntiMewtwoDeckStrategy
 	jp nc, .try_attack
 ; handle Pkmn Powers
 	farcall HandleAIGoGoRainDanceEnergy
@@ -71,10 +66,9 @@ AIMainTurnLogic:
 	ld a, AI_TRAINER_CARD_PHASE_12
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
-	jr nz, .skip_energy_attach_1
-	call AIProcessAndTryToPlayEnergy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	call z, AIProcessAndTryToPlayEnergy
 .skip_energy_attach_1
 ; play Pokemon from hand again
 	call AIDecidePlayPokemonCard
@@ -93,7 +87,7 @@ AIMainTurnLogic:
 ; if used Professor Oak, process new hand
 ; if not, then proceed to attack.
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_BIRCH
+	and AI_FLAG_USED_PROFESSOR_OAK
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards
@@ -120,10 +114,9 @@ AIMainTurnLogic:
 	call AIProcessHandTrainerCards
 	ld a, AI_TRAINER_CARD_PHASE_12
 	call AIProcessHandTrainerCards
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
-	jr nz, .skip_energy_attach_2
-	call AIProcessAndTryToPlayEnergy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	call z, AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2
 	call AIDecidePlayPokemonCard
 	farcall HandleAIDamageSwap
@@ -161,7 +154,7 @@ AIProcessRetreat:
 ; store Play Area to retreat to and
 ; set wAIRetreatedThisTurn to true
 	ld [wAIPlayAreaCardToSwitch], a
-	ld a, $01
+	ld a, TRUE
 	ld [wAIRetreatedThisTurn], a
 
 ; if AI can use Switch from hand, use it instead...
@@ -172,8 +165,7 @@ AIProcessRetreat:
 	jr nz, .used_switch
 ; ... else try retreating normally.
 	ld a, [wAIPlayAreaCardToSwitch]
-	call AITryToRetreat
-	ret
+	jp AITryToRetreat
 
 .used_switch
 ; if AI used switch, unset its AI flag

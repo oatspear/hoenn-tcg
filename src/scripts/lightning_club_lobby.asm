@@ -1,7 +1,6 @@
 LightningClubLobbyAfterDuel:
 	ld hl, .after_duel_table
-	call FindEndOfDuelScript
-	ret
+	jp FindEndOfDuelScript
 
 .after_duel_table
 	db NPC_IMAKUNI
@@ -40,21 +39,21 @@ Script_Chap2:
 	quit_script_fully
 
 .ows_e3b6
-	jump_if_card_owned NOSEPASS, .ows_e3be
+	jump_if_card_owned ELECTABUZZ_LV35, .ows_e3be
 	print_npc_text Text0613
 	quit_script_fully
 
 .ows_e3be
-	jump_if_card_in_collection NOSEPASS, .ows_e3c6
+	jump_if_card_in_collection ELECTABUZZ_LV35, .ows_e3c6
 	print_npc_text Text0614
 	quit_script_fully
 
 .ows_e3c6
 	set_event EVENT_CHAP2_TRADE_STATE, CHAP2_TRADE_COMPLETED
 	print_npc_text Text0615
-	take_card NOSEPASS
-	give_card HARIYAMA
-	show_card_received_screen HARIYAMA
+	take_card ELECTABUZZ_LV35
+	give_card ELECTABUZZ_LV20
+	show_card_received_screen ELECTABUZZ_LV20
 	print_npc_text Text0616
 	quit_script_fully
 

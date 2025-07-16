@@ -67,3 +67,22 @@ MACRO retbc
 	push bc
 	ret
 ENDM
+
+MACRO cp16
+	ld a, d
+	cp HIGH(\1)
+	jr nz, :+
+	ld a, e
+	cp LOW(\1)
+:
+ENDM
+
+MACRO cphl
+	inc hl
+	ld a, [hld]
+	cp HIGH(\1)
+	jr nz, :+
+	ld a, [hl]
+	cp LOW(\1)
+:
+ENDM

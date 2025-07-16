@@ -9,51 +9,52 @@ HandleSpecialAIAttacks:
 	add DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
 
-	cp MASQUERAIN
-	jr z, .NidoranFCallForFamily
-	cp BELLOSSOM
-	jr z, .CallForFamily
-	cp TORCHIC
-	jr z, .CallForFamily
-	cp MAGCARGO
+	cp16 NIDORANF
+	jp z, .NidoranFCallForFamily
+	cp16 ODDISH
+	jp z, .CallForFamily
+	cp16 BELLSPROUT
+	jp z, .CallForFamily
+	cp16 EXEGGUTOR
 	jp z, .Teleport
-	cp KINGDRA
+	cp16 SCYTHER
 	jp z, .SwordsDanceAndFocusEnergy
-	cp KYOGRE
-	jr z, .CallForFamily
-	cp ELECTRIKE
+	cp16 KRABBY
+	jp z, .CallForFamily
+	cp16 VAPOREON_LV29
 	jp z, .SwordsDanceAndFocusEnergy
-	cp MAKUHITA
+	cp16 ELECTRODE_LV42
 	jp z, .ChainLightning
-	cp RELICANTH
-	jr z, .CallForFriend
-	cp POOCHYENA
+	cp16 MAROWAK_LV26
+	jp z, .CallForFriend
+	cp16 MEW_LV23
 	jp z, .DevolutionBeam
-	cp GLOOM
+	cp16 JIGGLYPUFF_LV13
 	jp z, .FriendshipSong
-	cp TAILLOW
+	cp16 PORYGON
 	jp z, .Conversion
-	cp XATU
+	cp16 MEWTWO_ALT_LV60
 	jp z, .EnergyAbsorption
-	cp NATU
+	cp16 MEWTWO_LV60
 	jp z, .EnergyAbsorption
-	cp LATIAS
+	cp16 NINETALES_LV35
 	jp z, .MixUp
-	cp FLYGON
+	cp16 ZAPDOS_LV68
 	jp z, .BigThunder
-	cp CRAWDAUNT
+	cp16 KANGASKHAN
 	jp z, .Fetch
-	cp ANORITH
+	cp16 DUGTRIO
 	jp z, .Earthquake
-	cp ELECTRODE
+	cp16 ELECTRODE_LV35
 	jp z, .EnergySpike
-	cp GLALIE
+	cp16 GOLDUCK
 	jp z, .HyperBeam
-	cp VIGOROTH
+	cp16 DRAGONAIR
 	jp z, .HyperBeam
-	; return zero score.
+
+; return zero score.
+.zero_score
 	xor a
 	ret
 
@@ -61,7 +62,7 @@ HandleSpecialAIAttacks:
 ; return a score of $80 + slots available in bench.
 .CallForFamily:
 	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jr nc, .zero_score
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -76,13 +77,13 @@ HandleSpecialAIAttacks:
 ; if any of NidoranM or NidoranF is found in deck,
 ; return a score of $80 + slots available in bench.
 .NidoranFCallForFamily:
-	ld e, NINJASK
+	ld de, NIDORANM
 	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jr c, .found_nidoran
-	ld e, MASQUERAIN
+	ld de, NIDORANF
 	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jr nc, .zero_score
 .found_nidoran
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
@@ -99,28 +100,23 @@ HandleSpecialAIAttacks:
 ; if any of them are found, return a score of
 ; $80 + slots available in bench.
 .CallForFriend:
-	ld e, GEODUDE
+	ld de, GEODUDE
 	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jr c, .found_fighting_card
-	ld e, DONPHAN
+	ld de, ONIX
 	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jr c, .found_fighting_card
-	ld e, HERACROSS
+	ld de, CUBONE
 	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jr c, .found_fighting_card
-	ld e, RHYHORN
+	ld de, RHYHORN
 	ld a, CARD_LOCATION_DECK
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jr c, .found_fighting_card
-
-; return zero score.
-.zero_score
-	xor a
-	ret
-
+	jr .zero_score
 .found_fighting_card
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -140,7 +136,7 @@ HandleSpecialAIAttacks:
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
 	cp MAX_PLAY_AREA_POKEMON
-	jr nc, .zero_score
+	jp nc, .zero_score
 	ld b, a
 	ld a, MAX_PLAY_AREA_POKEMON
 	sub b
@@ -150,7 +146,7 @@ HandleSpecialAIAttacks:
 ; if AI decides to retreat, return a score of $80 + 10.
 .Teleport:
 	call AIDecideWhetherToRetreat
-	jr nc, .zero_score
+	jp nc, .zero_score
 	ld a, $8a
 	ret
 
@@ -171,7 +167,7 @@ HandleSpecialAIAttacks:
 	call EstimateDamage_VersusDefendingCard
 	ld a, [wDamage]
 	or a
-	jr nz, .zero_score
+	jp nz, .zero_score
 .swords_dance_focus_energy_success
 	ld a, $85
 	ret
@@ -197,16 +193,14 @@ HandleSpecialAIAttacks:
 	pop bc
 	cp b
 	jr nz, .loop_chain_lightning_bench
-	; return zero score
-	xor a
-	ret
+	jp .zero_score
 .chain_lightning_success
 	ld a, $82
 	ret
 
 .DevolutionBeam:
 	call LookForCardThatIsKnockedOutOnDevolution
-	jr nc, .zero_score
+	jp nc, .zero_score
 	ld a, $85
 	ret
 
@@ -248,9 +242,9 @@ HandleSpecialAIAttacks:
 ; if any Psychic Energy is found in the Discard Pile,
 ; return a score of $80 + 2.
 .EnergyAbsorption:
-	ld e, PSYCHIC_ENERGY
+	ld de, PSYCHIC_ENERGY
 	ld a, CARD_LOCATION_DISCARD_PILE
-	call CheckIfAnyCardIDinLocation
+	call LookForCardIDInLocation_Bank5
 	jp nc, .zero_score
 	ld a, $82
 	ret
@@ -292,9 +286,11 @@ HandleSpecialAIAttacks:
 	ld a, [hli]
 	cp $ff
 	jr z, .tally_basic_cards
+	push bc
 	call SwapTurn
 	call LoadCardDataToBuffer2_FromDeckIndex
 	call SwapTurn
+	pop bc
 	ld a, [wLoadedCard2Type]
 	cp TYPE_ENERGY
 	jr nc, .loop_mix_up_hand
@@ -343,14 +339,14 @@ HandleSpecialAIAttacks:
 	ld a, $80
 	ret
 
-; dismiss the attack if the number of Pokemon on the user's Bench
-; which would be KO'd after using Earthquake is greater than or equal to
-; the number of Prize cards that the Player has not yet drawn
+; dismiss attack if number of own benched cards which would
+; be KOd is greater than or equal to the number
+; of prize cards left for player.
 .Earthquake:
 	ld a, DUELVARS_BENCH
 	call GetTurnDuelistVariable
 
-	lb de, 0, 0
+	lb de, 0, PLAY_AREA_BENCH_1 - 1
 .loop_earthquake
 	inc e
 	ld a, [hli]
@@ -358,19 +354,23 @@ HandleSpecialAIAttacks:
 	jr z, .count_prizes
 	ld a, e
 	add DUELVARS_ARENA_CARD_HP
-	push hl
+	; bug, GetTurnDuelistVariable clobbers hl
+	; uncomment the following lines to preserve hl
+	; push hl
 	call GetTurnDuelistVariable
-	pop hl
+	; pop hl
 	cp 20
 	jr nc, .loop_earthquake
 	inc d
 	jr .loop_earthquake
 
 .count_prizes
+	; bug, this is supposed to count the player's prize cards
+	; not the opponent's, missing calls to SwapTurn
 	push de
-	call SwapTurn
+	; call SwapTurn
 	call CountPrizes
-	call SwapTurn
+	; call SwapTurn
 	pop de
 	cp d
 	jp c, .zero_score
@@ -382,8 +382,8 @@ HandleSpecialAIAttacks:
 ; return a score of $80 + 3.
 .EnergySpike:
 	ld a, CARD_LOCATION_DECK
-	ld e, LIGHTNING_ENERGY
-	call CheckIfAnyCardIDinLocation
+	ld de, LIGHTNING_ENERGY
+	call LookForCardIDInLocation_Bank5
 	jp nc, .zero_score
 	call AIProcessButDontPlayEnergy_SkipEvolution
 	jp nc, .zero_score
@@ -416,25 +416,23 @@ CheckWhetherToSwitchToFirstAttack:
 	cp $50
 	jr c, .keep_second_attack
 
-; first attack has more than minimum score to be used.
-; check if second attack can KO.
-; in case it can't, the AI keeps it as the attack to be used.
-; (possibly due to the assumption that if the
-; second attack cannot KO, the first attack can't KO as well.)
-	xor a
+; first attack has more than minimum score to be used,
+; check if it can KO, in case it can't
+; then the AI keeps second attack as selection.
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
+	; a = FIRST_ATTACK_OR_PKMN_POWER
 	call EstimateDamage_VersusDefendingCard
 	ld a, DUELVARS_ARENA_CARD_HP
 	call GetNonTurnDuelistVariable
 	ld hl, wDamage
-	sub [hl]
+	sub [hl] ; HP - damage
 	jr z, .check_flag
-	jr nc, .keep_second_attack
+	jr nc, .keep_second_attack ; cannot KO
 
-; second attack can ko, check its flag.
+; first attack can ko, check flags from second attack
 ; in case its effect is to heal user or nullify/weaken damage
 ; next turn, keep second attack as the option.
-; otherwise switch to the first attack.
 .check_flag
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
@@ -448,11 +446,11 @@ CheckWhetherToSwitchToFirstAttack:
 	call CheckLoadedAttackFlag
 	jr c, .keep_second_attack
 ; switch to first attack
-	xor a
+	xor a ; FIRST_ATTACK_OR_PKMN_POWER
 	ld [wSelectedAttack], a
 	ret
 .keep_second_attack
-	ld a, $01
+	ld a, SECOND_ATTACK
 	ld [wSelectedAttack], a
 	ret
 
@@ -466,20 +464,23 @@ CheckIfAnyBasicPokemonInDeck:
 	call GetTurnDuelistVariable
 	cp CARD_LOCATION_DECK
 	jr nz, .next
+	push de
 	ld a, e
 	call LoadCardDataToBuffer2_FromDeckIndex
+	pop de
 	ld a, [wLoadedCard2Type]
 	cp TYPE_ENERGY
 	jr nc, .next
 	ld a, [wLoadedCard2Stage]
 	or a
-	jr nz, .next
-	scf
-	ret
+	jr z, .set_carry
 .next
 	inc e
 	ld a, DECK_SIZE
 	cp e
 	jr nz, .loop
 	or a
+	ret
+.set_carry
+	scf
 	ret

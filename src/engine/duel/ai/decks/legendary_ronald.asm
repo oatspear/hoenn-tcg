@@ -7,8 +7,7 @@ AIActionTable_LegendaryRonald:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryRonald
-	ret
+	jp AIDoTurn_LegendaryRonald
 
 .start_duel
 	call InitAIDuelVars
@@ -16,77 +15,73 @@ AIActionTable_LegendaryRonald:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db CRAWDAUNT
-	db SLAKOTH
-	db LINOONE
-	db FLYGON
-	db PICHU
-	db WAILORD
-	db $00
+	dw KANGASKHAN
+	dw DRATINI
+	dw EEVEE
+	dw ZAPDOS_LV68
+	dw ARTICUNO_LV37
+	dw MOLTRES_LV37
+	dw NULL
 
 .list_bench
-	db CRAWDAUNT
-	db SLAKOTH
-	db LINOONE
-	db $00
+	dw KANGASKHAN
+	dw DRATINI
+	dw EEVEE
+	dw NULL
 
 .list_play_hand
-	db WAILORD
-	db FLYGON
-	db CRAWDAUNT
-	db SLAKOTH
-	db LINOONE
-	db PICHU
-	db $00
+	dw MOLTRES_LV37
+	dw ZAPDOS_LV68
+	dw KANGASKHAN
+	dw DRATINI
+	dw EEVEE
+	dw ARTICUNO_LV37
+	dw NULL
 
 .list_retreat
-	ai_retreat LINOONE, -2
-	db $00
+	ai_retreat EEVEE, -2
+	dw NULL
 
 .list_energy
-	ai_energy MARILL,   3, +0
-	ai_energy WAILORD,   3, +0
-	ai_energy ELECTRIKE,  3, +0
-	ai_energy PICHU,  0, -8
-	ai_energy MEDITITE,   4, +0
-	ai_energy FLYGON,    0, -8
-	ai_energy CRAWDAUNT,     4, -1
-	ai_energy LINOONE,          3, +0
-	ai_energy SLAKOTH,        3, +0
-	ai_energy VIGOROTH,      4, +0
-	ai_energy SLAKING, 3, +0
-	db $00
+	ai_energy FLAREON_LV22,   3, +0
+	ai_energy MOLTRES_LV37,   3, +0
+	ai_energy VAPOREON_LV29,  3, +0
+	ai_energy ARTICUNO_LV37,  0, -8
+	ai_energy JOLTEON_LV24,   4, +0
+	ai_energy ZAPDOS_LV68,    0, -8
+	ai_energy KANGASKHAN,     4, -1
+	ai_energy EEVEE,          3, +0
+	ai_energy DRATINI,        3, +0
+	ai_energy DRAGONAIR,      4, +0
+	ai_energy DRAGONITE_LV41, 3, +0
+	dw NULL
 
 .list_prize
-	db WAILORD
-	db PICHU
-	db FLYGON
-	db SLAKING
-	db GAMBLER
-	db $00
+	dw MOLTRES_LV37
+	dw ARTICUNO_LV37
+	dw ZAPDOS_LV68
+	dw DRAGONITE_LV41
+	dw GAMBLER
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_play_hand
-	store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret
 
@@ -111,10 +106,10 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_1 ; skip if cards in deck <= 9
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .skip_moltres_1 ; skip if Muk in play
-	ld a, WAILORD
+	ld de, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres_1 ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a
@@ -134,10 +129,9 @@ AIDoTurn_LegendaryRonald:
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
-	jr nz, .skip_attach_energy_1
-	call AIProcessAndTryToPlayEnergy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	call z, AIProcessAndTryToPlayEnergy
 .skip_attach_energy_1
 ; try playing Pokemon cards from hand again
 	call AIDecidePlayPokemonCard
@@ -147,7 +141,7 @@ AIDoTurn_LegendaryRonald:
 ; if not, then proceed to attack.
 	call AIProcessHandTrainerCards
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_PROFESSOR_BIRCH
+	and AI_FLAG_USED_PROFESSOR_OAK
 	jr z, .try_attack
 	ld a, AI_TRAINER_CARD_PHASE_01
 	call AIProcessHandTrainerCards
@@ -166,10 +160,10 @@ AIDoTurn_LegendaryRonald:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres_2 ; skip if cards in deck <= 9
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .skip_moltres_2 ; skip if Muk in play
-	ld a, WAILORD
+	ld de, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres_2 ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a
@@ -186,10 +180,9 @@ AIDoTurn_LegendaryRonald:
 	call AIProcessRetreat
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
-	jr nz, .skip_attach_energy_2
-	call AIProcessAndTryToPlayEnergy
+	ld a, [wAlreadyPlayedEnergy]
+	or a
+	call z, AIProcessAndTryToPlayEnergy
 .skip_attach_energy_2
 	call AIDecidePlayPokemonCard
 	ret c ; return if turn ended

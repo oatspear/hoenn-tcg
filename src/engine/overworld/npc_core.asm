@@ -1,4 +1,3 @@
-; preserves all registers except af
 ClearNPCs:
 	push hl
 	push bc
@@ -15,12 +14,6 @@ ClearNPCs:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
-; output:
-;	a = direction of the NPC from input
 GetNPCDirection:
 	push hl
 	ld a, [wLoadedNPCTempIndex]
@@ -30,12 +23,9 @@ GetNPCDirection:
 	pop hl
 	ret
 
-
-; sets new position to active NPC and updates its tile permissions
-; preserves all registers except af
-; input:
-;	bc = new coordinates
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
+; sets new position to active NPC
+; and updates its tile permissions
+; bc = new coords
 SetNPCPosition:
 	push hl
 	push bc
@@ -51,12 +41,6 @@ SetNPCPosition:
 	pop hl
 	ret
 
-
-; preserves de and hl
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
-; output:
-;	bc = coordinates of the NPC from input
 GetNPCPosition:
 	push hl
 	ld a, [wLoadedNPCTempIndex]
@@ -68,9 +52,7 @@ GetNPCPosition:
 	pop hl
 	ret
 
-
 ; Loads NPC Sprite Data
-; preserves all registers except af
 LoadNPC:
 	push hl
 	push bc
@@ -137,12 +119,7 @@ LoadNPC:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	a = NPC ID (NPC_* constant)
-; output:
-;	carry = set:  if the NPC from input was Ronald
+; returns carry if input NPC ID in register a is Ronald
 CheckIfNPCIsRonald:
 	cp NPC_RONALD1
 	jr z, .set_carry
@@ -156,10 +133,6 @@ CheckIfNPCIsRonald:
 	scf
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
 UnloadNPC:
 	push hl
 	call UpdateNPCsTilePermission
@@ -173,23 +146,18 @@ UnloadNPC:
 	xor a ; FALSE
 	ld [wRonaldIsInMap], a
 .not_ronald
+
 	xor a
 	ld [hli], a
 	ld a, [hl]
 	farcall DisableSpriteAnim
 	ld hl, wNumLoadedNPCs
 	dec [hl]
+
 .exit
 	pop hl
 	ret
 
-
-; sets a new backup direction for the NPC in wLoadedNPCTempIndex
-; and then updates the NPC's animation on the screen
-; preserves all registers except af
-; input:
-;	a = new direction for LOADED_NPC_DIRECTION_BACKUP
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
 Func_1c52e:
 	push hl
 	push af
@@ -202,14 +170,6 @@ Func_1c52e:
 	pop hl
 	ret
 
-
-; copies the LOADED_NPC_DIRECTION of the NPC in wLoadedNPCTempIndex to its
-; LOADED_NPC_DIRECTION_BACKUP and then updates the NPC's animation on the screen
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
-; output:
-;	a = LOADED_NPC_DIRECTION for the NPC from input
 Func_1c53f:
 	push hl
 	push bc
@@ -227,14 +187,6 @@ Func_1c53f:
 	pop hl
 	ret
 
-
-; copies the LOADED_NPC_DIRECTION of the NPC with ID in register a to its
-; LOADED_NPC_DIRECTION_BACKUP and then updates the NPC's animation on the screen
-; preserves all registers except af
-; input:
-;	a = NPC ID (NPC_* constant)
-; output:
-;	a = LOADED_NPC_DIRECTION for the NPC from input
 Func_1c557:
 	push bc
 	ld c, a
@@ -259,15 +211,10 @@ Func_1c557:
 	pop bc
 	ret
 
-
-; sets a new animation for the NPC in wLoadedNPCTempIndex
-; and then updates the NPC's animation on the screen
-; preserves all registers except af
-; input:
-;	a = NPC animation
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
+; a = NPC animation
 SetNPCAnimation:
 	push hl
+	push bc
 	push af
 	ld a, [wLoadedNPCTempIndex]
 	ld l, LOADED_NPC_ANIM
@@ -275,13 +222,10 @@ SetNPCAnimation:
 	pop af
 	ld [hl], a
 	call UpdateNPCAnimation
+	pop bc
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
 UpdateNPCAnimation:
 	push hl
 	push bc
@@ -311,12 +255,10 @@ UpdateNPCAnimation:
 	pop hl
 	ret
 
-
-; if the NPC's sprite has an animation, give it a random initial value.
-; this makes it so that all NPCs are out of phase when they are loaded into a map.
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
+; if NPC's sprite has an animation,
+; give it a random initial value
+; this makes it so that all NPCs are out of phase
+; when they are loaded into a map
 ApplyRandomCountToNPCAnim:
 	push hl
 	push bc
@@ -349,12 +291,8 @@ ApplyRandomCountToNPCAnim:
 	pop hl
 	ret
 
-
-; sets the loaded NPC's direction to the direction that is in LOADED_NPC_DIRECTION_BACKUP
-; and then updates the NPC's animation on the screen
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
+; sets the loaded NPC's direction
+; to the direction that is in LOADED_NPC_DIRECTION_BACKUP
 Func_1c5e9:
 	push hl
 	push bc
@@ -370,13 +308,7 @@ Func_1c5e9:
 	pop hl
 	ret
 
-
-; sets a new direction for the NPC in wLoadedNPCTempIndex
-; and then updates the NPC's animation on the screen
-; preserves all registers except af
-; input:
-;	a = direction the NPC should now be facing
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
+; a = new direction
 SetNPCDirection:
 	push hl
 	push af
@@ -389,8 +321,6 @@ SetNPCDirection:
 	pop hl
 	ret
 
-
-; preserves all registers except af
 HandleAllNPCMovement::
 	push hl
 	push bc
@@ -452,8 +382,6 @@ HandleAllNPCMovement::
 	pop hl
 	ret
 
-
-; preserves all registers except af
 UpdateNPCSpritePosition:
 	push hl
 	push bc
@@ -492,8 +420,8 @@ UpdateNPCSpritePosition:
 	pop hl
 	ret
 
-; outputs:
-;	bc = coordinate offsets, given the NPC's direction and its movement step
+; outputs in bc the coordinate offsets
+; given NPCs direction and its movement step
 .GetOffset
 	push hl
 	ld bc, $0
@@ -548,11 +476,8 @@ UpdateNPCSpritePosition:
 	ld b, a
 	ret
 
-
-; ands wIsAnNPCMoving with the current NPC's NPC_FLAG_MOVING_F
-; preserves all registers except af
-; input:
-;	hl = pointer to the location of NPC's ID in wLoadedNPCs
+; ands wIsAnNPCMoving with the current
+; NPC's NPC_FLAG_MOVING_F
 UpdateIsAnNPCMovingFlag:
 	push hl
 	push bc
@@ -565,10 +490,6 @@ UpdateIsAnNPCMovingFlag:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
 SetNPCsTilePermission:
 	push hl
 	push bc
@@ -584,14 +505,11 @@ SetNPCsTilePermission:
 	pop hl
 	ret
 
-
-; preserves all registers except af
 SetAllNPCTilePermissions:
 	push hl
 	push bc
 	push de
-	ld b, $00
-	ld c, LOADED_NPC_MAX
+	lb bc, $00, LOADED_NPC_MAX
 	ld hl, wLoadedNPCs
 	ld de, LOADED_NPC_LENGTH
 .loop_npcs
@@ -611,10 +529,6 @@ SetAllNPCTilePermissions:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
 UpdateNPCsTilePermission:
 	push hl
 	push bc
@@ -630,18 +544,12 @@ UpdateNPCsTilePermission:
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	bc = x and y coordinates of the NPC to find
-; output:
-;	[wLoadedNPCTempIndex] & a = NPC's index in wLoadedNPCs
+; Find NPC at coords b (x) c (y)
 FindNPCAtLocation:
 	push hl
 	push bc
 	push de
-	ld d, $00
-	ld e, LOADED_NPC_MAX
+	lb de, $00, LOADED_NPC_MAX
 	ld hl, wLoadedNPC1CoordX
 .findValidNPCLoop
 	ld a, [hli]
@@ -685,15 +593,8 @@ FindNPCAtLocation:
 	pop hl
 	ret
 
-
 ; Probably needs a new name. Loads data for NPC that the next Script is for
-; Sets the direction, loads the graphics data and name, and more
-; preserves de and hl
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
-; output:
-;	bc = pointer for the script
-;	[wCurrentNPCNameTx] = name of the NPC from input
+; Sets direction, Loads Image data for it, loads name, and more
 SetNewScriptNPC:
 	push hl
 	ld a, [wLoadedNPCTempIndex]
@@ -712,11 +613,6 @@ SetNewScriptNPC:
 	pop hl
 	ret
 
-
-; preserves de and hl
-; input:
-;	bc = address of next NPC movement byte
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
 StartNPCMovement:
 	push hl
 ; set NPC as moving
@@ -781,17 +677,19 @@ StartNPCMovement:
 	pop hl
 	ret
 
+; returns nz if there is an NPC currently moving
+CheckIsAnNPCMoving:
+	ld a, [wIsAnNPCMoving]
+	and NPC_FLAG_MOVING
+	ret
 
-; while the NPC is moving, increment its movement step by 1.
-; once it reaches a value greater than 16, update its tile permission
-; and its position and start the next movement.
-; preserves all registers except af
-; input:
-;	hl = pointer to the location of NPC's ID in wLoadedNPCs
+; while the NPC is moving, increment its movement step by 1
+; once it reaches a value greater than 16, update
+; its tile permission and its position and start next movement
 UpdateNPCMovementStep:
 	push hl
 	push bc
-;	push de ; unnecessary?
+	push de
 	ld bc, LOADED_NPC_FLAGS
 	add hl, bc
 	bit NPC_FLAG_MOVING_F, [hl]
@@ -811,15 +709,11 @@ UpdateNPCMovementStep:
 	call StartNPCMovement
 	call SetNPCsTilePermission
 .exit
-;	pop de ; unnecessary?
+	pop de
 	pop bc
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	[wLoadedNPCTempIndex] = NPC's index in wLoadedNPCs
 UpdateNPCPosition:
 	push hl
 	push bc

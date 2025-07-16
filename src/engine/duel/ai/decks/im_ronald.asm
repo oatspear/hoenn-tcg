@@ -7,8 +7,7 @@ AIActionTable_ImRonald:
 	dw .take_prize
 
 .do_turn
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 
 .start_duel
 	call InitAIDuelVars
@@ -16,65 +15,61 @@ AIActionTable_ImRonald:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db AGGRON
-	db GOREBYSS
-	db BAGON
-	db HERACROSS
-	db BARBOACH
-	db RAYQUAZA
-	db $00
+	dw LAPRAS
+	dw SEEL
+	dw CHARMANDER
+	dw CUBONE
+	dw SQUIRTLE
+	dw GROWLITHE
+	dw NULL
 
 .list_bench
-	db BAGON
-	db BARBOACH
-	db GOREBYSS
-	db HERACROSS
-	db RAYQUAZA
-	db AGGRON
-	db $00
+	dw CHARMANDER
+	dw SQUIRTLE
+	dw SEEL
+	dw CUBONE
+	dw GROWLITHE
+	dw LAPRAS
+	dw NULL
 
 .list_retreat
-	db $00
+	dw NULL
 
 .list_energy
-	ai_energy BAGON,     3, +0
-	ai_energy SHELGON,     5, +0
-	ai_energy RAYQUAZA,      2, +0
-	ai_energy MARSHTOMP,  4, +0
-	ai_energy BARBOACH,       2, +0
-	ai_energy WHISCASH,      3, +0
-	ai_energy GOREBYSS,           3, +0
-	ai_energy CORSOLA,        4, +0
-	ai_energy AGGRON,         3, +0
-	ai_energy HERACROSS,         3, +0
-	ai_energy RELICANTH,   3, +0
-	db $00
+	ai_energy CHARMANDER,     3, +0
+	ai_energy CHARMELEON,     5, +0
+	ai_energy GROWLITHE,      2, +0
+	ai_energy ARCANINE_LV45,  4, +0
+	ai_energy SQUIRTLE,       2, +0
+	ai_energy WARTORTLE,      3, +0
+	ai_energy SEEL,           3, +0
+	ai_energy DEWGONG,        4, +0
+	ai_energy LAPRAS,         3, +0
+	ai_energy CUBONE,         3, +0
+	ai_energy MAROWAK_LV26,   3, +0
+	dw NULL
 
 .list_prize
-	db AGGRON
-	db $00
+	dw LAPRAS
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_bench
-	store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret

@@ -1,47 +1,34 @@
-LombreName:
-	text "Lombre"
+KakunaDescription:
+	text "Almost incapable of moving, this"
+	line "Pokémon can only harden its shell to"
+	line "protect itself from predators."
 	done
 
-LombresStiffenDescription:
-	text "Flip a coin. If heads, prevent all"
-	line "damage done to Lombre during your"
-	line "opponent's next turn. (Any other"
-	line "effects of attacks still happen.)"
-	done
-
-LombreDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
-	done
-
-LudicoloName:
-	text "Ludicolo"
+BeedrillName:
+	text "Beedrill"
 	done
 
 TwineedleName:
-	text "Circular Steps"
+	text "Twineedle"
 	done
 
 DoubleAttackX30Description:
-	text "Flip 2 coins. This attack does"
-	line "30 damage times the number of heads."
+	text "Flip 2 coins. This attack does 30"
+	line "damage times the number of heads."
 	done
 
 PoisonBeeName:
 	text "Poison Bee"
 	done
 
-LudicoloDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+BeedrillDescription:
+	text "Flies at high speed and attacks"
+	line "using the large, venomous stingers"
+	line "on its forelegs and tail."
 	done
 
-SeedotName:
-	text "Seedot"
+EkansName:
+	text "Ekans"
 	done
 
 SpitPoisonName:
@@ -56,15 +43,14 @@ SnakeName:
 	text "Snake"
 	done
 
-SeedotDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+EkansDescription:
+	text "Moves silently and stealthily. Eats"
+	line "the eggs of birds, such as Pidgey"
+	line "and Spearow, whole."
 	done
 
-SurskitName:
-	text "Surskit"
+ArbokName:
+	text "Arbok"
 	done
 
 TerrorStrikeName:
@@ -76,8 +62,9 @@ TerrorStrikeDescription:
 	line "opponent has any Benched Pokémon,"
 	line "he or she chooses 1 of them and"
 	line "switches it with the Defending"
-	line "Pokémon. (Do the damage before"
-	line "switching the Pokémon.)"
+	line "Pokémon."
+	line "(Do the damage before switching"
+	line "the Pokémon.)"
 	done
 
 PoisonFangName:
@@ -88,15 +75,14 @@ CobraName:
 	text "Cobra"
 	done
 
-SurskitDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+ArbokDescription:
+	text "It is rumored that the ferocious"
+	line "warning markings on its belly differ"
+	line "from area to area."
 	done
 
-MasquerainName:
-	text "Masquerain"
+NidoranFName:
+	text "Nidoran♀"
 	done
 
 FurySwipesName:
@@ -104,15 +90,15 @@ FurySwipesName:
 	done
 
 TripleAttackX10Description:
-	text "Flip 3 coins. This attack does"
-	line "10 damage times the number of heads."
+	text "Flip 3 coins. This attack does 10"
+	line "damage times the number of heads."
 	done
 
 CallForFamilyName:
 	text "Call for Family"
 	done
 
-MasquerainsCallForFamilyDescription:
+NidoranFsCallForFamilyDescription:
 	text "Search your deck for a Basic Pokémon"
 	line "named Nidoran♀ or Nidoran♂ and put"
 	line "it onto your Bench. Shuffle your"
@@ -124,15 +110,14 @@ PoisonPinName:
 	text "Poison Pin"
 	done
 
-MasquerainDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+NidoranFDescription:
+	text "Although small, its venomous barbs"
+	line "make this Pokémon dangerous."
+	line "The female has smaller horns."
 	done
 
-ShroomishName:
-	text "Shroomish"
+NidorinaName:
+	text "Nidorina"
 	done
 
 SupersonicName:
@@ -140,23 +125,22 @@ SupersonicName:
 	done
 
 MayInflictConfusionDescription:
-	text "Flip a coin. If heads, the"
-	line "Defending Pokémon is now Confused."
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Confused."
 	done
 
 DoubleKickName:
 	text "Double Kick"
 	done
 
-ShroomishDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+NidorinaDescription:
+	text "The female's horn develops slowly."
+	line "Prefers physical attacks such as"
+	line "clawing and biting."
 	done
 
-NincadaName:
-	text "Nincada"
+NidoqueenName:
+	text "Nidoqueen"
 	done
 
 BoyfriendsName:
@@ -176,15 +160,14 @@ DrillName:
 	text "Drill"
 	done
 
-NincadaDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+NidoqueenDescription:
+	text "Its hard scales provide strong"
+	line "protection. It uses its hefty bulk"
+	line "to execute powerful moves."
 	done
 
-NinjaskName:
-	text "Ninjask"
+NidoranMName:
+	text "Nidoran♂"
 	done
 
 HornHazardName:
@@ -196,30 +179,28 @@ MayDoNothingDescription:
 	line "does nothing."
 	done
 
-NinjaskDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+NidoranMDescription:
+	text "Stiffens its ears to sense danger."
+	line "The larger, more powerful of its"
+	line "horns secretes venom."
 	done
 
-ShedinjaName:
-	text "Shedinja"
+NidorinoName:
+	text "Nidorino"
 	done
 
 HornDrillName:
 	text "Horn Drill"
 	done
 
-ShedinjaDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+NidorinoDescription:
+	text "An aggressive Pokémon that is quick"
+	line "to attack. The horn on its head"
+	line "secretes a powerful venom."
 	done
 
-VolbeatName:
-	text "Volbeat"
+NidokingName:
+	text "Nidoking"
 	done
 
 ThrashName:
@@ -246,15 +227,14 @@ ToxicDescription:
 	line "already Poisoned)."
 	done
 
-VolbeatDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+NidokingDescription:
+	text "Uses its powerful tail in battle to"
+	line "smash, constrict, then break its"
+	line "prey's bones."
 	done
 
-LatiosName:
-	text "Latios"
+ZubatName:
+	text "Zubat"
 	done
 
 LeechLifeName:
@@ -274,15 +254,14 @@ BatName:
 	text "Bat"
 	done
 
-LatiosDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+ZubatDescription:
+	text "Forms colonies in perpetually dark"
+	line "places. Uses ultrasonic waves to"
+	line "identify and approach targets."
 	done
 
-IllumiseName:
-	text "Illumise"
+GolbatName:
+	text "Golbat"
 	done
 
 WingAttackName:
@@ -298,15 +277,14 @@ GolbatsLeechLifeDescription:
 	line "than that, remove all of them."
 	done
 
-IllumiseDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+GolbatDescription:
+	text "Once it strikes, it will not stop"
+	line "draining energy from the victim even"
+	line "if it gets too heavy to fly."
 	done
 
-BellossomName:
-	text "Bellossom"
+OddishName:
+	text "Oddish"
 	done
 
 SproutName:
@@ -325,15 +303,14 @@ WeedName:
 	text "Weed"
 	done
 
-BellossomDescription:
-	text " Booster Pack: "
-	line " Original Set: "
-	line " Original Art: "
-	line " Pixel Art: "
+OddishDescription:
+	text "During the day, it keeps its face"
+	line "buried in the ground. At night, it"
+	line "wanders around sowing its seeds."
 	done
 
-RoseliaName:
-	text "Roselia"
+GloomName:
+	text "Gloom"
 	done
 
 FoulOdorName:
@@ -346,14 +323,14 @@ FoulOdorDescription:
 	line "damage)."
 	done
 
-RoseliaDescription:
+GloomDescription:
 	text "The fluid that oozes from its mouth"
 	line "isn't drool; it is a nectar that is"
 	line "used to attract prey."
 	done
 
-CacneaName:
-	text "Cacnea"
+VileplumeName:
+	text "Vileplume"
 	done
 
 HealName:
@@ -374,8 +351,8 @@ PetalDanceName:
 	done
 
 PetalDanceDescription:
-	text "Flip 3 coins. This attack does"
-	line "40 damage times the number of heads."
+	text "Flip 3 coins. This attack does 40"
+	line "damage times the number of heads."
 	line "Vileplume is now Confused (after"
 	line "doing damage)."
 	done
@@ -384,14 +361,14 @@ FlowerName:
 	text "Flower"
 	done
 
-CacneaDescription:
+VileplumeDescription:
 	text "The larger its petals, the more"
 	line "toxic pollen it contains. Its big"
 	line "head is heavy and hard to hold up."
 	done
 
-CacturneName:
-	text "Cacturne"
+ParasName:
+	text "Paras"
 	done
 
 ScratchName:
@@ -410,36 +387,36 @@ MushroomName:
 	text "Mushroom"
 	done
 
-CacturneDescription:
+ParasDescription:
 	text "Burrows to suck tree roots."
 	line "The mushrooms on its back grow by"
 	line "drawing nutrients from the bug host."
 	done
 
-LileepName:
-	text "Lileep"
+ParasectName:
+	text "Parasect"
 	done
 
 SlashName:
 	text "Slash"
 	done
 
-LileepDescription:
+ParasectDescription:
 	text "A host-parasite pair in which the"
 	line "parasite mushroom has taken over"
 	line "the host bug. Prefers damp places."
 	done
 
-CradilyName:
-	text "Cradily"
+VenonatName:
+	text "Venonat"
 	done
 
-CradilyLeechLifeDescription:
+VenonatLeechLifeDescription:
 	text "Remove a number of damage counters"
-	line "from Cradily equal to the damage"
+	line "from Venonat equal to the damage"
 	line "done to the Defending Pokémon (after"
 	line "applying Weakness and Resistance)."
-	line "If Cradily has fewer damage counters"
+	line "If Venonat has fewer damage counters"
 	line "than that, remove all of them."
 	done
 
@@ -447,14 +424,14 @@ InsectName:
 	text "Insect"
 	done
 
-CradilyDescription:
+VenonatDescription:
 	text "Lives in the shadows of tall trees"
 	line "where it eats insects."
 	line "It is attracted by light at night."
 	done
 
-TropiusName:
-	text "Tropius"
+VenomothName:
+	text "Venomoth"
 	done
 
 ShiftName:
@@ -464,9 +441,10 @@ ShiftName:
 ShiftDescription:
 	text "Once during your turn (before your"
 	line "attack), you may change the type of"
-	line "Tropius to the type of any other"
-	line "Pokémon in play other than <COLORLESS>."
-	line "This power can't be used if Tropius"
+	line "Venomoth to the type of any other"
+	line "Pokémon in play other than"
+	line "Colorless."
+	line "This power can't be used if Venomoth"
 	line "is Asleep, Confused, or Paralyzed."
 	done
 
@@ -475,41 +453,41 @@ VenomPowderName:
 	done
 
 VenomPowderDescription:
-	text "Flip a coin. If heads, the"
-	line "Defending Pokémon is now Confused"
-	line "and Poisoned."
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Confused and"
+	line "Poisoned."
 	done
 
 PoisonmothName:
 	text "Poisonmoth"
 	done
 
-TropiusDescription:
+VenomothDescription:
 	text "The dust-like scales covering its"
-	line "wings are color-coded to indicate"
+	line "wings are color coded to indicate"
 	line "the kinds of poison it has."
 	done
 
-TorchicName:
-	text "Torchic"
+BellsproutName:
+	text "Bellsprout"
 	done
 
-TorchicsCallForFamilyDescription:
+BellsproutsCallForFamilyDescription:
 	text "Search your deck for a Basic Pokémon"
-	line "named Torchic and put it onto"
+	line "named Bellsprout and put it onto"
 	line "your Bench. Shuffle your deck"
 	line "afterward. (You can't use this"
 	line "attack if your Bench is full.)"
 	done
 
-TorchicDescription:
+BellsproutDescription:
 	text "A carnivorous Pokémon that traps and"
 	line "eats bugs. It uses its root feet to"
 	line "soak up needed moisture."
 	done
 
-CombuskenName:
-	text "Combusken"
+WeepinbellName:
+	text "Weepinbell"
 	done
 
 RazorLeafName:
@@ -520,22 +498,22 @@ FlycatcherName:
 	text "Flycatcher"
 	done
 
-CombuskenDescription:
+WeepinbellDescription:
 	text "It spits out poisonpowder to"
 	line "immobilize the enemy, and then"
 	line "finishes the enemy with a spray of"
 	line "acid."
 	done
 
-BlazikenName:
-	text "Blaziken"
+VictreebelName:
+	text "Victreebel"
 	done
 
 LureName:
 	text "Lure"
 	done
 
-BlazikensLureDescription:
+VictreebelsLureDescription:
 	text "If your opponent has any Benched"
 	line "Pokémon, choose 1 of them and switch"
 	line "it with his or her Active Pokémon."
@@ -545,20 +523,20 @@ AcidName:
 	text "Acid"
 	done
 
-BlazikensAcidDescription:
-	text "Flip a coin. If heads, the"
-	line "Defending Pokémon can't retreat"
-	line "during your opponent's next turn."
+VictreebelsAcidDescription:
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon can't retreat during your"
+	line "opponent's next turn."
 	done
 
-BlazikenDescription:
+VictreebelDescription:
 	text "Said to live in huge colonies deep"
 	line "in jungles, although no one has ever"
 	line "returned from there."
 	done
 
-NumelName:
-	text "Numel"
+GrimerName:
+	text "Grimer"
 	done
 
 NastyGooName:
@@ -569,8 +547,8 @@ MinimizeName:
 	text "Minimize"
 	done
 
-NumelsMinimizeDescription:
-	text "All damage done by attacks to Numel"
+GrimersMinimizeDescription:
+	text "All damage done by attacks to Grimer"
 	line "during your opponent's next turn is"
 	line "reduced by 20 (after applying"
 	line "Weakness and Resistance)."
@@ -580,14 +558,14 @@ SludgeName:
 	text "Sludge"
 	done
 
-NumelDescription:
+GrimerDescription:
 	text "Appears in filthy areas. Thrives by"
 	line "sucking up polluted sludge that is"
 	line "pumped out of factories."
 	done
 
-CameruptName:
-	text "Camerupt"
+MukName:
+	text "Muk"
 	done
 
 ToxicGasName:
@@ -601,38 +579,38 @@ ToxicGasDescription:
 	line "Confused, or Paralyzed."
 	done
 
-CameruptDescription:
+MukDescription:
 	text "Thickly covered with a filthy, vile"
 	line "sludge. It is so toxic, even its"
 	line "footprints contain poison."
 	done
 
-SlugmaName:
-	text "Slugma"
+ExeggcuteName:
+	text "Exeggcute"
 	done
 
 HypnosisName:
 	text "Hypnosis"
 	done
 
-SlugmasLeechSeedDescription:
+ExeggcutesLeechSeedDescription:
 	text "Unless all damage from this attack"
 	line "is prevented, you may remove 1"
-	line "damage counter from Slugma."
+	line "damage counter from Exeggcute."
 	done
 
 EggName:
 	text "Egg"
 	done
 
-SlugmaDescription:
+ExeggcuteDescription:
 	text "Often mistaken for eggs."
 	line "When disturbed, they quickly gather"
 	line "and attack in swarms."
 	done
 
-MagcargoName:
-	text "Magcargo"
+ExeggutorName:
+	text "Exeggutor"
 	done
 
 TeleportName:
@@ -640,7 +618,7 @@ TeleportName:
 	done
 
 TeleportDescription:
-	text "Switch Magcargo with 1 of your"
+	text "Switch Exeggutor with 1 of your"
 	line "Benched Pokémon."
 	done
 
@@ -651,23 +629,23 @@ BigEggsplosionName:
 BigEggsplosionDescription:
 	text "Flip a number of coins equal to the"
 	line "number of Energy attached to"
-	line "Magcargo. This attack does"
-	line "20 damage times the number of heads."
+	line "Exeggutor. This attack does 20"
+	line "damage times the number of heads."
 	done
 
 CoconutName:
 	text "Coconut"
 	done
 
-MagcargoDescription:
+ExeggutorDescription:
 	text "Legend has it that on rare"
 	line "occasions, one of its heads will"
 	line "drop off and continue on as an"
-	line "Slugma."
+	line "Exeggcute."
 	done
 
-TorkoalName:
-	text "Torkoal"
+KoffingName:
+	text "Koffing"
 	done
 
 FoulGasName:
@@ -675,23 +653,23 @@ FoulGasName:
 	done
 
 FoulGasDescription:
-	text "Flip a coin. If heads, the"
-	line "Defending Pokémon is now Poisoned;"
-	line "if tails, it is now Confused."
+	text "Flip a coin. If heads, the Defending"
+	line "Pokémon is now Poisoned; if tails,"
+	line "it is now Confused."
 	done
 
 PoisonGasName:
 	text "Poison Gas"
 	done
 
-TorkoalDescription:
+KoffingDescription:
 	text "Because it stores several kinds of"
 	line "toxic gases in its body, it is prone"
 	line "to exploding without warning."
 	done
 
-AltariaName:
-	text "Altaria"
+WeezingName:
+	text "Weezing"
 	done
 
 SmogName:
@@ -705,15 +683,15 @@ SelfdestructName:
 WeezingsSelfdestructDescription:
 	text "Does 10 damage to each Pokémon on"
 	line "each player's Bench. (Don't apply"
-	line "Weakness and Resistance for"
-	line "Benched Pokémon.) Weezing does"
-	line "60 damage to itself."
+	line "Weakness and Resistance for Benched"
+	line "Pokémon.) Weezing does 60 damage to"
+	line "itself."
 	done
 
-AltariaDescription:
+WeezingDescription:
 	text "Where two kinds of poison gases"
-	line "meet, two Torkoals can fuse into a"
-	line "Altaria over many years."
+	line "meet, two Koffings can fuse into a"
+	line "Weezing over many years."
 	done
 
 TangelaName:
@@ -791,7 +769,7 @@ PinsirDescription:
 	done
 
 CharmanderName:
-	text "Torchic"
+	text "Charmander"
 	done
 
 EmberName:
@@ -799,13 +777,13 @@ EmberName:
 	done
 
 EmberDescription:
-	text "Discard 1 <FIRE> Energy card attached"
-	line "to Charmander in order to use this"
+	text "Discard 1 <FIRE> Energy card attached to"
+	line "Charmander in order to use this"
 	line "attack."
 	done
 
 LizardName:
-	text "Chick"
+	text "Lizard"
 	done
 
 CharmanderDescription:
@@ -816,7 +794,7 @@ CharmanderDescription:
 	done
 
 CharmeleonName:
-	text "Combusken"
+	text "Charmeleon"
 	done
 
 FlamethrowerName:
@@ -824,13 +802,13 @@ FlamethrowerName:
 	done
 
 CharmeleonsFlamethrowerDescription:
-	text "Discard 1 <FIRE> Energy card attached"
-	line "to Charmeleon in order to use this"
+	text "Discard 1 <FIRE> Energy card attached to"
+	line "Charmeleon in order to use this"
 	line "attack."
 	done
 
 FlameName:
-	text "Young Fowl"
+	text "Flame"
 	done
 
 CharmeleonDescription:
@@ -840,7 +818,7 @@ CharmeleonDescription:
 	done
 
 CharizardName:
-	text "Blaziken"
+	text "Charizard"
 	done
 
 EnergyBurnName:
@@ -892,7 +870,7 @@ VulpixDescription:
 	done
 
 NinetalesName:
-	text "Ninetales"
+	text "Ninetails"
 	done
 
 NinetalesLureDescription:
@@ -942,8 +920,8 @@ DancingEmbersName:
 	done
 
 DancingEmbersDescription:
-	text "Flip 8 coins. This attack does"
-	line "10 damage times the number of heads."
+	text "Flip 8 coins. This attack does 10"
+	line "damage times the number of heads."
 	done
 
 NinetalesLv35Description:
@@ -980,7 +958,9 @@ QuickAttackName:
 
 QuickAttackDescription:
 	text "Flip a coin. If heads, this attack"
-	line "does 10 damage plus 20 more damage."
+	line "does 10 damage plus 20 more damage;"
+	line "if tails, this attack does 10"
+	line "damage."
 	done
 
 FlamesOfRageName:
@@ -991,8 +971,8 @@ FlamesOfRageDescription:
 	text "Discard 2 <FIRE> Energy cards attached"
 	line "to Arcanine in order to use this"
 	line "attack. This attack does 40 damage"
-	line "plus 10 more damage for each"
-	line "damage counter on Arcanine."
+	line "plus 10 more damage for each damage"
+	line "counter on Arcanine."
 	done
 
 LegendaryName:
@@ -1006,8 +986,8 @@ ArcanineLv34Description:
 	done
 
 ArcaninesFlamethrowerDescription:
-	text "Discard 1 <FIRE> Energy card attached"
-	line "to Arcanine in order to use this"
+	text "Discard 1 <FIRE> Energy card attached to"
+	line "Arcanine in order to use this"
 	line "attack."
 	done
 
@@ -1057,7 +1037,9 @@ StompName:
 
 StompDescription:
 	text "Flip a coin. If heads, this attack"
-	line "does 20 damage plus 10 more damage."
+	line "does 20 damage plus 10 more damage;"
+	line "if tails, this attack does 20"
+	line "damage."
 	done
 
 AgilityName:
@@ -1095,9 +1077,9 @@ SpitfireName:
 	done
 
 MagmarLv24Description:
-	text "Its body always burns with an"
-	line "orange glow that enables it to"
-	line "hide perfectly among flames."
+	text "Its body always burns with an orange"
+	line "glow that enables it to hide"
+	line "perfectly among flames."
 	done
 
 SmokescreenName:
@@ -1122,8 +1104,8 @@ FlareonName:
 	text "Flareon"
 	done
 
-LinooneName:
-	text "Linoone"
+EeveeName:
+	text "Eevee"
 	done
 
 BiteName:
@@ -1231,7 +1213,7 @@ SquirtleDescription:
 	done
 
 WartortleName:
-	text "Marshtomp"
+	text "Wartortle"
 	done
 
 WartortlesWithdrawDescription:
@@ -1251,26 +1233,26 @@ WartortleDescription:
 	line "moves its ears to maintain balance."
 	done
 
-CorphishName:
-	text "Corphish"
+BlastoiseName:
+	text "Blastoise"
 	done
 
 RainDanceName:
-	text "Water Call"
+	text "Rain Dance"
 	done
 
 RainDanceDescription:
-	text "Once per turn (before your attack),"
-	line "you may attach a <WATER> Energy card"
-	line "from your hand to your Active Pkmn."
-	line "This power can’t be used if this "
-	line "Pokémon is affected by a Special"
-	line "Condition."
+	text "As often as you like during your"
+	line "turn (before your attack), you may"
+	line "attach 1 <WATER> Energy card to 1 of"
+	line "your <WATER> Pokémon. (This doesn't use"
+	line "up your 1 Energy card attachment"
+	line "for the turn.)"
 	done
 
 RainDanceDescriptionCont:
 	text "This power can't be used if"
-	line "Corphish is Asleep, Confused, or"
+	line "Blastoise is Asleep, Confused, or"
 	line "Paralyzed."
 	done
 
@@ -1281,7 +1263,7 @@ HydroPumpName:
 HydroPumpDescription:
 	text "Does 40 damage plus 10 more damage"
 	line "for each <WATER> Energy attached to"
-	line "Corphish but not used to pay for"
+	line "Blastoise but not used to pay for"
 	line "this attack's Energy cost. You can't"
 	line "add more than 20 damage in this way."
 	done
@@ -1290,7 +1272,7 @@ ShellfishName:
 	text "Shellfish"
 	done
 
-CorphishDescription:
+BlastoiseDescription:
 	text "A brutal Pokémon with pressurized"
 	line "water jets on its shell. They are"
 	line "used for high-speed tackles."
@@ -1301,7 +1283,7 @@ PsyduckName:
 	done
 
 HeadacheName:
-	text "Torment"
+	text "Headache"
 	done
 
 HeadacheDescription:
@@ -1333,8 +1315,8 @@ HyperBeamName:
 
 Discard1EnergyFromTargetDescription:
 	text "If the Defending Pokémon has any"
-	line "Energy cards attached to it,"
-	line "choose 1 of them and discard it."
+	line "Energy cards attached to it, choose"
+	line "1 of them and discard it."
 	done
 
 GolduckDescription:
@@ -1379,9 +1361,9 @@ AmnesiaName:
 
 PoliwhirlsAmnesiaDescription:
 	text "Choose 1 of the Defending Pokémon's"
-	line "attacks. That Pokémon can't use"
-	line "that attack during your opponent's"
-	line "next turn."
+	line "attacks. That Pokémon can't use that"
+	line "attack during your opponent's next"
+	line "turn."
 	done
 
 DoubleslapName:
@@ -1417,8 +1399,8 @@ PoliwrathDescription:
 	line "overtakes the best human swimmers."
 	done
 
-ClamperlName:
-	text "Clamperl"
+TentacoolName:
+	text "Tentacool"
 	done
 
 CowardiceName:
@@ -1428,10 +1410,10 @@ CowardiceName:
 CowardiceDescription:
 	text "At any time during your turn"
 	line "(before your attack), you may return"
-	line "Clamperl to your hand. (Discard all"
-	line "cards attached to Clamperl.) This"
+	line "Tentacool to your hand. (Discard all"
+	line "cards attached to Tentacool.) This"
 	line "power can't be used the turn you put"
-	line "Clamperl into play or if Clamperl"
+	line "Tentacool into play or if Tentacool"
 	line "is Asleep, Confused, or Paralyzed."
 	done
 
@@ -1439,21 +1421,21 @@ JellyfishName:
 	text "Jellyfish"
 	done
 
-ClamperlDescription:
+TentacoolDescription:
 	text "Drifts in shallow seas. Anglers who"
 	line "hook them by accident are often"
 	line "punished by its stinging acid."
 	done
 
-HuntailName:
-	text "Huntail"
+TentacruelName:
+	text "Tentacruel"
 	done
 
 JellyfishStingName:
 	text "Jellyfish Sting"
 	done
 
-HuntailDescription:
+TentacruelDescription:
 	text "The tentacles are normally kept"
 	line "short. On hunts, they are extended"
 	line "to ensnare and immobilize prey."
@@ -1595,4 +1577,17 @@ KinglerDescription:
 	line "unwieldy to use."
 	done
 
-;	ds $21
+HorseaName:
+	text "Horsea"
+	done
+
+OpponentAttackMayDoNothingDescription:
+	text "If the Defending Pokémon tries to"
+	line "attack during your opponent's next"
+	line "turn, your opponent flips a coin."
+	line "If tails, that attack does nothing."
+	done
+
+DragonName:
+	text "Dragon"
+	done

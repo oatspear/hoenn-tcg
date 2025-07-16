@@ -1,20 +1,23 @@
-; loads the data of a card to wLoadedCard1 by using the text ID of the card name
-; input:
-;	de = text ID for a card's name
+; load data of card with text id of name at de to wLoadedCard1
 LoadCardDataToBuffer1_FromName::
-	ld hl, CardPointers + 2 ; skip first NULL pointer
+	ld hl, CardPointers + 3 ; skip first NULL pointer
+	ldh a, [hBankROM]
+	push af
 	ld a, BANK(CardPointers)
-	call BankpushROM2
+	call BankswitchROM
 .find_card_loop
 	ld a, [hli]
 	or [hl]
 	jr z, .done
+	inc hl
 	push hl
+	ld a, [hld]
+	ld b, a
 	ld a, [hld]
 	ld l, [hl]
 	ld h, a
-	ld a, BANK(CardPointers)
-	call BankpushROM2
+	ld a, b
+	call BankswitchROM
 	ld bc, CARD_DATA_NAME
 	add hl, bc
 	ld a, [hli]
@@ -24,15 +27,20 @@ LoadCardDataToBuffer1_FromName::
 	cp d
 .no_match
 	pop hl
-	pop hl
+	push af
+	ld a, BANK(CardPointers)
+	call BankswitchROM
+	pop af
 	inc hl
 	jr nz, .find_card_loop
 	dec hl
 	ld a, [hld]
+	ld b, a
+	ld a, [hld]
 	ld l, [hl]
 	ld h, a
-	ld a, BANK(CardPointers)
-	call BankpushROM2
+	ld a, b
+	call BankswitchROM
 	ld de, wLoadedCard1
 	ld b, PKMN_CARD_DATA_LENGTH
 .copy_card_loop
@@ -41,25 +49,17 @@ LoadCardDataToBuffer1_FromName::
 	inc de
 	dec b
 	jr nz, .copy_card_loop
-	pop hl
 .done
-	call BankpopROM
-	ret
+	pop af
+	jp BankswitchROM
 
-
-; loads the data of a card to wLoadedCard2 by using the card ID from e
-; preserves all registers except af
-; input:
-;	e = card ID
+; load data of card with id at de to wLoadedCard2
 LoadCardDataToBuffer2_FromCardID::
 	push hl
 	ld hl, wLoadedCard2
 	jr LoadCardDataToHL_FromCardID
 
-; loads the data of a card to wLoadedCard1 by using the card ID from e
-; preserves all registers except af
-; input:
-;	e = card ID
+; load data of card with id at de to wLoadedCard1
 LoadCardDataToBuffer1_FromCardID::
 	push hl
 	ld hl, wLoadedCard1
@@ -72,7 +72,6 @@ LoadCardDataToHL_FromCardID::
 	call GetCardPointer
 	pop de
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld b, PKMN_CARD_DATA_LENGTH
 .copy_card_data_loop
@@ -89,17 +88,11 @@ LoadCardDataToHL_FromCardID::
 	pop hl
 	ret
 
-
-; preserves bc and hl
-; input:
-;	e = card ID
-; output:
-;	a = type ID of the card from input (TYPE_* constant)
+; return in a the type (TYPE_* constant) of the card with id at de
 GetCardType::
 	push hl
 	call GetCardPointer
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld l, [hl]
 	call BankpopROM
@@ -109,17 +102,11 @@ GetCardType::
 	pop hl
 	ret
 
-
-; preserves all registers except af
-; input:
-;	e = card ID
-; output:
-;	de = 2-byte text ID of the name of the card from input
+; return in de the 2-byte text id of the name of the card with id at de
 GetCardName::
 	push hl
 	call GetCardPointer
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld de, CARD_DATA_NAME
 	add hl, de
@@ -132,23 +119,11 @@ GetCardName::
 	pop hl
 	ret
 
-
-; Shaoden: this function can't be moved outside the home bank; it crashes the game.
-; preserves de and hl
-; input:
-;	a = card ID
-; output:
-;	a = type of card from input (CARD_DATA_TYPE)
-;	b = rarity of card from input (CARD_DATA_RARITY)
-;	c = set of card from input (CARD_DATA_SET)
+; from the card id in de, returns type into a, rarity into b, and set into c
 GetCardTypeRarityAndSet::
 	push hl
-	push de
-	ld d, 0
-	ld e, a
 	call GetCardPointer
 	jr c, .done
-	ld a, BANK(CardPointers)
 	call BankpushROM2
 	ld e, [hl] ; CARD_DATA_TYPE
 	ld bc, CARD_DATA_RARITY
@@ -160,56 +135,65 @@ GetCardTypeRarityAndSet::
 	ld a, e
 	or a
 .done
-	pop de
 	pop hl
 	ret
 
-
-; preserves bc and de
-; input:
-;	e = card ID
-; output:
-;	hl = pointer to the data of the card from input
-;	carry = set:  if input e was out of bounds, so no pointer was returned
+; return at a:hl the pointer to the data of the card with id at de
+; return carry if de was out of bounds, so no pointer was returned
 GetCardPointer::
 	push de
 	push bc
+	ldh a, [hBankROM]
+	push af
+	ld a, BANK(CardPointers)
+	call BankswitchROM
 	ld l, e
-	ld h, $0
+	ld h, d
 	add hl, hl
+	add hl, de
 	ld bc, CardPointers
 	add hl, bc
 	ld a, h
-	cp HIGH(CardPointers + 2 + (2 * NUM_CARDS))
+	cp HIGH(CardPointers + 3 * (NUM_CARDS + 1))
 	jr nz, .nz
 	ld a, l
-	cp LOW(CardPointers + 2 + (2 * NUM_CARDS))
+	cp LOW(CardPointers + 3 * (NUM_CARDS + 1))
 .nz
 	ccf
 	jr c, .out_of_bounds
-	ld a, BANK(CardPointers)
-	call BankpushROM2
+	ld a, [hli]
+	ld c, [hl]
+	inc hl
+	ld b, [hl]
+	ld l, a
+	ld h, c
+	pop af
+	call BankswitchROM
+	ld a, b
+	pop bc
+	pop de
+	or a
+	ret
+
+.out_of_bounds
+	pop af
+	call BankswitchROM
+	pop bc
+	pop de
+	scf
+	ret
+
+; input:
+; wLoadedCard1 = card with gfx to load
+; de = where to load the card gfx to
+; bc are supposed to be $30 (number of tiles of a card gfx) and TILE_SIZE respectively
+; card_gfx_index = (<Name>CardGfx - CardGraphics) / 8  (using absolute ROM addresses)
+; also copies the card's palette to wCardPalette
+LoadLoaded1CardGfx::
+	ld hl, wLoadedCard1Gfx
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call BankpopROM
-	or a
-.out_of_bounds
-	pop bc
-	pop de
-	ret
-
-
-; copies a card graphic to vram and its palette to wCardPalette
-; card_gfx_index = (<Name>CardGfx - CardGraphics) / 8  (using absolute ROM addresses)
-; input:
-;	hl = card_gfx_index
-;	de = where to load the card gfx to
-;	b = number of tiles used for a card graphic (should always be $30)
-;	c = number of bytes in a tile (should always be TILE_SIZE, or 16)
-; output:
-;	[wCardPalette] = palette of the card being loaded
-LoadCardGfx::
 	ldh a, [hBankROM]
 	push af
 	push hl
@@ -227,14 +211,28 @@ LoadCardGfx::
 	add hl, hl
 	res 7, h
 	set 6, h ; $4000 ≤ hl ≤ $7fff
-	call CopyGfxData
-	ld b, CGB_PAL_SIZE
+
+	push de
 	ld de, wCardPalette
+	ld b, 3 palettes
 .copy_card_palette
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec b
 	jr nz, .copy_card_palette
+
+	; de = wCardAttrMap
+	ld b, $30
+.copy_card_attrmap
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .copy_card_attrmap
+
+	pop de
+	lb bc, $30, TILE_SIZE
+	call CopyGfxData
 	pop af
 	jp BankswitchROM

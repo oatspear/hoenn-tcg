@@ -1,24 +1,24 @@
 ; fills wFilteredCardList and wOwnedCardsCountList
-; with card IDs and counts, respectively, from a given Card Set
-; input:
-;	a = CARD_SET_* constant
+; with cards IDs and counts, respectively,
+; from given Card Set in register a
+; a = CARD_SET_* constant
 CreateCardSetList:
 	push af
-	ld a, DECK_SIZE
+	ld a, (MAX_NUM_CARDS_PER_TYPE + 1) * 2
 	ld hl, wFilteredCardList
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	ld a, DECK_SIZE
 	ld hl, wOwnedCardsCountList
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 	xor a
 	ld [wOwnedPhantomCardFlags], a
 	pop af
 
 	ld hl, 0
-	lb de, 0, 0
+	ld de, 0
 	ld b, a
 .loop_all_cards
-	inc e
+	inc de
 	call LoadCardDataToBuffer1_FromCardID
 	jr c, .done_pkmn_cards
 	ld a, [wLoadedCard1Set]
@@ -27,18 +27,20 @@ CreateCardSetList:
 	cp b
 	jr nz, .loop_all_cards
 
-; it's the same set as the input, i.e. PROMOTIONAL
-	ld a, e
-	cp SCEPTILE
-	jp z, .SetSceptileOwnedFlag
-	cp DEOXYS
+; it's same set as input
+	cp16 VENUSAUR_LV64
+	jp z, .SetVenusaurLv64OwnedFlag
+	cp16 MEW_LV15
 	jp z, .SetMewLv15OwnedFlag
 
 	push bc
 	push hl
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e ; card ID
+	inc hl     ;
+	ld [hl], d ;
 
 	ld hl, wTempCardCollection
 	add hl, de
@@ -55,27 +57,29 @@ CreateCardSetList:
 	jr .loop_all_cards
 
 .done_pkmn_cards
-; for the Energy cards, put all Basic Energy cards in the Colosseum set
-; and Double Colorless Energy is put in the Mystery set
+; for the energy cards, put all basic energy cards in Colosseum
+; and Double Colorless energy in Mystery
 	ld a, b
 	cp CARD_SET_MYSTERY
 	jr z, .mystery
 	or a
 	jr nz, .skip_energy_cards
 
-; Colosseum
-; places all Basic Energy cards in wFilteredCardList
-	lb de, 0, 0
+; colosseum
+; places all basic energy cards in wFilteredCardList
+	ld de, 0
 .loop_basic_energy_cards
 	inc e
-	ld a, e
-	cp DOUBLE_COLORLESS_ENERGY
-	jr z, .skip_energy_cards ; no more Basic Energy cards to sort
+	cp16 DOUBLE_COLORLESS_ENERGY
+	jr z, .skip_energy_cards
 	push bc
 	push hl
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e
+	inc hl
+	ld [hl], d
 	ld hl, wTempCardCollection
 	add hl, de
 	ld a, [hl]
@@ -90,21 +94,23 @@ CreateCardSetList:
 	jr .loop_basic_energy_cards
 
 .mystery
-; places Double Colorless Energy card in wFilteredCardList
-	lb de, 0, 0
+; places double colorless energy card in wFilteredCardList
+	ld de, 0
 .loop_find_double_colorless
 	inc e
-	ld a, e
-	cp TREECKO
+	cp16 BULBASAUR
 	jr z, .skip_energy_cards
-	cp DOUBLE_COLORLESS_ENERGY
+	cp16 DOUBLE_COLORLESS_ENERGY
 	jr nz, .loop_find_double_colorless
-	; Double Colorless Energy
+	; double colorless energy
 	push bc
 	push hl
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e
+	inc hl
+	ld [hl], d
 	ld hl, wTempCardCollection
 	add hl, de
 	ld a, [hl]
@@ -122,7 +128,7 @@ CreateCardSetList:
 	ld a, [wOwnedPhantomCardFlags]
 	bit VENUSAUR_OWNED_PHANTOM_F, a
 	jr z, .check_mew
-	call .PlaceSceptileInList
+	call .PlaceVenusaurLv64InList
 .check_mew
 	bit MEW_OWNED_PHANTOM_F, a
 	jr z, .find_first_owned
@@ -145,22 +151,22 @@ CreateCardSetList:
 	inc c
 	ld a, c
 	ld [wNumEntriesInCurFilter], a
-	xor a
-	ld hl, wFilteredCardList
-	add hl, bc
-	ld [hl], a
-	ld a, $ff ; terminator byte
 	ld hl, wOwnedCardsCountList
 	add hl, bc
+	ld [hl], $ff ; terminator byte
+
+	xor a
+	ld hl, wFilteredCardList
+	sla c
+	add hl, bc
+	ld [hli], a
 	ld [hl], a
 	ret
 
 .SetMewLv15OwnedFlag
 	ld a, (1 << MEW_OWNED_PHANTOM_F)
-	; fallthrough
+;	fallthrough
 
-; input:
-;	a = *_OWNED_PHANTOM_F constant
 .SetPhantomOwnedFlag
 	push hl
 	push bc
@@ -178,23 +184,24 @@ CreateCardSetList:
 	pop hl
 	jp .loop_all_cards
 
-.SetSceptileOwnedFlag
+.SetVenusaurLv64OwnedFlag
 	ld a, (1 << VENUSAUR_OWNED_PHANTOM_F)
 	jr .SetPhantomOwnedFlag
 
-.PlaceSceptileInList
+.PlaceVenusaurLv64InList
 	push af
 	push hl
-	ld e, SCEPTILE
-	; fallthrough
+	ld de, VENUSAUR_LV64
+;	fallthrough
 
-; places card in register e directly in the list
-; input:
-;	e = card ID
+; places card in register de directly in the list
 .PlaceCardInList
 	ld bc, wFilteredCardList
+	add hl, hl
 	add hl, bc
 	ld [hl], e
+	inc hl
+	ld [hl], d
 	pop hl
 	push hl
 	ld bc, wOwnedCardsCountList
@@ -208,20 +215,17 @@ CreateCardSetList:
 .PlaceMewLv15InList
 	push af
 	push hl
-	ld e, DEOXYS
+	ld de, MEW_LV15
 	jr .PlaceCardInList
 
-
-; preserves af
-; input:
-;	a = CARD_SET_* constant
+; a = CARD_SET_* constant
 CreateCardSetListAndInitListCoords:
 	push af
 	ld hl, sCardCollection
 	ld de, wTempCardCollection
-	ld b, CARD_COLLECTION_SIZE - 1
+	ld bc, CARD_COLLECTION_SIZE - 2
 	call EnableSRAM
-	call CopyNBytesFromHLToDE
+	call CopyNBytesFromHLToDE_Long
 	call DisableSRAM
 	pop af
 
@@ -239,9 +243,7 @@ CreateCardSetListAndInitListCoords:
 	ret
 
 ; places in entry name the prefix associated with the selected Card Set
-; preserves af and bc
-; input:
-;	a = CARD_SET_* constant
+; a = CARD_SET_* constant
 .GetEntryPrefix
 	push af
 	cp CARD_SET_PROMOTIONAL
@@ -265,7 +267,6 @@ CreateCardSetListAndInitListCoords:
 	jr .got_prefix
 .colosseum
 	lb de, 3, "FW3_A"
-	; fallthrough
 
 .got_prefix
 	ld hl, wCurDeckName
@@ -275,18 +276,17 @@ CreateCardSetListAndInitListCoords:
 	pop af
 	ret
 
-
 ; prints the cards being shown in the Card Album screen
 ; for the corresponding Card Set
-; preserves bc
 PrintCardSetListEntries:
 	push bc
 	ld hl, wCardListCoords
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld b, 18
+	ld b, $13
 	ld c, e
+	dec c
 	dec c
 
 ; draw up cursor on top right
@@ -296,7 +296,7 @@ PrintCardSetListEntries:
 	ld a, SYM_CURSOR_U
 	jr .got_up_cursor_tile
 .no_up_cursor
-	ld a, SYM_SPACE
+	ld a, SYM_BOX_TOP_R
 .got_up_cursor_tile
 	call WriteByteToBGMap0
 
@@ -311,13 +311,15 @@ PrintCardSetListEntries:
 	ld b, a
 	ld de, wFilteredCardList
 	push hl
+	add hl, hl
 	add hl, de
-	ld a, [hl]
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
 	pop hl
 	inc l
-	or a
+	or d
 	jr z, .no_down_cursor
-	ld e, a
 	call AddCardIDToVisibleList
 	call LoadCardDataToBuffer1_FromCardID
 	push bc
@@ -346,15 +348,15 @@ PrintCardSetListEntries:
 	call .AppendCardListIndex
 	call ProcessText
 	ld hl, wDefaultText
-;	jr .asm_a76d
-;
-;	; this code is never reached
-;	pop de
-;	push hl
-;	call InitTextPrinting
-;	ld hl, Text_9a36
-;
-;.asm_a76d
+	jr .asm_a76d
+
+	; this code is never reached
+	pop de
+	push hl
+	call InitTextPrinting
+	ld hl, Text_9a36
+
+.asm_a76d
 	call ProcessText
 	pop hl
 	ld a, b
@@ -365,9 +367,10 @@ PrintCardSetListEntries:
 
 .handle_down_cursor
 	ld de, wFilteredCardList
+	add hl, hl
 	add hl, de
-	ld a, [hl]
-	or a
+	ld a, [hli]
+	or [hl]
 	jr z, .no_down_cursor
 	pop de
 	xor a ; FALSE
@@ -378,10 +381,9 @@ PrintCardSetListEntries:
 	pop de
 	ld a, TRUE
 	ld [wUnableToScrollDown], a
-	ld a, SYM_SPACE
+	ld a, SYM_BOX_BTM_R
 .got_down_cursor_tile
-	ld b, 18
-	ld c, 16
+	lb bc, 19, 17
 	call WriteByteToBGMap0
 	pop bc
 	ret
@@ -394,15 +396,19 @@ PrintCardSetListEntries:
 .AppendCardListIndex
 	push bc
 	push de
+	add hl, hl
 	ld de, wFilteredCardList
 	add hl, de
 	dec hl
-	ld a, [hl]
-	cp DOUBLE_COLORLESS_ENERGY + 1
+	dec hl
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	cp16 DOUBLE_COLORLESS_ENERGY + 1
 	jr c, .energy_card
-	cp SCEPTILE
+	cp16 VENUSAUR_LV64
 	jr z, .phantom_card
-	cp DEOXYS
+	cp16 MEW_LV15
 	jr z, .phantom_card
 
 	ld a, [wNumVisibleCardListEntries]
@@ -438,7 +444,9 @@ PrintCardSetListEntries:
 	ret
 
 .energy_card
-	call CalculateOnesAndTensDigits
+	ld h, d
+	ld l, e
+	call CalculateOnesAndTensDigits_Long
 	ld hl, wDecimalDigitsSymbols
 	ld a, [hli]
 	ld b, a
@@ -483,7 +491,6 @@ PrintCardSetListEntries:
 	pop bc
 	ret
 
-
 ; handles opening card page, and inputs when inside Card Album
 HandleCardAlbumCardPage:
 	ld a, [wCardListCursorPos]
@@ -502,9 +509,11 @@ HandleCardAlbumCardPage:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	sla c
 	add hl, bc
 	ld e, [hl]
-	ld d, $00
+	inc hl
+	ld d, [hl]
 	push de
 	call LoadCardDataToBuffer1_FromCardID
 	lb de, $38, $9f
@@ -533,7 +542,7 @@ HandleCardAlbumCardPage:
 	add [hl]
 	ld hl, wFirstOwnedCardIndex
 	cp [hl]
-	jr z, .open_card_page_pop_af
+	jr z, .open_card_page_pop_af_2
 	pop af
 
 	dec a
@@ -565,17 +574,19 @@ HandleCardAlbumCardPage:
 	ld h, [hl]
 	ld l, a
 	ld a, [wCardListCursorPos]
+	sla a
 	ld c, a
 	ld b, $00
 	add hl, bc
 	ld a, [wCardListVisibleOffset]
 	inc a
+	sla a
 	ld c, a
 	ld b, $00
 	add hl, bc
-	ld a, [hl]
-	or a
-	jr z, .open_card_page_pop_af
+	ld a, [hli]
+	or [hl]
+	jr z, .open_card_page_pop_af_1
 	ld a, [wCardListVisibleOffset]
 	inc a
 	ld [wCardListVisibleOffset], a
@@ -589,6 +600,9 @@ HandleCardAlbumCardPage:
 	jp z, HandleCardAlbumCardPage
 	call PlaySFX
 	jp HandleCardAlbumCardPage
+.open_card_page_pop_af_1
+	pop af
+	jr .open_card_page
 
 .asm_a8d6
 	ld a, [wced2]
@@ -603,7 +617,7 @@ HandleCardAlbumCardPage:
 	jr z, .open_card_page
 	call TryAddCardToDeck
 
-.open_card_page_pop_af
+.open_card_page_pop_af_2
 	pop af
 .open_card_page
 	push de
@@ -618,8 +632,6 @@ HandleCardAlbumCardPage:
 	ld [wTempCardListCursorPos], a
 	ret
 
-
-; preserves de
 GetFirstOwnedCardIndex:
 	ld hl, wOwnedCardsCountList
 	ld b, 0
@@ -634,11 +646,10 @@ GetFirstOwnedCardIndex:
 	ld [wFirstOwnedCardIndex], a
 	ret
 
-
-; primary function which handles all of the card album menu screens
 CardAlbum:
 	ld a, $01
 	ldh [hffb4], a
+
 	xor a
 .booster_pack_menu
 	ld hl, .BoosterPackMenuParams
@@ -647,7 +658,7 @@ CardAlbum:
 .loop_input_1
 	call DoFrame
 	call HandleMenuInput
-	jr nc, .loop_input_1
+	jp nc, .loop_input_1 ; can be jr
 	ldh a, [hCurMenuItem]
 	cp $ff
 	ret z
@@ -678,10 +689,10 @@ CardAlbum:
 	ldh a, [hKeysPressed]
 	and B_BUTTON
 	jr z, .loop_input_2
-	ld a, -1
-	call PlaySFXConfirmOrCancel_Bank2
+	ld a, $ff
+	call PlaySFXConfirmOrCancel
 	ldh a, [hCurMenuItem]
-	jr .booster_pack_menu
+	jp .booster_pack_menu
 
 .asm_a968
 	call .GetNumCardEntries
@@ -713,8 +724,8 @@ CardAlbum:
 	and START
 	jr z, .loop_input_3
 .open_card_page
-	ld a, $1
-	call PlaySFXConfirmOrCancel_Bank2
+	ld a, $01
+	call PlaySFXConfirmOrCancel
 	ld a, [wCardListNumCursorPositions]
 	ld [wTempCardListNumCursorPositions], a
 	ld a, [wCardListCursorPos]
@@ -769,8 +780,8 @@ CardAlbum:
 	dw NULL ; function pointer if non-0
 
 .BoosterPackCardsMenuParams:
-	db 1 ; x position
-	db 4 ; y position
+	db 1 ; x pos
+	db 4 ; y pos
 	db 2 ; y spacing
 	db 0 ; x spacing
 	db NUM_CARD_ALBUM_VISIBLE_CARDS ; num entries
@@ -780,10 +791,11 @@ CardAlbum:
 
 .GetNumCardEntries
 	ld hl, wFilteredCardList
-	ld b, $00
+	ld b, 0
 .loop_card_ids
 	ld a, [hli]
-	or a
+	or [hl]
+	inc hl
 	jr z, .asm_aa1f
 	inc b
 	jr .loop_card_ids
@@ -811,7 +823,7 @@ CardAlbum:
 	lb de, 1, 1
 	call InitTextPrinting
 
-; prints the total number of cards that are in the Card Set
+; print the total number of cards that are in the Card Set
 	ld a, [wSelectedCardSet]
 	cp CARD_SET_PROMOTIONAL
 	jr nz, .check_laboratory
@@ -848,7 +860,6 @@ CardAlbum:
 .colosseum
 	ldtx hl, Item1ColosseumText
 	ld e, NUM_CARDS_COLOSSEUM
-	; fallthrough
 
 .has_card_set_count
 	push de
@@ -878,7 +889,7 @@ CardAlbum:
 	jp EnableLCD
 
 ; counts number of cards in wOwnedCardsCountList
-; that are not set as CARD_NOT_OWNED
+; that is not set as CARD_NOT_OWNED
 .CountOwnedCardsInSet
 	ld hl, wOwnedCardsCountList
 	ld b, 0
@@ -904,7 +915,9 @@ CardAlbum:
 	jr nz, .draw_box
 	ldh [hffb4], a
 	call Set_OBJ_8x8
-	call ZeroObjectPositionsAndToggleOAMCopy
+	call ZeroObjectPositions
+	ld a, $01
+	ld [wVBlankOAMCopyToggle], a
 
 	call LoadCursorTile
 	call LoadSymbolsFont
@@ -923,29 +936,30 @@ CardAlbum:
 	; set all Card Sets as available
 	ld a, NUM_CARD_SETS
 	ld hl, wUnavailableAlbumCardSets
-	call ClearNBytesFromHL
+	call ClearMemory_Bank2
 
-	; check if the player has received any promotional cards
+	; check whether player has had promotional cards
 	call EnableSRAM
 	ld a, [sHasPromotionalCards]
 	call DisableSRAM
 	or a
 	jr nz, .has_promotional
 
-	; doesn't have any promotional cards,
-	; double check by looking at the collection
+	; doesn't have promotional, check if
+	; this is still the case by checking the collection
 	ld a, CARD_SET_PROMOTIONAL
 	call CreateCardSetListAndInitListCoords
-	ld a, [wFilteredCardList]
-	or a
+	ld hl, wFilteredCardList
+	ld a, [hli]
+	or [hl]
 	jr nz, .set_has_promotional
-	; still didn't find any promotional cards, so print empty Card Set name
+	; still has no promotional, print empty Card Set name
 	ld a, TRUE
 	ld [wUnavailableAlbumCardSets + CARD_SET_PROMOTIONAL], a
-	ld e, 11
-	ld d, 5
+	lb de, 5, 11
+	call InitTextPrinting
 	ldtx hl, EmptyPromotionalCardText
-	call InitTextPrinting_ProcessTextFromID
+	call ProcessTextFromID
 	jr .has_promotional
 
 .set_has_promotional
@@ -959,7 +973,7 @@ CardAlbum:
 	jp EnableLCD
 
 .BoosterPacksMenuData
-	textitem 7,  1, BoosterPackText
+	textitem 7,  1, BoosterPackTitleText
 	textitem 5,  3, Item1ColosseumText
 	textitem 5,  5, Item2EvolutionText
 	textitem 5,  7, Item3MysteryText

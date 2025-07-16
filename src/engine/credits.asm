@@ -30,20 +30,19 @@ PlayCreditsSequence::
 	call DisableLCD
 	ld hl, wLCDC
 	set 1, [hl]
-	xor a
-	ld [wDoFrameFunction + 0], a
-	ld [wDoFrameFunction + 1], a
-	ret
+	jp ResetDoFrameFunction
 
 Func_1d705:
 	call DisableLCD
-	farcall LoadConsolePaletteData
+	xor a
+	ld [wd317], a
 	call EnableAndClearSpriteAnimations
 	farcall InitMenuScreen
 	call Func_1d7ee
 	ld hl, Func_3e31
 	call SetDoFrameFunction
-	; fallthrough
+	call .Func_1d720 ; can be fallthrough
+	ret
 
 .Func_1d720
 	ld a, $91
@@ -54,7 +53,8 @@ Func_1d705:
 	ld [wd64a], a
 	call Func_1d765
 	call SetWindowOn
-	; fallthrough
+	call .Func_1d73a ; can be fallthrough
+	ret
 
 .Func_1d73a
 	push hl
@@ -185,5 +185,4 @@ Func_1d7ee:
 	lb de, 0, 32
 	lb bc, 20, 18
 	lb hl, 0, 0
-	call FillRectangle
-	ret
+	jp FillRectangle

@@ -22,7 +22,8 @@ AIProcessButDontUseAttack:
 
 ; copies wTempPlayAreaAIScore to wPlayAreaAIScore
 ; and loads wAIScore with value in wTempAIScore.
-RetrievePlayAreaAIScoreFromBackup:
+; identical to RetrievePlayAreaAIScoreFromBackup1.
+RetrievePlayAreaAIScoreFromBackup2:
 	push af
 	ld de, wPlayAreaAIScore
 	ld hl, wTempPlayAreaAIScore
@@ -44,7 +45,7 @@ RetrievePlayAreaAIScoreFromBackup:
 AIProcessAndTryToUseAttack:
 	xor a
 	ld [wAIExecuteProcessedAttack], a
-;	fallthrough
+	; fallthrough
 
 ; checks which of the Active card's attacks for AI to use.
 ; If any of the attacks has enough AI score to be used,
@@ -53,7 +54,7 @@ AIProcessAndTryToUseAttack:
 AIProcessAttacks:
 ; if AI used Pluspower, load its attack index
 	ld a, [wPreviousAIFlags]
-	and AI_FLAG_USED_TV_REPORTER
+	and AI_FLAG_USED_PLUSPOWER
 	jr z, .no_pluspower
 	ld a, [wAIPluspowerAttack]
 	ld [wSelectedAttack], a
@@ -98,9 +99,7 @@ AIProcessAttacks:
 	ld a, c
 	ld [wSelectedAttack], a
 	or a
-	jr z, .attack_chosen
-	call CheckWhetherToSwitchToFirstAttack
-
+	call nz, CheckWhetherToSwitchToFirstAttack
 .attack_chosen
 ; check whether to execute the attack chosen
 	ld a, [wAIExecuteProcessedAttack]
@@ -110,7 +109,7 @@ AIProcessAttacks:
 ; set carry and reset Play Area AI score
 ; to the previous values.
 	scf
-	jp RetrievePlayAreaAIScoreFromBackup
+	jp RetrievePlayAreaAIScoreFromBackup2
 
 .execute
 	ld a, AI_TRAINER_CARD_PHASE_14
@@ -158,7 +157,7 @@ AIProcessAttacks:
 	jr z, .failed_to_use
 ; reset Play Area AI score
 ; to the previous values.
-	jp RetrievePlayAreaAIScoreFromBackup
+	jp RetrievePlayAreaAIScoreFromBackup2
 
 ; return no carry if no viable attack.
 .failed_to_use
@@ -175,7 +174,7 @@ GetAIScoreOfAttack:
 	ld a, $50
 	ld [wAIScore], a
 
-	xor a
+	xor a ; PLAY_AREA_ARENA
 	ldh [hTempPlayAreaLocation_ff9d], a
 	call CheckIfSelectedAttackIsUnusable
 	jr nc, .usable
@@ -184,7 +183,7 @@ GetAIScoreOfAttack:
 .unusable
 	xor a
 	ld [wAIScore], a
-	ret
+	jp .done
 
 ; load arena card IDs
 .usable
@@ -194,20 +193,24 @@ GetAIScoreOfAttack:
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempTurnDuelistCardID], a
+	ld [wTempTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempTurnDuelistCardID + 1], a
 	call SwapTurn
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
 	ld a, e
-	ld [wTempNonTurnDuelistCardID], a
+	ld [wTempNonTurnDuelistCardID + 0], a
+	ld a, d
+	ld [wTempNonTurnDuelistCardID + 1], a
 
 ; handle the case where the player has No Damage substatus.
 ; in the case the player does, check if this attack
 ; has a residual effect, or if it can damage the opposing bench.
 ; If none of those are true, render the attack unusable.
 ; also if it's a PKMN power, consider it unusable as well.
-	call HandleNoDamageOrEffectSubstatus
+	bank1call HandleNoDamageOrEffectSubstatus
 	call SwapTurn
 	jr nc, .check_if_can_ko
 
@@ -239,7 +242,7 @@ GetAIScoreOfAttack:
 	jr .check_damage
 .can_ko
 	ld a, 20
-	call AddToAIScore
+	call AIEncourage
 
 ; raise AI score by the number of damage counters that this attack deals.
 ; if no damage is dealt, subtract AI score. in case wDamage is zero
@@ -253,18 +256,18 @@ GetAIScoreOfAttack:
 	ld [wTempAI], a
 	or a
 	jr z, .no_damage
-	call CalculateByteTensDigit
-	call AddToAIScore
+	call ConvertHPToDamageCounters_Bank5
+	call AIEncourage
 	jr .check_recoil
 .no_damage
 	ld a, $01
 	ld [wAIAttackIsNonDamaging], a
-	call SubFromAIScore
+	call AIDiscourage
 	ld a, [wAIMaxDamage]
 	or a
 	jr z, .no_max_damage
 	ld a, 2
-	call AddToAIScore
+	call AIEncourage
 	xor a
 	ld [wAIAttackIsNonDamaging], a
 .no_max_damage
@@ -272,7 +275,7 @@ GetAIScoreOfAttack:
 	call CheckLoadedAttackFlag
 	jr nc, .check_recoil
 	ld a, 2
-	call AddToAIScore
+	call AIEncourage
 
 ; handle recoil attacks (low and high recoil).
 .check_recoil
@@ -291,8 +294,8 @@ GetAIScoreOfAttack:
 	ld [wDamage], a
 	call ApplyDamageModifiers_DamageToSelf
 	ld a, e
-	call CalculateByteTensDigit
-	call SubFromAIScore
+	call ConvertHPToDamageCounters_Bank5
+	call AIDiscourage
 
 	push de
 	ld a, ATTACK_FLAG1_ADDRESS | HIGH_RECOIL_F
@@ -308,7 +311,7 @@ GetAIScoreOfAttack:
 	jp nz, .check_defending_can_ko
 .kos_self
 	ld a, 10
-	call SubFromAIScore
+	call AIDiscourage
 
 .high_recoil
 	; dismiss this attack if no benched Pokémon
@@ -335,7 +338,12 @@ GetAIScoreOfAttack:
 .dismiss_high_recoil_atk
 	xor a
 	ld [wAIScore], a
-	ret
+	jp .done
+
+.encourage_high_recoil_atk
+	ld a, 20
+	call AIEncourage
+	jp .done
 
 ; Zapping Selfdestruct deck only uses this attack
 ; if number of cards in deck >= 30 and
@@ -354,8 +362,7 @@ GetAIScoreOfAttack:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp MAGNEMITE
+	cp16 MAGNEMITE_LV13
 	jr z, .magnemite1
 	ld b, 10 ; bench damage
 .magnemite1
@@ -368,10 +375,7 @@ GetAIScoreOfAttack:
 	ld a, 1 ; count active Pokémon as KO'd
 	call .check_if_kos_bench
 	jr c, .dismiss_high_recoil_atk
-
-.encourage_high_recoil_atk
-	ld a, 20
-	jp AddToAIScore
+	jr .encourage_high_recoil_atk
 
 ; Rock Crusher Deck only uses this attack if
 ; prize count is below 4 and attack wins (or potentially draws) the duel,
@@ -396,12 +400,11 @@ GetAIScoreOfAttack:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp SEVIPER
+	cp16 CHANSEY
 	jr z, .chansey
-	cp MAGNEMITE
+	cp16 MAGNEMITE_LV13
 	jr z, .magnemite1_or_weezing
-	cp ALTARIA
+	cp16 WEEZING
 	jr z, .magnemite1_or_weezing
 	ld b, 20 ; bench damage
 	jr .check_bench_kos
@@ -410,7 +413,6 @@ GetAIScoreOfAttack:
 	jr .check_bench_kos
 .chansey
 	ld b, 0 ; no bench damage
-	; fallthrough
 
 .check_bench_kos
 	push bc
@@ -429,12 +431,13 @@ GetAIScoreOfAttack:
 ; attack causes player to draw all prize cards
 	xor a
 	ld [wAIScore], a
-	ret
+	jp .done
 
 ; attack causes CPU to draw all prize cards
 .wins_the_duel
 	ld a, 20
-	jp AddToAIScore
+	call AIEncourage
+	jp .done
 
 ; subtract from AI score number of own benched Pokémon KO'd
 .count_own_ko_bench
@@ -443,224 +446,14 @@ GetAIScoreOfAttack:
 	or a
 	jr z, .count_player_ko_bench
 	dec a
-	call SubFromAIScore
+	call AIDiscourage
 
 ; add to AI score number of player benched Pokémon KO'd
 .count_player_ko_bench
 	pop bc
 	ld a, b
-	call AddToAIScore
-
-; if defending card can KO, encourage attack
-; unless attack is non-damaging.
-.check_defending_can_ko
-	ld a, [wSelectedAttack]
-	push af
-	call CheckIfDefendingPokemonCanKnockOut
-	pop bc
-	ld a, b
-	ld [wSelectedAttack], a
-	jr nc, .check_discard
-	ld a, 5
-	call AddToAIScore
-	ld a, [wAIAttackIsNonDamaging]
-	or a
-	jr z, .check_discard
-	ld a, 5
-	call SubFromAIScore
-
-; subtract from AI score if this attack requires
-; discarding any energy cards.
-.check_discard
-	ld a, [wSelectedAttack]
-	ld e, a
-	ld a, DUELVARS_ARENA_CARD
-	call GetTurnDuelistVariable
-	ld d, a
-	call CopyAttackDataAndDamage_FromDeckIndex
-	ld a, ATTACK_FLAG2_ADDRESS | DISCARD_ENERGY_F
-	call CheckLoadedAttackFlag
-	jr nc, .asm_16ca6
-	ld a, 1
-	call SubFromAIScore
-	ld a, [wLoadedAttackEffectParam]
-	call SubFromAIScore
-
-.asm_16ca6
-	ld a, ATTACK_FLAG2_ADDRESS | FLAG_2_BIT_6_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_nullify_flag
-	ld a, [wLoadedAttackEffectParam]
-	call AddToAIScore
-
-; encourage attack if it has a nullify or weaken attack effect.
-.check_nullify_flag
-	ld a, ATTACK_FLAG2_ADDRESS | NULLIFY_OR_WEAKEN_ATTACK_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_draw_flag
-	ld a, 1
-	call AddToAIScore
-
-; encourage attack if it has an effect to draw a card.
-.check_draw_flag
-	ld a, ATTACK_FLAG1_ADDRESS | DRAW_CARD_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_heal_flag
-	ld a, 1
-	call AddToAIScore
-
-.check_heal_flag
-	ld a, ATTACK_FLAG2_ADDRESS | HEAL_USER_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_status_effect
-	ld a, [wLoadedAttackEffectParam]
-	cp 1
-	jr z, .tally_heal_score
-	ld a, [wTempAI]
-	call CalculateByteTensDigit
-	ld b, a
-	ld a, [wLoadedAttackEffectParam]
-	cp 3
-	jr z, .asm_16cec
-	srl b
-	jr nc, .asm_16cec
-	inc b
-.asm_16cec
-	ld a, DUELVARS_ARENA_CARD_HP
-	call GetTurnDuelistVariable
-	call CalculateByteTensDigit
-	cp b
-	jr c, .tally_heal_score
-	ld a, b
-.tally_heal_score
-	push af
-	ld e, PLAY_AREA_ARENA
-	call GetCardDamageAndMaxHP
-	call CalculateByteTensDigit
-	pop bc
-	cp b ; wLoadedAttackEffectParam
-	jr c, .add_heal_score
-	ld a, b
-.add_heal_score
-	call AddToAIScore
-
-.check_status_effect
-	ld a, DUELVARS_ARENA_CARD
-	call GetNonTurnDuelistVariable
-	call SwapTurn
-	call GetCardIDFromDeckIndex
-	call SwapTurn
-	ld a, e
-	; skip if player has Swellow
-	cp SWELLOW
-	jp z, .handle_special_atks
-
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetNonTurnDuelistVariable
-	ld [wTempAI], a
-
-; encourage a poison inflicting attack if opposing Pokémon
-; isn't (doubly) poisoned already.
-; if opposing Pokémon is only poisoned and not double poisoned,
-; and this attack has FLAG_2_BIT_6 set, discourage it
-; (possibly to make Nidoking's Toxic attack less likely to be chosen
-; if the other Pokémon is poisoned.)
-	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_POISON_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_sleep
-	ld a, [wTempAI]
-	and DOUBLE_POISONED
-	jr z, .add_poison_score
-	and $40 ; only double poisoned?
-	jr z, .check_sleep
-	ld a, ATTACK_FLAG2_ADDRESS | FLAG_2_BIT_6_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_sleep
-	ld a, 2
-	call SubFromAIScore
-	jr .check_sleep
-.add_poison_score
-	ld a, 2
-	call AddToAIScore
-
-; encourage sleep-inducing attack if other Pokémon isn't asleep.
-.check_sleep
-	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_SLEEP_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_paralysis
-	ld a, [wTempAI]
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jr z, .check_paralysis
-	ld a, 1
-	call AddToAIScore
-
-; encourage paralysis-inducing attack if other Pokémon isn't asleep.
-; otherwise, if other Pokémon is asleep, discourage attack.
-.check_paralysis
-	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_PARALYSIS_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_confusion
-	ld a, [wTempAI]
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jr z, .sub_prz_score
-	ld a, 1
-	call AddToAIScore
-	jr .check_confusion
-.sub_prz_score
-	ld a, 1
-	call SubFromAIScore
-
-; encourage confuse-inducing attack if other Pokémon isn't asleep
-; or confused already.
-; otherwise, if other Pokémon is asleep or confused,
-; discourage attack instead.
-.check_confusion
-	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_CONFUSION_F
-	call CheckLoadedAttackFlag
-	jr nc, .check_if_confused
-	ld a, [wTempAI]
-	and CNF_SLP_PRZ
-	cp ASLEEP
-	jr z, .sub_cnf_score
-	ld a, [wTempAI]
-	and CNF_SLP_PRZ
-	cp CONFUSED
-	jr z, .check_if_confused
-	ld a, 1
-	call AddToAIScore
-	jr .check_if_confused
-.sub_cnf_score
-	ld a, 1
-	call SubFromAIScore
-
-; if this Pokémon is confused, subtract from score.
-.check_if_confused
-	ld a, DUELVARS_ARENA_CARD_STATUS
-	call GetTurnDuelistVariable
-	and CNF_SLP_PRZ
-	cp CONFUSED
-	jr nz, .handle_special_atks
-	ld a, 1
-	call SubFromAIScore
-
-; SPECIAL_AI_HANDLING marks attacks that the AI handles individually.
-; each attack has its own checks and modifies AI score accordingly.
-.handle_special_atks
-	ld a, ATTACK_FLAG3_ADDRESS | SPECIAL_AI_HANDLING_F
-	call CheckLoadedAttackFlag
-	ret nc
-	call HandleSpecialAIAttacks
-	cp $80
-	jr c, .negative_score
-	sub $80
-	jp AddToAIScore
-.negative_score
-	ld b, a
-	ld a, $80
-	sub b
-	jp SubFromAIScore
+	call AIEncourage
+	jr .check_defending_can_ko
 
 ; local function that gets called to determine damage to
 ; benched Pokémon caused by a HIGH_RECOIL attack.
@@ -703,10 +496,224 @@ GetAIScoreOfAttack:
 	call SwapTurn
 	pop de
 	cp d
-	ret c
-	jr z, .set_carry
+	jp c, .set_carry
+	jp z, .set_carry
 	or a
 	ret
 .set_carry
 	scf
+	ret
+
+; if defending card can KO, encourage attack
+; unless attack is non-damaging.
+.check_defending_can_ko
+	ld a, [wSelectedAttack]
+	push af
+	call CheckIfDefendingPokemonCanKnockOut
+	pop bc
+	ld a, b
+	ld [wSelectedAttack], a
+	jr nc, .check_discard
+	ld a, 5
+	call AIEncourage
+	ld a, [wAIAttackIsNonDamaging]
+	or a
+	jr z, .check_discard
+	ld a, 5
+	call AIDiscourage
+
+; subtract from AI score if this attack requires
+; discarding any energy cards.
+.check_discard
+	ld a, [wSelectedAttack]
+	ld e, a
+	ld a, DUELVARS_ARENA_CARD
+	call GetTurnDuelistVariable
+	ld d, a
+	call CopyAttackDataAndDamage_FromDeckIndex
+	ld a, ATTACK_FLAG2_ADDRESS | DISCARD_ENERGY_F
+	call CheckLoadedAttackFlag
+	jr nc, .asm_16ca6
+	ld a, 1
+	call AIDiscourage
+	ld a, [wLoadedAttackEffectParam]
+	call AIDiscourage
+
+.asm_16ca6
+	ld a, ATTACK_FLAG2_ADDRESS | FLAG_2_BIT_6_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_nullify_flag
+	ld a, [wLoadedAttackEffectParam]
+	call AIEncourage
+
+; encourage attack if it has a nullify or weaken attack effect.
+.check_nullify_flag
+	ld a, ATTACK_FLAG2_ADDRESS | NULLIFY_OR_WEAKEN_ATTACK_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_draw_flag
+	ld a, 1
+	call AIEncourage
+
+; encourage attack if it has an effect to draw a card.
+.check_draw_flag
+	ld a, ATTACK_FLAG1_ADDRESS | DRAW_CARD_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_heal_flag
+	ld a, 1
+	call AIEncourage
+
+.check_heal_flag
+	ld a, ATTACK_FLAG2_ADDRESS | HEAL_USER_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_status_effect
+	ld a, [wLoadedAttackEffectParam]
+	cp 1
+	jr z, .tally_heal_score
+	ld a, [wTempAI]
+	call ConvertHPToDamageCounters_Bank5
+	ld b, a
+	ld a, [wLoadedAttackEffectParam]
+	cp 3
+	jr z, .asm_16cec
+	srl b
+	jr nc, .asm_16cec
+	inc b
+.asm_16cec
+	ld a, DUELVARS_ARENA_CARD_HP
+	call GetTurnDuelistVariable
+	call ConvertHPToDamageCounters_Bank5
+	cp b
+	jr c, .tally_heal_score
+	ld a, b
+.tally_heal_score
+	push af
+	ld e, PLAY_AREA_ARENA
+	call GetCardDamageAndMaxHP
+	call ConvertHPToDamageCounters_Bank5
+	pop bc
+	cp b
+	jr c, .add_heal_score
+	ld a, b
+.add_heal_score
+	call AIEncourage
+
+.check_status_effect
+	ld a, DUELVARS_ARENA_CARD
+	call GetNonTurnDuelistVariable
+	call SwapTurn
+	call GetCardIDFromDeckIndex
+	call SwapTurn
+	; skip if player has Snorlax
+	cp16 SNORLAX
+	jp z, .handle_special_atks
+
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetNonTurnDuelistVariable
+	ld [wTempAI], a
+
+; encourage a poison inflicting attack if opposing Pokémon
+; isn't (doubly) poisoned already.
+; if opposing Pokémon is only poisoned and not double poisoned,
+; and this attack has FLAG_2_BIT_6 set, discourage it
+; (possibly to make Nidoking's Toxic attack less likely to be chosen
+; if the other Pokémon is poisoned.)
+	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_POISON_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_sleep
+	ld a, [wTempAI]
+	and DOUBLE_POISONED
+	jr z, .add_poison_score
+	and $40 ; only double poisoned?
+	jr z, .check_sleep
+	ld a, ATTACK_FLAG2_ADDRESS | FLAG_2_BIT_6_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_sleep
+	ld a, 2
+	call AIDiscourage
+	jr .check_sleep
+.add_poison_score
+	ld a, 2
+	call AIEncourage
+
+; encourage sleep-inducing attack if other Pokémon isn't asleep.
+.check_sleep
+	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_SLEEP_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_paralysis
+	ld a, [wTempAI]
+	and CNF_SLP_PRZ
+	cp ASLEEP
+	jr z, .check_paralysis
+	ld a, 1
+	call AIEncourage
+
+; encourage paralysis-inducing attack if other Pokémon isn't asleep.
+; otherwise, if other Pokémon is asleep, discourage attack.
+.check_paralysis
+	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_PARALYSIS_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_confusion
+	ld a, [wTempAI]
+	and CNF_SLP_PRZ
+	cp ASLEEP
+	jr z, .sub_prz_score
+	ld a, 1
+	call AIEncourage
+	jr .check_confusion
+.sub_prz_score
+	ld a, 1
+	call AIDiscourage
+
+; encourage confuse-inducing attack if other Pokémon isn't asleep
+; or confused already.
+; otherwise, if other Pokémon is asleep or confused,
+; discourage attack instead.
+.check_confusion
+	ld a, ATTACK_FLAG1_ADDRESS | INFLICT_CONFUSION_F
+	call CheckLoadedAttackFlag
+	jr nc, .check_if_confused
+	ld a, [wTempAI]
+	and CNF_SLP_PRZ
+	cp ASLEEP
+	jr z, .sub_cnf_score
+	ld a, [wTempAI]
+	and CNF_SLP_PRZ
+	cp CONFUSED
+	jr z, .check_if_confused
+	ld a, 1
+	call AIEncourage
+	jr .check_if_confused
+.sub_cnf_score
+	ld a, 1
+	call AIDiscourage
+
+; if this Pokémon is confused, subtract from score.
+.check_if_confused
+	ld a, DUELVARS_ARENA_CARD_STATUS
+	call GetTurnDuelistVariable
+	and CNF_SLP_PRZ
+	cp CONFUSED
+	jr nz, .handle_special_atks
+	ld a, 1
+	call AIDiscourage
+
+; SPECIAL_AI_HANDLING marks attacks that the AI handles individually.
+; each attack has its own checks and modifies AI score accordingly.
+.handle_special_atks
+	ld a, ATTACK_FLAG3_ADDRESS | SPECIAL_AI_HANDLING_F
+	call CheckLoadedAttackFlag
+	jr nc, .done
+	call HandleSpecialAIAttacks
+	cp $80
+	jr c, .negative_score
+	sub $80
+	call AIEncourage
+	jr .done
+.negative_score
+	ld b, a
+	ld a, $80
+	sub b
+	call AIDiscourage
+
+.done
 	ret

@@ -1,20 +1,19 @@
 SFX_PlaySFX:
-	jr SFX_Play
+	jp SFX_Play
 
 SFX_UpdateSFX:
-	jr SFX_Update
+	jp SFX_Update
 
 SFX_Play:
 	ld hl, NumberOfSFX
 	cp [hl]
-	ret nc ; invalid ID
+	jr nc, .invalidID
 	add a
 	ld c, a
 	ld b, $0
 	ld a, [wde53]
 	or a
-	jr z, .asm_fc019
-	call Func_fc279
+	call nz, Func_fc279
 .asm_fc019
 	ld a, $1
 	ld [wde53], a
@@ -56,14 +55,14 @@ SFX_Play:
 	ld a, $4
 	cp c
 	jr nz, .asm_fc031
+.invalidID
 	ret
 
 SFX_Update:
 	ld a, [wdd8c]
 	or a
 	jr nz, .asm_fc063
-	call Func_fc26c
-	ret
+	jp Func_fc26c
 .asm_fc063
 	xor a
 	ld b, a
@@ -99,6 +98,25 @@ SFX_Update:
 	jr nz, .asm_fc06c
 	ret
 
+Func_fc094:
+	ld a, [hl]
+	and $f0
+	swap a
+	add a
+	ld e, a
+	ld d, $0
+	ld a, [hli]
+	push hl
+	and $f
+	ld hl, SFX_CommandTable
+	add hl, de
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld h, d
+	ld l, e
+	jp hl
+
 SFX_CommandTable:
 	dw SFX_0
 	dw SFX_1
@@ -116,6 +134,9 @@ SFX_CommandTable:
 	dw SFX_unused
 	dw SFX_unused
 	dw SFX_end
+
+SFX_unused:
+	jp Func_fc094
 
 SFX_0:
 	ld d, a
@@ -189,7 +210,7 @@ SFX_1:
 	ld l, a
 	ld [hl], e
 	pop hl
-	jr Func_fc094
+	jp Func_fc094
 
 SFX_2:
 	swap a
@@ -203,7 +224,7 @@ SFX_2:
 	ld l, a
 	ld [hl], e
 	pop hl
-	jr Func_fc094
+	jp Func_fc094
 
 SFX_loop:
 	ld hl, wde43
@@ -220,29 +241,7 @@ SFX_loop:
 	ld [hl], a
 	ld l, e
 	ld h, d
-;	fallthrough
-
-SFX_unused:
-;	fallthrough
-
-Func_fc094:
-	ld a, [hl]
-	and $f0
-	swap a
-	add a
-	ld e, a
-	ld d, $0
-	ld a, [hli]
-	push hl
-	and $f
-	ld hl, SFX_CommandTable
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld h, d
-	ld l, e
-	jp hl
+	jp Func_fc094
 
 SFX_endloop:
 	ld hl, wde3f
@@ -258,10 +257,10 @@ SFX_endloop:
 	ld h, [hl]
 	ld l, a
 	pop de
-	jr Func_fc094
+	jp Func_fc094
 .asm_fc162
 	pop hl
-	jr Func_fc094
+	jp Func_fc094
 
 SFX_5:
 	ld hl, wde2f
@@ -271,7 +270,7 @@ SFX_5:
 	pop hl
 	ld a, [hli]
 	ld [de], a
-	jr Func_fc094
+	jp Func_fc094
 
 SFX_6:
 	ld a, c
@@ -298,7 +297,7 @@ Func_fc18d:
 	add hl, bc
 	ld a, [hl]
 	or a
-	ret z
+	jr z, .asm_fc1cc
 	ld hl, wde37
 	add hl, bc
 	add hl, bc
@@ -344,13 +343,14 @@ Func_fc18d:
 	ld a, e
 	ld [hli], a
 	ld [hl], d
+.asm_fc1cc
 	ret
 
 Func_fc1cd:
 	ld hl, wde32
 	ld a, [hl]
 	or a
-	ret z
+	jr z, .asm_fc201
 	ld hl, wde3d
 	bit 7, a
 	jr z, .asm_fc1e5
@@ -385,6 +385,7 @@ Func_fc1cd:
 	ld a, d
 	ld [hli], a
 	ld [hl], e
+.asm_fc201
 	ret
 
 SFX_7:

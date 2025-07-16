@@ -1,6 +1,7 @@
-; clears all PC packs in WRAM and then gives the 1st pack.
-; this doesn't clear in SRAM, so it's not done to clear PC pack data.
-; preserves all registers except af
+; clears all PC packs in WRAM 
+; and then gives the 1st pack
+; this doesn't clear in SRAM so
+; it's not done to clear PC pack data
 InitPCPacks:
 	push hl
 	push bc
@@ -17,7 +18,6 @@ InitPCPacks:
 	pop bc
 	pop hl
 	ret
-
 
 _PCMenu_ReadMail:
 	ld a, [wd291]
@@ -55,7 +55,6 @@ _PCMenu_ReadMail:
 	ld [wd291], a
 	ret
 
-
 MailScreenLabels:
 	db 1, 0
 	tx MailText
@@ -68,8 +67,6 @@ MailScreenLabels:
 
 	db $ff
 
-
-; preserves de
 PCMailHandleDPadInput:
 	ldh a, [hDPadHeld]
 	and D_PAD
@@ -131,7 +128,6 @@ PCMailTransitionTable:
 	db $0b, $0c, $02, $0d ; mail 15
 	assert_table_length NUM_MAILS
 
-
 PCMailHandleAInput:
 	ldh a, [hKeysPressed]
 	and A_BUTTON
@@ -192,7 +188,6 @@ PCMailHandleAInput:
 	ld hl, MailScreenLabels
 	call PrintLabels
 	jp DoFrameIfLCDEnabled
-
 
 PCMailTextPages:
 	; unused
@@ -259,7 +254,6 @@ PCMailTextPages:
 	tx Mail15Part1Text
 	dw NULL
 
-
 TryOpenPCMailBoosterPack:
 	xor a
 	ld [wAnotherBoosterPack], a
@@ -280,8 +274,8 @@ TryOpenPCMailBoosterPack:
 	pop hl
 	ld a, [hl]
 	or a
-	jp z, DisableLCD ; the mail didn't have a 2nd booster pack
-	call GiveBoosterPack
+	call nz, GiveBoosterPack
+.done
 	jp DisableLCD
 
 .booster_already_open
@@ -290,58 +284,47 @@ TryOpenPCMailBoosterPack:
 	call SetupText
 	ldtx hl, MailBoosterPackAlreadyOpenedText
 	call PrintScrollableText_NoTextBoxLabel
-	jp DisableLCD
+	jr .done
 
 PCMailBoosterPacks:
 	table_width 2, PCMailBoosterPacks
 	db $00, $00 ; unused
-	db BOOSTER_COLOSSEUM_NEUTRAL, $00                       ; mail 1
-	db BOOSTER_LABORATORY_PSYCHIC, $00                      ; mail 2
-	db BOOSTER_EVOLUTION_GRASS, $00                         ; mail 3
-	db BOOSTER_MYSTERY_LIGHTNING_COLORLESS, $00             ; mail 4
-	db BOOSTER_EVOLUTION_FIGHTING, $00                      ; mail 5
-	db BOOSTER_COLOSSEUM_FIRE, $00                          ; mail 6
-	db BOOSTER_LABORATORY_PSYCHIC, $00                      ; mail 7
-	db BOOSTER_LABORATORY_PSYCHIC, $00                      ; mail 8
-	db BOOSTER_MYSTERY_WATER_COLORLESS, $00                 ; mail 9
+	db BOOSTER_COLOSSEUM_NEUTRAL, $00 ; mail 1
+	db BOOSTER_LABORATORY_PSYCHIC, $00 ; mail 2
+	db BOOSTER_EVOLUTION_GRASS, $00 ; mail 3
+	db BOOSTER_MYSTERY_LIGHTNING_COLORLESS, $00 ; mail 4
+	db BOOSTER_EVOLUTION_FIGHTING, $00 ; mail 5
+	db BOOSTER_COLOSSEUM_FIRE, $00 ; mail 6
+	db BOOSTER_LABORATORY_PSYCHIC, $00 ; mail 7
+	db BOOSTER_LABORATORY_PSYCHIC, $00 ; mail 8
+	db BOOSTER_MYSTERY_WATER_COLORLESS, $00 ; mail 9
 	db BOOSTER_COLOSSEUM_NEUTRAL, BOOSTER_EVOLUTION_NEUTRAL ; mail 10
-	db BOOSTER_MYSTERY_NEUTRAL, BOOSTER_LABORATORY_NEUTRAL  ; mail 11
-	db BOOSTER_COLOSSEUM_TRAINER, $00                       ; mail 12
-	db BOOSTER_EVOLUTION_TRAINER, $00                       ; mail 13
-	db BOOSTER_MYSTERY_TRAINER_COLORLESS, $00               ; mail 14
-	db BOOSTER_LABORATORY_TRAINER, $00                      ; mail 15
+	db BOOSTER_MYSTERY_NEUTRAL, BOOSTER_LABORATORY_NEUTRAL ; mail 11
+	db BOOSTER_COLOSSEUM_TRAINER, $00 ; mail 12
+	db BOOSTER_EVOLUTION_TRAINER, $00 ; mail 13
+	db BOOSTER_MYSTERY_TRAINER_COLORLESS, $00 ; mail 14
+	db BOOSTER_LABORATORY_TRAINER, $00 ; mail 15
 	assert_table_length NUM_MAILS + 1
 
-
-; preserves de and hl
-ShowMailMenuCursor:
-	ld a, SYM_CURSOR_R
-	jr DrawMailMenuCursor
-
-; preserves de and hl
 UpdateMailMenuCursor:
 	ld a, [wCursorBlinkTimer]
 	and $10
 	jr z, ShowMailMenuCursor
-;	fallthrough
-
-; preserves de and hl
+	jr HideMailMenuCursor
+ShowMailMenuCursor:
+	ld a, SYM_CURSOR_R
+	jr DrawMailMenuCursor
 HideMailMenuCursor:
 	ld a, SYM_SPACE
-;	fallthrough
-
-; preserves de and hl
-; input:
-;	a = tile to draw
+	jr DrawMailMenuCursor ; can be fallthrough
 DrawMailMenuCursor:
 	push af
-	call GetPCPackSelectionCoordinates
+	call GePCPackSelectionCoordinates
 	pop af
 	jp WriteByteToBGMap0
 
-
-; preserves bc
-; prints all of the PC packs that the player has already obtained
+; prints all the PC packs that player
+; has already obtained
 PrintObtainedPCPacks:
 	ld e, $0
 	ld hl, wPCPacks
@@ -359,12 +342,9 @@ PrintObtainedPCPacks:
 	jr c, .loop_packs
 	ret
 
-
-; preserves bc and hl
-; input:
-;	a = booster type (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
-; output:
-;	de = text ID corresponding to the name of the mail from input
+; outputs in de the text ID
+; corresponding to the name
+; of the mail in input a
 GetPCPackNameTextID:
 	push hl
 	add a
@@ -397,11 +377,8 @@ GetPCPackNameTextID:
 	tx Mail15Text
 	assert_table_length NUM_MAILS
 
-
-; prints on screen the name of the PC pack from input in a
-; preserves all registers except af
-; input:
-;	a = booster type (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
+; prints on screen the name of
+; the PC pack from input in a
 PrintPCPackName:
 	push hl
 	push bc
@@ -421,12 +398,10 @@ PrintPCPackName:
 	pop hl
 	ret
 
-
-; prints empty characters on screen corresponding to the PC pack in a,
-; in order to create the blinking effect of unopened PC packs
-; preserves all registers except af
-; input:
-;	a = booster type (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
+; prints empty characters on screen
+; corresponding to the PC pack in a
+; this is to create the blinking
+; effect of unopened PC packs
 PrintEmptyPCPackName:
 	push hl
 	push bc
@@ -442,8 +417,6 @@ PrintEmptyPCPackName:
 	pop hl
 	ret
 
-
-; preserves bc
 BlinkUnopenedPCPacks:
 	ld e, $00
 	ld hl, wPCPacks
@@ -473,31 +446,24 @@ BlinkUnopenedPCPacks:
 	jr c, .loop_packs
 	ret
 
-
-; preserves de and hl
-; input:
-;	a = booster type (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
-; output:
-;	bc = coordinates corresponding to the PC pack from input
+; outputs in bc the coordinates
+; corresponding to the PC pack in a
 GetPCPackCoordinates:
 	ld c, a
 	ld a, [wPCPackSelection]
 	push af
 	ld a, c
 	ld [wPCPackSelection], a
-	call GetPCPackSelectionCoordinates
+	call GePCPackSelectionCoordinates
 	inc b
 	pop af
 	ld [wPCPackSelection], a
 	ret
 
-
-; preserves de and hl
-; input:
-;	[wPCPackSelection] = booster type (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
-; output:
-;	bc = coordinates corresponding to the PC pack from input
-GetPCPackSelectionCoordinates:
+; outputs in bc the coordinates
+; corresponding to the PC pack
+; that is stored in wPCPackSelection
+GePCPackSelectionCoordinates:
 	push hl
 	ld a, [wPCPackSelection]
 	add a
@@ -530,11 +496,7 @@ PCMailCoordinates:
 	db 13, 10 ; mail 15
 	assert_table_length NUM_MAILS
 
-
 ; gives the pc pack described in a
-; preserves all registers except af
-; input:
-;	a = booster type (e.g. BOOSTER_COLOSSEUM_NEUTRAL)
 TryGivePCPack:
 	push hl
 	push bc
@@ -571,12 +533,3 @@ TryGivePCPack:
 	pop bc
 	pop hl
 	ret
-
-
-;----------------------------------------
-;        UNREFERENCED FUNCTIONS
-;----------------------------------------
-;
-;Unknown_107c2:
-;	db $01, $00, $00, $4a, $21, $b5, $42, $e0
-;	db $03, $4a, $29, $94, $52, $fF, $7f, $00

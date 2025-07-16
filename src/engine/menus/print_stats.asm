@@ -19,7 +19,7 @@ LoadCollectedMedalTilemaps:
 	ld a, EVENT_MEDAL_FLAGS
 	farcall GetEventValue
 	or a
-	ret z ; no medals?
+	jr z, .done ; no medals?
 
 ; load tilemaps of only the collected medals
 	ld c, NUM_MEDALS
@@ -59,6 +59,7 @@ LoadCollectedMedalTilemaps:
 	ld [wd4cb], a
 	ld a, $76
 	farcall SetBGPAndLoadedPal
+.done
 	ret
 
 MedalCoordsAndTilemaps:
@@ -73,7 +74,6 @@ MedalCoordsAndTilemaps:
 	db 11, 14, TILEMAP_ROCK_MEDAL
 	db 16, 14, TILEMAP_FIGHTING_MEDAL
 	assert_table_length NUM_MEDALS
-
 
 FlashReceivedMedal:
 	xor a
@@ -96,12 +96,11 @@ FlashReceivedMedal:
 	jr z, .show
 ; hide
 	xor a
-	ld e, c ; y coordinate
-	ld d, b ; x coordinate
-	lb bc, 3, 3 ; width and height of a medal icon
+	ld e, c
+	ld d, b
+	lb bc, 3, 3
 	lb hl, 0, 0
-	call FillRectangle
-	ret
+	jp FillRectangle
 
 .show
 	inc hl
@@ -109,7 +108,6 @@ FlashReceivedMedal:
 	ld [wCurTilemap], a
 	farcall LoadTilemap_ToVRAM
 	ret
-
 
 PrintPlayTime:
 	ld a, [wPlayTimeCounter + 2]
@@ -119,9 +117,6 @@ PrintPlayTime:
 	ld a, [wPlayTimeCounter + 4]
 	ld [wPlayTimeHourMinutes + 2], a
 ;	fallthrough
-
-; input:
-;	bc = screen coordinates for printing text
 PrintPlayTime_SkipUpdateTime:
 	push bc
 	ld a, [wPlayTimeHourMinutes + 1]
@@ -151,15 +146,14 @@ PrintPlayTime_SkipUpdateTime:
 	ld b, 2
 	jp SafeCopyDataHLtoDE
 
-
 ; input:
-;	hl = number to convert to symbol font
+; hl = value to convert
 ConvertWordToNumericalDigits:
 	ld de, wDecimalChars
 	ld bc, -100 ; hundreds
-	call GetTxSymbolDigit
+	call .GetNumberSymbol
 	ld bc, -10 ; tens
-	call GetTxSymbolDigit
+	call .GetNumberSymbol
 	ld a, l ; ones
 	add SYM_0
 	ld [de], a
@@ -170,40 +164,52 @@ ConvertWordToNumericalDigits:
 .loop_digits
 	ld a, [hl]
 	cp SYM_0
-	ret nz ; reached a non-zero digit?
+	jr nz, .done ; reached a non-zero digit?
 	ld [hl], SYM_SPACE
 	inc hl
 	dec c
 	jr nz, .loop_digits
+.done
 	ret
 
+.GetNumberSymbol
+	ld a, SYM_0 - 1
+.loop
+	inc a
+	add hl, bc
+	jr c, .loop
+	ld [de], a
+	inc de
+	ld a, l
+	sub c
+	ld l, a
+	ld a, h
+	sbc b
+	ld h, a
+	ret
 
-; prints album progress in coordinates bc
-; input:
-;	bc = screen coordinates for printing text
+; prints album progress in coords bc
 PrintAlbumProgress:
 	push bc
 	call GetCardAlbumProgress
+	ld l, c
+	ld h, b
 	pop bc
 ;	fallthrough
 
-; input:
-;	bc = screen coordinates for printing text
 PrintAlbumProgress_SkipGetProgress:
 	push bc
-	push de
+	push hl
 	push bc
-	ld l, d ; number of different cards collected
-	ld h, $00
+	ld l, e ; number of different cards collected
+	ld h, d ;
 	call ConvertWordToNumericalDigits
 	pop bc
 	call BCCoordToBGMap0Address
 	ld hl, wDecimalChars
 	ld b, 3
 	call SafeCopyDataHLtoDE
-	pop de
-	ld l, e ; total number of cards
-	ld h, $00
+	pop hl ; total number of cards
 	call ConvertWordToNumericalDigits
 	pop bc
 	ld a, b
@@ -214,10 +220,7 @@ PrintAlbumProgress_SkipGetProgress:
 	ld b, 3
 	jp SafeCopyDataHLtoDE
 
-
 ; prints the number of medals collected in bc
-; input:
-;	bc = screen coordinates for printing text
 PrintMedalCount:
 	push bc
 	farcall TryGiveMedalPCPacks
@@ -231,3 +234,7 @@ PrintMedalCount:
 	ld hl, wDecimalChars + 2
 	ld b, 1
 	jp SafeCopyDataHLtoDE
+
+; bc = coordinates
+DrawPauseMenuPlayerPortrait:
+	jp DrawPlayerPortrait

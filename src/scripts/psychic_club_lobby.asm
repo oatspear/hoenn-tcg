@@ -1,7 +1,6 @@
 PsychicClubLobbyAfterDuel:
 	ld hl, .after_duel_table
-	call FindEndOfDuelScript
-	ret
+	jp FindEndOfDuelScript
 
 .after_duel_table
 	db NPC_ROBERT
@@ -61,8 +60,8 @@ Script_Pappy1:
 .ows_e9cb
 	test_if_event_zero EVENT_PAPPY1_STATE
 	print_variable_npc_text Text0660, Text0661
-	give_card XATU
-	show_card_received_screen XATU
+	give_card MEWTWO_ALT_LV60
+	show_card_received_screen MEWTWO_ALT_LV60
 	set_event EVENT_PAPPY1_STATE, PAPPY1_CHALLENGE_COMPLETE
 	print_text_quit_fully Text0662
 

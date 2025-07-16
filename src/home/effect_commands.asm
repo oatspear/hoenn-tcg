@@ -1,8 +1,8 @@
 ; Checks if the command type at a is one of the commands of the attack or
 ; card effect currently in use, and executes its associated function if so.
 ; input:
-;	a = command type to check
-;	[wLoadedAttackEffectCommands] = pointer to the list of commands for the current attack or Trainer card
+   ; a = command type to check
+   ; [wLoadedAttackEffectCommands] = pointer to list of commands of current attack or trainer card
 TryExecuteEffectCommandFunction::
 	push af
 	; grab pointer to command list from wLoadedAttackEffectCommands
@@ -34,13 +34,10 @@ TryExecuteEffectCommandFunction::
 	pop af
 	ret
 
-
-; preserves de
 ; input:
-;	a = command type to check
-;	hl = list of commands for the current attack or Trainer card
-; output:
-;	carry = set:  if the command type from input wasn't found
+  ; a = command type to check
+  ; hl = list of commands of current attack or trainer card
+; return nc if command type matching a is found, carry otherwise
 CheckMatchingCommand::
 	ld c, a
 	ld a, l
@@ -81,7 +78,7 @@ CheckMatchingCommand::
 	ret
 
 .no_more_commands
-	; restore bank and return carry
+	; restore bank and return c
 	pop af
 	call BankswitchROM
 	scf

@@ -7,8 +7,7 @@ AIActionTable_PowerfulRonald:
 	dw .take_prize
 
 .do_turn
-	call AIMainTurnLogic
-	ret
+	jp AIMainTurnLogic
 
 .start_duel
 	call InitAIDuelVars
@@ -16,77 +15,73 @@ AIActionTable_PowerfulRonald:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db CRAWDAUNT
-	db NOSEPASS
-	db RALTS
-	db CHIMECHO
-	db WEEZING
-	db GROUDON
-	db ABSOL
-	db WYNAUT
-	db WOBBUFFET
-	db MUK
-	db $00
+	dw KANGASKHAN
+	dw ELECTABUZZ_LV35
+	dw HITMONCHAN
+	dw MR_MIME
+	dw LICKITUNG
+	dw HITMONLEE
+	dw TAUROS
+	dw JYNX
+	dw MEWTWO_LV53
+	dw DODUO
+	dw NULL
 
 .list_bench
-	db CRAWDAUNT
-	db GROUDON
-	db RALTS
-	db ABSOL
-	db MUK
-	db WYNAUT
-	db WOBBUFFET
-	db NOSEPASS
-	db CHIMECHO
-	db WEEZING
-	db $00
+	dw KANGASKHAN
+	dw HITMONLEE
+	dw HITMONCHAN
+	dw TAUROS
+	dw DODUO
+	dw JYNX
+	dw MEWTWO_LV53
+	dw ELECTABUZZ_LV35
+	dw MR_MIME
+	dw LICKITUNG
+	dw NULL
 
 .list_retreat
-	ai_retreat CRAWDAUNT, -1
-	ai_retreat MUK,      -1
-	ai_retreat KOFFING,     -1
-	db $00
+	ai_retreat KANGASKHAN, -1
+	ai_retreat DODUO,      -1
+	ai_retreat DODRIO,     -1
+	dw NULL
 
 .list_energy
-	ai_energy NOSEPASS, 2, +1
-	ai_energy GROUDON,       3, +1
-	ai_energy RALTS,      3, +1
-	ai_energy CHIMECHO,         2, +0
-	ai_energy WYNAUT,            3, +0
-	ai_energy WOBBUFFET,     2, +0
-	ai_energy MUK,           3, -1
-	ai_energy KOFFING,          3, -1
-	ai_energy WEEZING,       2, +0
-	ai_energy CRAWDAUNT,      4, -1
-	ai_energy ABSOL,          3, +0
-	db $00
+	ai_energy ELECTABUZZ_LV35, 2, +1
+	ai_energy HITMONLEE,       3, +1
+	ai_energy HITMONCHAN,      3, +1
+	ai_energy MR_MIME,         2, +0
+	ai_energy JYNX,            3, +0
+	ai_energy MEWTWO_LV53,     2, +0
+	ai_energy DODUO,           3, -1
+	ai_energy DODRIO,          3, -1
+	ai_energy LICKITUNG,       2, +0
+	ai_energy KANGASKHAN,      4, -1
+	ai_energy TAUROS,          3, +0
+	dw NULL
 
 .list_prize
-	db GAMBLER
-	db STEVEN
-	db $00
+	dw GAMBLER
+	dw ENERGY_REMOVAL
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
 	store_list_pointer wAICardListArenaPriority, .list_arena
 	store_list_pointer wAICardListBenchPriority, .list_bench
 	store_list_pointer wAICardListPlayFromHandPriority, .list_bench
-	store_list_pointer wAICardListRetreatBonus, .list_retreat
+	; missing store_list_pointer wAICardListRetreatBonus, .list_retreat
 	store_list_pointer wAICardListEnergyBonus, .list_energy
 	ret

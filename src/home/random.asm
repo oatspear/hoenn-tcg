@@ -1,8 +1,25 @@
-; preserves all registers except af
-; input:
-;	a = highest possible number to consider
-; output:
-;	a = random number between 0 and a (exclusive)
+; returns h * l in hl
+HtimesL::
+	push de
+	ld a, h
+	ld e, l
+	ld d, $0
+	ld l, d
+	ld h, d
+	jr .asm_887
+.asm_882
+	add hl, de
+.asm_883
+	sla e
+	rl d
+.asm_887
+	srl a
+	jr c, .asm_882
+	jr nz, .asm_883
+	pop de
+	ret
+
+; return a random number between 0 and a (exclusive) in a
 Random::
 	push hl
 	ld h, a
@@ -13,9 +30,7 @@ Random::
 	pop hl
 	ret
 
-
-; gets the next random numbers of the wRNG1 and wRNG2 sequences
-; preserves all registers except af
+; get the next random numbers of the wRNG1 and wRNG2 sequences
 UpdateRNGSources::
 	push hl
 	push de

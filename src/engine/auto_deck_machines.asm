@@ -42,7 +42,7 @@ ReadAutoDeckConfiguration:
 .GetPointerToSRAMAutoDeck
 	push hl
 	ld l, b
-	ld h, DECK_STRUCT_SIZE
+	ld h, DECK_COMPRESSED_STRUCT_SIZE
 	call HtimesL
 	ld de, sAutoDecks
 	add hl, de
@@ -61,9 +61,8 @@ ReadAutoDeckConfiguration:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	pop hl
-	ld bc, DECK_NAME_SIZE
-	add hl, bc
+	
+	ld hl, wCurDeckCards
 .loop_create_deck
 	ld a, [de]
 	inc de
@@ -73,13 +72,27 @@ ReadAutoDeckConfiguration:
 	ld a, [de]
 	inc de
 	ld c, a ; card ID
+	ld a, [de]
+	inc de
 .loop_card_count
 	ld [hl], c
 	inc hl
+	ld [hli], a
 	dec b
 	jr nz, .loop_card_count
 	jr .loop_create_deck
+
 .done_create_deck
+	xor a
+	ld [hli], a
+	ld [hl], a
+
+	pop hl
+	ld de, DECK_NAME_SIZE
+	add hl, de
+	; hl = destination
+	ld de, wCurDeckCards
+	call CompressDeckToSRAM
 	pop de
 	pop bc
 	pop hl
@@ -128,8 +141,10 @@ CheckWhichDecksToDismantleToBuildSavedDeck:
 	ret nc
 	sla a ; next deck
 	cp (1 << NUM_DECKS)
-	jr nz, .loop_single_built_decks
+	jr z, .two_deck_combinations
+	jr .loop_single_built_decks
 
+.two_deck_combinations
 ; next check all two deck combinations
 	ld a, DECK_1 | DECK_2
 	call .CheckIfCanBuild
@@ -157,8 +172,10 @@ CheckWhichDecksToDismantleToBuildSavedDeck:
 	ret nc
 	sra a
 	cp $ff
-	jr nz, .loop_three_deck_combinations
+	jr z, .all_decks
+	jr .loop_three_deck_combinations
 
+.all_decks
 ; finally check if can be built by dismantling all decks
 	call .CheckIfCanBuild
 	ret nc

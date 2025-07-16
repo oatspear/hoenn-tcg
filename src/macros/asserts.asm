@@ -23,8 +23,8 @@ ENDM
 ; \1 = card ID
 ; \2 = quantity
 MACRO card_item
-	DEF x = x + \2
-	db \2, \1
+	DEF x += \2
+	dbw \2, \1
 ENDM
 
 MACRO deck_list_end

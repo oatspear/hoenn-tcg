@@ -4,7 +4,7 @@ MACRO card_data_struct
 \1Name::          ds 2
 \1Rarity::        ds 1
 \1Set::           ds 1
-\1ID::            ds 1
+\1ID::            ds 2
 \1EffectCommands:: ; ds 2
 \1HP::            ds 1
 \1Stage::         ds 1
@@ -16,12 +16,12 @@ MACRO card_data_struct
 \1Weakness::      ds 1
 \1Resistance::    ds 1
 \1Category::      ds 2
-\1PokedexNumber:: ds 2
+\1PokedexNumber:: ds 1
 \1Level::         ds 1
 \1Length::        ds 2
 \1Weight::        ds 2
 \1Description::   ds 2
-\1Unknown2::      ds 1
+\1AIInfo::        ds 1
 ENDM
 
 MACRO atk_data_struct
@@ -95,7 +95,7 @@ ENDM
 
 MACRO deck_struct
 \1Name::  ds DECK_NAME_SIZE
-\1Cards:: ds DECK_SIZE
+\1Cards:: ds DECK_COMPRESSED_SIZE
 ENDM
 
 MACRO duel_vars
@@ -151,7 +151,7 @@ MACRO duel_vars
 \1Bench4CardStage::              ds $1
 \1Bench5CardStage::              ds $1
 
-; changed type from Tropius's Shift Pokemon Power
+; changed type from Venomoth's Shift Pokemon Power
 ; if bit 7 == 1, then bits 0-3 override the Pokemon's actual color
 \1ArenaCardChangedType::         ds $1
 \1Bench1CardChangedType::        ds $1
@@ -198,7 +198,6 @@ MACRO duel_vars
 \1ArenaCardStatus::              ds $1
 
 ; $00   - player
-; $01   - link
 ; other - AI controlled
 \1DuelistType::                  ds $1
 

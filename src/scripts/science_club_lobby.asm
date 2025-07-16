@@ -1,7 +1,6 @@
 ScienceClubLobbyAfterDuel:
 	ld hl, .after_duel_table
-	call FindEndOfDuelScript
-	ret
+	jp FindEndOfDuelScript
 
 .after_duel_table
 	db NPC_IMAKUNI
@@ -67,13 +66,14 @@ Script_Man3:
 
 Script_Specs2:
 	call UpdateRNGSources
-	and %11
+	and %110
 	ld c, a
 	ld b, 0
 	ld hl, Data_ebe7
 	add hl, bc
 	ld e, [hl]
-	ld d, 0
+	inc hl
+	ld d, [hl]
 	call GetCardName
 	ld hl, wTxRam2
 	ld a, e
@@ -86,10 +86,10 @@ Script_Specs2:
 	print_text_quit_fully Text074d
 
 Data_ebe7:
-	db TAILLOW
-	db ZIGZAGOON
-	db CAMERUPT
-	db ALTARIA
+	dw PORYGON
+	dw DITTO
+	dw MUK
+	dw WEEZING
 
 NPCMovement_ebeb:
 	db WEST | NO_MOVE

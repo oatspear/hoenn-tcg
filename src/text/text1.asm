@@ -38,10 +38,6 @@ PKMNPWRText:
 	text "PKMN PWR"
 	done
 
-PokemonName:
-	text "Pokémon"
-	done
-
 LengthText:
 	text "Length"
 	done
@@ -63,7 +59,7 @@ LbsText:
 	done
 
 PromostarRarityText:
-	textfw "☆"
+	textfw " "
 	done
 
 CircleRarityText:
@@ -118,44 +114,34 @@ ColorlessPokemonText:
 	text "Colorless Pokémon"
 	done
 
-TrainerCardsText:
-	text "Trainer Cards"
+TrainerCardText:
+	text "Trainer Card"
 	done
 
-EnergyCardsText:
-	text "Energy Cards"
-	done
-
-DeckPrinterText:
-	text "Deck"
-	done
-
-EmptySpaceText:
-	text "<SPACE>"
+EnergyCardText:
+	text "Energy Card"
 	done
 
 NoPokemonOnTheBenchText:
-	text "You do not have any Benched Pokémon."
+	text "No Pokémon on the Bench."
 	done
 
 UnableDueToSleepText:
-	text "Your Active Pokémon is Asleep."
-	line "You cannot attack or retreat."
+	text "Unable to due to Sleep."
 	done
 
 UnableDueToParalysisText:
-	text "Your Active Pokémon is Paralyzed."
-	line "You cannot attack or retreat"
+	text "Unable to due to Paralysis."
 	done
 
 Received10DamageDueToPoisonText:
-	text "<RAMTEXT> lost"
-	line "10HP due to Poison."
+	text "<RAMTEXT> received"
+	line "10 damage due to Poison."
 	done
 
 Received20DamageDueToPoisonText:
-	text "<RAMTEXT> lost"
-	line "20HP due to Poison."
+	text "<RAMTEXT> received"
+	line "20 damage due to Double Poison."
 	done
 
 IsStillAsleepText:
@@ -165,12 +151,12 @@ IsStillAsleepText:
 
 IsCuredOfSleepText:
 	text "<RAMTEXT> is"
-	line "no longer Asleep."
+	line "cured of Sleep."
 	done
 
 IsCuredOfParalysisText:
 	text "<RAMTEXT> is"
-	line "no longer Paralyzed."
+	line "cured of Paralysis."
 	done
 
 BetweenTurnsText:
@@ -178,11 +164,11 @@ BetweenTurnsText:
 	done
 
 UnableToUseItText:
-	text "You cannot use that."
+	text "Unable to use it."
 	done
 
-NoEnergyCardsAttachedText:
-	text "There are no attached Energy cards."
+NoEnergyCardsText:
+	text "No Energy cards."
 	done
 
 IsThisOKText:
@@ -197,20 +183,8 @@ DiscardName:
 	text "Discard"
 	done
 
-IncompleteText:
-	text "Incomplete"
-	done
-
-NumberSymbolText:
-	textfw "#"
-	done
-
 UsedText:
-	text " Used <RAMTEXT>."
-	done
-
-UnusedText0034: ; Unused
-	text "Received damage"
+	text "Used <RAMTEXT>."
 	done
 
 PokemonsAttackText:
@@ -220,22 +194,23 @@ PokemonsAttackText:
 	done
 
 ResistanceLessDamageText:
-	text "<RAMTEXT> took <RAMNUM> damage"
-	line "because of its Resistance!"
+	text "<RAMTEXT> received"
+	line "<RAMNUM> damage due to Resistance!"
 	done
 
 WeaknessMoreDamageText:
-	text "<RAMTEXT> took <RAMNUM> damage"
-	line "because of its Weakness!"
+	text "<RAMTEXT> received"
+	line "<RAMNUM> damage due to Weakness!"
 	done
 
-UnusedText0038: ; Unused
-	text "????"
+WeaknessMoreDamage2Text:
+	text "<RAMTEXT> received"
+	line "<RAMNUM> damage due to Weakness!"
 	done
 
 ResistanceNoDamageText:
-	text "<RAMTEXT> did not receive any"
-	line "damage because of its Resistance."
+	text "<RAMTEXT> did not"
+	line "receive damage due to Resistance."
 	done
 
 AttackDamageText:
@@ -245,11 +220,11 @@ AttackDamageText:
 
 NoDamageText:
 	text "<RAMTEXT> did not"
-	line "receive any damage!"
+	line "receive damage!"
 	done
 
 NoSelectableAttackText:
-	text "No Valid Attack"
+	text "No selectable Attack"
 	done
 
 UnableToRetreatText:
@@ -258,7 +233,7 @@ UnableToRetreatText:
 
 MayOnlyAttachOneEnergyCardText:
 	text "You may only attach 1 Energy card"
-	line "from your hand each turn."
+	line "per turn."
 	done
 
 UseThisPokemonPowerText:
@@ -272,14 +247,14 @@ PokemonPowerSelectNotRequiredText:
 
 DiscardDescription:
 	text "You may discard this card during"
-	line "your turn. (This doesn't count"
-	line "as a Knocked Out Pokémon, and"
-	line "this ability isn't a Pokémon Power.)"
+	line "your turn."
+	line "It will be counted as a Knock Out"
+	line "(This Discard is not"
+	line "a Pokémon Power)"
 	done
 
 WillDrawNPrizesText:
-	text "<RAMNAME> will draw"
-	line "<RAMNUM> Prize(s)."
+	text "<RAMNAME> will draw <RAMNUM> Prize(s)."
 	done
 
 DrewNPrizesText:
@@ -337,7 +312,7 @@ KnockOutText:
 	done
 
 DamageToSelfDueToConfusionText:
-	text "20 damage to self due to Confusion."
+	text "20 damage to Self due to Confusion."
 	done
 
 ChooseEnergyCardToDiscardText:
@@ -352,15 +327,15 @@ ChooseNextActivePokemonText:
 
 PressStartWhenReadyText:
 	text "Press START"
-	line "when you are ready."
+	line "When you are ready."
 	done
 
 YouPlayFirstText:
-	text "You go first."
+	text "You play first."
 	done
 
 YouPlaySecondText:
-	text "You go second."
+	text "You play second."
 	done
 
 TransmissionErrorText:
@@ -388,12 +363,13 @@ SelectingBenchPokemonHandExamineBackText:
 	done
 
 RetreatedToTheBenchText:
-	text "<RAMTEXT> retreated"
-	line "to the Bench."
+	text "<RAMTEXT>"
+	line "Retreated to the Bench."
 	done
 
 RetreatWasUnsuccessfulText:
-	text "<RAMTEXT> failed to retreat."
+	text "<RAMTEXT>'s"
+	line "Retreat was unsuccessful."
 	done
 
 WillUseThePokemonPowerText:
@@ -402,45 +378,46 @@ WillUseThePokemonPowerText:
 	done
 
 FinishedTurnWithoutAttackingText:
-	text "Finished the turn without attacking."
+	text "Finished the Turn"
+	line "without Attacking."
 	done
 
 DuelistTurnText:
-	text "It is <RAMNAME>'s Turn."
+	text "<RAMNAME>'s Turn."
 	done
 
 AttachedEnergyToPokemonText:
-	text "A <RAMTEXT> was"
-	line "attached to <RAMTEXT>."
+	text "Attached <RAMTEXT>"
+	line "to <RAMTEXT>."
 	done
 
 PokemonEvolvedIntoPokemonText:
-	text "<RAMTEXT> evolved into"
-	line "<RAMTEXT>."
+	text "<RAMTEXT> evolved"
+	line "into <RAMTEXT>."
 	done
 
 PlacedOnTheBenchText:
-	text "<RAMTEXT> was placed"
+	text "Placed <RAMTEXT>"
 	line "on the Bench."
 	done
 
 PlacedInTheArenaText:
-	text "<RAMTEXT> became"
-	line "the Active Pokémon."
+	text "<RAMTEXT>"
+	line "was placed in the Arena."
 	done
 
 ShufflesTheDeckText:
-	text "<RAMNAME> shuffles the deck."
+	text "<RAMNAME> shuffles the Deck."
 	done
 
 ThisIsJustPracticeDoNotShuffleText:
 	text "Since this is just practice,"
-	line "do not shuffle the deck."
+	line "Do not shuffle the Deck."
 	done
 
 EachPlayerShuffleOpponentsDeckText:
 	text "Each player will"
-	line "shuffle the opponent's deck."
+	line "shuffle the opponent's Deck."
 	done
 
 EachPlayerDraw7CardsText:
@@ -458,12 +435,12 @@ DeckHasXCardsText:
 
 ChooseBasicPkmnToPlaceInArenaText:
 	text "Choose a Basic Pokémon"
-	line "to become your Active Pokémon."
+	line "to place in the Arena."
 	done
 
 ThereAreNoBasicPokemonInHand:
-	text "There are no Basic Pokémon in"
-	line "<RAMNAME>'s hand."
+	text "There are no Basic Pokémon"
+	line "in <RAMNAME>'s hand."
 	done
 
 NeitherPlayerHasBasicPkmnText:
@@ -472,8 +449,8 @@ NeitherPlayerHasBasicPkmnText:
 	done
 
 ReturnCardsToDeckAndDrawAgainText:
-	text "Shuffle your hand into your deck"
-	line "and draw a new hand."
+	text "Return the cards to the Deck"
+	line "and draw again."
 	done
 
 ChooseUpTo5BasicPkmnToPlaceOnBenchText:
@@ -487,12 +464,12 @@ PleaseChooseAnActivePokemonText:
 	done
 
 ChooseYourBenchPokemonText:
-	text "Choose Basic Pokémon"
-	line "to put on the Bench."
+	text "Choose your"
+	line "Bench Pokémon."
 	done
 
 YouDrewText:
-	text "You drew a <RAMTEXT>."
+	text "You drew <RAMTEXT>."
 	done
 
 YouCannotSelectThisCardText:
@@ -509,12 +486,14 @@ PleasePlacePrizesText:
 	done
 
 IfHeadsDuelistPlaysFirstText:
-	text "If heads, <RAMTEXT> goes first."
+	text "If heads,"
+	line ""
+	text "<RAMTEXT> plays first."
 	done
 
 CoinTossToDecideWhoPlaysFirstText:
 	text "A coin will be tossed"
-	line "to decide who goes first."
+	line "to decide who plays first."
 	done
 
 DecisionText:
@@ -522,18 +501,17 @@ DecisionText:
 	done
 
 DuelWasADrawText:
-	text "The duel with <RAMNAME>"
-	line "ended in a draw!"
+	text "The Duel with <RAMNAME>"
+	line "was a Draw!"
 	done
 
 WonDuelText:
-	text "You won the duel with"
-	line "<RAMNAME>!"
+	text "You won the Duel with <RAMNAME>!"
 	done
 
 LostDuelText:
-	text "You lost the duel with"
-	line "<RAMNAME>!"
+	text "You lost the Duel"
+	line "with <RAMNAME>..."
 	done
 
 StartSuddenDeathMatchText:
@@ -561,12 +539,12 @@ CardsText:
 
 TookAllThePrizesText:
 	text "<RAMNAME> took"
-	line "all of their Prizes!"
+	line "all the Prizes!"
 	done
 
 ThereAreNoPokemonInPlayAreaText:
-	text "<RAMNAME> doesn't have"
-	line "any more Pokémon in play!"
+	text "There are no Pokémon"
+	line "in <RAMNAME>'s Play Area!"
 	done
 
 WasKnockedOutText:
@@ -575,21 +553,23 @@ WasKnockedOutText:
 	done
 
 HavePokemonPowerText:
-	text "<RAMTEXT> has"
-	line "a Pokémon Power."
+	text "<RAMTEXT> have"
+	line "Pokémon Power."
 	done
 
-UnusedText0083: ; Unused
-	text "????"
+UnableToUsePkmnPowerDueToToxicGasText:
+	text "Unable to us Pokémon Power due to"
+	line "the effect of Toxic Gas."
 	done
 
-PlayCheckText:
+PlayCheck1Text:
 	text "  Play"
 	line "  Check"
 	done
 
-UnusedText0085: ; Unused
-	text "????"
+PlayCheck2Text:
+	text "  Play"
+	line "  Check"
 	done
 
 SelectCheckText:
@@ -597,12 +577,8 @@ SelectCheckText:
 	line "  Check"
 	done
 
-UnusedText0087: ; Unused
-	textfw "B", "<RAMNUM>", "S", "<RAMNUM>"
-	done
-
 DuelistIsThinkingText:
-	text "<RAMNAME> is thinking..."
+	text "<RAMNAME> is thinking."
 	done
 
 ClearOpponentNameText:
@@ -617,139 +593,8 @@ NumberOfPrizesText:
 	text "Number of Prizes"
 	done
 
-UnusedText008c: ; Unused
-	text "Random 1"
-	done
-
-UnusedText008d: ; Unused
-	text "Random 2"
-	done
-
-UnusedText008e: ; Unused
-	text "Random 3"
-	done
-
-UnusedText008f: ; Unused
-	text "Random 4"
-	done
-
-UnusedText0090: ; Unused
-	text "Training COM"
-	done
-
-UnusedText0091: ; Unused
-	text "Player 1"
-	done
-
 Player2Text:
 	text "Player 2"
-	done
-
-UnusedText0093: ; Unused
-	text "Left to Right"
-	done
-
-UnusedText0094: ; Unused
-	text "Right to Left"
-	done
-
-UnusedText0095: ; Unused
-	text "START: Change"
-	line "    A: Execute"
-	line "    B: End"
-	done
-
-UnusedText0096: ; Unused
-	text "Other"
-	line "Poison"
-	line "Sleep"
-	line "Payalysis"
-	line "Confusion"
-	line "Double Poison"
-	line "Clear"
-	line "Foul Gas"
-	line "Opponent's Hand"
-	line "Discard from Hand"
-	line "Select Deck"
-	line "Select Discard"
-	line "From Hand to Deck"
-	line "Take Prize"
-	line "Change Player"
-	line "Shuffle Deck"
-	line "Discard Bench"
-	line "Change Card"
-	done
-
-UnusedText0097: ; Unused
-	text "WIN GAME"
-	line "LOSE GAME"
-	line "DRAW GAME"
-	line "CHANGE CASE"
-	line "PAUSE MODE"
-	line "CHANGE COMPUTER OPPONENT"
-	line "CHANGE PLAYER 2 TO COM"
-	line "FLIP 20"
-	line "SAVE NOW"
-	line "LOAD FILE"
-	done
-
-UnusedText0098: ; Unused
-	text "Save File"
-	done
-
-UnusedText0099: ; Unused
-	text "Load File"
-	line "  "
-	half2full
-	textfw "0"
-	text "  Last Saved File"
-	done
-
-UnusedText009a: ; Unused
-	text "Pause Mode is ON"
-	line "Press SELECT to Pause"
-	done
-
-UnusedText009b: ; Unused
-	text "Pause Mode is OFF"
-	done
-
-UnusedText009c: ; Unused
-	text "Computer Mode is OFF"
-	done
-
-UnusedText009d: ; Unused
-	text "Computer Mode is ON"
-	done
-
-UnusedText009e: ; Unused
-	text "<GRASS> Pokémon"
-	line ""
-	text "<FIRE> Pokémon"
-	line ""
-	text "<WATER> Pokémon"
-	line ""
-	text "<LIGHTNING> Pokémon"
-	line ""
-	text "<FIGHTING> Pokémon"
-	line ""
-	text "<PSYCHIC> Pokémon"
-	line ""
-	text "<COLORLESS> Pokémon"
-	line "Trainer Card"
-	line "Energy Card"
-	done
-
-UnusedText009f: ; Unused
-	text "Card List"
-	done
-
-UnusedText00a0: ; Unused
-	text "Test Coin Flip"
-	done
-
-UnusedText00a1: ; Unused
-	text "End without Prizes?"
 	done
 
 ResetBackUpRamText:
@@ -771,12 +616,11 @@ NoCardsInHandText:
 	done
 
 TheDiscardPileHasNoCardsText:
-	text "There are no cards"
-	line "in the discard pile."
+	text "The Discard Pile has no cards."
 	done
 
-UnusedText00a6: ; Unused
-	text "????"
+PlayerDiscardPileText:
+	text "Player's Discard Pile"
 	done
 
 DuelistHandText:
@@ -792,41 +636,41 @@ DuelistDeckText:
 	done
 
 PleaseSelectHandText:
-	text "Choose a card from"
-	line "your hand."
+	text "Please select"
+	line "Hand."
 	done
 
 PleaseSelectCardText:
 	text "Please select"
-	line "a card."
+	line "Card."
 	done
 
 NoPokemonWithDamageCountersText:
-	text "There are no Pokémon with"
-	line "any damage counters on them."
+	text "There are no Pokémon"
+	line "with Damage Counters."
 	done
 
 NoDamageCountersText:
-	text "There are no damage counters."
+	text "There are no Damage Counters."
 	done
 
 NoEnergyAttachedToOpponentsActiveText:
-	text "The Defending Pokémon doesn't have"
-	line "any Energy cards attached to it."
+	text "No Energy cards are attached to"
+	line "the opponent's Active Pokémon."
 	done
 
-NoEnergyCardsInDiscardPileText:
+ThereAreNoEnergyCardsInDiscardPileText:
 	text "There are no Energy cards"
-	line "in your discard pile."
+	line "in the the Discard Pile."
 	done
 
-NoBasicEnergyCardsInDiscardPileText:
+ThereAreNoBasicEnergyCardsInDiscardPileText:
 	text "There are no Basic Energy cards"
-	line "in your discard pile."
+	line "in the Discard Pile."
 	done
 
 NoCardsLeftInTheDeckText:
-	text "There are no cards left in the deck."
+	text "There are no cards left in the Deck."
 	done
 
 NoSpaceOnTheBenchText:
@@ -835,31 +679,30 @@ NoSpaceOnTheBenchText:
 
 NoPokemonCapableOfEvolvingText:
 	text "There are no Pokémon capable"
-	line "of evolving."
+	line "of Evolving."
 	done
 
 CantEvolvePokemonInSameTurnItsPlacedText:
-	text "You cannot evolve a Pokémon"
-	line "on its first turn in play."
+	text "You cannot Evolve a Pokémon"
+	line "in the same turn it was placed."
 	done
 
-NotAffectedBySpecialConditionsText:
-	text "The Active Pokémon is not affected"
-	line "by any Special Conditions."
+NotAffectedByPoisonSleepParalysisOrConfusionText:
+	text "Not affected by Poison,"
+	line "Sleep, Paralysis, or Confusion."
 	done
 
 NotEnoughCardsInHandText:
-	text "You don't have enough cards"
-	line "in your hand."
+	text "Not enough cards in Hand."
 	done
 
-YouNoBenchedPokemonText:
-	text "You don't have any Benched Pokémon."
+EffectNoPokemonOnTheBenchText:
+	text "No Pokémon on the Bench."
 	done
 
-NoBasicPokemonInYourDiscardPileText:
-	text "There are no Basic Pokémon"
-	line "in your discard pile."
+ThereAreNoPokemonInDiscardPileText:
+	text "There are no Pokémon"
+	line "in the Discard Pile."
 	done
 
 ConditionsForEvolvingToStage2NotFulfilledText:
@@ -867,67 +710,69 @@ ConditionsForEvolvingToStage2NotFulfilledText:
 	line "Stage 2 not fulfilled."
 	done
 
-NoPokemonInHandText:
-	text "You don't have any Pokémon"
-	line "in your hand."
+ThereAreNoCardsInHandThatYouCanChangeText:
+	text "There are no cards in Hand"
+	line "that you can change."
 	done
 
-NoCardsInTheDiscardPileText:
+ThereAreNoCardsInTheDiscardPileText:
 	text "There are no cards in the"
-	line "discard pile."
+	line "Discard Pile."
 	done
 
-NoEvolvedPokemonText:
-	text "There are no Evolved Pokémon."
+ThereAreNoStage1PokemonText:
+	text "There are no Stage 1 Pokémon"
+	line "in the Play Area."
 	done
 
 NoEnergyCardsAttachedToPokemonInYourPlayAreaText:
-	text "None of your Pokémon in play"
-	line "have any Energy attached to them."
+	text "No Energy cards are attached to"
+	line "Pokémon in your Play Area."
 	done
 
 NoEnergyCardsAttachedToPokemonInOppPlayAreaText:
-	text "None of your opponent's Pokémon"
-	line "have any Energy attached to them."
+	text "No Energy cards attached to Pokémon"
+	line "in your opponent's Play Area."
 	done
 
 EnergyCardsRequiredToRetreatText:
-	text "This Pokémon needs"
-	line "<RAMNUM> Energy to retreat."
+	text "<RAMNUM> Energy cards"
+	line "are required to Retreat."
 	done
 
 NotEnoughEnergyCardsText:
-	text " Not enough Energy."
+	text "Not enough Energy cards."
 	done
 
 NotEnoughFireEnergyText:
-	text " Not enough <FIRE> Energy."
+	text "Not enough Fire Energy."
 	done
 
 NotEnoughPsychicEnergyText:
-	text " Not enough <PSYCHIC> Energy."
+	text "Not enough Psychic Energy."
 	done
 
 NotEnoughWaterEnergyText:
-	text " Not enough <WATER> Energy."
+	text "Not enough Water Energy."
 	done
 
-NoTrainerCardsInDiscardPileText:
-	text "There are no Trainer cards"
-	line "in your discard pile."
+ThereAreNoTrainerCardsInDiscardPileText:
+	text "There are no Trainer Cards"
+	line "in the Discard Pile."
 	done
 
-NoAttackMayBeChosenText:
-	text "No Attacks may be chosen."
+NoAttackMayBeChoosenText:
+	text "No Attacks may be choosen."
 	done
 
 YouDidNotReceiveAnAttackToMirrorMoveText:
-	text "This Pokémon wasn't attacked"
-	line "during your opponent's last turn"
+	text "You did not receive an Attack"
+	line "to Mirror Move."
 	done
 
 ThisAttackCannotBeUsedTwiceText:
-	text "This attack cannot be used again."
+	text "This attack cannot"
+	line "be used twice."
 	done
 
 NoWeaknessText:
@@ -943,21 +788,21 @@ OnlyOncePerTurnText:
 	done
 
 CannotUseDueToStatusText:
-	text "Cannot be used while this Pokémon"
-	line "is affected by a Special Condition."
+	text "Cannot use due to Sleep, Paralysis,"
+	line "or Confusion."
 	done
 
 CannotBeUsedInTurnWhichWasPlayedText:
-	text "Cannot be used on the same turn"
-	line "that this Pokémon was put into play."
+	text "Cannot be used in the turn in"
+	line "which it was played."
 	done
 
 ThereIsNoEnergyCardAttachedText:
-	text "There are no attached Energy cards."
+	text "There is no Energy card attached."
 	done
 
 NoGrassEnergyText:
-	text " No <GRASS> Energy."
+	text "No Grass Energy."
 	done
 
 CannotUseSinceTheresOnly1PkmnText:
@@ -966,38 +811,29 @@ CannotUseSinceTheresOnly1PkmnText:
 	done
 
 CannotUseBecauseItWillBeKnockedOutText:
-	text "Cannot use because the Pokémon"
-	line "would be Knocked Out."
+	text "Cannot use because"
+	line "it will be Knocked Out."
 	done
 
 CanOnlyBeUsedOnTheBenchText:
 	text "Can only be used on the Bench."
 	done
 
-OpponentNoBenchedPokemonText:
-	text "Your opponent doesn't have"
-	line "any Benched Pokémon"
+ThereAreNoPokemonOnBenchText:
+	text "There are no Pokémon on the Bench."
+	done
 
 OpponentIsNotAsleepText:
-	text "The Defending Pokémon is not Asleep."
+	text "Opponent is not Asleep"
 	done
 
 UnableDueToToxicGasText:
-	text "You cannot use any Pokémon Powers"
-	line "because of Muk's Toxic Gas."
-	done
-
-UnusedText00d5: ; Unused
-	text "A Transmission Error occured."
+	text "Unable to use due to the"
+	line "effects of Toxic Gas."
 	done
 
 BackUpIsBrokenText:
 	text "Back Up is broken."
-	done
-
-PrinterIsNotConnectedText:
-	text "Error No. 02:"
-	line "Printer is not connected."
 	done
 
 BatteriesHaveLostTheirChargeText:
@@ -1005,74 +841,65 @@ BatteriesHaveLostTheirChargeText:
 	line "Batteries have lost their charge."
 	done
 
-PrinterPaperIsJammedText:
-	text "Error No. 03:"
-	line "Printer paper is jammed."
-	done
-
-CheckCableOrPrinterSwitchText:
-	text "Error No. 02:"
-	line "Check cable or printer switch."
-	done
-
-PrinterPacketErrorText:
-	text "Error No. 04:"
-	line "Printer Packet Error."
-	done
-
 PrintingWasInterruptedText:
 	text "Printing was interrupted."
 	done
 
 CardPopCannotBePlayedWithTheGameBoyText:
-	text "Card Pop! cannot be done with a Game"
-	line "Boy. Please use a Game Boy Color."
+	text "Card Pop! cannot be played"
+	line "with the Game Boy."
+	line "Please use a"
+	line "Game Boy Color."
 	done
 
-UnusedText00de: ; Unused
-	text "????"
+SandAttackCheckText:
+	text "Sand-attack check!"
+	line "If Tails, Attack is unsuccessful."
+	done
 
 SmokescreenCheckText:
-	text "Accuracy check!"
-	line "If tails, the attack fails."
+	text "Smokescreen check!"
+	line "If Tails, Attack is unsuccessful."
 	done
 
 ParalysisCheckText:
-	text "If heads, the Defending Pokémon"
-	line "is now Paralyzed."
+	text "Paralysis check!"
+	line "If Heads, opponent is Paralyzed."
 	done
 
 SleepCheckText:
-	text "If heads, the Defending Pokémon"
-	line "is now Asleep."
+	text "Sleep check!"
+	line "If Heads, opponent becomes Asleep."
 	done
 
 PoisonCheckText:
-	text "If heads, the Defending Pokémon"
-	line "is now Poisoned."
+	text "Poison check!"
+	line "If Heads, opponent is Poisoned."
 	done
 
 ConfusionCheckText:
-	text "If heads, the Defending Pokémon"
-	line "is now Confused."
+	text "Confusion check! If Heads,"
+	line "opponent becomes Confused."
 	done
 
 VenomPowderCheckText:
-	text "If heads, the Defending Pokémon"
-	line "is now Confused and Poisoned."
+	text "Venom Powder check! If Heads,"
+	line "opponent is Poisoned & Confused."
 	done
 
 IfTailsYourPokemonBecomesConfusedText:
-	text "If tails, your Active Pokémon"
-	line "is now Confused."
+	text "If Tails,  your Pokémon"
+	line "becomes Confused."
 	done
 
-UnusedText00e6: ; Unused
-	text "????"
+DamageCheckIfTailsNoDamageText:
+	text "Damage check!"
+	line "If Tails, no damage!!!"
 	done
 
 IfHeadsDraw1CardFromDeckText:
-	text "If heads, draw a card."
+	text "If Heads,"
+	line "Draw 1 card from Deck!"
 	done
 
 FlipUntilFailAppears10DamageForEachHeadsText:
@@ -1081,804 +908,56 @@ FlipUntilFailAppears10DamageForEachHeadsText:
 	done
 
 IfHeadPlus10IfTails10ToYourselfText:
-	text "If heads, +10 damage!"
-	line "If tails, 10 damage to self!"
+	text "If Heads, + 10 damage!"
+	line "If Tails, +10 damage to yourself!"
 	done
 
 DamageToOppBenchIfHeadsDamageToYoursIfTailsText:
-	text "Tails: 10 damage to your Bench"
-	line "Heads: 10 damage to your opponent's"
+	text "10 damage to opponent's Bench if"
+	line "Heads, damage to yours if Tails."
 	done
 
 IfHeadsChangeOpponentsActivePokemonText:
-	text "If heads, switch your opponent's"
+	text "If Heads, change opponent's"
 	line "Active Pokémon."
 	done
 
 IfHeadsHealIsSuccessfulText:
-	text "If heads, Heal is successful."
+	text "If Heads,"
+	line "Heal is successful."
 	done
 
 IfTailsDamageToYourselfTooText:
-	text "If tails, this Pokémon deals"
-	line "<RAMNUM> damage to self."
+	text "If Tails, <RAMNUM> damage"
+	line "to yourself, too."
 	done
 
-AttackSuccessCheckText:
-	text "Success Check:"
-	line "If tails, the attack does nothing."
+SuccessCheckIfHeadsAttackIsSuccessfulText:
+	text "Success check!!!"
+	line "If Heads, Attack is successful!"
 	done
 
 TrainerCardSuccessCheckText:
-	text "Success Check:"
-	line "If tails, there is no effect."
+	text "Trainer card success check!"
+	line "If Heads, you're successful!"
 	done
 
 CardCheckIfHeads8CardsIfTails1CardText:
-	text "If heads, draw 8 cards!"
-	line "If tails, draw 1 card!"
+	text "Card check!"
+	line "If Heads, 8 cards! If Tails, 1 card!"
 	done
 
 IfHeadsNoDamageNextTurnText:
-	text "If heads, prevent all damage done to"
-	line "this Pokémon during the next turn!"
-	done
-
-UnusedText00f2: ; Unused
-	text "Damage check"
+	text "If Heads, you will not receive"
+	line "damage during opponent's next turn!"
 	done
 
 DamageCheckIfHeadsPlusDamageText:
-	text "Damage check! If heads,"
-	line "the attack does <RAMNUM> more damage!!"
+	text "Damage check!"
+	line "If Heads, +<RAMNUM> damage!!"
 	done
 
 DamageCheckIfHeadsXDamageText:
-	text "Damage check! The attack does"
-	line "<RAMNUM> damage for each heads!!"
+	text "Damage check!"
+	line "If Heads, x <RAMNUM> damage!!"
 	done
-
-AcidCheckText:
-	text "If heads, the Defending Pokémon"
-	line "can't retreat during the next turn."
-	done
-
-TransparencyCheckText:
-	text "If heads, prevent all effects of"
-	line "the attack done to Haunter!"
-	done
-
-ConfusionCheckDamageText:
-	text "Confusion check,"
-	line "If tails, damage to self!"
-	done
-
-ConfusionCheckRetreatText:
-	text "Confusion check!"
-	line "If tails, unable to retreat."
-	done
-
-PokemonsSleepCheckText:
-	text "Sleep check! If tails,"
-	line "<RAMTEXT> is still Asleep."
-	done
-
-PoisonedIfHeadsConfusedIfTailsText:
-	text "Heads: Defending Pokémon is Poisoned"
-	line "Tails: Defending Pokémon is Confused"
-	done
-
-IfHeadsDoNotReceiveDamageOrEffectText:
-	text "If heads, prevent all damage and"
-	line "effects of attacks next turn."
-	done
-
-IfHeadsOpponentCannotAttackText:
-	text "If heads, the Defending Pokémon"
-	line "can't attack next turn!"
-	done
-
-AttackUnsuccessfulText:
-	text "The attack was not successful."
-	done
-
-UnableToRetreatDueToAcidText:
-	text "This Pokémon cannot retreat"
-	line "until your next turn."
-	done
-
-UnableToUseTrainerDueToHeadacheText:
-	text "Unable to use a Trainer card"
-	line "due to the effects of Headache."
-	done
-
-CannotUsePokemonFluteText:
-	text "There are no Basic Pokémon in"
-	line "your opponent's discard pile."
-	done
-
-UnableToAttackThatPokemonText:
-	text "You cannot attack that Pokémon"
-	line "until your next turn."
-	done
-
-UnableToAttackText:
-	text "This Pokémon cannot attack"
-	line "until your next turn."
-	done
-
-UnableToUseAttackDueToAmnesiaText:
-	text "Unable to use this attack"
-	line "due to the effects of Amnesia."
-	done
-
-KnockedOutDueToDestinyBondText:
-	text "<RAMTEXT> was Knocked Out"
-	line "due to the effects of Destiny Bond."
-	done
-
-ReceivesDamageDueToStrikesBackText:
-	text "<RAMTEXT> receives <RAMNUM> damage"
-	line "due to the effects of Strikes Back."
-	done
-
-UnableToEvolveDueToPrehistoricPowerText:
-	text "Unable to evolve due to the"
-	line "effects of Prehistoric Power."
-	done
-
-UnusedText0107: ; Unused
-	text "????"
-	done
-
-UnusedText0108: ; Unused
-	text "????"
-	done
-
-NoDamageOrEffectDueToAttackText:
-	text "The attack failed to affect"
-	line "the Defending Pokémon."
-	done
-
-UnableToUseAttackDueToNShieldText:
-	text "Unable to use this attack due to"
-	line "Mew's Neutralizing Shield."
-	done
-
-NoDamageOrEffectDueToNShieldText:
-	text "The Neutralizing Shield power"
-	line "protected Mew from the atack."
-	done
-
-NoDamageOrEffectDueToTransparencyText:
-	text "The Transparency power"
-	line "protected Haunter from the atack."
-	done
-
-MetamorphsToText:
-	text "<RAMTEXT> transformed into"
-	line "<RAMTEXT>."
-	done
-
-SelectNewDefendingPokemonText:
-	text "Select a Benched Pokémon to switch"
-	line "with your opponent's Active Pokémon."
-	done
-
-SelectNewActivePokemonText :
-	text "Select 1 of your Benched Pokémon to"
-	line "become your new Active Pokémon."
-	done
-
-DuelistIsSelectingPokemonToPlaceInArenaText:
-	text "<RAMNAME> is selecting"
-	line "an Active Pokémon..."
-	done
-
-ChooseWeaknessYouWishToChangeText:
-	text "Choose the Weakness you wish"
-	line "to change with Conversion 1."
-	done
-
-ChooseResistanceYouWishToChangeText:
-	text "Choose the Resistance you wish"
-	line "to change with Conversion 2."
-	done
-
-ChoosePokemonToCopyWithShiftText:
-	text "Choose the Pokémon you want to copy"
-	line "with Tropius's Shift."
-	done
-
-ChangedTheWeaknessOfPokemonToColorText:
-	text "Changed the Weakness of"
-	line ""
-	text "<RAMTEXT> to <RAMTEXT>."
-	done
-
-ChangedTheResistanceOfPokemonToColorText:
-	text "Changed the Resistance of"
-	line ""
-	text "<RAMTEXT> to <RAMTEXT>."
-	done
-
-ChangedTheColorOfText:
-	text "Changed the color of"
-	line ""
-	text "<RAMTEXT> to <RAMTEXT>."
-	done
-
-Draw1CardFromTheDeckText:
-	text "Draw a card."
-	done
-
-DrawCardsFromTheDeckText:
-	text " Draw <RAMNUM> cards."
-	done
-
-CannotDrawCardBecauseNoCardsInDeckText:
-	text "Cannot draw a card because"
-	line "there are no cards in the deck."
-	done
-
-ChoosePkmnInTheBenchToGiveDamageText:
-	text "Which 1 of your opponent's Benched"
-	line "Pokémon will receive the damage?"
-	done
-
-ChooseUpTo3PkmnOnBenchToGiveDamageText:
-	text "Choose up to 3 of your opponent's"
-	line "Benched Pokémon to give damage to."
-	done
-
-Choose1BasicEnergyCardFromDeckText:
-	text "Choose a Basic Energy card"
-	line "from your deck."
-	done
-
-ChoosePokemonToAttachEnergyCardText:
-	text "Choose a Pokémon to attach"
-	line "the Energy card to."
-	done
-
-UnusedText011e: ; Unused
-	text "Discard 1 <FIRE> Energy."
-	done
-
-ChooseAndDiscard2FireEnergyCardsText:
-	text "Discard 2 <FIRE> Energy."
-	done
-
-DiscardOppDeckAsManyFireEnergyCardsText:
-	text "Discard a card from the opponent's"
-	line "deck for each discarded <FIRE> Energy."
-	done
-
-ChooseAndDiscard2EnergyCardsText:
-	text "Choose and discard"
-	line "2 Energy cards."
-	done
-
-ChooseAKrabbyFromDeckText:
-	text "Choose a Krabby"
-	line "from your deck."
-	done
-
-ChooseDiscardEnergyCardFromOpponentText:
-	text "Choose and discard an Energy card"
-	line "attached to the Defending Pokémon."
-	done
-
-ChooseAttackOpponentWillNotBeAbleToUseText:
-	text "Choose the attack the opponent will"
-	line "not be able to use on the next turn."
-	done
-
-ChooseBasicFightingPokemonFromDeckText:
-	text "Choose a Basic <FIGHTING> Pokémon"
-	line "from your deck."
-	done
-
-ChooseAnOddishFromDeckText:
-	text "Choose an Oddish"
-	line "from your deck."
-	done
-
-ChooseAnOddishText:
-	text "Choose an Oddish"
-	done
-
-ChooseAKrabbyText:
-	text "Choose a Krabby."
-	done
-
-ChooseBasicEnergyCardText:
-	text "Choose a"
-	line "Basic Energy card."
-	done
-
-ChooseNidoranFromDeckText:
-	text "Choose a Nidoran♀ or a Nidoran♂"
-	line "from the deck."
-	done
-
-ChooseNidoranText:
-	text "Choose a Nidoran♀"
-	line "or a Nidoran♂."
-	done
-
-ChooseBasicFightingPokemonText:
-	text "Choose a Basic"
-	line "<FIGHTING> Pokémon."
-	done
-
-ProcedureForEnergyTransferText:
-	text "Procedure for Energy Transfer:"
-	line ""
-	line "1. Choose the Pokémon to take the <GRASS>"
-	line "   Energy from.  Press the A Button."
-	line ""
-	line "2. Choose the Pokémon to move the"
-	line "   energy to and press the A Button."
-	line ""
-	line "3. Repeat steps 1 and 2."
-	line ""
-	line "4. Press the B Button to end."
-	done
-
-ChooseATorchicFromDeckText:
-	text "Choose a Torchic"
-	line "from the deck."
-	done
-
-ChooseATorchicText:
-	text "Choose a Torchic."
-	done
-
-ChoosePkmnToRemoveDamageCounterText:
-	text "Choose a Pokémon to remove"
-	line "a damage counter from."
-	done
-
-ProcedureForCurseText:
-	text "Procedure for Curse:"
-	line ""
-	line "1. Choose the Pokémon to take"
-	line "   a damage counter from and"
-	line "   press the A Button."
-	line ""
-	line "2. Choose a Pokémon to receive"
-	line "   the damage counter and"
-	line "   press the A Button."
-	line ""
-	line "3. Press the B Button to cancel."
-	done
-
-UnusedText0132: ; Unused
-	text "????"
-	done
-
-Choose2EnergyCardsFromDiscardPileText:
-	text "Choose 2 Energy cards from"
-	line "your discard pile."
-	done
-
-ChooseAnEnergyCardText:
-	text "Choose an Energy"
-	line "card."
-	done
-
-ProcedureForProphecyText:
-	text "Procedure for Prophecy:"
-	line ""
-	line "1. Choose either your deck"
-	line "   or your opponent's deck"
-	line ""
-	line "2. Choose the cards you wish to"
-	line "   place on top and press the"
-	line "   A Button."
-	line ""
-	line "3. Select ”Yes” after you choose"
-	line "   the 3 cards and their order."
-	line ""
-	line "4. Press the B Button to cancel."
-	done
-
-ChooseTheOrderOfTheCardsText:
-	text "Choose the order"
-	line "of the cards."
-	done
-
-ProcedureForDamageSwapText:
-	text "Procedure for Damage Swap:"
-	line ""
-	line "1. Choose a Pokémon to take"
-	line "   a damage counter from and"
-	line "   press the A Button."
-	line ""
-	line "2. Choose a Pokémon to receive"
-	line "   the damage counter and"
-	line "   press the A Button."
-	line "   (You cannot give a Pokémon"
-	line "   a damage counter if it would"
-	line "   Knock Out that Pokémon.)"
-	line ""
-	line "3. Repeat steps 1 and 2."
-	line ""
-	line "4. Press the B Button to end."
-	done
-
-ProcedureForDevolutionBeamText:
-	text "Procedure for Devolution Beam."
-	line ""
-	line "1. Choose whether you want to"
-	line "   devolve one of your Pokémon or"
-	line "   one of your opponent's Pokémon."
-	line "   Then, press the A Button."
-	line ""
-	line "2. Choose the Pokémon to devolve"
-	line "   and press the A Button."
-	line ""
-	line "3. Press the B Button to cancel."
-	done
-
-ProcedureForStrangeBehaviorText:
-	text "Procedure for Strange Behavior:"
-	line ""
-	line "1. Choose the Pokémon to take"
-	line "   a damage counter from and"
-	line "   press the A Button."
-	line ""
-	line "2. Repeat step 1 until you're"
-	line "   satisfied. (You cannot move"
-	line "   a damage counter if it would"
-	line "   cause Slowbro to be Knocked Out.)"
-	line ""
-	line "3. Press the B Button to end."
-	done
-
-ChooseOppAttackToBeUsedWithMetronomeText:
-	text "Choose the opponent's attack to"
-	line "copy with Metronome."
-	done
-
-ThereIsNoInTheDeckText:
-	text "There is no <RAMTEXT>"
-	line "in the deck."
-	done
-
-WouldYouLikeToCheckTheDeckText:
-	text "Would you like to check the deck?"
-	done
-
-PleaseSelectTheDeckText:
-	text "Please select the deck:"
-	line "            Yours   Opponent's"
-	done
-
-PleaseSelectThePlayAreaText:
-	text "Please select the Play Area:"
-	line "            Yours   Opponent's"
-	done
-
-NidoranMNidoranFText:
-	text "Nidoran♂ or Nidoran♀"
-	done
-
-BasicFightingPokemonText:
-	text "Basic <FIGHTING> Pokémon"
-	done
-
-BasicPokemonText:
-	text "Basic Pokémon"
-	done
-
-EvolutionCardText:
-	text "Evolution card"
-	done
-
-TrainerCardText:
-	text "Trainer card"
-	done
-
-BasicEnergyCardText:
-	text "Basic Energy card"
-	done
-
-PeekWasUsedToLookInYourHandText:
-	text "Peek was used to look at the"
-	line "<RAMTEXT> in your hand."
-	done
-
-CardPeekWasUsedOnText:
-	text "The card that Peek was used on"
-	done
-
-PokemonAndAllAttachedCardsReturnedToHandText:
-	text "<RAMTEXT> and all attached"
-	line "cards were returned to the hand."
-	done
-
-WasChosenForTheEffectOfAmnesiaText:
-	text "<RAMTEXT> was chosen"
-	line "with the effect of Amnesia."
-	done
-
-BasicPokemonWasPlacedOnEachBenchText:
-	text "A Basic Pokémon was placed"
-	line "on each Bench."
-	done
-
-WasUnsuccessfulText:
-	text "<RAMTEXT>'s"
-	line "<RAMTEXT> was unsuccessful."
-	done
-
-ThereWasNoEffectFromTxRam2Text:
-	text "There was no effect from"
-	line "<RAMTEXT>."
-	done
-
-TheEnergyCardFromPlayAreaWasMovedText:
-	text "<RAMNAME> moved an Energy card"
-	line "from 1 of their Pokémon to another."
-	done
-
-DrewFireEnergyFromTheHandText:
-	text "<RAMNAME> drew <RAMNUM> <FIRE> Energy"
-	line "from their deck."
-	done
-
-ThePkmnCardsInHandAndDeckWereShuffledText:
-	text "The Pokémon in <RAMNAME>'s hand"
-	line "were replaced."
-	done
-
-UnusedText014f: ; Unused
-	text "????"
-	done
-
-ChoosePokemonToHealText:
-	text "Choose the Pokémon from which"
-	line "to remove the damage counter."
-	done
-
-ChooseCardToDiscardFromHandText:
-	text "Choose the card to discard"
-	line "from the hand."
-	done
-
-ChoosePokemonToRemoveEnergyFromText:
-	text "Choose a Pokémon to remove"
-	line "Energy from and choose the Energy."
-	done
-
-Choose2BasicEnergyCardsFromDiscardPileText:
-	text "Choose 2 Basic Energy cards"
-	line "from the discard pile."
-	done
-
-UnusedText0154: ; Unused
-	text "????"
-	done
-
-Choose2CardsFromHandToDiscardText:
-	text "Choose 2 cards from your hand"
-	line "to discard."
-	done
-
-Choose2HandCardsFromHandToReturnToDeckText:
-	text "Choose 2 cards from your hand"
-	line "to return to your deck."
-	done
-
-ChooseCardToPlaceInHandText:
-	text "Choose a card to"
-	line "put into your hand."
-	done
-
-ChoosePokemonToAttachDefenderToText:
-	text "Choose a Pokémon to"
-	line "attach Defender to."
-	done
-
-UnusedText0159: ; Unused
-	text "You can draw up to <RAMNUM> cards."
-	line "A to Draw, B to End."
-	done
-
-ChoosePokemonToReturnToTheDeckText:
-	text "Choose a Pokémon to"
-	line "return to the deck."
-	done
-
-ChoosePokemonToPlaceInPlayText:
-	text "Choose a Pokémon to"
-	line "put into play."
-	done
-
-ChooseBasicPokemonToEvolveText:
-	text "Choose a Basic Pokémon"
-	line "to evolve."
-	done
-
-ChoosePokemonToScoopUpText:
-	text "Choose a Pokémon to"
-	line "Scoop Up."
-	done
-
-ChoosePokemonFromYourHandText:
-	text "Choose a Pokémon from your hand."
-	done
-
-UnusedText015f: ; Unused
-	text "????"
-	done
-
-ChoosePokemonFromDeckText:
-	text "Choose a Pokémon from the deck."
-	done
-
-ChoosePokemonCardText:
-	text "Choose a Pokémon."
-	done
-
-RearrangeThe5CardsAtTopOfDeckText:
-	text "Rearrange 5 cards from"
-	line "the top of the deck."
-	done
-
-PleaseCheckTheOpponentsHandText:
-	text "Please check the opponent's hand."
-	done
-
-UnusedText0164: ; Unused
-	text "????"
-	done
-
-CardWasChosenText:
-	text "<RAMTEXT> was chosen."
-	done
-
-ChooseBasicPokemonToPlaceOnBenchText:
-	text "Choose a Basic Pokémon"
-	line "to place on the Bench."
-	done
-
-ChooseEvolutionCardAndPressAButtonToDevolveText:
-	text "Choose an Evolved Pokémon and"
-	line "press the A Button to devolve it."
-	done
-
-ChoosePokemonInYourAreaThenPokemonInYourOppText:
-	text "Choose 1 of your Pokémon, then"
-	line "choose 1 of your opponent's Pokémon."
-	done
-
-ChooseUpTo4FromDiscardPileText:
-	text "Choose up to 4 Basic Energy cards"
-	line "from your discard pile."
-	done
-
-UnusedText016a: ; Unused
-	text "????"
-	done
-
-PokemonAndAllAttachedCardsWereReturnedToDeckText:
-	text "<RAMTEXT> and all attached"
-	line "cards were returned to the deck."
-	done
-
-PokemonWasReturnedToHandText:
-	text "<RAMTEXT> was returned"
-	line "to the hand."
-	done
-
-UnusedText016d: ; Unused
-	text "????"
-	done
-
-PokemonWasReturnedToDeckText:
-	text "<RAMTEXT> was returned"
-	line "to the deck."
-	done
-
-WasPlacedInTheHandText:
-	text "<RAMTEXT> was placed"
-	line "in the hand."
-	done
-
-TheCardYouReceivedText:
-	text "The card you received"
-	done
-
-YouReceivedTheseCardsText:
-	text "You received these cards:"
-	done
-
-ChooseTheCardToPutBackText:
-	text "Choose the card"
-	line "to put back."
-	done
-
-ChooseTheCardToDiscardText:
-	text "Choose the card"
-	line "to discard."
-	done
-
-DiscardedCardsFromDeckText:
-	text "Discarded <RAMNUM> cards from"
-	line "<RAMNAME>'s deck."
-	done
-
-UnusedText0175: ; Unused
-	text "Discarded <RAMTEXT>"
-	line "from the Hand."
-	done
-
-UnusedText0176: ; Unused
-	text "????"
-	done
-
-UnusedText0177: ; Unused
-	text "????"
-	done
-
-DuelistHasNoCardsInHandText:
-	text "<RAMNAME> has"
-	line "no cards in hand!"
-	done
-
-PokemonHealedDamageText:
-	text "<RAMTEXT> healed"
-	line "<RAMNUM> damage!"
-	done
-
-PokemonDevolvedToText:
-	text "<RAMTEXT> devolved into"
-	line "<RAMTEXT>!"
-	done
-
-ThereWasNoFireEnergyText:
-	text "There were no <FIRE> Energy"
-	line "in your deck."
-	done
-
-YouCanSelectMoreCardsQuitText:
-	text "<RAMNUM> more cards can be chosen. Quit?"
-	done
-
-ThereWasNoEffectText:
-	text "There was no effect!"
-	done
-
-UnusedText017e: ; Unused
-	text "????"
-	done
-
-ThereWasNoEffectFromPoisonText:
-	text "The Pokémon could not be Poisoned."
-	done
-
-ThereWasNoEffectFromSleepText:
-	text "The Pokémon could be put to Sleep."
-	done
-
-ThereWasNoEffectFromParalysisText:
-	text "The Pokémon could not be Paralyzed."
-	done
-
-ThereWasNoEffectFromConfusionText:
-	text "The Pokémon could not be Confused."
-	done
-
-ThereWasNoEffectFromPoisonConfusionText:
-	text "The Pokémon could not be"
-	line "Poisoned or Confused."
-	done
-
-RearrangedCardsInDuelistsDeckText:
-	text "<RAMNAME>'s deck was rearranged."
-	done
-
-;	ds $d

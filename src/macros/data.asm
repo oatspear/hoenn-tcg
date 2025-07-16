@@ -32,8 +32,8 @@ MACRO bigdw ; big-endian word
 	dx 2, \1
 ENDM
 
-MACRO sgb
-	db (\1) << 3 + (\2) ; sgb_command * 8 + length
+MACRO dab
+	dwb \1, BANK(\1)
 ENDM
 
 MACRO rgb
@@ -95,5 +95,5 @@ ENDM
 ; idx-[direction] means the index to get when the input is in the direction.
 ; its attribute is used for drawing a flipped cursor.
 MACRO cursor_transition
-db \1, \2, \3, \4, \5, \6, \7
+	db \1, \2, \3, \4, \5, \6, \7
 ENDM

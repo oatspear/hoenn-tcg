@@ -24,34 +24,19 @@ Tilesets:
 	tileset PokemonDomeEntranceTilesetGfx,  78 ; TILESET_POKEMON_DOME_ENTRANCE
 	tileset PokemonDomeTilesetGfx,         207 ; TILESET_POKEMON_DOME
 	tileset HallOfHonorTilesetGfx,         121 ; TILESET_HALL_OF_HONOR
-	tileset CardPopGfx,                    189 ; TILESET_CARD_POP
 	tileset MedalGfx,                       72 ; TILESET_MEDAL
-	tileset GameBoyLinkGfx,                109 ; TILESET_GAMEBOY_LINK
-	tileset GameBoyPrinterGfx,              93 ; TILESET_GAMEBOY_PRINTER
-	tileset Colosseum1Gfx,                  96 ; TILESET_COLOSSEUM_1
-	tileset Colosseum2Gfx,                  86 ; TILESET_COLOSSEUM_2
-	tileset Evolution1Gfx,                  96 ; TILESET_EVOLUTION_1
-	tileset Evolution2Gfx,                  86 ; TILESET_EVOLUTION_2
-	tileset Mystery1Gfx,                    96 ; TILESET_MYSTERY_1
-	tileset Mystery2Gfx,                    86 ; TILESET_MYSTERY_2
-	tileset Laboratory1Gfx,                 96 ; TILESET_LABORATORY_1
-	tileset Laboratory2Gfx,                 86 ; TILESET_LABORATORY_2
-	tileset CharizardIntro1Gfx,             96 ; TILESET_CHARIZARD_INTRO_1
-	tileset CharizardIntro2Gfx,             96 ; TILESET_CHARIZARD_INTRO_2
-	tileset ScytherIntro1Gfx,               96 ; TILESET_SCYTHER_INTRO_1
-	tileset ScytherIntro2Gfx,               96 ; TILESET_SCYTHER_INTRO_2
-	tileset AerodactylIntro1Gfx,            96 ; TILESET_AERODACTYL_INTRO_1
-	tileset AerodactylIntro2Gfx,            96 ; TILESET_AERODACTYL_INTRO_2
-	tileset JapaneseTitleScreenGfx,         97 ; TILESET_JAPANESE_TITLE_SCREEN
-	tileset JapaneseTitleScreenCGBGfx,      97 ; TILESET_JAPANESE_TITLE_SCREEN_CGB
+	tileset ColosseumGfx,                   86 ; TILESET_COLOSSEUM
+	tileset EvolutionGfx,                   86 ; TILESET_EVOLUTION
+	tileset MysteryGfx,                     86 ; TILESET_MYSTERY
+	tileset LaboratoryGfx,                  86 ; TILESET_LABORATORY
+	tileset CharizardIntroGfx,              96 ; TILESET_CHARIZARD_INTRO
+	tileset ScytherIntroGfx,                96 ; TILESET_SCYTHER_INTRO
+	tileset AerodactylIntroGfx,             96 ; TILESET_AERODACTYL_INTRO
 	tileset SolidTiles1,                     4 ; TILESET_SOLID_TILES_1
-	tileset JapaneseTitleScreen2Gfx,       244 ; TILESET_JAPANESE_TITLE_SCREEN_2
-	tileset JapaneseTitleScreen2CGBGfx,     59 ; TILESET_JAPANESE_TITLE_SCREEN_2_CGB
 	tileset SolidTiles2,                     4 ; TILESET_SOLID_TILES_2
 	tileset PlayerGfx,                      36 ; TILESET_PLAYER
 	tileset RonaldGfx,                      36 ; TILESET_RONALD
-	tileset TitleScreenGfx,                220 ; TILESET_TITLE_SCREEN
-	tileset TitleScreenCGBGfx,             212 ; TILESET_TITLE_SCREEN_CGB
+	tileset TitleScreenGfx,                212 ; TILESET_TITLE_SCREEN
 	tileset CopyrightGfx,                   36 ; TILESET_COPYRIGHT
 	tileset NintendoGfx,                    24 ; TILESET_NINTENDO
 	tileset CompaniesGfx,                   49 ; TILESET_COMPANIES

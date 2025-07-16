@@ -13,19 +13,9 @@
 	const SCENE_GRADIENT_WHITE_AND_GREEN      ; $0b
 	const SCENE_COLOR_WHEEL                   ; $0c
 	const SCENE_COLOR_TEST                    ; $0d
-	const SCENE_GAMEBOY_LINK_CONNECTING       ; $0e
-	const SCENE_GAMEBOY_LINK_TRANSMITTING     ; $0f
-	const SCENE_GAMEBOY_LINK_NOT_CONNECTED    ; $10
-	const SCENE_GAMEBOY_PRINTER_TRANSMITTING  ; $11
-	const SCENE_GAMEBOY_PRINTER_NOT_CONNECTED ; $12
-	const SCENE_CARD_POP                      ; $13
-	const SCENE_CARD_POP_ERROR                ; $14
-	const SCENE_JAPANESE_TITLE_SCREEN         ; $15
-	const SCENE_NINTENDO                      ; $16
-	const SCENE_COMPANIES                     ; $17
-	const SCENE_JAPANESE_TITLE_SCREEN_2       ; $18
-	const SCENE_COPYRIGHT                     ; $19
-	const SCENE_JAPANESE_TITLE_SCREEN_2_COPY  ; $1a
-	const SCENE_COLOR_PALETTE                 ; $1b
+	const SCENE_NINTENDO                      ; $0e
+	const SCENE_COMPANIES                     ; $0f
+	const SCENE_COPYRIGHT                     ; $10
+	const SCENE_COLOR_PALETTE                 ; $11
 
 DEF NUM_SCENES EQU const_value

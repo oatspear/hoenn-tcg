@@ -1,7 +1,5 @@
-; validates the saved data in SRAM
+; validate the saved data in SRAM
 ; it must contain with the sequence $04, $21, $05 at s0a000
-; output:
-;	carry = set:  if there was no save data
 ValidateSRAM::
 	xor a
 	call BankswitchSRAM
@@ -20,7 +18,7 @@ ValidateSRAM::
 	jr nz, .check_pattern_loop
 	call RestartSRAM
 	scf
-	bank1call InitSaveDataAndSetUppercase
+	call InitSaveDataAndSetUppercase
 	jp DisableSRAM
 .check_sequence
 	ld hl, s0a000
@@ -37,12 +35,10 @@ ValidateSRAM::
 .restart_sram
 	call RestartSRAM
 	or a
-	bank1call InitSaveDataAndSetUppercase
+	call InitSaveDataAndSetUppercase
 	jp DisableSRAM
 
-
-; zeroes all SRAM banks and set s0a000 to $04, $21, $05
-; preserves de
+; zero all SRAM banks and set s0a000 to $04, $21, $05
 RestartSRAM::
 	ld a, 3
 .clear_loop
@@ -58,9 +54,7 @@ RestartSRAM::
 	ld [hl], $05
 	ret
 
-
-; zeroes the loaded SRAM bank
-; preserves af and de
+; zero the loaded SRAM bank
 ClearSRAMBank::
 	push af
 	call BankswitchSRAM

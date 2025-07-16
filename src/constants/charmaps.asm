@@ -33,7 +33,7 @@
 	charmap "9", $39
 	charmap ":", $3a
 	charmap ";", $3b
-	charmap "‹", $3c ; <
+	charmap "<", $3c
 	charmap "=", $3d
 	charmap ">", $3e
 	charmap "?", $3f
@@ -65,7 +65,7 @@
 	charmap "Y", $59
 	charmap "Z", $5a
 	charmap "[", $5b
-	charmap "\\", $5c ; \
+	charmap "\\", $5c
 	charmap "]", $5d
 	charmap "^", $5e
 	charmap "_", $5f
@@ -96,107 +96,11 @@
 	charmap "x", $78
 	charmap "y", $79
 	charmap "z", $7a
-	charmap "\{", $7b ; {
-	charmap "¦", $7c ; Broken Vertical Bar
+	charmap "\{", $7b
+	charmap "¦", $7c
 	charmap "}", $7d
-	charmap "|", $7e ; Vertical Bar is identical to lowercase L
+	charmap "|", $7e
 	charmap "‾", $7f
-	charmap "à", $80
-	charmap "á", $81
-	charmap "â", $82
-	charmap "ä", $83
-	charmap "ç", $84
-	charmap "è", $85
-	charmap "ê", $86
-	charmap "ë", $87
-	charmap "ì", $88
-	charmap "í", $89
-	charmap "î", $8a
-	charmap "ï", $8b
-	charmap "ò", $8c
-	charmap "ó", $8d
-	charmap "ô", $8e
-	charmap "ö", $8f
-	charmap "ù", $90
-	charmap "ú", $91
-	charmap "û", $92
-	charmap "ü", $93
-	charmap "ã", $94
-	charmap "ñ", $95
-	charmap "õ", $96
-	charmap "′", $97 ; Prime Symbol
-	charmap "À", $98
-	charmap "Á", $99
-	charmap "Â", $9a
-	charmap "Ä", $9b
-	charmap "Ç", $9c
-	charmap "È", $9d
-	charmap "Ê", $9e
-	charmap "Ë", $9f
-	charmap "Ì", $a0
-	charmap "Í", $a1
-	charmap "Î", $a2
-	charmap "Ï", $a3
-	charmap "Ò", $a4
-	charmap "Ó", $a5
-	charmap "Ô", $a6
-	charmap "Ö", $a7
-	charmap "Ù", $a8
-	charmap "Ú", $a9
-	charmap "Û", $aa
-	charmap "Ü", $ab
-	charmap "Ã", $ac
-	charmap "Ñ", $ad
-	charmap "Õ", $ae
-	charmap "¿", $af ; Inverted Question Mark
-	charmap "¡", $b0 ; Inverted Exclamation Mark
-	charmap "$", $b1
-	charmap "‘", $b2 ; Left Single Quotation Mark
-	charmap "’", $b3 ; Right Single Quotation Mark
-	charmap "%", $b4
-	charmap "°", $b5 ; Degree Symbol
-	charmap "•", $b6 ; Bullet Point
-	charmap "■", $b7 ; 3x7 Black Rectangle
-;	charmap "", $b8
-;	charmap "", $b9
-;	charmap "", $ba
-;	charmap "", $bb
-;	charmap "", $bc
-;	charmap "", $bd
-;	charmap "", $be
-;	charmap "", $bf
-;	charmap "", $c0
-;	charmap "", $c1
-;	charmap "", $c2
-;	charmap "", $c3
-;	charmap "", $c4
-;	charmap "", $c5
-;	charmap "", $c6
-;	charmap "", $c7
-;	charmap "", $c8
-;	charmap "", $c9
-;	charmap "", $ca
-;	charmap "", $cb
-;	charmap "", $cc
-;	charmap "", $cd
-;	charmap "", $ce
-;	charmap "", $cf
-;	charmap "", $d0
-;	charmap "", $d1
-;	charmap "", $d2
-;	charmap "", $d3
-;	charmap "", $d4
-;	charmap "", $d5
-;	charmap "", $d6
-;	charmap "", $d7
-;	charmap "", $d8
-;	charmap "", $d9
-;	charmap "", $da
-;	charmap "", $db
-;	charmap "", $dc
-;	charmap "", $dd
-;	charmap "", $de
-;	charmap "", $df
 
 MACRO fwcharmap
 	charmap STRCAT("FW{x:\1}_", \2), \3
@@ -229,10 +133,10 @@ ENDM
 	fwcharmap TX_FULLWIDTH3, "X", $47
 	fwcharmap TX_FULLWIDTH3, "Y", $48
 	fwcharmap TX_FULLWIDTH3, "Z", $49
-	fwcharmap TX_FULLWIDTH3, "ṙ", $4a ; 'r
-	fwcharmap TX_FULLWIDTH3, "ṡ", $4b ; 's
-	fwcharmap TX_FULLWIDTH3, "ṫ", $4c ; 't
-	fwcharmap TX_FULLWIDTH3, "ṛ", $4d ; r.
+	fwcharmap TX_FULLWIDTH3, "g", $4a
+	fwcharmap TX_FULLWIDTH3, "c", $4b
+	fwcharmap TX_FULLWIDTH3, "m", $4c
+	fwcharmap TX_FULLWIDTH3, "r.", $4d
 	fwcharmap TX_FULLWIDTH3, "♀", $4e
 	fwcharmap TX_FULLWIDTH3, "♂", $4f
 	fwcharmap TX_FULLWIDTH3, "【", $50
@@ -242,90 +146,61 @@ ENDM
 	fwcharmap TX_FULLWIDTH3, "★", $54
 	fwcharmap TX_FULLWIDTH3, "☆", $55
 	fwcharmap TX_FULLWIDTH3, "_", $56
-	fwcharmap TX_FULLWIDTH3, "▪", $57 ; 7x7 Black Square
+	fwcharmap TX_FULLWIDTH3, "▪", $57
 	fwcharmap TX_FULLWIDTH3, "℃", $58
-	fwcharmap TX_FULLWIDTH3, "゛", $59 ; Japanese Dakuten
+	fwcharmap TX_FULLWIDTH3, "゛", $59
 	fwcharmap TX_FULLWIDTH3, "°", $5a
-	fwcharmap TX_FULLWIDTH3, "゜", $5b ; Japanese Handakuten
-	fwcharmap TX_FULLWIDTH3, "ˍ", $5c ; Low Level Macron
+	fwcharmap TX_FULLWIDTH3, "゜", $5b
+	fwcharmap TX_FULLWIDTH3, "ˍ", $5c
 	fwcharmap TX_FULLWIDTH3, "&", $5d
-	fwcharmap TX_FULLWIDTH3, "꞉", $5e ; Centered Colon (:)
-	fwcharmap TX_FULLWIDTH3, "○", $5f ; 7x7 White Circle
-	fwcharmap TX_FULLWIDTH3, "※", $60 ; Reference Mark
-;	fwcharmap TX_FULLWIDTH3, "", $61
+	fwcharmap TX_FULLWIDTH3, ":", $5e
+	fwcharmap TX_FULLWIDTH3, "○", $5f
+	fwcharmap TX_FULLWIDTH3, "※", $60
+	fwcharmap TX_FULLWIDTH3, "о", $61
 	fwcharmap TX_FULLWIDTH3, "^", $62
 	fwcharmap TX_FULLWIDTH3, "♪", $63
-	fwcharmap TX_FULLWIDTH3, "ß", $64
-;	fwcharmap TX_FULLWIDTH3, "", $65
-;	fwcharmap TX_FULLWIDTH3, "", $66
-;	fwcharmap TX_FULLWIDTH3, "", $67
-;	fwcharmap TX_FULLWIDTH3, "", $68
-;	fwcharmap TX_FULLWIDTH3, "", $69
-;	fwcharmap TX_FULLWIDTH3, "", $6a
-;	fwcharmap TX_FULLWIDTH3, "", $6b
-;	fwcharmap TX_FULLWIDTH3, "", $6c
-;	fwcharmap TX_FULLWIDTH3, "", $6d
-;	fwcharmap TX_FULLWIDTH3, "", $6e
-;	fwcharmap TX_FULLWIDTH3, "", $6f
-;	fwcharmap TX_FULLWIDTH3, "", $70
-;	fwcharmap TX_FULLWIDTH3, "", $71
-	fwcharmap TX_FULLWIDTH3, "╚", $72 ; merged lines ($74/$75)
-	fwcharmap TX_FULLWIDTH3, "╔", $73 ; merged lines ($74/$75)
-	fwcharmap TX_FULLWIDTH3, "║", $74 ; left-aligned vertical 2px line
-	fwcharmap TX_FULLWIDTH3, "═", $75 ; centered horizontal 2px line
-	fwcharmap TX_FULLWIDTH3, "¿", $76 ; Inverted Question Mark
-	fwcharmap TX_FULLWIDTH3, "“", $77 ; Left Double Quotation Mark
-	fwcharmap TX_FULLWIDTH3, "‘", $78 ; Left Single Quotation Mark
-	fwcharmap TX_FULLWIDTH3, "'", $79 ; Right Single Quotation Mark
-	fwcharmap TX_FULLWIDTH3, "”", $7a ; Right Double Quotation Mark
-	fwcharmap TX_FULLWIDTH3, ".", $7b ; Period
-	fwcharmap TX_FULLWIDTH3, "■", $7c ; 8x8 Black Square
-	fwcharmap TX_FULLWIDTH3, "a", $7d
-	fwcharmap TX_FULLWIDTH3, "b", $7e
-	fwcharmap TX_FULLWIDTH3, "c", $7f
-	fwcharmap TX_FULLWIDTH3, "d", $80
-	fwcharmap TX_FULLWIDTH3, "e", $81
-	fwcharmap TX_FULLWIDTH3, "f", $82
-	fwcharmap TX_FULLWIDTH3, "g", $83
-	fwcharmap TX_FULLWIDTH3, "h", $84
-	fwcharmap TX_FULLWIDTH3, "i", $85
-	fwcharmap TX_FULLWIDTH3, "j", $86
-	fwcharmap TX_FULLWIDTH3, "k", $87
-	fwcharmap TX_FULLWIDTH3, "l", $88
-	fwcharmap TX_FULLWIDTH3, "m", $89
-	fwcharmap TX_FULLWIDTH3, "n", $8a
-	fwcharmap TX_FULLWIDTH3, "o", $8b
-	fwcharmap TX_FULLWIDTH3, "p", $8c
-	fwcharmap TX_FULLWIDTH3, "q", $8d
+	fwcharmap TX_FULLWIDTH3, "a", $64
+	fwcharmap TX_FULLWIDTH3, "b", $65
+	fwcharmap TX_FULLWIDTH3, "d", $66
+	fwcharmap TX_FULLWIDTH3, "e", $67
+	fwcharmap TX_FULLWIDTH3, "f", $68
+	fwcharmap TX_FULLWIDTH3, "h", $69
+	fwcharmap TX_FULLWIDTH3, "i", $6a
+	fwcharmap TX_FULLWIDTH3, "j", $6b
+	fwcharmap TX_FULLWIDTH3, "k", $6c
+	fwcharmap TX_FULLWIDTH3, "l", $6d
+	fwcharmap TX_FULLWIDTH3, "n", $6e
+	fwcharmap TX_FULLWIDTH3, "o", $6f
+	fwcharmap TX_FULLWIDTH3, "p", $70
+	fwcharmap TX_FULLWIDTH3, "q", $71
+	fwcharmap TX_FULLWIDTH3, "s", $72
+	fwcharmap TX_FULLWIDTH3, "t", $73
+	fwcharmap TX_FULLWIDTH3, "u", $74
+	fwcharmap TX_FULLWIDTH3, "v", $75
+	fwcharmap TX_FULLWIDTH3, "w", $76
+	fwcharmap TX_FULLWIDTH3, "x", $77
+	fwcharmap TX_FULLWIDTH3, "y", $78
+	fwcharmap TX_FULLWIDTH3, "z", $79
+	fwcharmap TX_FULLWIDTH3, "'", $7a
+	fwcharmap TX_FULLWIDTH3, "”", $7b
+	fwcharmap TX_FULLWIDTH3, "■", $7c
 	fwcharmap TX_FULLWIDTH3, "r", $8e
-	fwcharmap TX_FULLWIDTH3, "s", $8f
-	fwcharmap TX_FULLWIDTH3, "t", $90
-	fwcharmap TX_FULLWIDTH3, "u", $91
-	fwcharmap TX_FULLWIDTH3, "v", $92
-	fwcharmap TX_FULLWIDTH3, "w", $93
-	fwcharmap TX_FULLWIDTH3, "x", $94
-	fwcharmap TX_FULLWIDTH3, "y", $95
-	fwcharmap TX_FULLWIDTH3, "z", $96
-	fwcharmap TX_FULLWIDTH3, "「", $97 ; Japanese Left Quotation Mark
-	fwcharmap TX_FULLWIDTH3, "＼", $98 ; \
-	fwcharmap TX_FULLWIDTH3, "」", $99 ; Japanese Right Quotation Mark
+	fwcharmap TX_FULLWIDTH3, "「", $97
+	fwcharmap TX_FULLWIDTH3, "＼", $98
+	fwcharmap TX_FULLWIDTH3, "」", $99
 	fwcharmap TX_FULLWIDTH3, "|", $9a
 	fwcharmap TX_FULLWIDTH3, "ˉ", $9b
-	fwcharmap TX_FULLWIDTH3, " ", $9c ; Empty Space
+	fwcharmap TX_FULLWIDTH3, " ", $9c
 	fwcharmap TX_FULLWIDTH3, "!", $9d
-	fwcharmap TX_FULLWIDTH3, "₽", $9e ; Pokémon Dollar Sign
 	fwcharmap TX_FULLWIDTH3, "#", $9f
 	fwcharmap TX_FULLWIDTH3, "$", $a0
 	fwcharmap TX_FULLWIDTH3, "%", $a1
-	fwcharmap TX_FULLWIDTH3, "Ƕ", $a2 ; HP
-	fwcharmap TX_FULLWIDTH3, "Ľ", $a3 ; LV
 	fwcharmap TX_FULLWIDTH3, "(", $a4
 	fwcharmap TX_FULLWIDTH3, ")", $a5
 	fwcharmap TX_FULLWIDTH3, "*", $a6
 	fwcharmap TX_FULLWIDTH3, "+", $a7
-	fwcharmap TX_FULLWIDTH3, "、", $a8 ; Japanese Comma
-	fwcharmap TX_FULLWIDTH3, "-", $a9 ; Hyphen/En Dash(6 pixels long)
-	fwcharmap TX_FULLWIDTH3, "—", $aa ; Em Dash (8 pixels long)
+	fwcharmap TX_FULLWIDTH3, "、", $a8
+	fwcharmap TX_FULLWIDTH3, "-", $a9
 	fwcharmap TX_FULLWIDTH3, "/", $ab
 	fwcharmap TX_FULLWIDTH3, "0", $ac
 	fwcharmap TX_FULLWIDTH3, "1", $ad
@@ -337,44 +212,15 @@ ENDM
 	fwcharmap TX_FULLWIDTH3, "7", $b3
 	fwcharmap TX_FULLWIDTH3, "8", $b4
 	fwcharmap TX_FULLWIDTH3, "9", $b5
-	fwcharmap TX_FULLWIDTH3, ":", $b6
 	fwcharmap TX_FULLWIDTH3, ";", $b7
 	fwcharmap TX_FULLWIDTH3, "<", $b8
 	fwcharmap TX_FULLWIDTH3, "=", $b9
 	fwcharmap TX_FULLWIDTH3, ">", $ba
 	fwcharmap TX_FULLWIDTH3, "?", $bb
 	fwcharmap TX_FULLWIDTH3, "@", $bc
-	fwcharmap TX_FULLWIDTH3, "æ", $bd
-	fwcharmap TX_FULLWIDTH3, "ç", $be
-	fwcharmap TX_FULLWIDTH3, "œ", $bf
-	fwcharmap TX_FULLWIDTH3, "à", $c0
-	fwcharmap TX_FULLWIDTH3, "á", $c1
-	fwcharmap TX_FULLWIDTH3, "â", $c2
-	fwcharmap TX_FULLWIDTH3, "ä", $c3
-	fwcharmap TX_FULLWIDTH3, "è", $c4
-	fwcharmap TX_FULLWIDTH3, "é", $c5
-	fwcharmap TX_FULLWIDTH3, "ê", $c6
-	fwcharmap TX_FULLWIDTH3, "ë", $c7
-	fwcharmap TX_FULLWIDTH3, "ì", $c8
-	fwcharmap TX_FULLWIDTH3, "í", $c9
-	fwcharmap TX_FULLWIDTH3, "î", $ca
-	fwcharmap TX_FULLWIDTH3, "ï", $cb
-	fwcharmap TX_FULLWIDTH3, "ò", $cc
-	fwcharmap TX_FULLWIDTH3, "ó", $cd
-	fwcharmap TX_FULLWIDTH3, "ô", $ce
-	fwcharmap TX_FULLWIDTH3, "ö", $cf
-	fwcharmap TX_FULLWIDTH3, "ù", $d0
-	fwcharmap TX_FULLWIDTH3, "ú", $d1
-	fwcharmap TX_FULLWIDTH3, "û", $d2
-	fwcharmap TX_FULLWIDTH3, "ü", $d3
-	fwcharmap TX_FULLWIDTH3, "ã", $d4
-	fwcharmap TX_FULLWIDTH3, "ñ", $d5
-	fwcharmap TX_FULLWIDTH3, "õ", $d6
 	fwcharmap TX_FULLWIDTH3, "[", $d7
 	fwcharmap TX_FULLWIDTH3, "¥", $d8
 	fwcharmap TX_FULLWIDTH3, "]", $d9
-;	fwcharmap TX_FULLWIDTH3, "", $da
-;	fwcharmap TX_FULLWIDTH3, "", $db
 
 ; TX_KATAKANA
 	fwcharmap TX_KATAKANA, "ヲ", $10
@@ -580,52 +426,52 @@ ENDM
 ;       would probably be preferred over SYM_*
 	charmap "<", TX_SYMBOL
 	const_def
-	txsymbol SPACE          ; $00
-	txsymbol FIRE           ; $01
-	txsymbol GRASS          ; $02
-	txsymbol LIGHTNING      ; $03
-	txsymbol WATER          ; $04
-	txsymbol FIGHTING       ; $05
-	txsymbol PSYCHIC        ; $06
-	txsymbol COLORLESS      ; $07
-	txsymbol POISONED       ; $08
-	txsymbol ASLEEP         ; $09
-	txsymbol CONFUSED       ; $0a
-	txsymbol PARALYZED      ; $0b
-	txsymbol CURSOR_U       ; $0c
-	txsymbol POKEMON        ; $0d
-	txsymbol ATK_DESCR      ; $0e
-	txsymbol CURSOR_R       ; $0f
-	txsymbol HP             ; $10
-	txsymbol Lv             ; $11
-	txsymbol E              ; $12
-	txsymbol DAMAGE_COUNTER ; $13
-	txsymbol TV_REPORTER      ; $14
-	txsymbol WALLYS_TRAINING       ; $15
-	txsymbol BOX_HEADER_L   ; $16
-	txsymbol BOX_HEADER_R   ; $17
-	txsymbol BOX_TOP_L      ; $18
-	txsymbol BOX_TOP_R      ; $19
-	txsymbol BOX_BTM_L      ; $1a
-	txsymbol BOX_BTM_R      ; $1b
-	txsymbol BOX_TOP        ; $1c
-	txsymbol BOX_BOTTOM     ; $1d
-	txsymbol BOX_LEFT       ; $1e
-	txsymbol BOX_RIGHT      ; $1f
-	txsymbol 0              ; $20
-	txsymbol 1              ; $21
-	txsymbol 2              ; $22
-	txsymbol 3              ; $23
-	txsymbol 4              ; $24
-	txsymbol 5              ; $25
-	txsymbol 6              ; $26
-	txsymbol 7              ; $27
-	txsymbol 8              ; $28
-	txsymbol 9              ; $29
-	txsymbol DOT            ; $2a
-	txsymbol PLUS           ; $2b
-	txsymbol MINUS          ; $2c
-	txsymbol CROSS          ; $2d
-	txsymbol SLASH          ; $2e
-	txsymbol CURSOR_D       ; $2f
-	txsymbol PRIZE          ; $30
+	txsymbol SPACE      ; $00
+	txsymbol FIRE       ; $01
+	txsymbol GRASS      ; $02
+	txsymbol LIGHTNING  ; $03
+	txsymbol WATER      ; $04
+	txsymbol FIGHTING   ; $05
+	txsymbol PSYCHIC    ; $06
+	txsymbol COLORLESS  ; $07
+	txsymbol POISONED   ; $08
+	txsymbol ASLEEP     ; $09
+	txsymbol CONFUSED   ; $0a
+	txsymbol PARALYZED  ; $0b
+	txsymbol CURSOR_U   ; $0c
+	txsymbol POKEMON    ; $0d
+	txsymbol ATK_DESCR  ; $0e
+	txsymbol CURSOR_R   ; $0f
+	txsymbol HP         ; $10
+	txsymbol Lv         ; $11
+	txsymbol E          ; $12
+	txsymbol No         ; $13
+	txsymbol PLUSPOWER  ; $14
+	txsymbol DEFENDER   ; $15
+	txsymbol HP_OK      ; $16
+	txsymbol HP_NOK     ; $17
+	txsymbol BOX_TOP_L  ; $18
+	txsymbol BOX_TOP_R  ; $19
+	txsymbol BOX_BTM_L  ; $1a
+	txsymbol BOX_BTM_R  ; $1b
+	txsymbol BOX_TOP    ; $1c
+	txsymbol BOX_BOTTOM ; $1d
+	txsymbol BOX_LEFT   ; $1e
+	txsymbol BOX_RIGHT  ; $1f
+	txsymbol 0          ; $20
+	txsymbol 1          ; $21
+	txsymbol 2          ; $22
+	txsymbol 3          ; $23
+	txsymbol 4          ; $24
+	txsymbol 5          ; $25
+	txsymbol 6          ; $26
+	txsymbol 7          ; $27
+	txsymbol 8          ; $28
+	txsymbol 9          ; $29
+	txsymbol DOT        ; $2a
+	txsymbol PLUS       ; $2b
+	txsymbol MINUS      ; $2c
+	txsymbol CROSS      ; $2d
+	txsymbol SLASH      ; $2e
+	txsymbol CURSOR_D   ; $2f
+	txsymbol PRIZE      ; $30

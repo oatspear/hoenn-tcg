@@ -4,7 +4,7 @@
 InitScreenAnimation:
 	ld a, [wAnimationsDisabled]
 	or a
-	ret nz
+	jr nz, .skip
 	ld a, [wTempAnimation]
 	ld [wActiveScreenAnim], a
 	sub DUEL_SCREEN_ANIMS
@@ -23,19 +23,21 @@ InitScreenAnimation:
 	ld a, [hl]
 	ld [wScreenAnimDuration], a
 	call CallBC
+.skip
 	ret
 
-
-; for the following animations, these functions are run with the corresponding duration.
-; this duration decides different effects, depending on which function runs
-; and is decreased by one each time. when it is down to 0, the animation is done.
+; for the following animations, these functions
+; are run with the corresponding duration.
+; this duration decides different effects,
+; depending on which function runs
+; and is decreased by one each time.
+; when it is down to 0, the animation is done.
 
 MACRO screen_effect
 	dw \1 ; function pointer
 	db \2 ; duration
 	db $00 ; padding
 ENDM
-
 
 Data_1cc9f:
 ; function pointer, duration
@@ -46,18 +48,15 @@ Data_1cc9f:
 	screen_effect WhiteFlashScreen,    8 ; DUEL_ANIM_FLASH
 	screen_effect DistortScreen,      63 ; DUEL_ANIM_DISTORT
 
-
 ; checks if screen animation duration is over
 ; and if so, loads the default update function
-; preserves bc and de
 LoadDefaultScreenAnimationUpdateWhenFinished:
 	ld a, [wScreenAnimDuration]
 	or a
 	ret nz
-;	fallthrough
+	; fallthrough
 
 ; function called for the screen animation update when it is over
-; preserves bc and de
 DefaultScreenAnimationUpdate:
 	ld a, $ff
 	ld [wActiveScreenAnim], a
@@ -72,7 +71,6 @@ DefaultScreenAnimationUpdate:
 	ld [hl], HIGH(DefaultScreenAnimationUpdate)
 	ret
 
-
 ; runs the screen update function set in wScreenAnimUpdatePtr
 DoScreenAnimationUpdate:
 	ld a, 1
@@ -81,22 +79,18 @@ DoScreenAnimationUpdate:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call CallHL
+	call CallHL2
 	jr DefaultScreenAnimationUpdate
 
-
-; preserves bc and de
 ShakeScreenX_Small:
 	ld hl, SmallShakeOffsets
 	jr ShakeScreenX
 
-; preserves bc and de
 ShakeScreenX_Big:
 	ld hl, BigShakeOffsets
 ;	fallthrough
 
-; input:
-;	hl = timer and offset data
+
 ShakeScreenX:
 	ld a, l
 	ld [wScreenShakeOffsetsPtr], a
@@ -109,28 +103,23 @@ ShakeScreenX:
 	ret
 
 .Update
-	ld hl, wScreenAnimDuration
-	dec [hl]
+	call DecrementScreenAnimDuration
 	call UpdateShakeOffset
-	jr nc, LoadDefaultScreenAnimationUpdateWhenFinished
+	jp nc, LoadDefaultScreenAnimationUpdateWhenFinished
 	ldh a, [hSCX]
 	add [hl]
 	ldh [hSCX], a
-	jr LoadDefaultScreenAnimationUpdateWhenFinished
+	jp LoadDefaultScreenAnimationUpdateWhenFinished
 
-
-; preserves bc and de
 ShakeScreenY_Small:
 	ld hl, SmallShakeOffsets
 	jr ShakeScreenY
 
-; preserves bc and de
 ShakeScreenY_Big:
 	ld hl, BigShakeOffsets
 ;	fallthrough
 
-; input:
-;	hl = timer and offset data
+
 ShakeScreenY:
 	ld a, l
 	ld [wScreenShakeOffsetsPtr], a
@@ -143,20 +132,17 @@ ShakeScreenY:
 	ret
 
 .Update
-	ld hl, wScreenAnimDuration
-	dec [hl]
+	call DecrementScreenAnimDuration
 	call UpdateShakeOffset
-	jr nc, LoadDefaultScreenAnimationUpdateWhenFinished
+	jp nc, LoadDefaultScreenAnimationUpdateWhenFinished
 	ldh a, [hSCY]
 	add [hl]
 	ldh [hSCY], a
-	jr LoadDefaultScreenAnimationUpdateWhenFinished
+	jp LoadDefaultScreenAnimationUpdateWhenFinished
 
-
-; gets the displacement of the current frame depending on the value of wScreenAnimDuration
-; preserves bc and de
-; output:
-;	carry = set:  if the displacement was updated
+; get the displacement of the current frame
+; depending on the value of wScreenAnimDuration
+; returns carry if displacement was updated
 UpdateShakeOffset:
 	ld hl, wScreenShakeOffsetsPtr
 	ld a, [hli]
@@ -176,7 +162,6 @@ UpdateShakeOffset:
 	scf
 	ret
 
-
 SmallShakeOffsets:
 ; timer, offset
 	db 21,  2
@@ -185,7 +170,6 @@ SmallShakeOffsets:
 	db  9, -2
 	db  5,  1
 	db  1, -1
-
 
 BigShakeOffsets:
 ; timer, offset
@@ -198,6 +182,10 @@ BigShakeOffsets:
 	db  5,  2
 	db  1, -2
 
+DecrementScreenAnimDuration:
+	ld hl, wScreenAnimDuration
+	dec [hl]
+	ret
 
 WhiteFlashScreen:
 	ld hl, wScreenAnimUpdatePtr
@@ -206,7 +194,7 @@ WhiteFlashScreen:
 	ld [hl], HIGH(.Update)
 	ld a, [wBGP]
 	ld [wTempWhiteFlashBGP], a
-	; backup the current background palettes
+	; backup the current background pals
 	ld hl, wBackgroundPalettesCGB
 	ld de, wTempBackgroundPalettesCGB
 	ld bc, 8 palettes
@@ -220,12 +208,11 @@ WhiteFlashScreen:
 	call FlushAllPalettes
 
 .Update
-	ld hl, wScreenAnimDuration
-	dec [hl]
+	call DecrementScreenAnimDuration
 	ld a, [wScreenAnimDuration]
 	or a
 	ret nz
-	; retrieve the previous background palettes
+	; retrieve the previous background pals
 	ld hl, wTempBackgroundPalettesCGB
 	ld de, wBackgroundPalettesCGB
 	ld bc, 8 palettes
@@ -235,8 +222,6 @@ WhiteFlashScreen:
 	call FlushAllPalettes
 	jp DefaultScreenAnimationUpdate
 
-
-; preserves de
 DistortScreen:
 	ld hl, wScreenAnimUpdatePtr
 	ld [hl], LOW(.Update)
@@ -264,11 +249,41 @@ DistortScreen:
 	add hl, bc
 	ld a, [hl]
 	ld [wBGScrollMod], a
-	ld hl, wScreenAnimDuration
-	dec [hl]
+	call DecrementScreenAnimDuration
 	jp LoadDefaultScreenAnimationUpdateWhenFinished
 
 ; each value is applied for 8 "ticks" of wScreenAnimDuration
 ; starting from the last and running backwards
 .BGScrollModData
 	db 4, 3, 2, 1, 1, 1, 1, 2
+
+Func_1ce03:
+	cp DUEL_ANIM_158
+	jr z, .asm_1ce17
+	sub $96
+	add a
+	ld c, a
+	ld b, $00
+	ld hl, .pointer_table
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp Func_3bb5
+
+.asm_1ce17
+	ld a, [wDuelAnimDamage]
+	ld l, a
+	ld a, [wDuelAnimDamage + 1]
+	ld h, a
+	jp Func_3bb5
+
+.pointer_table
+	dw Func_190f4         ; DUEL_ANIM_150
+	dw PrintDamageText    ; DUEL_ANIM_PRINT_DAMAGE
+	dw UpdateMainSceneHUD ; DUEL_ANIM_UPDATE_HUD
+	dw Func_191a3         ; DUEL_ANIM_153
+	dw Func_191a3         ; DUEL_ANIM_154
+	dw Func_191a3         ; DUEL_ANIM_155
+	dw Func_191a3         ; DUEL_ANIM_156
+	dw Func_191a3         ; DUEL_ANIM_157

@@ -1,15 +1,10 @@
-; output:
-;	a = Active Pokemon's type/color (accounting for Tropius's Shift Pokemon Power if active)
+; return the turn holder's arena card's color in a, accounting for Venomoth's Shift Pokemon Power if active
 GetArenaCardColor::
 	xor a ; PLAY_AREA_ARENA
 ;	fallthrough
 
-; preserves all registers except af
-; input:
-;	a = play area location offset of the desired card (PLAY_AREA_* constant)
-; output:
-;	a = type/color of the turn holder's Pokemon from input
-;	    (accounting for Tropius's Shift Pokemon Power if active)
+; input: a = play area location offset (PLAY_AREA_*) of the desired card
+; return the turn holder's card's color in a, accounting for Venomoth's Shift Pokemon Power if active
 GetPlayAreaCardColor::
 	push hl
 	push de
@@ -33,7 +28,7 @@ GetPlayAreaCardColor::
 	ret
 .has_changed_color
 	ld a, e
-	call CheckCannotUseDueToStatus_OnlyToxicGasIfANon0
+	call CheckIsIncapableOfUsingPkmnPower
 	jr c, .regular_color ; jump if can't use Shift
 	ld a, e
 	add DUELVARS_ARENA_CARD_CHANGED_TYPE
@@ -43,24 +38,17 @@ GetPlayAreaCardColor::
 	and $f
 	ret
 
-
-; finds the Weakness of one of the turn holder's in-play Pokemon
-; preserves bc and hl
-; input:
-;	a = play area location offset (PLAY_AREA_* constant)
-; output:
-;	a = Weakness of the Pokemon from input
+; return in a the weakness of the turn holder's arena or benchx Pokemon given the PLAY_AREA_* value in a
+; if a == 0 and [DUELVARS_ARENA_CARD_CHANGED_WEAKNESS] != 0,
+; return [DUELVARS_ARENA_CARD_CHANGED_WEAKNESS] instead
 GetPlayAreaCardWeakness::
 	or a
 	jr z, GetArenaCardWeakness
 	add DUELVARS_ARENA_CARD
 	jr GetCardWeakness
 
-; finds the Weakness of the turn holder's Active Pokemon's, either what's
-; printed on the card or whatever it might have become via a card effect
-; preserves bc and hl
-; output:
-;	a = Weakness of the turn holder's Active Pokemon
+; return in a the weakness of the turn holder's arena Pokemon
+; if [DUELVARS_ARENA_CARD_CHANGED_WEAKNESS] != 0, return it instead
 GetArenaCardWeakness::
 	ld a, DUELVARS_ARENA_CARD_CHANGED_WEAKNESS
 	call GetTurnDuelistVariable
@@ -75,25 +63,17 @@ GetCardWeakness::
 	ld a, [wLoadedCard2Weakness]
 	ret
 
-
-; finds the Resistance of one of the turn holder's in-play Pokemon
-; preserves bc and hl
-; input:
-;	a = play area location offset (PLAY_AREA_* constant)
-; output:
-;	a = Resistance of the Pokemon from input
+; return in a the resistance of the turn holder's arena or benchx Pokemon given the PLAY_AREA_* value in a
+; if a == 0 and [DUELVARS_ARENA_CARD_CHANGED_RESISTANCE] != 0,
+; return [DUELVARS_ARENA_CARD_CHANGED_RESISTANCE] instead
 GetPlayAreaCardResistance::
 	or a
-	jr z, GetArenaCardResistance ; it's the Active Pokemon
-	; it's a Benched Pokemon
+	jr z, GetArenaCardResistance
 	add DUELVARS_ARENA_CARD
 	jr GetCardResistance
 
-; finds the Resistance of the turn holder's Active Pokemon's, either what's
-; printed on the card or whatever it might have become via a card effect
-; preserves bc and hl
-; output:
-;	a = Resistance of the turn holder's Active Pokemon
+; return in a the resistance of the arena Pokemon
+; if [DUELVARS_ARENA_CARD_CHANGED_RESISTANCE] != 0, return it instead
 GetArenaCardResistance::
 	ld a, DUELVARS_ARENA_CARD_CHANGED_RESISTANCE
 	call GetTurnDuelistVariable
@@ -108,18 +88,16 @@ GetCardResistance::
 	ld a, [wLoadedCard2Resistance]
 	ret
 
-
-; checks if the turn holder's CHARIZARD's Energy Burn is active,
-; and if so, it turns all Energy (except for Double Colorless Energy)
-; at wAttachedEnergies into Fire Energy
+; this function checks if turn holder's CHARIZARD energy burn is active, and if so, turns
+; all energies at wAttachedEnergies except double colorless energies into fire energies
 HandleEnergyBurn::
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, e
-	cp SALAMENCE
+	cp16 CHARIZARD
 	ret nz
-	call CheckCannotUseDueToStatus
+	xor a ; PLAY_AREA_ARENA
+	call CheckIsIncapableOfUsingPkmnPower
 	ret c
 	ld hl, wAttachedEnergies
 	ld c, NUM_COLORED_TYPES
@@ -129,5 +107,5 @@ HandleEnergyBurn::
 	dec c
 	jr nz, .zero_next_energy
 	ld a, [wTotalAttachedEnergies]
-	ld [wAttachedEnergies], a
+	ld [wAttachedEnergies + FIRE], a
 	ret

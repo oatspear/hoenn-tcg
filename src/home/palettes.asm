@@ -1,34 +1,18 @@
-; Flushes all non-CGB and CGB palettes
-; preserves all registers except af
+; Flush all non-CGB and CGB palettes
 FlushAllPalettes::
 	ld a, FLUSH_ALL_PALS
 	jr FlushPalettes
 
-; Flushes non-CGB palettes and a single CGB palette,
-; provided in a as an index between 0-7 (BGP) or 8-15 (OBP)
-; preserves all registers except af
-; input:
-;	a = CGB palette to flush
-FlushPalette::
-	or FLUSH_ONE_PAL
-	jr FlushPalettes
-
-; Sets wBGP to the specified value, then flushes non-CGB palettes and the first CGB palette.
-; preserves all registers except af
-; input:
-;	a = value to copy into wBGP
+; Set wBGP to the specified value, flush non-CGB palettes, and the first CGB palette.
 SetBGP::
 	ld [wBGP], a
 ;	fallthrough
 
-; Flushes non-CGB palettes and the first CGB palette
-; preserves all registers except af
+; Flush non-CGB palettes and the first CGB palette
 FlushPalette0::
 	ld a, FLUSH_ONE_PAL
 ;	fallthrough
 
-; input:
-;	a = wFlushPaletteFlags ID (FLUSH_* constant)
 FlushPalettes::
 	ld [wFlushPaletteFlags], a
 	ld a, [wLCDC]
@@ -43,25 +27,18 @@ FlushPalettes::
 	pop hl
 	ret
 
-; Sets wOBP0 to the specified value, then flushes non-CGB palettes and the first CGB palette.
-; preserves all registers except af
-; input:
-;	a = value to copy into wOBP0
+; Set wOBP0 to the specified value, flush non-CGB palettes, and the first CGB palette.
 SetOBP0::
 	ld [wOBP0], a
 	jr FlushPalette0
 
-; Sets wOBP1 to the specified value, then flushes non-CGB palettes and the first CGB palette.
-; preserves all registers except af
-; input:
-;	a = value to copy into wOBP1
+; Set wOBP1 to the specified value, flush non-CGB palettes, and the first CGB palette.
 SetOBP1::
 	ld [wOBP1], a
 	jr FlushPalette0
 
-
-; Flushes non-CGB palettes from [wBGP], [wOBP0], and [wOBP1].
-; Also flushes CGB palettes from [wBackgroundPalettesCGB..wBackgroundPalettesCGB+$3f] (BG palette)
+; Flushes non-CGB palettes from [wBGP], [wOBP0], [wOBP1] as well as CGB
+; palettes from [wBackgroundPalettesCGB..wBackgroundPalettesCGB+$3f] (BG palette)
 ; and [wObjectPalettesCGB+$00..wObjectPalettesCGB+$3f] (sprite palette).
 ; Only flushes if [wFlushPaletteFlags] is nonzero, and only flushes
 ; a single CGB palette if bit6 of that location is reset.
@@ -105,12 +82,8 @@ FlushAllCGBPalettes::
 	call CopyCGBPalettes
 	jr FlushPalettesIfRequested.done
 
-
-; copies b bytes of CGB palette data starting at
+; copy b bytes of CGB palette data starting at
 ; (wBackgroundPalettesCGB + a palettes) into rBGPD or rOBPD.
-; input:
-;	a = offset for wBackgroundPalettesCGB
-;	b = number of bytes to copy
 CopyCGBPalettes::
 	add a
 	add a

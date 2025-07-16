@@ -1,14 +1,6 @@
 ; plays the Opening sequence, and handles player selection
 ; in the Title Screen and Start Menu
 HandleTitleScreen:
-; if last selected item in Start Menu is 0 (Card Pop!),
-; then skip straight to the Start Menu
-; this makes it so that returning from Card Pop!
-; doesn't play the Opening sequence
-	ld a, [wLastSelectedStartMenuItem]
-	or a
-	jr z, .start_menu
-
 .play_opening
 	ld a, MUSIC_STOP
 	call PlaySong
@@ -51,7 +43,6 @@ HandleTitleScreen:
 	call PlaySFX
 	farcall FadeScreenToWhite
 
-.start_menu
 	call CheckIfHasSaveData
 	call HandleStartMenu
 
@@ -61,30 +52,19 @@ HandleTitleScreen:
 	jr nz, .continue_from_diary
 	call DeleteSaveDataForNewGame
 	jr c, HandleTitleScreen
-	jr .card_pop
+	jr .continue_duel
 .continue_from_diary
 	ld a, [wStartMenuChoice]
-	cp START_MENU_CONTINUE_FROM_DIARY
-	jr nz, .card_pop
+	or a ; cp START_MENU_CONTINUE_FROM_DIARY
+	jr nz, .continue_duel
 	call AskToContinueFromDiaryWithDuelData
 	jr c, HandleTitleScreen
-.card_pop
-	ld a, [wStartMenuChoice]
-	cp START_MENU_CARD_POP
-	jr nz, .continue_duel
-	call ShowCardPopCGBDisclaimer
-	jr c, HandleTitleScreen
 .continue_duel
-	xor a
-	ld [wDoFrameFunction + 0], a
-	ld [wDoFrameFunction + 1], a
-	call EnableAndClearSpriteAnimations
-	ret
-
+	call ResetDoFrameFunction
+	jp EnableAndClearSpriteAnimations
 
 ; updates wHasSaveData and wHasDuelSaveData
 ; depending on whether the save data is valid or not
-; preserves de
 CheckIfHasSaveData:
 	farcall ValidateBackupGeneralSaveData
 	ld a, TRUE
@@ -94,7 +74,8 @@ CheckIfHasSaveData:
 	ld [wHasSaveData], a
 	cp $00 ; or a
 	jr z, .write_has_duel_data
-	bank1call ValidateSavedNonLinkDuelData
+	ld hl, sCurrentDuel
+	bank1call ValidateSavedDuelData
 	ld a, TRUE
 	jr nc, .write_has_duel_data
 	ld a, FALSE
@@ -103,8 +84,8 @@ CheckIfHasSaveData:
 	farcall ValidateBackupGeneralSaveData
 	ret
 
-
-; handles printing the Start Menu and getting the player's input and choice
+; handles printing the Start Menu
+; and getting player input and choice
 HandleStartMenu:
 	ld a, MUSIC_PC_MAIN_MENU
 	call PlaySong
@@ -113,10 +94,9 @@ HandleStartMenu:
 	lb de, $30, $8f
 	call SetupText
 	call EnableAndClearSpriteAnimations
-	xor a ; text is double-spaced
+	xor a ; DOUBLE_SPACED
 	ld [wLineSeparation], a
-	lb bc, 14, 1
-	call DrawPlayerPortrait
+	call .DrawPlayerPortrait
 	call .SetStartMenuParams
 
 	ld a, $ff
@@ -124,10 +104,7 @@ HandleStartMenu:
 	ld a, [wLastSelectedStartMenuItem]
 	cp $4
 	jr c, .init_menu
-	ld a, [wHasSaveData]
-	or a
-	jr z, .init_menu
-	ld a, 1 ; start at second menu option
+	xor a ; start at first menu option
 .init_menu
 	ld hl, wStartMenuParams
 	farcall InitAndPrintMenu
@@ -153,7 +130,6 @@ HandleStartMenu:
 	; but when there's no save data,
 	; it's the 1st in menu list, so adjust it
 	inc e
-	inc e
 .no_adjustment
 	ld a, e
 	ld [wStartMenuChoice], a
@@ -170,7 +146,7 @@ HandleStartMenu:
 	or a
 	jr z, .get_text_id ; New Game
 	inc e
-	ld a, 2
+	ld a, 1
 	call .AddItems
 	ld a, [wHasDuelSaveData]
 	or a
@@ -192,11 +168,9 @@ HandleStartMenu:
 	ld [wStartMenuParams + 7], a
 	ret
 
-; adds c items to start menu list, 
+; adds a items to start menu list
 ; this means adding 2 units per item to the text box height
 ; and adding to the number of items
-; input:
-;	a = number of items to add to the list
 .AddItems
 	push bc
 	ld c, a
@@ -213,7 +187,7 @@ HandleStartMenu:
 	ret
 
 .StartMenuParams
-	db  0, 0 ; start menu coordinates
+	db  0, 0 ; start menu coords
 	db 14, 4 ; start menu text box dimensions
 
 	db  2, 2 ; text alignment for InitTextPrinting
@@ -230,13 +204,16 @@ HandleStartMenu:
 
 .StartMenuTextIDs
 	tx NewGameText
-	tx CardPopContinueDiaryNewGameText
-	tx CardPopContinueDiaryNewGameContinueDuelText
+	tx ContinueDiaryNewGameText
+	tx ContinueDiaryNewGameContinueDuelText
 
+.DrawPlayerPortrait
+	lb bc, 14, 1
+	farcall $4, DrawPlayerPortrait
+	ret
 
 ; prints the description for the current selected item
 ; in the Start Menu in the text box
-; preserves all registers except af
 PrintStartMenuDescriptionText:
 	push hl
 	push bc
@@ -252,7 +229,6 @@ PrintStartMenuDescriptionText:
 	jr nz, .has_data
 	; New Game option is 3rd element
 	; in function table, so add 2
-	inc e
 	inc e
 .has_data
 
@@ -273,16 +249,9 @@ PrintStartMenuDescriptionText:
 	ret
 
 .StartMenuDescriptionFunctionTable
-	dw .CardPop
 	dw .ContinueFromDiary
 	dw .NewGame
 	dw .ContinueDuel
-
-.CardPop
-	lb de, 1, 12
-	call InitTextPrinting
-	ldtx hl, WhenYouCardPopWithFriendText
-	jp PrintTextNoDelay
 
 .ContinueDuel
 	lb de, 1, 12
@@ -321,20 +290,23 @@ PrintStartMenuDescriptionText:
 	ldtx hl, ContinueFromDiarySummaryText
 	call PrintTextNoDelay
 
-	ld a, [wTotalNumCardsCollected]
-	ld d, a
-	ld a, [wTotalNumCardsToCollect]
+	ld a, [wTotalNumCardsCollected + 0]
 	ld e, a
+	ld a, [wTotalNumCardsCollected + 1]
+	ld d, a
+	ld a, [wTotalNumCardsToCollect + 0]
+	ld l, a
+	ld a, [wTotalNumCardsToCollect + 1]
+	ld h, a
 	lb bc, 9, 14
 	farcall PrintAlbumProgress_SkipGetProgress
 	lb bc, 10, 16
 	farcall PrintPlayTime_SkipUpdateTime
 	ret
 
-
 ; asks the player whether it's okay to delete
-; the save data in order to create a new one.
-; if player answers "Yes", then delete the save data.
+; the save data in order to create a new one
+; if player answers "yes", delete it
 DeleteSaveDataForNewGame:
 ; exit if there no save data
 	ld a, [wHasSaveData]
@@ -350,18 +322,16 @@ DeleteSaveDataForNewGame:
 	call PrintScrollableText_NoTextBoxLabel
 	ldtx hl, OKToDeleteTheDataText
 	call YesOrNoMenuWithText
-	ret c ; quit if "No" was selected
+	ret c ; quit if chose "no"
 	farcall InvalidateSaveData
 	ldtx hl, AllDataWasDeletedText
 	call PrintScrollableText_NoTextBoxLabel
 	or a
 	ret
 
-
 ; asks the player if the game should resume
-; from the diary even though there is Duel save data
-; output:
-;	carry = set:  if "No" was selected
+; from diary even though there is Duel save data
+; returns carry if "no" was selected
 AskToContinueFromDiaryWithDuelData:
 ; return if there's no duel save data
 	ld a, [wHasDuelSaveData]
@@ -381,47 +351,19 @@ AskToContinueFromDiaryWithDuelData:
 	or a
 	ret
 
-
-; shows the disclaimer for Card Pop! in case the player
-; is not playing on a Game Boy Color
-; output:
-;	carry = set:  if the disclaimer was shown
-ShowCardPopCGBDisclaimer:
-; return if playing in CGB
-	ld a, [wConsole]
-	cp CONSOLE_CGB
-	ret z
-
-	lb de, 0, 10
-	lb bc, 20, 8
-	call DrawRegularTextBox
-	lb de, 1,12
-	call InitTextPrinting
-	ldtx hl, YouCanAccessCardPopOnlyWithGameBoyColorsText
-	call PrintTextNoDelay
-	lb bc, SYM_CURSOR_D, SYM_BOX_BOTTOM
-	lb de, 18, 17
-	call SetCursorParametersForTextBox
-	call WaitForButtonAorB
-	scf
-	ret
-
-
 DrawPlayerPortraitAndPrintNewGameText:
 	call DisableLCD
-	farcall LoadConsolePaletteData
+	xor a
+	ld [wd317], a
 	farcall InitMenuScreen
 	call EnableAndClearSpriteAnimations
 	ld hl, HandleAllSpriteAnimations
 	call SetDoFrameFunction
 	lb bc, 7, 3
-	call DrawPlayerPortrait
+	farcall $4, DrawPlayerPortrait
 	farcall FadeScreenFromWhite
 	call DoFrameIfLCDEnabled
 	ldtx hl, IsCrazyAboutPokemonAndPokemonCardCollectingText
 	call PrintScrollableText_NoTextBoxLabel
-	xor a
-	ld [wDoFrameFunction + 0], a
-	ld [wDoFrameFunction + 1], a
-	call EnableAndClearSpriteAnimations
-	ret
+	call ResetDoFrameFunction
+	jp EnableAndClearSpriteAnimations

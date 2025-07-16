@@ -7,8 +7,7 @@ AIActionTable_LegendaryMoltres:
 	dw .take_prize
 
 .do_turn
-	call AIDoTurn_LegendaryMoltres
-	ret
+	jp AIDoTurn_LegendaryMoltres
 
 .start_duel
 	call InitAIDuelVars
@@ -16,67 +15,63 @@ AIActionTable_LegendaryMoltres:
 	call SetUpBossStartingHandAndDeck
 	call TrySetUpBossStartingPlayArea
 	ret nc ; Play Area set up was successful
-	call AIPlayInitialBasicCards
-	ret
+	jp AIPlayInitialBasicCards
 
 .forced_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .ko_switch
-	call AIDecideBenchPokemonToSwitchTo
-	ret
+	jp AIDecideBenchPokemonToSwitchTo
 
 .take_prize
-	call AIPickPrizeCards
-	ret
+	jp AIPickPrizeCards
 
 .list_arena
-	db PELIPPER
-	db RAYQUAZA
-	db VULPIX
-	db WINGULL
-	db WAILMER
-	db WAILORD
-	db $00
+	dw MAGMAR_LV31
+	dw GROWLITHE
+	dw VULPIX
+	dw MAGMAR_LV24
+	dw MOLTRES_LV35
+	dw MOLTRES_LV37
+	dw NULL
 
 .list_bench
-	db WAILMER
-	db VULPIX
-	db RAYQUAZA
-	db PELIPPER
-	db WINGULL
-	db $00
+	dw MOLTRES_LV35
+	dw VULPIX
+	dw GROWLITHE
+	dw MAGMAR_LV31
+	dw MAGMAR_LV24
+	dw NULL
 
 .list_play_hand
-	db WAILORD
-	db WAILMER
-	db VULPIX
-	db RAYQUAZA
-	db PELIPPER
-	db WINGULL
-	db $00
+	dw MOLTRES_LV37
+	dw MOLTRES_LV35
+	dw VULPIX
+	dw GROWLITHE
+	dw MAGMAR_LV31
+	dw MAGMAR_LV24
+	dw NULL
 
 .list_retreat
-	ai_retreat RAYQUAZA, -5
+	ai_retreat GROWLITHE, -5
 	ai_retreat VULPIX,    -5
-	db $00
+	dw NULL
 
 .list_energy
 	ai_energy VULPIX,         3, +0
-	ai_energy LATIAS, 3, +1
-	ai_energy RAYQUAZA,      3, +1
-	ai_energy MARSHTOMP,  4, +1
-	ai_energy WINGULL,    4, -1
-	ai_energy PELIPPER,    1, -1
-	ai_energy WAILORD,   3, +2
-	ai_energy WAILMER,   4, +2
-	db $00
+	ai_energy NINETALES_LV35, 3, +1
+	ai_energy GROWLITHE,      3, +1
+	ai_energy ARCANINE_LV45,  4, +1
+	ai_energy MAGMAR_LV24,    4, -1
+	ai_energy MAGMAR_LV31,    1, -1
+	ai_energy MOLTRES_LV37,   3, +2
+	ai_energy MOLTRES_LV35,   4, +2
+	dw NULL
 
 .list_prize
-	db STEVEN
-	db WAILORD
-	db $00
+	dw ENERGY_REMOVAL
+	dw MOLTRES_LV37
+	dw NULL
 
 .store_list_pointers
 	store_list_pointer wAICardListAvoidPrize, .list_prize
@@ -90,7 +85,7 @@ AIActionTable_LegendaryMoltres:
 AIDoTurn_LegendaryMoltres:
 ; initialize variables
 	call InitAITurnVars
-	call HandleAIAntiMewtwoDeckStrategy
+	farcall HandleAIAntiMewtwoDeckStrategy
 	jp nc, .try_attack
 ; process Trainer cards
 ; phase 2 through 4.
@@ -109,10 +104,10 @@ AIDoTurn_LegendaryMoltres:
 	call GetTurnDuelistVariable
 	cp DECK_SIZE - 9
 	jr nc, .skip_moltres ; skip if cards in deck <= 9
-	ld a, CAMERUPT
-	call CountPokemonIDInBothPlayAreas
+	ld de, MUK
+	call CountPokemonWithActivePkmnPowerInBothPlayAreas
 	jr c, .skip_moltres ; skip if Muk in play
-	ld a, WAILORD
+	ld de, MOLTRES_LV37
 	call LookForCardIDInHandList_Bank5
 	jr nc, .skip_moltres ; skip if no MoltresLv37 in hand
 	ldh [hTemp_ffa0], a
@@ -132,8 +127,8 @@ AIDoTurn_LegendaryMoltres:
 	ld a, AI_TRAINER_CARD_PHASE_11
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
-	ld a, [wAlreadyDidUniqueAction]
-	and PLAYED_ENERGY_THIS_TURN
+	ld a, [wAlreadyPlayedEnergy]
+	or a
 	jr nz, .skip_attach_energy
 
 ; if MagmarLv31 is the Arena card and has no energy attached,
@@ -142,8 +137,7 @@ AIDoTurn_LegendaryMoltres:
 	ld a, DUELVARS_ARENA_CARD
 	call GetTurnDuelistVariable
 	call GetCardIDFromDeckIndex
-	ld a, PELIPPER
-	cp e
+	cp16 MAGMAR_LV31
 	jr nz, .attach_normally
 	; MagmarLv31 is the Arena card
 	call CreateEnergyCardListFromHand

@@ -956,15 +956,16 @@ DrawCardTypeIcons:
 
 .CardTypeIcons
 ; icon tile, x coord, y coord
-	db ICON_TILE_GRASS,      1, 2
-	db ICON_TILE_FIRE,       3, 2
-	db ICON_TILE_WATER,      5, 2
-	db ICON_TILE_LIGHTNING,  7, 2
-	db ICON_TILE_FIGHTING,   9, 2
-	db ICON_TILE_PSYCHIC,   11, 2
-	db ICON_TILE_COLORLESS, 13, 2
-	db ICON_TILE_TRAINER,   15, 2
-	db ICON_TILE_ENERGY,    17, 2
+	db ICON_TILE_GRASS,      0, 2
+	db ICON_TILE_FIRE,       2, 2
+	db ICON_TILE_WATER,      4, 2
+	db ICON_TILE_LIGHTNING,  6, 2
+	db ICON_TILE_FIGHTING,   8, 2
+	db ICON_TILE_PSYCHIC,   10, 2
+	db ICON_TILE_COLORLESS, 12, 2
+	db ICON_TILE_TRAINER,   14, 2
+	db ICON_TILE_ENERGY,    16, 2
+	db ICON_TILE_ENERGY,    18, 2
 	db $00
 
 DeckBuildMenuData:

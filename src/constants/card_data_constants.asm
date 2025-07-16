@@ -1,5 +1,8 @@
 DEF NONE EQU $0
 
+; debug constants
+DEF DEBUG_FULL_COLLECTION_AT_START EQU $1
+
 ; sCardCollection constants
 DEF CARD_COLLECTION_SIZE EQU $200 ; cards
 DEF MAX_AMOUNT_OF_CARD   EQU 99

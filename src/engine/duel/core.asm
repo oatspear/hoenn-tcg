@@ -717,7 +717,7 @@ OpenVariousPlayAreaScreens_FromSelectPresses:
 ; return carry if unable, nc if able.
 CheckAbleToRetreat:
 ; OATS retreat only once per turn
-	ld a, [wAlreadyDidUniqueAction]
+	ld a, [wOncePerTurnActions]
 	and RETREATED_THIS_TURN
 	ldtx hl, AlreadyRetreatedThisTurnText
 	jr nz, .done

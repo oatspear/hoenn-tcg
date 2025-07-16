@@ -94,7 +94,7 @@ AIDoTurn_LegendaryZapdos:
 	call AIProcessHandTrainerCards
 ; play Energy card if possible.
 	ld a, [wOncePerTurnActions]
-	or a
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .skip_energy_attach
 
 ; if Arena card is Voltorb and there's ElectrodeLv35 in hand,

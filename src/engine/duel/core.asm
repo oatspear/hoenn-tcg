@@ -529,13 +529,14 @@ PlayEnergyCard:
 
 .not_water_energy
 	ld a, [wOncePerTurnActions]
-	or a
+	and PLAYED_ENERGY_THIS_TURN
 	jr nz, .already_played_energy
 	call HasAlivePokemonInPlayArea
 	call OpenPlayAreaScreenForSelection ; choose card to play energy card on
 	jp c, DuelMainInterface ; exit if no card was chosen
 .play_energy_set_played
-	ld a, TRUE
+	ld a, [wOncePerTurnActions]
+	or PLAYED_ENERGY_THIS_TURN
 	ld [wOncePerTurnActions], a
 .play_energy
 	ldh a, [hTempPlayAreaLocation_ff9d]
@@ -557,7 +558,7 @@ PlayEnergyCard:
 	call CheckRainDanceScenario
 	jr c, .play_energy
 	ld a, [wOncePerTurnActions]
-	or a
+	and PLAYED_ENERGY_THIS_TURN
 	jr z, .play_energy_set_played
 	ldtx hl, MayOnlyAttachOneEnergyCardText
 	call DrawWideTextBox_WaitForInput
@@ -5961,7 +5962,8 @@ OppAction_PlayEnergyCard:
 	call LoadCardDataToBuffer1_FromDeckIndex
 	call DrawLargePictureOfCard
 	call PrintAttachedEnergyToPokemon
-	ld a, TRUE
+	ld a, [wOncePerTurnActions]
+	or PLAYED_ENERGY_THIS_TURN
 	ld [wOncePerTurnActions], a
 	jp DrawDuelMainScene
 

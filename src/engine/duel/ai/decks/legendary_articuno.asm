@@ -160,7 +160,7 @@ AIDoTurn_LegendaryArticuno:
 	call AIProcessHandTrainerCards
 ; play Energy card if possible
 	ld a, [wOncePerTurnActions]
-	or a
+	and PLAYED_ENERGY_THIS_TURN
 	call z, AIProcessAndTryToPlayEnergy
 .skip_energy_attach_1
 ; play Pokemon from hand again
@@ -184,7 +184,7 @@ AIDoTurn_LegendaryArticuno:
 	ld a, AI_TRAINER_CARD_PHASE_10
 	call AIProcessHandTrainerCards
 	ld a, [wOncePerTurnActions]
-	or a
+	and PLAYED_ENERGY_THIS_TURN
 	call z, AIProcessAndTryToPlayEnergy
 .skip_energy_attach_2
 	call AIDecidePlayPokemonCard

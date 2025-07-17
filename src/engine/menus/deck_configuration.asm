@@ -956,16 +956,15 @@ DrawCardTypeIcons:
 
 .CardTypeIcons
 ; icon tile, x coord, y coord
-	db ICON_TILE_GRASS,      0, 2
-	db ICON_TILE_FIRE,       2, 2
-	db ICON_TILE_WATER,      4, 2
-	db ICON_TILE_LIGHTNING,  6, 2
-	db ICON_TILE_FIGHTING,   8, 2
-	db ICON_TILE_PSYCHIC,   10, 2
-	db ICON_TILE_COLORLESS, 12, 2
-	db ICON_TILE_TRAINER,   14, 2
-	db ICON_TILE_ENERGY,    16, 2
-	db ICON_TILE_ENERGY,    18, 2
+	db ICON_TILE_GRASS,      1, 2
+	db ICON_TILE_FIRE,       3, 2
+	db ICON_TILE_WATER,      5, 2
+	db ICON_TILE_LIGHTNING,  7, 2
+	db ICON_TILE_FIGHTING,   9, 2
+	db ICON_TILE_PSYCHIC,   11, 2
+	db ICON_TILE_DARKNESS,  13, 2
+	db ICON_TILE_COLORLESS, 15, 2
+	db ICON_TILE_TRAINER,   17, 2
 	db $00
 
 DeckBuildMenuData:
@@ -1035,7 +1034,14 @@ CreateFilteredCardList:
 	and FILTER_ENERGY
 	cp FILTER_ENERGY
 	jr z, .check_energy
+; OATS begin custom logic to include energy and pokemon in the same filter
 	ld a, c
+	cp TYPE_TRAINER
+	jr nc, .normal_card_check  ; it's a trainer card
+	and TYPE_PKMN  ; treat pokemon and energy as the same thing
+; OATS end custom logic
+.normal_card_check
+	; ld a, c
 	cp b
 	jr nz, .loop_card_ids
 	jr .add_card
@@ -1378,6 +1384,14 @@ CountNumberOfCardsOfType:
 	and FILTER_ENERGY
 	cp FILTER_ENERGY
 	jr z, .check_energy
+; OATS begin custom logic to include energy and pokemon in the same filter
+	ld a, l
+	cp TYPE_TRAINER
+	jr nc, .normal_card_check  ; it's a trainer card
+	and TYPE_PKMN  ; treat pokemon and energy as the same thing
+; OATS end custom logic
+.normal_card_check
+	; ld a, l
 	ld a, l
 	pop hl
 	cp b
@@ -1476,9 +1490,9 @@ CardTypeFilters:
 	db FILTER_LIGHTNING
 	db FILTER_FIGHTING
 	db FILTER_PSYCHIC
+	db FILTER_DARKNESS
 	db FILTER_COLORLESS
 	db FILTER_TRAINER
-	db FILTER_ENERGY
 	db -1 ; end of list
 
 ; counts all the cards from each card type
@@ -2994,8 +3008,8 @@ GetCardTypeIconPalette:
 	db ICON_TILE_WATER,           $3
 	db ICON_TILE_FIGHTING,        $4
 	db ICON_TILE_PSYCHIC,         $4
+	db ICON_TILE_DARKNESS,        $0
 	db ICON_TILE_COLORLESS,       $0
-	db ICON_TILE_ENERGY,          $3
 	db ICON_TILE_BASIC_POKEMON,   $3
 	db ICON_TILE_STAGE_1_POKEMON, $3
 	db ICON_TILE_STAGE_2_POKEMON, $2

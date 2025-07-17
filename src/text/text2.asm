@@ -806,11 +806,6 @@ ReceivedPromotionalSurfingPikachuText:
 	line "card Surfin' Pikachu!"
 	done
 
-NowPrintingPleaseWaitText:
-	text "Now printing."
-	line "Please wait..."
-	done
-
 BoosterPackText:
 	text "Booster Pack"
 	done
@@ -857,6 +852,7 @@ DeckConfigurationTransferWasntSuccessful2Text:
 	line "wasn't successful."
 	done
 
+NowPrintingPleaseWaitText:
 NowPrintingText:
 	text "Now printing..."
 	done
@@ -1471,7 +1467,7 @@ PlayerNameKeyboardText:
 	linefw "J K L M N O P Q R"
 	linefw "S T U V W X Y Z !"
 	linefw "? & + - ・ 0 1 2 3"
-	linefw "4 5 6 7 8 9 ", "<No>", " ", "<Lv>", "  "
+	linefw "4 5 6 7 8 9 ", "<Lv>", "    "
 	linefw "                 "
 	done
 

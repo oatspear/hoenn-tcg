@@ -1259,8 +1259,13 @@ _CheckIfEnoughEnergiesToAttack:
 	inc de
 	dec c
 	jr nz, .next_energy_type_pair
-	ld a, [de] ; colorless energy
+; OATS: NUM_COLORED_TYPES is odd with the addition of DARKNESS
+	ld a, [de] ; darkness energy
 	swap a
+	call CheckIfEnoughEnergiesOfType
+	jr c, .not_usable_or_not_enough_energies
+
+	ld a, [de] ; colorless energy
 	and $f
 	ld b, a
 	ld a, [wAttachedEnergiesAccum]
@@ -3858,9 +3863,9 @@ DisplayCardPage_PokemonOverview:
 	; print surrounding box, card name at 5,1, type, set 2, and rarity
 	call PrintPokemonCardPageGenericInformation
 	; print fixed text and draw the card symbol associated to its TYPE_*
-	ld hl, CardPageRetreatWRTextData
+	ld hl, CardPageRetreatWRNumberTextData
 	call PlaceTextItems
-	ld hl, CardPageLvHPNoTextTileData
+	ld hl, CardPageLvHPTextTileData
 	call WriteDataBlocksToBGMap0
 	lb de, 3, 2
 	call DrawCardSymbol
@@ -3886,10 +3891,8 @@ DisplayCardPage_PokemonOverview:
 	; draw the surrounding box, and print fixed text
 	call DrawCardPageSurroundingBox
 	call LoadDuelCheckPokemonScreenTiles
-	ld hl, CardPageRetreatWRTextData
+	ld hl, CardPageRetreatWRNumberTextData
 	call PlaceTextItems
-	ld hl, CardPageNoTextTileData
-	call WriteDataBlocksToBGMap0
 	ld a, 1
 	ld [wCurPlayAreaY], a
 	; print set 2 icon and rarity symbol at fixed positions
@@ -4115,19 +4118,11 @@ DrawCardPageSurroundingBox:
 	call FillRectangle
 	jp ApplyCardCGBAttributes
 
-CardPageRetreatWRTextData:
-	textitem 1, 14, RetreatCostText
-	textitem 1, 15, WeaknessText
-	textitem 1, 16, ResistanceText
-	db $ff
-
-CardPageLvHPNoTextTileData:
-	db 11,  2, SYM_Lv, 0
-	db 15,  2, SYM_HP, 0
-;	continues to CardPageNoTextTileData
-
-CardPageNoTextTileData:
-	db 15, 16, SYM_No, 0
+CardPageRetreatWRNumberTextData:
+	textitem  1, 14, RetreatCostText
+	textitem  1, 15, WeaknessText
+	textitem  1, 16, ResistanceText
+	textitem 15, 16, NumberText
 	db $ff
 
 DisplayCardPage_PokemonAttack1Page1:
@@ -5176,7 +5171,7 @@ PrintPlayAreaCardAttachedEnergies:
 	jr nz, .empty_loop
 	pop hl
 	ld de, wAttachedEnergies
-	lb bc, SYM_FIRE, NUM_TYPES - 1
+	lb bc, SYM_FIRE, NUM_TYPES
 .next_color
 	ld a, [de] ; energy count of current color
 	inc de

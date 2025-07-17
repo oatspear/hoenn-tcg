@@ -429,6 +429,11 @@ CheckEnergyNeededForAttack:
 	dec c
 	jr nz, .loop
 
+; OATS add check for Darkness Energy
+	ld a, [de]
+	swap a
+	call CheckIfEnoughParticularAttachedEnergy
+
 ; running CheckIfEnoughParticularAttachedEnergy back to back like this
 ; overwrites the results of a previous call of this function,
 ; however, no attack in the game has energy requirements for two
@@ -441,8 +446,7 @@ CheckEnergyNeededForAttack:
 
 	; colorless
 	ld a, [de]
-	swap a
-	and %00001111
+	and $f
 	ld b, a ; colorless energy still needed
 	ld a, [wTempLoadedAttackEnergyCost]
 	ld hl, wTempLoadedAttackEnergyNeededAmount
@@ -529,6 +533,7 @@ ConvertColorToEnergyCardID:
 	dw WATER_ENERGY
 	dw FIGHTING_ENERGY
 	dw PSYCHIC_ENERGY
+	dw DARKNESS_ENERGY
 	dw DOUBLE_COLORLESS_ENERGY
 
 ; return carry depending on card index in a:
@@ -1517,8 +1522,13 @@ CheckEnergyFlagsNeededInList:
 	jr .check_energy
 .psychic
 	cp16 PSYCHIC_ENERGY
-	jr nz, .colorless
+	jr nz, .darkness
 	ld a, PSYCHIC_F
+	jr .check_energy
+.darkness
+	cp16 DARKNESS_ENERGY
+	jr nz, .colorless
+	ld a, DARKNESS_F
 	jr .check_energy
 .colorless
 	cp16 DOUBLE_COLORLESS_ENERGY
@@ -1606,17 +1616,23 @@ GetAttacksEnergyCostBits:
 .psychic
 	ld a, b
 	and $0f
-	jr z, .colorless
+	jr z, .darkness
 	ld a, PSYCHIC_F
 	or c
 	ld c, a
-.colorless
+.darkness
 	ld a, [hli]
 	ld b, a
 	and $f0
+	jr z, .colorless
+	ld a, DARKNESS_F
+	or c
+	ld c, a
+.colorless
+	ld a, b
+	and $0f
 	jr z, .done
 	ld a, %11111111
-	or c ; unnecessary
 	ld c, a
 .done
 	ld a, c

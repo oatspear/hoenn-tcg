@@ -1142,6 +1142,11 @@ PsychicEnergyCardGfx::
 	INCBIN "gfx/cards/psychic_energy.attrmap"
 	INCBIN "gfx/cards/psychic_energy.2bpp"
 
+DarknessEnergyCardGfx::
+	INCBIN "gfx/cards/darkness_energy.pal"
+	INCBIN "gfx/cards/darkness_energy.attrmap"
+	INCBIN "gfx/cards/darkness_energy.2bpp"
+
 DoubleColorlessEnergyCardGfx::
 	INCBIN "gfx/cards/double_colorless_energy.pal"
 	INCBIN "gfx/cards/double_colorless_energy.attrmap"
@@ -1161,11 +1166,6 @@ VenusaurLv64CardGfx::
 	INCBIN "gfx/cards/venusaur_lv64.pal"
 	INCBIN "gfx/cards/venusaur_lv64.attrmap"
 	INCBIN "gfx/cards/venusaur_lv64.2bpp"
-
-VenusaurLv67CardGfx::
-	INCBIN "gfx/cards/venusaur_lv67.pal"
-	INCBIN "gfx/cards/venusaur_lv67.attrmap"
-	INCBIN "gfx/cards/venusaur_lv67.2bpp"
 
 CaterpieCardGfx::
 	INCBIN "gfx/cards/caterpie.pal"
@@ -1208,6 +1208,11 @@ ArbokCardGfx::
 	INCBIN "gfx/cards/arbok.2bpp"
 
 SECTION "Card Gfx 2", ROMX
+
+VenusaurLv67CardGfx::
+	INCBIN "gfx/cards/venusaur_lv67.pal"
+	INCBIN "gfx/cards/venusaur_lv67.attrmap"
+	INCBIN "gfx/cards/venusaur_lv67.2bpp"
 
 NidoranFCardGfx::
 	INCBIN "gfx/cards/nidoranf.pal"
@@ -1299,12 +1304,12 @@ VictreebelCardGfx::
 	INCBIN "gfx/cards/victreebel.attrmap"
 	INCBIN "gfx/cards/victreebel.2bpp"
 
+SECTION "Card Gfx 3", ROMX
+
 GrimerCardGfx::
 	INCBIN "gfx/cards/grimer.pal"
 	INCBIN "gfx/cards/grimer.attrmap"
 	INCBIN "gfx/cards/grimer.2bpp"
-
-SECTION "Card Gfx 3", ROMX
 
 MukCardGfx::
 	INCBIN "gfx/cards/muk.pal"
@@ -1396,12 +1401,12 @@ ArcanineLv45CardGfx::
 	INCBIN "gfx/cards/arcanine_lv45.attrmap"
 	INCBIN "gfx/cards/arcanine_lv45.2bpp"
 
+SECTION "Card Gfx 4", ROMX
+
 PonytaCardGfx::
 	INCBIN "gfx/cards/ponyta.pal"
 	INCBIN "gfx/cards/ponyta.attrmap"
 	INCBIN "gfx/cards/ponyta.2bpp"
-
-SECTION "Card Gfx 4", ROMX
 
 RapidashCardGfx::
 	INCBIN "gfx/cards/rapidash.pal"
@@ -1432,11 +1437,6 @@ MoltresLv35CardGfx::
 	INCBIN "gfx/cards/moltres_lv35.pal"
 	INCBIN "gfx/cards/moltres_lv35.attrmap"
 	INCBIN "gfx/cards/moltres_lv35.2bpp"
-
-MoltresLv37CardGfx::
-	INCBIN "gfx/cards/moltres_lv37.pal"
-	INCBIN "gfx/cards/moltres_lv37.attrmap"
-	INCBIN "gfx/cards/moltres_lv37.2bpp"
 
 SquirtleCardGfx::
 	INCBIN "gfx/cards/squirtle.pal"
@@ -1499,6 +1499,11 @@ DewgongCardGfx::
 	INCBIN "gfx/cards/dewgong.2bpp"
 
 SECTION "Card Gfx 5", ROMX
+
+MoltresLv37CardGfx::
+	INCBIN "gfx/cards/moltres_lv37.pal"
+	INCBIN "gfx/cards/moltres_lv37.attrmap"
+	INCBIN "gfx/cards/moltres_lv37.2bpp"
 
 ShellderCardGfx::
 	INCBIN "gfx/cards/shellder.pal"
@@ -1585,17 +1590,17 @@ OmastarCardGfx::
 	INCBIN "gfx/cards/omastar.attrmap"
 	INCBIN "gfx/cards/omastar.2bpp"
 
-ArticunoLv35CardGfx::
-	INCBIN "gfx/cards/articuno_lv35.pal"
-	INCBIN "gfx/cards/articuno_lv35.attrmap"
-	INCBIN "gfx/cards/articuno_lv35.2bpp"
-
 ArticunoLv37CardGfx::
 	INCBIN "gfx/cards/articuno_lv37.pal"
 	INCBIN "gfx/cards/articuno_lv37.attrmap"
 	INCBIN "gfx/cards/articuno_lv37.2bpp"
 
 SECTION "Card Gfx 6", ROMX
+
+ArticunoLv35CardGfx::
+	INCBIN "gfx/cards/articuno_lv35.pal"
+	INCBIN "gfx/cards/articuno_lv35.attrmap"
+	INCBIN "gfx/cards/articuno_lv35.2bpp"
 
 PikachuLv12CardGfx::
 	INCBIN "gfx/cards/pikachu_lv12.pal"
@@ -1687,12 +1692,12 @@ ElectabuzzLv35CardGfx::
 	INCBIN "gfx/cards/electabuzz_lv35.attrmap"
 	INCBIN "gfx/cards/electabuzz_lv35.2bpp"
 
+SECTION "Card Gfx 7", ROMX
+
 JolteonLv24CardGfx::
 	INCBIN "gfx/cards/jolteon_lv24.pal"
 	INCBIN "gfx/cards/jolteon_lv24.attrmap"
 	INCBIN "gfx/cards/jolteon_lv24.2bpp"
-
-SECTION "Card Gfx 7", ROMX
 
 JolteonLv29CardGfx::
 	INCBIN "gfx/cards/jolteon_lv29.pal"
@@ -1784,12 +1789,12 @@ CuboneCardGfx::
 	INCBIN "gfx/cards/cubone.attrmap"
 	INCBIN "gfx/cards/cubone.2bpp"
 
+SECTION "Card Gfx 8", ROMX
+
 MarowakLv26CardGfx::
 	INCBIN "gfx/cards/marowak_lv26.pal"
 	INCBIN "gfx/cards/marowak_lv26.attrmap"
 	INCBIN "gfx/cards/marowak_lv26.2bpp"
-
-SECTION "Card Gfx 8", ROMX
 
 MarowakLv32CardGfx::
 	INCBIN "gfx/cards/marowak_lv32.pal"
@@ -1881,12 +1886,12 @@ HaunterLv22CardGfx::
 	INCBIN "gfx/cards/haunter_lv22.attrmap"
 	INCBIN "gfx/cards/haunter_lv22.2bpp"
 
+SECTION "Card Gfx 9", ROMX
+
 GengarCardGfx::
 	INCBIN "gfx/cards/gengar.pal"
 	INCBIN "gfx/cards/gengar.attrmap"
 	INCBIN "gfx/cards/gengar.2bpp"
-
-SECTION "Card Gfx 9", ROMX
 
 DrowzeeCardGfx::
 	INCBIN "gfx/cards/drowzee.pal"
@@ -1978,12 +1983,12 @@ FearowCardGfx::
 	INCBIN "gfx/cards/fearow.attrmap"
 	INCBIN "gfx/cards/fearow.2bpp"
 
+SECTION "Card Gfx 10", ROMX
+
 ClefairyCardGfx::
 	INCBIN "gfx/cards/clefairy.pal"
 	INCBIN "gfx/cards/clefairy.attrmap"
 	INCBIN "gfx/cards/clefairy.2bpp"
-
-SECTION "Card Gfx 10", ROMX
 
 ClefableCardGfx::
 	INCBIN "gfx/cards/clefable.pal"
@@ -2075,12 +2080,12 @@ PorygonCardGfx::
 	INCBIN "gfx/cards/porygon.attrmap"
 	INCBIN "gfx/cards/porygon.2bpp"
 
+SECTION "Card Gfx 11", ROMX
+
 SnorlaxCardGfx::
 	INCBIN "gfx/cards/snorlax.pal"
 	INCBIN "gfx/cards/snorlax.attrmap"
 	INCBIN "gfx/cards/snorlax.2bpp"
-
-SECTION "Card Gfx 11", ROMX
 
 DratiniCardGfx::
 	INCBIN "gfx/cards/dratini.pal"
@@ -2172,12 +2177,12 @@ EnergyRemovalCardGfx::
 	INCBIN "gfx/cards/energy_removal.attrmap"
 	INCBIN "gfx/cards/energy_removal.2bpp"
 
+SECTION "Card Gfx 12", ROMX
+
 SuperEnergyRemovalCardGfx::
 	INCBIN "gfx/cards/super_energy_removal.pal"
 	INCBIN "gfx/cards/super_energy_removal.attrmap"
 	INCBIN "gfx/cards/super_energy_removal.2bpp"
-
-SECTION "Card Gfx 12", ROMX
 
 SwitchCardGfx::
 	INCBIN "gfx/cards/switch.pal"

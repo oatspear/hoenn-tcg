@@ -342,9 +342,10 @@ SquirtleExtraDeck:
 
 BulbasaurAndFriendsDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,    11
+	card_item GRASS_ENERGY,     9
 	card_item FIRE_ENERGY,      3
-	card_item WATER_ENERGY,     9
+	card_item WATER_ENERGY,     7
+	card_item DARKNESS_ENERGY,  4
 	card_item BULBASAUR,        2
 	card_item IVYSAUR,          1
 	card_item VENUSAUR_LV67,    1
@@ -468,11 +469,9 @@ GrassAndPsychicDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,   12
 	card_item PSYCHIC_ENERGY, 12
-	card_item WEEDLE,          2
-	card_item KAKUNA,          1
+	card_item WEEDLE,          3
+	card_item KAKUNA,          2
 	card_item BEEDRILL,        1
-	card_item NIDORANF,        2
-	card_item NIDORINA,        1
 	card_item PARAS,           2
 	card_item PARASECT,        1
 	card_item EXEGGCUTE,       2
@@ -490,7 +489,6 @@ GrassAndPsychicDeck:
 	card_item GUST_OF_WIND,    2
 	card_item POTION,          2
 	card_item FULL_HEAL,       2
-	; this deck list has 61 cards
 	;deck_list_end
 	db 0 ; end
 	tx GrassAndPsychicDeckName
@@ -708,7 +706,7 @@ StrangePsyshockDeck:
 
 WondersofScienceDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,           15
+	card_item DARKNESS_ENERGY,        15
 	card_item PSYCHIC_ENERGY,          8
 	card_item GRIMER,                  4
 	card_item MUK,                     3
@@ -812,7 +810,7 @@ PowerfulRonaldDeck:
 
 InvincibleRonaldDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,            7
+	card_item DARKNESS_ENERGY,         7
 	card_item FIRE_ENERGY,             6
 	card_item FIGHTING_ENERGY,         7
 	card_item DOUBLE_COLORLESS_ENERGY, 4
@@ -1029,8 +1027,8 @@ WaterfrontPokemonDeck:
 
 LonelyFriendsDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,            8
-	card_item WATER_ENERGY,            9
+	card_item GRASS_ENERGY,            4
+	card_item WATER_ENERGY,           13
 	card_item DOUBLE_COLORLESS_ENERGY, 4
 	card_item SCYTHER,                 4
 	card_item POLIWAG,                 4
@@ -1096,7 +1094,7 @@ PikachuDeck:
 
 BoomBoomSelfdestructDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,      8
+	card_item DARKNESS_ENERGY,   8
 	card_item LIGHTNING_ENERGY, 14
 	card_item FIGHTING_ENERGY,   8
 	card_item KOFFING,           4
@@ -1145,9 +1143,8 @@ EtceteraDeck:
 	card_item LIGHTNING_ENERGY, 4
 	card_item FIGHTING_ENERGY,  4
 	card_item PSYCHIC_ENERGY,   4
-	card_item CATERPIE,         1
-	card_item WEEDLE,           1
-	card_item NIDORANF,         2
+	card_item CATERPIE,         2
+	card_item WEEDLE,           2
 	card_item ODDISH,           2
 	card_item TANGELA_LV12,     2
 	card_item CHARMANDER,       2
@@ -1220,8 +1217,7 @@ KaleidoscopeDeck:
 
 GhostDeck:
 	deck_list_start
-	card_item PSYCHIC_ENERGY,          15
-	card_item GRASS_ENERGY,             6
+	card_item DARKNESS_ENERGY,         21
 	card_item DOUBLE_COLORLESS_ENERGY,  3
 	card_item ZUBAT,                    4
 	card_item GOLBAT,                   3
@@ -1245,7 +1241,7 @@ GhostDeck:
 NapTimeDeck:
 	deck_list_start
 	card_item GRASS_ENERGY,     8
-	card_item PSYCHIC_ENERGY,  18
+	card_item DARKNESS_ENERGY, 18
 	card_item PARAS,            4
 	card_item EXEGGCUTE,        4
 	card_item GASTLY_LV8,       4
@@ -1288,7 +1284,7 @@ StrangePowerDeck:
 
 FlyinPokemonDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,            13
+	card_item DARKNESS_ENERGY,         13
 	card_item LIGHTNING_ENERGY,        10
 	card_item DOUBLE_COLORLESS_ENERGY,  2
 	card_item ZUBAT,                    4
@@ -1309,7 +1305,7 @@ FlyinPokemonDeck:
 
 LovelyNidoranDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,    24
+	card_item DARKNESS_ENERGY, 24
 	card_item NIDORANF,         4
 	card_item NIDORINA,         2
 	card_item NIDOQUEEN,        2
@@ -1320,8 +1316,8 @@ LovelyNidoranDeck:
 	card_item MUK,              1
 	card_item KOFFING,          2
 	card_item WEEZING,          1
-	card_item PINSIR,           1
 	card_item MEOWTH_LV15,      2
+	card_item PERSIAN,          1
 	card_item FARFETCHD,        2
 	card_item DODUO,            2
 	card_item PROFESSOR_OAK,    1
@@ -1335,7 +1331,8 @@ LovelyNidoranDeck:
 
 PoisonDeck:
 	deck_list_start
-	card_item GRASS_ENERGY,           24
+	card_item GRASS_ENERGY,            8
+	card_item DARKNESS_ENERGY,        16
 	card_item WEEDLE,                  3
 	card_item KAKUNA,                  2
 	card_item BEEDRILL,                1
@@ -1410,23 +1407,19 @@ ReshuffleDeck:
 	card_item NINETALES_LV35,           3
 	card_item GROWLITHE,                2
 	card_item ARCANINE_LV45,            1
-	card_item PONYTA,                   2
 	card_item PIDGEY,                   4
 	card_item PIDGEOTTO,                3
 	card_item PIDGEOT_LV38,             2
-	card_item JIGGLYPUFF_LV13,          1
-	card_item WIGGLYTUFF,               1
 	card_item LICKITUNG,                2
 	card_item KANGASKHAN,               1
 	card_item TAUROS,                   1
 	card_item BILL,                     2
 	card_item ENERGY_RETRIEVAL,         2
-	card_item ENERGY_REMOVAL,           1
+	card_item ENERGY_REMOVAL,           2
 	card_item SUPER_ENERGY_REMOVAL,     1
 	card_item SWITCH,                   2
 	card_item POKEMON_CENTER,           1
 	card_item POTION,                   2
-	; this deck list has 63 cards
 	;deck_list_end
 	db 0
 	tx ReshuffleDeckName

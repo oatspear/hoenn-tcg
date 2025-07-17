@@ -433,19 +433,19 @@ ENDM
 	txsymbol WATER      ; $04
 	txsymbol FIGHTING   ; $05
 	txsymbol PSYCHIC    ; $06
-	txsymbol COLORLESS  ; $07
-	txsymbol POISONED   ; $08
-	txsymbol ASLEEP     ; $09
-	txsymbol CONFUSED   ; $0a
-	txsymbol PARALYZED  ; $0b
-	txsymbol CURSOR_U   ; $0c
-	txsymbol POKEMON    ; $0d
-	txsymbol ATK_DESCR  ; $0e
-	txsymbol CURSOR_R   ; $0f
-	txsymbol HP         ; $10
-	txsymbol Lv         ; $11
-	txsymbol E          ; $12
-	txsymbol No         ; $13
+	txsymbol DARKNESS   ; $07
+	txsymbol COLORLESS  ; $08
+	txsymbol POISONED   ; $09
+	txsymbol ASLEEP     ; $0a
+	txsymbol CONFUSED   ; $0b
+	txsymbol PARALYZED  ; $0c
+	txsymbol CURSOR_U   ; $0d
+	txsymbol POKEMON    ; $0e
+	txsymbol ATK_DESCR  ; $0f
+	txsymbol CURSOR_R   ; $10
+	txsymbol HP         ; $11
+	txsymbol Lv         ; $12
+	txsymbol E          ; $13
 	txsymbol PLUSPOWER  ; $14
 	txsymbol DEFENDER   ; $15
 	txsymbol HP_OK      ; $16

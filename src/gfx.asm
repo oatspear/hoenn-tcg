@@ -2274,6 +2274,8 @@ GamblerCardGfx::
 	INCBIN "gfx/cards/gambler.attrmap"
 	INCBIN "gfx/cards/gambler.2bpp"
 
+SECTION "Card Gfx 13", ROMX
+
 RecycleCardGfx::
 	INCBIN "gfx/cards/recycle.pal"
 	INCBIN "gfx/cards/recycle.attrmap"

@@ -1391,8 +1391,6 @@ CountNumberOfCardsOfType:
 	and TYPE_PKMN  ; treat pokemon and energy as the same thing
 ; OATS end custom logic
 .normal_card_check
-	; ld a, l
-	ld a, l
 	pop hl
 	cp b
 	jr nz, .loop_cards

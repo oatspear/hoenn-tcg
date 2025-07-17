@@ -10,6 +10,10 @@ AttackText:
 	text "Attack"
 	done
 
+NumberText:
+	text "No"
+	done
+
 PKMNPowerText:
 	text "PKMN Power"
 	done
@@ -108,6 +112,10 @@ FightingPokemonText:
 
 PsychicPokemonText:
 	text "Psychic Pokémon"
+	done
+
+DarknessPokemonText:
+	text "Darkness Pokémon"
 	done
 
 ColorlessPokemonText:
@@ -277,6 +285,7 @@ ColorListText:
 	line "Lightning"
 	line "Fighting"
 	line "Psychic"
+	line "Darkness"
 	done
 
 GrassSymbolText:
@@ -303,6 +312,10 @@ PsychicSymbolText:
 	textfw "<PSYCHIC>"
 	done
 
+DarknessSymbolText:
+	textfw "<DARKNESS>"
+	done
+
 BenchText:
 	text "Bench"
 	done
@@ -322,7 +335,7 @@ ChooseEnergyCardToDiscardText:
 
 ChooseNextActivePokemonText:
 	text "The Active Pokémon was Knocked Out."
-	line "Please choose the next Pokémon."
+	line "Choose the next Pokémon."
 	done
 
 PressStartWhenReadyText:
@@ -853,12 +866,8 @@ CardPopCannotBePlayedWithTheGameBoyText:
 	done
 
 SandAttackCheckText:
-	text "Sand-attack check!"
-	line "If Tails, Attack is unsuccessful."
-	done
-
 SmokescreenCheckText:
-	text "Smokescreen check!"
+	text "Acccuracy check!"
 	line "If Tails, Attack is unsuccessful."
 	done
 

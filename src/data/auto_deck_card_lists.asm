@@ -1005,7 +1005,8 @@ BulbasaurAndFriendsCardList:
 	deck_list_start
 	card_item GRASS_ENERGY,     9
 	card_item LIGHTNING_ENERGY, 8
-	card_item PSYCHIC_ENERGY,   6
+	card_item PSYCHIC_ENERGY,   4
+	card_item DARKNESS_ENERGY,  2
 	card_item BULBASAUR,        2
 	card_item IVYSAUR,          1
 	card_item VENUSAUR_LV67,    1

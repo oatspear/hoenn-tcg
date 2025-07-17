@@ -5,6 +5,7 @@ TextOffsets::
 	textpointer HandText
 	textpointer CheckText
 	textpointer AttackText
+	textpointer NumberText
 	textpointer PKMNPowerText
 	textpointer DoneText
 	textpointer TypeText
@@ -30,6 +31,7 @@ TextOffsets::
 	textpointer LightningPokemonText
 	textpointer FightingPokemonText
 	textpointer PsychicPokemonText
+	textpointer DarknessPokemonText
 	textpointer ColorlessPokemonText
 	textpointer TrainerCardText
 	textpointer EnergyCardText
@@ -72,6 +74,7 @@ TextOffsets::
 	textpointer LightningSymbolText
 	textpointer FightingSymbolText
 	textpointer PsychicSymbolText
+	textpointer DarknessSymbolText
 	textpointer BenchText
 	textpointer KnockOutText
 	textpointer DamageToSelfDueToConfusionText
@@ -1966,6 +1969,8 @@ TextOffsets::
 	textpointer FightingEnergyDescription
 	textpointer PsychicEnergyName
 	textpointer PsychicEnergyDescription
+	textpointer DarknessEnergyName
+	textpointer DarknessEnergyDescription
 	textpointer DoubleColorlessEnergyName
 	textpointer DoubleColorlessEnergyDescription
 	textpointer BulbasaurName

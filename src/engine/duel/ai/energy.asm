@@ -760,7 +760,13 @@ GetEnergyCardForDiscardOrEnergyBoostAttack:
 	ld de, FIGHTING_ENERGY
 	jr .set_carry
 .psychic
+	ld a, b
+	and $0f
+	jr z, .darkness
 	ld de, PSYCHIC_ENERGY
+	jr .set_carry
+.darkness
+	ld de, DARKNESS_ENERGY
 
 .set_carry
 	lb bc, TRUE, FALSE

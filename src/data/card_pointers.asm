@@ -7,6 +7,7 @@ CardPointers::
 	dab LightningEnergyCard
 	dab FightingEnergyCard
 	dab PsychicEnergyCard
+	dab DarknessEnergyCard
 	dab DoubleColorlessEnergyCard
 	dab BulbasaurCard
 	dab IvysaurCard

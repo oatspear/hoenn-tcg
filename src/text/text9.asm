@@ -1226,17 +1226,23 @@ PsychicEnergyDescription:
 	text "Provides 1 <PSYCHIC> Energy."
 	done
 
+DarknessEnergyName:
+	text "Darkness Energy"
+	done
+
+DarknessEnergyDescription:
+	text "Provides 1 <DARKNESS> Energy."
+	done
+
 DoubleColorlessEnergyName:
 	text "Double Colorless Energy"
 	done
 
 DoubleColorlessEnergyDescription:
-	text "Provides <COLORLESS><COLORLESS> Energy. (Doesn't"
-	line "count as a basic Energy card.) "
+	text "Provides <COLORLESS><COLORLESS> Energy."
+	line "(Special Energy card.) "
 	line "Colorless Energy can't be used to"
-	line "pay colored Energy costs. (Any type"
-	line "of Energy can be used to pay"
-	line "Colorless Energy costs.)"
+	line "pay colored Energy costs."
 	done
 
 BulbasaurName:

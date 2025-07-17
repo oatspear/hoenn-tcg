@@ -3289,14 +3289,12 @@ AIDecide_EnergySearch:
 	scf
 	ret
 
-; this subroutine has a bug.
-; it was supposed to use the .CheckUsefulGrassEnergy subroutine
-; but uses .CheckUsefulFireOrLightningEnergy instead.
+; searches for Darkness energy.
 .wonders_of_science
 	ld a, CARD_LOCATION_DECK
 	call FindBasicEnergyCardsInLocation
 	jr c, .no_carry
-	call .CheckUsefulFireOrLightningEnergy
+	call .CheckUsefulDarknessEnergy
 	jr c, .no_carry
 	scf
 	ret
@@ -3419,9 +3417,9 @@ AIDecide_EnergySearch:
 	ret
 
 ; checks whether there are useful energies
-; only for Grass type Pokemon cards
+; only for Darkness type Pokemon cards
 ; in Play Area. If none found, return carry.
-.CheckUsefulGrassEnergy
+.CheckUsefulDarknessEnergy
 ; unreferenced
 	ld a, DUELVARS_NUMBER_OF_POKEMON_IN_PLAY_AREA
 	call GetTurnDuelistVariable
@@ -3445,8 +3443,8 @@ AIDecide_EnergySearch:
 	ld a, [wLoadedCard1Type]
 	or TYPE_ENERGY
 
-; only do check if the Pokemon's type is Grass
-	cp TYPE_ENERGY_GRASS
+; only do check if the Pokemon's type is Darkness
+	cp TYPE_ENERGY_DARKNESS
 	jr nz, .next_play_area_3
 
 ; loop each energy card in list

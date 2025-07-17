@@ -414,6 +414,9 @@ Script_EnterLabFirstTime:
 	set_dialog_npc NPC_DRMASON
 	print_npc_text Text05ea
 	script_nop
+; OATS skip tutorial
+	script_jump .ows_d82d
+
 	set_event EVENT_MASON_LAB_STATE, MASON_LAB_IN_PRACTICE_DUEL
 	close_advanced_text_box
 	set_next_npc_and_script NPC_SAM, .ows_d827
@@ -450,11 +453,11 @@ Script_AfterPracticeDuel:
 	print_text Text05f1
 	close_text_box
 	print_npc_text Text05f2
-.ows_d85f
+.loop_choose_starter_deck
 	choose_starter_deck
 	close_text_box
 	ask_question_jump Text05f3, .ows_d869
-	script_jump .ows_d85f
+	script_jump .loop_choose_starter_deck
 
 .ows_d869
 	print_npc_text Text05f4
